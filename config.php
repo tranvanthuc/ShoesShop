@@ -15,10 +15,10 @@
 // hosting sql
 return [
   'database' => [
-    'name' => 'sql9.freemysqlhosting.net',
+    'name' => 'sql9197805',
     'username' => 'sql9197805',
     'password' => 'cRmU75JgyF',
-    'connection' => 'mysql:host=localhost',
+    'connection' => 'sql9.freemysqlhosting.net',
     'options' => [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
