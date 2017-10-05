@@ -23,3 +23,17 @@ $router->post('login', 'AuthenController@access');
 
 // logout
 $router->get('logout', 'AuthenController@logout');
+
+//shop_information controller
+//show list information of the shop
+$router->get('shopInf', 'ShopInfController@index');
+
+//insert shop information
+$router->post('shopInf', 'ShopInfController@insert');
+
+// //update shop information
+// $router->get('shopInf', 'ShopInfController@getEditShopInf');
+// $router->post('shopInf', 'ShopInfController@postEditShopInf');
+
+//delete shop information
+$router->get('shopInf', 'ShopInfController@deleteShopInf');

@@ -69,6 +69,31 @@ INSERT INTO `users` VALUES (1,'thuc','123','Tran Van Thuc',1),(2,'huy','123','Do
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+DROP TABLE IF EXISTS `shop_information`;
+CREATE TABLE `shop_information` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `description` text COLLATE utf8_unicode_ci DEFAULT NULL,
+  `name` varchar(150) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `address` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `phone` varchar(15) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `email` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=56 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+LOCK TABLES `todos` WRITE;
+/*!40000 ALTER TABLE `todos` DISABLE KEYS */;
+INSERT INTO `shop_information` VALUES (
+1,
+'Our Shop making bespoke shoes entirely by hand. Today those craft skills are still as important as ever and are interwoven with creative expertise inspired by world culture. Now, 20 years later and with millions of pairs of shoes under its belt, the company has more than 5 flagship stores around the world in the most exciting fashion locations. Its production unit employs over 150 highly skilled workers. Baldinini brand creations attract attention and are instantly recognised, they are the choice of a huge following of devotees and of the leading world fashion markets.',
+'ShoesShop Viet Nam',
+'346 2 Thang 9, Hoa Cuong Bac, Đa Nang',
+'0123465798',
+'shoesshop@gmail.com'
+);
+/*!40000 ALTER TABLE `todos` ENABLE KEYS */;
+UNLOCK TABLES;
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;

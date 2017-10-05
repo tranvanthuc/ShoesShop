@@ -3,8 +3,9 @@
   $user = $_SESSION['user'];
 ?>
 
-<h1>Homopage</h1>
-<h3>Hello <?= $user->fullname ?></h3>
+<h1>Homepage</h1>
+
+<p>Hello <?= $user->fullname ?></p>
 
 <?php require('partials/footer.php'); ?>
   

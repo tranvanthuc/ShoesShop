@@ -16,7 +16,7 @@ class PagesController
 
   public function contact()
   {
-    $name = "Thuc";
+    $name = "Minh Thai";
 
     return view('contact', ['name' => $name]);
   }

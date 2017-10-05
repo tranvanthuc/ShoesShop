@@ -34,7 +34,8 @@ class User
   }
 
   // update User by id
-  public static function updateById($id, $password, $fullname , $gender) {
+  public static function updateById($id, $password, $fullname , $gender)
+  {
     App::get('database')->updateById(User::$table, [
       'password' => $password,
       'fullname' => $fullname,
@@ -42,7 +43,8 @@ class User
     ], $id);
   }
 
-  public static function checkLogin($username,$password) {
+  public static function checkLogin($username,$password)
+  {
     $table = User::$table;
     $sql = "select * from {$table} where username='{$username}' and password='{$password}'";
     $user = App::get('database')->query($sql);
@@ -51,7 +53,8 @@ class User
   }
 
   // delete User by id
-  public static function deleteById($id) {
+  public static function deleteById($id)
+  {
     App::get('database')->deleteById(User::$table, $id);
   }
 
