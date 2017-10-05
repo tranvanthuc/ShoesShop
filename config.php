@@ -18,7 +18,7 @@ return [
     'name' => 'sql9197805',
     'username' => 'sql9197805',
     'password' => 'cRmU75JgyF',
-    'connection' => 'sql9.freemysqlhosting.net',
+    'connection' => 'mysql:host=sql9.freemysqlhosting.net',
     'options' => [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
