@@ -1,14 +1,15 @@
 
 <?php
-  ob_start();
-  require 'vendor/autoload.php';
+ob_start();
+require "core/Autoload.php";
+new core\Autoload;
 
-  require 'core/bootstrap.php';
+require "core/bootstrap.php";
 
-  use App\Core\{Router, Request};
+use core\{Router, Request};
 
-  Router::load('app/routes.php')->direct(Request::uri(),Request::method());
-  
+Router::load('app/routes.php')->direct(Request::uri(),Request::method());
+
 
 ?>
 

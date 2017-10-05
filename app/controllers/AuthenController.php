@@ -1,7 +1,8 @@
 <?php 
 
-namespace App\Controllers;
-use App\Models\User;
+namespace app\controllers;
+
+use app\models\User;
 
 class AuthenController 
 {
