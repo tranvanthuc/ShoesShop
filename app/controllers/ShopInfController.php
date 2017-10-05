@@ -30,7 +30,7 @@ class ShopInfController
     public function getEditShopInf()
     {
         $id = $_GET['id'];
-        $shopInf = ShopInformation::getById($id);
+        $shopInf = ShopInformation::getById($id)[0];
         // die(var_dump($shopInf));
 
         return view('editShopInf', compact('shopInf'));

@@ -2,19 +2,24 @@
 
 <!-- update shop information action  -->
 <h1>Submit your updation shop information</h1>
+<style>
+    .txt-input{
+        width: 38.5%;
+    }
+</style>
 
-<form method="POST" action="/shopInf/update">
-    <input type="hidden" name="id" value="<?= $shopInf->id ?>">
+<form method="POST" action="/shopInf/update" >
+    <input type="hidden" name="id" value="<?= $shopInf->id ?>" class="txt-input">
     Name: <br/>
-    <input type="text" name="name" value = "<?php echo $shopInf->name; ?>"><br/>
+    <input type="text" name="name" value = "<?= $shopInf->name; ?>" class="txt-input"><br/><br/>
     Description: <br/>
-    <input type="text" name="description" value = "<?php echo $shopInf->description; ?>"><br/>
-    Addres: <br/>
-    <input type="text" name="address" value = "<?php echo $shopInf->address; ?>"><br/>
+    <textarea name="description" cols="59" rows="10" ><?= $shopInf->description; ?></textarea><br/><br/>
+    Address: <br/>
+    <input type="text" name="address" value = "<?= $shopInf->address; ?>" class="txt-input"><br/><br/>
     Phone: <br/>
-    <input type="text" name="phone" value = "<?php echo $shopInf->phone; ?>"><br/>
+    <input type="text" name="phone" value = "<?= $shopInf->phone; ?>" class="txt-input"><br/><br/>
     Email: <br/>    
-    <input type="text" name="email" value = "<?php echo $shopInf->email; ?>"><br/>
+    <input type="text" name="email" value = "<?= $shopInf->email; ?>" class="txt-input"><br/><br/>
     <br/><button type="submit">Submit</button>
 </form>
 
