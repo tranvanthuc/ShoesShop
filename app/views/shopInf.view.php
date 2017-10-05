@@ -36,7 +36,7 @@
     <?php endforeach; ?>
 </ul><br />
 
-<!-- insert user action  -->
+<!-- insert shop information action  -->
 <h1>Submit your shop information</h1>
 
 <form method="POST" action="/shopInf">
