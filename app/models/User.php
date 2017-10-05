@@ -1,7 +1,7 @@
 <?php 
-namespace App\Models;
+namespace app\models;
 
-use App\Core\App;
+use core\App;
 
 class User 
 {

@@ -1,6 +1,8 @@
 <?php
 
-namespace App\Core;
+namespace core;
+
+use app\controllers;
 
 class Router 
 {
@@ -54,7 +56,7 @@ class Router
   // call action
   protected function callAction($controller, $action)
   {
-    $controller = "App\\Controllers\\{$controller}";
+    $controller = "app\\controllers\\{$controller}";
 
     $controller = new $controller;
     
