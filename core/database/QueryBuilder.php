@@ -111,19 +111,6 @@ class QueryBuilder
     }
   }
 
-  // get by id
-  public function getShopById($table, $id) 
-  {
-    $sql = "select * from {$table} where id={$id}";
-    try {
-      $stm = $this->pdo->prepare($sql);
-      // die(var_dump($sql));
-      $stm->execute();
-      return $stm->fetchAll(PDO::FETCH_CLASS);
-    } catch (PDOException $e) {
-      die($e->getMessage());
-    }
-  }
 }
 
 ?>

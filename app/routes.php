@@ -32,8 +32,8 @@ $router->get('shopInf', 'ShopInfController@index');
 $router->post('shopInf', 'ShopInfController@insert');
 
 // //update shop information
-// $router->get('shopInf', 'ShopInfController@getEditShopInf');
-// $router->post('shopInf', 'ShopInfController@postEditShopInf');
+$router->get('shopInf/update', 'ShopInfController@getEditShopInf');
+$router->post('shopInf/update', 'ShopInfController@postEditShopInf');
 
 //delete shop information
-$router->get('shopInf', 'ShopInfController@deleteShopInf');
+$router->get('shopInf/delete', 'ShopInfController@deleteShopInf');

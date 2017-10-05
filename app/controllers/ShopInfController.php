@@ -26,15 +26,15 @@ class ShopInfController
         return redirect ('shopInf');
     }
 
-    //get shop information by id
-    // public function getEditShopInf()
-    // {
-    //     $id = $_GET['id'];
-    //     $shopInf = ShopInformation::getShopById($id);
-    //     die(var_dump($id));
+    // get shop information by id
+    public function getEditShopInf()
+    {
+        $id = $_GET['id'];
+        $shopInf = ShopInformation::getById($id);
+        // die(var_dump($shopInf));
 
-    //     return view('editShopInf', compact('shopInf'));
-    // }
+        return view('editShopInf', compact('shopInf'));
+    }
 
     //post edit shop information
     public function postEditShopInf()
@@ -55,7 +55,7 @@ class ShopInfController
     {
         $id = $_GET['id'];
         ShopInformation::deleteById($id);
-
+        // die(var_dump($id));
         return redirect('shopInf');
     }
 }

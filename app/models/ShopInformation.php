@@ -37,9 +37,9 @@ class ShopInformation
     }
 
     //get information of shop by id
-    public static function getShopById($id)
+    public static function getById($id)
     {
-        return App::get('database')->getShopById(ShopInformation::$table, $id);
+        return App::get('database')->getById(ShopInformation::$table, $id);
     }
 
     //update information of shop by id

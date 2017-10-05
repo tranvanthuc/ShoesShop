@@ -12,17 +12,4 @@ return [
   ]
 ];
 
-// // hosting sql
-// return [
-//   'database' => [
-//     'name' => 'id3113257_neolab',
-//     'username' => 'id3113257_root',
-//     'password' => 'thuc123',
-//     'connection' => 'mysql:host=localhost',
-//     'options' => [
-//       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-//     ]
-//   ]
-// ];
-
 ?>

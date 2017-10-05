@@ -15,7 +15,7 @@
 
         <!-- delete shop informaton action  -->
         <li>
-            <form action = "/shopInf/delete" method = "POST">
+            <form action = "/shopInf/delete" method = "GET">
                 <input name = "id" type = "hidden" value="<?php echo $id; ?>">
                 <input type = "submit" value = "Delete">
             </form>
