@@ -20,9 +20,9 @@ class AuthenController
 
   public function access()
   {
-    $username = $_POST['username'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
-    $user = User::checkLogin($username, $password);
+    $user = User::checkLogin($email, $password);
     if(\sizeof($user) == 0) {
       return redirect('login');
     }

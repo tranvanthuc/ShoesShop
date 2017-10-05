@@ -2,27 +2,15 @@
 // mysql
 return [
   'database' => [
-    'name' => 'todos',
-    'username' => 'root',
-    'password' => 'huy',
-    'connection' => 'mysql:host=127.0.0.1',
+    'name' => 'sql12197810',
+    'username' => 'sql12197810',
+    'password' => 'taEyRnk35I',
+    'connection' => 'mysql:host=sql12.freemysqlhosting.net',
     'options' => [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
   ]
 ];
 
-// // hosting sql
-// return [
-//   'database' => [
-//     'name' => 'id3113257_neolab',
-//     'username' => 'id3113257_root',
-//     'password' => 'thuc123',
-//     'connection' => 'mysql:host=localhost',
-//     'options' => [
-//       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-//     ]
-//   ]
-// ];
 
 ?>
