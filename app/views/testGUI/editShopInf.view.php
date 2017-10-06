@@ -1,4 +1,4 @@
-<?php require 'partials/header.php'; ?>
+<?php require('app/views/testGUI/partials/header.php'); ?>
 
 <!-- update shop information action  -->
 <h1>Submit your updation shop information</h1>
@@ -23,4 +23,4 @@
     <br/><button type="submit">Submit</button>
 </form>
 
-<?php require 'partials/footer.php'; ?>
+<?php require('app/views/testGUI/partials/footer.php'); ?>

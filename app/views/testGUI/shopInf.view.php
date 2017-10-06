@@ -1,4 +1,4 @@
-<?php require 'partials/header.php'; ?>
+<?php require('app/views/testGUI/partials/header.php'); ?>
 
 <!-- View all shop informations  -->
 <style>
@@ -59,4 +59,4 @@
     <br/><button type="submit">Submit</button>
 </form>
 
-<?php require 'partials/footer.php'; ?>
+<?php require('app/views/testGUI/partials/footer.php'); ?>

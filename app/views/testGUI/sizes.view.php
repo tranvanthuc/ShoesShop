@@ -1,4 +1,5 @@
-<?php require('partials/header.php'); ?>
+<?php require('app/views/testGUI/partials/header.php'); ?>
+
 <h1>All shoe sizes</h1>
 <script>
   function deleteSize(href, name){
@@ -51,5 +52,5 @@
     <button type="submit">Submit</button>
 </form>
 
-<?php require 'partials/footer.php'; ?>
+<?php require('app/views/testGUI/partials/footer.php'); ?>
 

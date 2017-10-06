@@ -1,4 +1,4 @@
-<?php require 'partials/header.php'; ?>
+<?php require('app/views/testGUI/partials/header.php'); ?>
 
 <!-- update shoe size action  -->
 <h1>Submit your updation size</h1>
@@ -10,4 +10,4 @@
     <button type="submit">Submit</button>
 </form>
 
-<?php require 'partials/footer.php'; ?>
+<?php require('app/views/testGUI/partials/footer.php'); ?>

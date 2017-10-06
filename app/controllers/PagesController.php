@@ -1,5 +1,4 @@
 <?php
-
 namespace app\controllers;
 
 class PagesController 
@@ -16,8 +15,7 @@ class PagesController
 
   public function contact()
   {
-    $name = "Minh Thai";
-
+    $name = "Thuc";
     return view('contact', ['name' => $name]);
   }
 
