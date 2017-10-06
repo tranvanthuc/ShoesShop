@@ -1,6 +1,6 @@
 <?php 
-
 namespace utils;
+
 
 function blockPage() 
 {
@@ -16,5 +16,3 @@ function blockPage()
 
   return false;
 }
-
-?>

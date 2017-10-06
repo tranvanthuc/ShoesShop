@@ -1,4 +1,5 @@
 <?php require('partials/header.php'); ?>
+
 <?php 
   $user = $_SESSION['user'];
 ?>
