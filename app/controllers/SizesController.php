@@ -10,7 +10,7 @@ class SizesController
     {
         $sizes = Size::selectAll();
 
-        return view('sizes', compact('sizes'));
+        return view('sizes/index', compact('sizes'));
     }
 
     //insert new size
@@ -28,7 +28,7 @@ class SizesController
         $id = $_GET['id'];
         $size = Size::getById($id)[0];
 
-        return view('editSize', compact('size'));
+        return view('sizes/edit', compact('size'));
     }
 
     //post edit size

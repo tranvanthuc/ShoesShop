@@ -47,8 +47,8 @@ $router->get('sizes', 'SizesController@index');
 $router->post('sizes', 'SizesController@insert');
 
 // //update size by id
-$router->get('sizes/update', 'SizesController@getEditSize');
-$router->post('sizes/update', 'SizesController@postEditSize');
+$router->get('sizes/size/update', 'SizesController@getEditSize');
+$router->post('sizes/size/update', 'SizesController@postEditSize');
 
 //delete size
-$router->get('sizes/delete', 'SizesController@deleteSize');
+$router->get('sizes/index/size/delete', 'SizesController@deleteSize');

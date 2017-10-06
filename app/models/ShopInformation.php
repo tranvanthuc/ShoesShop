@@ -64,5 +64,6 @@ class ShopInformation
     public static function deleteById($id)
     {
         App::get('database')->deleteById(ShopInformation::$table, $id);
+        die(var_dump(App::get('database')->deleteById(ShopInformation::$table, $id)));
     }
 }

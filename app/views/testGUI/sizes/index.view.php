@@ -32,12 +32,12 @@
 
             <!-- delete shoe size action  -->
             <td>
-                <?php $deleteUrl = "http://" . $_SERVER['HTTP_HOST'] . "/sizes/delete/?id={$data->id}"; ?>
+                <?php $deleteUrl = "http://" . $_SERVER['HTTP_HOST'] . "/sizes/index/size/delete/?id={$data->id}";?>
                 <button onclick="deleteSize('<?= $deleteUrl ?>', '<?= $data->size ?>')">Delete</button>            
             </td>
             <!-- update shoe size action  -->
             <td>
-            <button ><a href="<?= "sizes/update/?id=".$data->id ?>" id ="btn-update">Update</a></button >        
+            <button ><a href="<?= "sizes/size/update/?id=".$data->id ?>" id ="btn-update">Update</a></button >        
             </td>
         </tr>
     <?php endforeach; ?>
