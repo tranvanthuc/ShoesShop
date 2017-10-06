@@ -19,7 +19,7 @@ class Connection
         $config['options']
       );
       return $pdo;
-    }catch (PDOException $e) {
+    } catch (PDOException $e) {
       die($e->getMessage());
     }
   

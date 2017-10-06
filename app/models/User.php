@@ -19,7 +19,7 @@ class User
   {
     return App::get('database')->selectAll(User::$table);
   }
-
+  
   // insert User
   public static function insert($email, $password, $first_name, $gender) 
   {
@@ -30,6 +30,7 @@ class User
       'gender' => $gender
     ]);
   }
+
   // get User by id
   public static function getById($id) 
   {
@@ -43,7 +44,7 @@ class User
   }
 
   // check login
-  public static function checkLogin($email,$password) 
+  public static function checkLogin($email, $password) 
   {
     $table = User::$table;
     $sql = "select * from {$table} where email='{$email}' and password='{$password}'";
@@ -51,7 +52,7 @@ class User
     
     return $user[0];
   }
-  
+
   // delete User by id
   public static function deleteById($id) 
   {

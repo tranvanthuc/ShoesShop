@@ -38,11 +38,9 @@ class Todo
     ], $id);
   }
 
-
   // delete todo by id
   public static function deleteById($id) 
   {
     App::get('database')->deleteById(Todo::$table, $id);
   }
-
 }

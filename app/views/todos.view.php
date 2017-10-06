@@ -1,4 +1,5 @@
 <?php require('partials/header.php'); ?>
+
 <h1>All todos</h1>
 <script>
   function deleteTodo(href, todoName){
@@ -36,8 +37,6 @@
   <input type="text" name="description">
   <input type="submit" value="Submit">
 </form>
-
-
 
 
 <?php require('partials/footer.php'); ?>
