@@ -30,4 +30,14 @@ class AuthenController
     
     return \redirect('');
   }
+
+  public function getRegister() 
+  {
+    return view('authen/register');
+  }
+
+  public function postRegister()
+  {
+    
+  }
 }

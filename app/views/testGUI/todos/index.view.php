@@ -1,14 +1,7 @@
 <?php require('app/views/testGUI/partials/header.php'); ?>
 
 <h1>All todos</h1>
-<script>
-  function deleteTodo(href, todoName){
-    var confirmDelete = confirm("Do you want to delete '" + todoName+ "' ?");
-    if(confirmDelete) {
-      window.location.href = href;
-    }
-  }
-</script>
+<script src="public/js/script.js"></script>
 <ul>
 
 <?php
