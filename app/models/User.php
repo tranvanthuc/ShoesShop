@@ -6,53 +6,45 @@ use core\App;
 class User 
 {
   static $table = "users";
-  public $username;
+  public $email;
   public $password;
-  public $fullname;
+  public $first_name;
+  public $last_name;
+  public $phone;
+  public $address;
   public $gender;
-
   // get all users
   public static function selectAll()
   {
     return App::get('database')->selectAll(User::$table);
   }
-
   // insert User
-  public static function insert($username, $password, $fullname, $gender) {
+  public static function insert($email, $password, $first_name, $gender) {
     App::get('database')->insert(User::$table, [
-      'username'=> $username,
+      'email'=> $username,
       'password' => $password,
-      'fullname' => $fullname,
+      'first_name' => $first_name,
       'gender' => $gender
     ]);
   }
-
   // get User by id
   public static function getById($id) 
   {
     return App::get('database')->getById(User::$table, $id);
   }
-
   // update User by id
-  public static function updateById($id, $password, $fullname , $gender) {
-    App::get('database')->updateById(User::$table, [
-      'password' => $password,
-      'fullname' => $fullname,
-      'gender' => $gender,
-    ], $id);
+  public static function updateById($id, $params) {
+    App::get('database')->updateById(User::$table, $params, $id);
   }
-
-  public static function checkLogin($username,$password) {
+  public static function checkLogin($email,$password) {
     $table = User::$table;
-    $sql = "select * from {$table} where username='{$username}' and password='{$password}'";
+    $sql = "select * from {$table} where email='{$email}' and password='{$password}'";
     $user = App::get('database')->query($sql);
     
     return $user[0];
   }
-
   // delete User by id
   public static function deleteById($id) {
     App::get('database')->deleteById(User::$table, $id);
   }
-
 }
