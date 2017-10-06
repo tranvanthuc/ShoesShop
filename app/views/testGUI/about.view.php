@@ -1,5 +1,5 @@
-<?php require('partials/header.php'); ?>
+<?php require('app/views/testGUI/partials/header.php'); ?>
 
     About us
 
-<?php require('partials/footer.php'); ?>
+<?php require('app/views/testGUI/partials/footer.php'); ?>

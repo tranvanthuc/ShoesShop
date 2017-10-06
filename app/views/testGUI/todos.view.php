@@ -1,4 +1,4 @@
-<?php require('partials/header.php'); ?>
+<?php require('app/views/testGUI/partials/header.php'); ?>
 
 <h1>All todos</h1>
 <script>
@@ -39,5 +39,5 @@
 </form>
 
 
-<?php require('partials/footer.php'); ?>
+<?php require('app/views/testGUI/partials/footer.php'); ?>
   
