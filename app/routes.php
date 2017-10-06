@@ -23,3 +23,8 @@ $router->post('login', 'AuthenController@access');
 
 // logout
 $router->get('logout', 'AuthenController@logout');
+
+// register
+$router->get('register', 'AuthenController@getRegister');
+$router->post('register', 'AuthenController@postRegister');
+

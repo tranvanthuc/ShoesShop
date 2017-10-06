@@ -9,7 +9,7 @@ class TodosController
   public function index()
   {
     $todos = Todo::selectAll();  
-    return view('todos', compact('todos'));
+    return view('todos/index', compact('todos'));
   }
 
   // insert todo
@@ -27,7 +27,7 @@ class TodosController
     $id = $_GET['id'];
     $todo = Todo::getById($id)[0];
     
-    return view('editTodo',compact('todo'));
+    return view('todos/edit',compact('todo'));
   }
 
   // post edit todo 
