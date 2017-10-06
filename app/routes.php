@@ -23,3 +23,32 @@ $router->post('login', 'AuthenController@access');
 
 // logout
 $router->get('logout', 'AuthenController@logout');
+
+//shop_information controller
+//show list information of the shop
+$router->get('shopInf', 'ShopInfController@index');
+
+//insert shop information
+$router->post('shopInf', 'ShopInfController@insert');
+
+// //update shop information
+$router->get('shopInf/update', 'ShopInfController@getEditShopInf');
+$router->post('shopInf/update', 'ShopInfController@postEditShopInf');
+
+//delete shop information
+$router->get('shopInf/delete', 'ShopInfController@deleteShopInf');
+
+
+//Sizes controller
+//show list Sizes of the shop
+$router->get('sizes', 'SizesController@index');
+
+//insert new size
+$router->post('sizes', 'SizesController@insert');
+
+// //update size by id
+$router->get('sizes/update', 'SizesController@getEditSize');
+$router->post('sizes/update', 'SizesController@postEditSize');
+
+//delete size
+$router->get('sizes/delete', 'SizesController@deleteSize');
