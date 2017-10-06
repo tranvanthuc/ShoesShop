@@ -6,5 +6,5 @@
 - change password in file `config` to connect with database
 - `composer install` to install dependencies
 - `php -S localhost:8000`  to run website
-- username is your name and password 123
-- vd : username: `thuc` password: `123`
+- username is your email and password 123
+- vd : username: `thuc.tv@neo-lab.vn` password: `123`
