@@ -27,5 +27,3 @@ function redirect($path)
   $link = "http://". $_SERVER['HTTP_HOST']. "/" .$path;
   return header("Location: {$link}");
 }
-
-?>
