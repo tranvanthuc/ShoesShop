@@ -3,8 +3,9 @@
 ## How to run
 
 - Clone this project: `git clone git@github.com:tranvanthuc/ShoesShop.git`
-- change password in file `config` to connect with database
-- `composer install` to install dependencies
-- `php -S localhost:8000`  to run website
-- username is your name and password 123
-- vd : username: `thuc` password: `123`
+- Connect page `http://www.phpmyadmin.co/index.php` to create database
+- Server `sql12.freemysqlhosting.net`
+- Database name `sql12197810`
+- Username `sql12197810`
+- Password in group
+- `php -S localhost:8000` to run website

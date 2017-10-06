@@ -1,5 +1,4 @@
 <?php 
-
 namespace app\controllers;
 
 use app\models\User;
@@ -30,9 +29,5 @@ class AuthenController
     $_SESSION['user'] = $user;
     
     return \redirect('');
-    
   }
 }
-
-
-?>

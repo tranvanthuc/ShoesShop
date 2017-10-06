@@ -33,7 +33,6 @@ class QueryBuilder
     );
     try {
       $stm = $this->pdo->prepare($sql);
-
       $stm->execute($params);
     } catch(PDOException $e){
       die($e->getMessage());
@@ -41,17 +40,19 @@ class QueryBuilder
   }
 
   // update by id
-  public function updateById($table, $params,$condition)
+  public function updateById($table, $params, $id)
   {
     $result = [];
     $keys = array_keys($params);
     $values = array_values($params);
     for($i=0; $i< count($params); $i++) {
       // die(var_dump(gettype($values[$i])));
-      if(gettype($values[$i]) === "string")
+      if(gettype($values[$i]) === "string") {
         $temp = $keys[$i] . "='" .$values[$i]. "'";
-      else 
-      $temp = $keys[$i] . "=" .$values[$i];
+      }
+      else {
+        $temp = $keys[$i] . "=" .$values[$i];
+      } 
       array_push($result, $temp);
     }
     // die(var_dump($result));
@@ -60,12 +61,10 @@ class QueryBuilder
       'update %s set %s where id=%s',
       $table,
       implode(',', $result),
-      
-      $condition
+      $id
     );
     try {
       $stm = $this->pdo->prepare($sql);
-
       $stm->execute($params);
     } catch(PDOException $e){
       die($e->getMessage());
@@ -78,7 +77,6 @@ class QueryBuilder
     $sql = "delete from {$table} where id={$id}";
     try {
       $stm = $this->pdo->prepare($sql);
-
       $stm->execute();
     } catch(PDOException $e){
       die($e->getMessage());
@@ -103,7 +101,6 @@ class QueryBuilder
     $sql = "select * from {$table} where id={$id}";
     try {
       $stm = $this->pdo->prepare($sql);
-
       $stm->execute();
       return $stm->fetchAll(PDO::FETCH_CLASS);
     } catch (PDOException $e) {
@@ -111,6 +108,4 @@ class QueryBuilder
     }
   }
 }
-
-?>
 
