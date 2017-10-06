@@ -1,5 +1,5 @@
-<?php require('partials/header.php'); ?>
+<?php require('app/views/testGUI/partials/header.php'); ?>
 
     Contact <?= $name ?>
 
-<?php require('partials/footer.php'); ?>
+<?php require('app/views/testGUI/partials/footer.php'); ?>
