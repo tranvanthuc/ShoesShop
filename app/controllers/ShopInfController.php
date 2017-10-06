@@ -10,7 +10,7 @@ class ShopInfController
     {
         $shopInf = ShopInformation::selectAll();
 
-        return view('shopInf',compact('shopInf'));
+        return view('shopInf/index',compact('shopInf'));
     }
 
     //insert Information of shop
@@ -33,7 +33,7 @@ class ShopInfController
         $shopInf = ShopInformation::getById($id)[0];
         // die(var_dump($shopInf));
 
-        return view('editShopInf', compact('shopInf'));
+        return view('shopInf/edit', compact('shopInf'));
     }
 
     //post edit shop information
@@ -55,7 +55,7 @@ class ShopInfController
     {
         $id = $_GET['id'];
         ShopInformation::deleteById($id);
-        // die(var_dump($id));
+
         return redirect('shopInf');
     }
 }

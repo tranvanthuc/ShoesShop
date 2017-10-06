@@ -28,6 +28,7 @@ $router->get('logout', 'AuthenController@logout');
 $router->get('register', 'AuthenController@getRegister');
 $router->post('register', 'AuthenController@postRegister');
 
+
 //shop_information controller
 //show list information of the shop
 $router->get('shopInf', 'ShopInfController@index');
@@ -40,7 +41,7 @@ $router->get('shopInf/update', 'ShopInfController@getEditShopInf');
 $router->post('shopInf/update', 'ShopInfController@postEditShopInf');
 
 //delete shop information
-$router->get('shopInf/delete', 'ShopInfController@deleteShopInf');
+$router->get('shopInf/index/shop/delete', 'ShopInfController@deleteShopInf');
 
 
 //Sizes controller

@@ -4,7 +4,7 @@
   $user = $_SESSION['user'];
 ?>
 
-<h1>Homopage</h1>
+<h1>Homepage</h1>
 <h3>Hello <?= $user->first_name ?></h3>
 
 <?php require('app/views/testGUI/partials/footer.php'); ?>

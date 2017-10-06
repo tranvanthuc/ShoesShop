@@ -30,7 +30,8 @@
 
         <!-- delete shop informaton action  -->
         <li>
-            <?php $deleteUrl = "http://" . $_SERVER['HTTP_HOST'] . "/shopInf/delete/?id={$shop->id}"; ?>
+            <?php $deleteUrl = "http://" . $_SERVER['HTTP_HOST'] . "/shopInf/index/shop/delete/?id={$shop->id}"; 
+            ?>
             <button onclick="deleteShopInf('<?= $deleteUrl ?>', '<?= $shop->name ?>')">Delete</button>            
         </li><br />
 
