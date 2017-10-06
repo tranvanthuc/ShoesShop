@@ -1,15 +1,13 @@
 <?php 
 
-  use utils\functions;
-
   session_start();
 
-  
+  use utils\Functions;
 
 
-  if(!blockPage() && !$_SESSION['user'])
+  if(!Functions::blockPage() && !$_SESSION['user'])
     redirect('login');
-  else if(!blockPage())
+  else if(!Functions::blockPage())
     $user = $_SESSION['user'];
 ?>
 
@@ -17,7 +15,7 @@
   <ul> 
     
 
-  <?php if(!blockPage()) { ?>
+  <?php if(!Functions::blockPage()) { ?>
     <li><a href="/" >Home</a></li>
     <li><a href="/about" >About</a></li>
     <li><a href="/todos" >Todos</a></li>

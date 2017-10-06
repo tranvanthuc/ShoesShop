@@ -15,7 +15,8 @@ class Todo
   }
 
   // insert todo
-  public static function insert($description) {
+  public static function insert($description) 
+  {
     App::get('database')->insert(Todo::$table, [
       'description'=> $description,
       'completed' => 0
@@ -29,7 +30,8 @@ class Todo
   }
 
   // update todo by id
-  public static function updateById($id, $description, $completed = 0) {
+  public static function updateById($id, $description, $completed = 0) 
+  {
     App::get('database')->updateById(Todo::$table, [
       'description'=> $description,
       'completed' => $completed
@@ -38,7 +40,8 @@ class Todo
 
 
   // delete todo by id
-  public static function deleteById($id) {
+  public static function deleteById($id) 
+  {
     App::get('database')->deleteById(Todo::$table, $id);
   }
 

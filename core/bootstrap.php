@@ -16,9 +16,9 @@ App::bind(
 
 function view($nameView, $data = [])
 {
-  if($data)
+  if($data) {
     extract($data);
-
+  }
   return require "app/views/{$nameView}.view.php";
 }
 
@@ -27,5 +27,3 @@ function redirect($path)
   $link = "http://". $_SERVER['HTTP_HOST']. "/" .$path;
   return header("Location: {$link}");
 }
-
-?>

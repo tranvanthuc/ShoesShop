@@ -1,6 +1,7 @@
 <?php
 
 namespace app\controllers;
+
 use app\models\Todo;
 
 class TodosController 
@@ -25,9 +26,8 @@ class TodosController
   public function getEditTodo() 
   {
     $id = $_GET['id'];
-
     $todo = Todo::getById($id)[0];
-
+    
     return view('editTodo',compact('todo'));
   }
 

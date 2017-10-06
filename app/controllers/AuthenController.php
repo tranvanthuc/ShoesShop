@@ -30,7 +30,6 @@ class AuthenController
     $_SESSION['user'] = $user;
     
     return \redirect('');
-    
   }
 }
 

@@ -10,7 +10,7 @@ class Autoload
 	private function _autoload($file)
 	{
 		$file = str_replace("\\", "/", trim($file, '\\')) . '.php';
-		echo "<br>trong file Autoload : " . $file . "****</br>";
+		// echo "<br>trong file Autoload : " . $file . "****</br>";
 		if(file_exists($file)) {
 			require $file;
 		}
