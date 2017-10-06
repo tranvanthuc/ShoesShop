@@ -18,7 +18,9 @@ class Size
     //insert new size
     public static function insert($size)
     {
-        App::get('database')->insert(Size::$table,$size);
+        App::get('database')->insert(Size::$table,[
+            'size' => $size
+        ]);
     }
 
     //get size by id
@@ -28,9 +30,9 @@ class Size
     }
 
     //update size by Id
-    public static function updateById($id, $size)
+    public static function updateById($id, $size)  
     {
-        App::get('databse')->updateById(Size::$table, $size, $id);
+        App::get('database')->updateById(Size::$table, [ 'size' => $size], $id);
     }
 
     //delete size by Id

@@ -59,8 +59,7 @@ class QueryBuilder
     $sql = sprintf(
       'update %s set %s where id=%s',
       $table,
-      implode(',', $result),
-      
+      implode(',', $result),      
       $condition
     );
     try {
