@@ -2,11 +2,21 @@
 
 <!-- View all shop informations  -->
 <style>
-    .txt-input{
+    .txt-input {
         width: 38.5%;
     }
+    #btn-update {
+        text-decoration: none;
+    }
 </style>
-
+<script>
+  function deleteShopInf(href, shopName){
+    var confirmDelete = confirm("Do you want to delete '" + shopName+ "' ?");
+    if(confirmDelete) {
+      window.location.href = href;
+    }
+  }
+</script>
 <ul style="list-style-type:none">
     <!-- render all shop information in the information table -->
     <?php foreach($shopInf as $shop): ?> 
@@ -20,19 +30,15 @@
 
         <!-- delete shop informaton action  -->
         <li>
-            <form action = "/shopInf/delete" method = "GET">
-                <input name = "id" type = "hidden" value="<?php echo $id; ?>">
-                <input type = "submit" value = "Delete">
-            </form>
+            <?php $deleteUrl = "http://" . $_SERVER['HTTP_HOST'] . "/shopInf/delete/?id={$shop->id}"; ?>
+            <button onclick="deleteShopInf('<?= $deleteUrl ?>', '<?= $shop->name ?>')">Delete</button>            
         </li><br />
 
         <!-- update shop information action  -->
         <li>
-            <form action = "/shopInf/update" method = "GET">
-                <input name = "id" type = "hidden" value="<?php echo $id; ?>">
-                <input type = "submit" value = "Update">
-            </form>
+        <button ><a href="<?= "shopInf/update/?id=".$shop->id ?>" id ="btn-update">Update</a></button>
         </li><br />
+        
     <?php endforeach; ?>
 </ul><br />
 

@@ -1,5 +1,19 @@
 <?php require('partials/header.php'); ?>
 <h1>All shoe sizes</h1>
+<script>
+  function deleteSize(href, name){
+    var confirmDelete = confirm("Do you want to delete  size '" + name+ "' ?");
+    if(confirmDelete) {
+      window.location.href = href;
+    }
+  }
+</script>
+<style>
+    #btn-update {
+        text-decoration: none;
+    }
+</style>
+
 
 <!-- View all shoe sizes  -->
 <table style="width: 25%;">
@@ -13,21 +27,16 @@
     <?php foreach($sizes as $data): ?> 
         <tr>
             <td><?= $id = $data->id; ?></td>   
-            <td><?= $data->size; ?></td>
+            <td><?= $size = $data->size; ?></td>
 
             <!-- delete shoe size action  -->
             <td>
-                <form action = "/sizes/delete" method = "GET">
-                    <input name = "id" type = "hidden" value="<?php echo $id; ?>">
-                    <input type = "submit" value = "Delete">
-                </form>
+                <?php $deleteUrl = "http://" . $_SERVER['HTTP_HOST'] . "/sizes/delete/?id={$data->id}"; ?>
+                <button onclick="deleteSize('<?= $deleteUrl ?>', '<?= $data->size ?>')">Delete</button>            
             </td>
             <!-- update shoe size action  -->
             <td>
-                <form action = "/sizes/update" method = "GET">
-                    <input name = "id" type = "hidden" value="<?php echo $id; ?>">
-                    <input type = "submit" value = "Update">
-                </form>
+            <button ><a href="<?= "sizes/update/?id=".$data->id ?>" id ="btn-update">Update</a></button >        
             </td>
         </tr>
     <?php endforeach; ?>
