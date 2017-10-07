@@ -5,7 +5,7 @@ module.exports = {
       './app/app.module.js',
     ],
     output: {
-        path: __dirname + '/frontend/public',
+        path: __dirname + '/public',
         filename: 'app.bundle.js',
     },
     watch: true,
