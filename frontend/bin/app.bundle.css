@@ -6043,4 +6043,91 @@ p {
     display: flex;
     justify-content: space-between; }
 
+.sidebar {
+  height: 100%;
+  background-color: #34495e;
+  padding: 0; }
+  .sidebar .user-container {
+    align-items: center;
+    padding: 10px;
+    height: 12%;
+    background-image: url("http://www.planwallpaper.com/static/images/518164-backgrounds.jpg"); }
+  .sidebar .avatar {
+    height: 100%;
+    display: flex;
+    justify-content: center; }
+    .sidebar .avatar img {
+      height: 100%;
+      border-radius: 50%;
+      background-color: rebeccapurple; }
+  .sidebar .sidebar-menu {
+    padding: 10px 10px 0 10px; }
+    .sidebar .sidebar-menu .menu-item {
+      color: #ecf0f1;
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      margin: 0; }
+    .sidebar .sidebar-menu .collapse-menu {
+      flex-direction: column;
+      align-items: inherit; }
+    .sidebar .sidebar-menu .collapse-menu a {
+      color: #ecf0f1; }
+    .sidebar .sidebar-menu .collapse-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 10px 0 10px;
+      font-size: 14px; }
+    .sidebar .sidebar-menu .sub-item {
+      display: flex;
+      align-items: center; }
+    .sidebar .sidebar-menu .menu-item:hover {
+      background-color: #2c3e50;
+      margin: 0 -10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      cursor: pointer; }
+
+.main-content {
+  height: 100vh; }
+  .main-content .form-common-style, .main-content .left-container, .main-content .right-container {
+    padding-top: 30px;
+    padding-bottom: 30px; }
+  .main-content .modify-style, .main-content .right-container .list .edit-icon, .main-content .right-container .list .delete-icon {
+    font-size: 18px; }
+    .main-content .modify-style:hover, .main-content .right-container .list .edit-icon:hover, .main-content .right-container .list .delete-icon:hover {
+      cursor: pointer; }
+  .main-content .left-container {
+    border-right: 1px solid #bdc3c7;
+    overflow-y: auto; }
+    .main-content .left-container .introduction {
+      text-align: center; }
+    .main-content .left-container .form {
+      margin-top: 30px !important; }
+      .main-content .left-container .form .submit {
+        display: flex;
+        justify-content: flex-end; }
+  .main-content .right-container .title {
+    text-align: center; }
+  .main-content .right-container .list {
+    background-color: white;
+    margin-top: 30px !important;
+    max-height: 75%;
+    overflow-y: auto; }
+    .main-content .right-container .list .list-item {
+      padding: 15px 0;
+      margin-bottom: 1px !important; }
+      .main-content .right-container .list .list-item .title {
+        text-align: start; }
+      .main-content .right-container .list .list-item:hover {
+        background-color: rgba(0, 0, 0, 0.03); }
+    .main-content .right-container .list .edit-icon {
+      color: #3498db; }
+      .main-content .right-container .list .edit-icon:hover {
+        color: #2980b9; }
+    .main-content .right-container .list .delete-icon {
+      color: #e74c3c; }
+      .main-content .right-container .list .delete-icon:hover {
+        color: #c0392b; }
+
 /*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IiIsImZpbGUiOiIuL2FwcC5idW5kbGUuY3NzIiwic291cmNlUm9vdCI6IiJ9*/

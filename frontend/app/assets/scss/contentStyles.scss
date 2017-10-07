@@ -1,0 +1,81 @@
+.main-content {
+  height: 100vh;
+
+  .form-common-style {
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .modify-style {
+    font-size: 18px;
+    
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .left-container {
+    @extend .form-common-style;
+    border-right: 1px solid #bdc3c7;
+    overflow-y: auto;
+
+    .introduction {
+      text-align: center;
+    }
+
+    .form {
+      margin-top: 30px !important;
+
+      .submit {
+        display: flex;
+        justify-content: flex-end; 
+      }
+    }
+  }
+
+  .right-container {
+    @extend .form-common-style;
+
+    .title {
+      text-align: center;
+    }
+
+    .list {
+      background-color: white;
+      margin-top: 30px !important;
+      max-height: 75%;
+      overflow-y: auto;
+
+      .list-item {
+        padding: 15px 0;
+        margin-bottom: 1px !important;
+
+        .title {
+          text-align: start;
+        }
+
+        &:hover {
+          background-color: rgba(0,0,0,0.03);
+        }
+      }
+      
+      .edit-icon {
+        @extend .modify-style;
+        color: #3498db;
+        
+        &:hover {
+          color: #2980b9;
+        }
+      }
+
+      .delete-icon {
+        @extend .modify-style;
+        color: #e74c3c;
+
+        &:hover {
+          color: #c0392b;
+        }
+      }
+    }
+  }
+}
