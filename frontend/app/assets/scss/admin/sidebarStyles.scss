@@ -3,6 +3,10 @@
   background-color: #34495e;
   padding: 0;
 
+  @include media-breakpoint-down(sm) {
+    display: none
+  }
+
   .user-container {
     align-items: center;
     padding: 10px;

@@ -5,27 +5,31 @@
       <div class="introduction">
         <p>Create shoe category, such as sandal, boot, high-heeled, ....</p>
       </div>
-      <div class="form w-50 m-auto">
-        <div class="form-group">
-          <label for="name">Category name</label>
-          <input class="form-control" name="name" id="name" placeholder="Enter shoe category name ..." ng-model="name">
+      <div class="row">
+        <div class="col-1 col-lg-2"></div>
+        <div class="form col-10 col-lg-8">
+          <div class="form-group">
+            <label for="name">Category name</label>
+            <input class="form-control" name="name" id="name" placeholder="Enter shoe category name ..." ng-model="name">
+          </div>
+          <div class="form-group">
+            <label for="gender">Gender</label>
+            <select class="form-control" id="gender" ng-model="gender">
+              <option>male</option>
+              <option>female</option>
+              <option>both</option>
+            </select>
+          </div>
+          <div class="submit form-group">
+            <button type="submit" class="btn btn-sm btn-primary">Create</button>  
+          </div>                 
         </div>
-        <div class="form-group">
-          <label for="gender">Gender</label>
-          <select class="form-control" id="gender" ng-model="gender">
-            <option>male</option>
-            <option>female</option>
-            <option>both</option>
-          </select>
-        </div>
-        <div class="submit form-group">
-          <button type="submit" class="btn btn-sm btn-primary">Create</button>  
-        </div>                 
+        <div class="col-1 col-lg-2"></div>
       </div>
     </div>
     <div class="right-container col-6">
       <p class="title">Categories</p>
-      <div class="list w-75 m-auto" id="list">
+      <div class="list" id="list">
         <div class="list-item row m-0" ng-repeat="item in list">
           <div class="title col-9" id="title">
             <p ng-bind="item.title"></p>

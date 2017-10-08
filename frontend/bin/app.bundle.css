@@ -6047,6 +6047,9 @@ p {
   height: 100%;
   background-color: #34495e;
   padding: 0; }
+  @media (max-width: 767px) {
+    .sidebar {
+      display: none; } }
   .sidebar .user-container {
     align-items: center;
     padding: 10px;
