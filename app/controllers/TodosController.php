@@ -13,7 +13,7 @@ class TodosController
   }
 
   // insert todo
-  public function insert()
+  public function store()
   {
     $description = $_POST['description'];
     Todo::insert($description);
@@ -22,7 +22,7 @@ class TodosController
   }
 
   // get edit todo
-  public function getEditTodo() 
+  public function getUpdate() 
   {
     $id = $_GET['id'];
     $todo = Todo::getById($id)[0];
@@ -31,7 +31,7 @@ class TodosController
   }
 
   // post edit todo 
-  public function postEditTodo() 
+  public function postUpdate() 
   {
     $id = $_POST['id'];
     $description = $_POST['description'];

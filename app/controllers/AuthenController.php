@@ -5,22 +5,22 @@ use app\models\User;
 
 class AuthenController 
 {
-  public function login()
+  public function getLogin()
   {
     return view('authen/login');
   }
 
-  public function logout()
+  public function getLogout()
   {
-    \session_start();
+    session_start();
     session_destroy();
     return view('authen/login');
   }
 
-  public function access()
+  public function postLogin()
   {
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = md5($_POST['password']);
     $user = User::checkLogin($email, $password);
     if(\sizeof($user) == 0) {
       return redirect('login');
@@ -38,6 +38,13 @@ class AuthenController
 
   public function postRegister()
   {
-    
+    $email = $_POST['email'];
+    $password = md5($_POST['password']);
+    $first_name = "Thuc";
+    $last_name = "Tran Van";
+    $role_id = 1;
+
+    User::insert($role_id, $first_name, $last_name, $email, $password);
+    return \redirect('login');
   }
 }

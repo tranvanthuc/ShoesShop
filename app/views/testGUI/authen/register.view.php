@@ -5,14 +5,15 @@
 <h1>Register</h1>
 <form action="/register" method="post">
   <div>
-    <input type="text" placeholder="Enter username"
-  name="username">
+    <input type="text" placeholder="Enter email"
+  name="email">
   </div>
   
   <div>
     <input type="password" id="password" placeholder="Enter password"
   name="password">
   </div>
+  
   <div>
     <input type="password" placeholder="Enter confirm password"
   name="confirm_password" id="confirm_password" onkeyup="check_pass();">
