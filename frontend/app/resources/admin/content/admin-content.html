@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<div class="main-content" ng-controller="adminContentCtrl">
+  <div class="row m-0 justify-content-around h-100">
+    <div class="left-container col-6">
+      <div class="introduction">
+        <p>Create shoe category, such as sandal, boot, high-heeled, ....</p>
+      </div>
+      <div class="form w-50 m-auto">
+        <div class="form-group">
+          <label for="name">Category name</label>
+          <input class="form-control" name="name" id="name" placeholder="Enter shoe category name ..." ng-model="name">
+        </div>
+        <div class="form-group">
+          <label for="gender">Gender</label>
+          <select class="form-control" id="gender" ng-model="gender">
+            <option>male</option>
+            <option>female</option>
+            <option>both</option>
+          </select>
+        </div>
+        <div class="submit form-group">
+          <button type="submit" class="btn btn-sm btn-primary">Create</button>  
+        </div>                 
+      </div>
+    </div>
+    <div class="right-container col-6">
+      <p class="title">Categories</p>
+      <div class="list w-75 m-auto" id="list">
+        <div class="list-item row m-0" ng-repeat="item in list">
+          <div class="title col-9" id="title">
+            <p ng-bind="item.title"></p>
+          </div>
+          <div class="modify col-3">
+            <div class="row">
+              <span class="edit-icon col-6">
+                <i class="fa fa-pencil"></i>
+              </span>
+              <span class="delete-icon col-6">
+                <i class="fa fa-times"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

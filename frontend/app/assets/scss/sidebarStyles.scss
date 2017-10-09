@@ -1,0 +1,65 @@
+.sidebar {
+  height: 100%;
+  background-color: #34495e;
+  padding: 0;
+
+  .user-container {
+    align-items: center;
+    padding: 10px;
+    height: 12%;
+    background-image: url('http://www.planwallpaper.com/static/images/518164-backgrounds.jpg');
+  }
+
+  .avatar {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: 100%;
+      border-radius: 50%;
+      background-color: rebeccapurple;
+    }
+  }
+
+  .sidebar-menu {
+    padding: 10px 10px 0 10px;
+
+    .menu-item {
+      color: #ecf0f1;
+      display: flex;
+      align-items: center;
+      padding: 10px 0;
+      margin: 0;
+    }
+
+    .collapse-menu {
+      flex-direction: column;
+      align-items: inherit;
+    }
+
+    .collapse-menu a {
+      color: #ecf0f1;
+    }
+
+    .collapse-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 10px 0 10px;
+      font-size: 14px;
+    }
+
+    .sub-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-item:hover {
+      background-color: #2c3e50;
+      margin: 0 -10px;
+      padding-left: 10px;
+      padding-right: 10px;
+      cursor: pointer;
+    }
+  }
+}

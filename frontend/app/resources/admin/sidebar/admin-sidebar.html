@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<div class="sidebar" id="sidebar" ng-controller="adminSidebarCtrl">
+  <div class="user-container row m-0">
+    <div class="avatar col-6 pl-0">
+      <img ng-src="{{ avatar }}" alt="admin">
+    </div>
+    <div class="username col-6 p-0">User Admin</div>
+  </div>
+  <div class="sidebar-menu">
+    <div class="menu-item row">
+      <i class="fa fa-bar-chart col-1 p-0"></i>
+      <div class="menu-item-title col-11">Dashboard</div>
+    </div>
+    <div class="menu-item collapse-menu">
+      <div data-target="#collapseSubItem" data-toggle="collapse" class="sub-item collapse-down-btn row m-0">
+        <i class="fa fa-bar-chart col-1 p-0"></i>
+        <span class="menu-item-title col-10">Management</span>
+        <i class="fa fa-angle-down icon col-1 p-0"></i>
+      </div>
+      <div id="collapseSubItem" class="collapse">
+        <div class="collapse-item row m-0" ng-repeat="item in managementMenu">
+          <i class="fa {{ item.icon }} col-1 p-0"></i>
+          <a href="#" class="col-11 pr-0" ng-bind="item.title"></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
