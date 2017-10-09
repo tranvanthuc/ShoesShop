@@ -8,8 +8,8 @@ class CategoriesController
 	public function index()
 	{
 		$cates = Category::selectAll();
-		// return view('category/index', compact("cates"));
-		return (json_encode($cates));
+		return view('category/index', compact("cates"));
+		// die((json_encode($cates)));
 	}
 
 	public function create()
@@ -28,8 +28,8 @@ class CategoriesController
 
 	public function delete()
 	{
-		
+		$id = $_GET['id'];
+		Category::deleteById($id);
+		return redirect('cates');
 	}
-
-
 } 

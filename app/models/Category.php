@@ -16,12 +16,12 @@ class Category
 		return App::get('database')->insert(Category::$table, [
 			'name' => $name,
 			'gender' => $gender
-		]);
+			]);
 	}
 
-	public function deleteById($id)
+	public static function deleteById($id)
 	{
-		return App::get('database')->delete(Category::$table,$id);
+		return App::get('database')->deleteById(Category::$table,$id);
 	}
 }
 
