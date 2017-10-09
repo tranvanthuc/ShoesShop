@@ -35,8 +35,6 @@ class QueryBuilder
     try {
       $stm = $this->pdo->prepare($sql);
       $stm->execute($params);
-      $last_id = $stm->lastInsertId();
-      die(var_dump($last_id));
     } catch(PDOException $e){
       die($e->getMessage());
     }

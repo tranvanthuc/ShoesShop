@@ -21,14 +21,10 @@ $router->get('todos/delete', 'TodosController@getDelete');
 $router->get('login', 'AuthenController@getLogin');
 $router->post('login', 'AuthenController@postLogin');
 
-
-// CategoryController
-$router->get('cates', 'CategoriesController@index');
-$router->get('cate/create', 'CategoriesController@create');
-$router->post('cate/store', 'CategoriesController@store');
 // logout
 $router->get('logout', 'AuthenController@getLogout');
 
 // register
 $router->get('register', 'AuthenController@getRegister');
 $router->post('register', 'AuthenController@postRegister');
+

@@ -10,7 +10,6 @@
     $deleteUrl = "http://". $_SERVER['HTTP_HOST']. "/todos/delete/?id={$todo->id}";
 ?>
   <!-- $todo->completed ? "" -->
-  
   <li >
   
     <a href="<?= "todos/edit/?id=".$todo->id ?>">
