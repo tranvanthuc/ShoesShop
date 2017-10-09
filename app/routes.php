@@ -59,3 +59,18 @@ $router->post('sizes/size/update', 'SizesController@postEditSize');
 $router->get('sizes/index/size/delete', 'SizesController@deleteSize');
 
 
+//ProductsSizes controller
+//show list ProductsSizes of the shop
+$router->get('productsSizes', 'ProductsSizesController@index');
+
+//insert new size
+$router->post('productsSizes', 'ProductsSizesController@insert');
+
+// //update size by id
+$router->get('productsSizes/productSize/update', 'ProductsSizesController@getEditProductSize');
+$router->post('productsSizes/productSize/update', 'ProductsSizesController@postEditProductSize');
+
+//delete size
+$router->get('productsSizes/productSize/delete', 'ProductsSizesController@deleteProductSize');
+
+

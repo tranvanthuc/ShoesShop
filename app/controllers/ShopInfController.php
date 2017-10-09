@@ -1,6 +1,7 @@
 <?php
 
-namespace app\controllers;
+namespace app\controllers; 
+
 use app\models\ShopInformation;
 
 class ShopInfController
