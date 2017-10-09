@@ -19,6 +19,7 @@ function view($nameView, $data = [])
   if($data) {
     extract($data);
   }
+  json_encode($data);
   return require "app/views/testGUI/{$nameView}.view.php";
 }
 
