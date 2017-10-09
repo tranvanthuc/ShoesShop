@@ -9,11 +9,11 @@ class TodosController
   public function index()
   {
     $todos = Todo::selectAll();  
-    return view('todos', compact('todos'));
+    return view('todos/index', compact('todos'));
   }
 
   // insert todo
-  public function insert()
+  public function store()
   {
     $description = $_POST['description'];
     Todo::insert($description);
@@ -22,16 +22,16 @@ class TodosController
   }
 
   // get edit todo
-  public function getEditTodo() 
+  public function getUpdate() 
   {
     $id = $_GET['id'];
     $todo = Todo::getById($id)[0];
     
-    return view('editTodo',compact('todo'));
+    return view('todos/edit',compact('todo'));
   }
 
   // post edit todo 
-  public function postEditTodo() 
+  public function postUpdate() 
   {
     $id = $_POST['id'];
     $description = $_POST['description'];

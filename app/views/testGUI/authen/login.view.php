@@ -8,4 +8,6 @@
     <input type="submit" value="Login">
   </form>
 
+  <div><a href="/register">Register</a></div>
+
 <?php require('app/views/testGUI/partials/footer.php'); ?>
