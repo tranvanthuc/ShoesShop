@@ -8,12 +8,8 @@ class CategoriesController
 	public function index()
 	{
 		$cates = Category::selectAll();
-		header('Content-type: application/json');
-		// return view('category/index', compact("cates"));
-		$response = new Response(json_encode($cates));
-    $response->headers->set('Content-Type', 'application/json');
 
-		return $response;
+		return new JsonResponse($cates);
 	}
 
 	public function create()
