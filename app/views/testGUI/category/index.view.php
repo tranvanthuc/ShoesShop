@@ -9,14 +9,13 @@
 
 		$deleteUrl = "http://". $_SERVER['HTTP_HOST'] . "/cate/delete/?id={$cate->id}";
 	?>
-	<!-- $todo->completed ? "" -->
 
 	<li>
-		<a href=""><?= $cate->name ?></a>
+		<a href="<?= "cate/getUpdate/?id=" . $cate->id ?>"><?= $cate->name ?></a>
 		<button onclick="deleteTodo('<?= $deleteUrl ?>', '<?= $cate->name ?>')">&#10006;</button>
 	</li>
 
-<?php endforeach; ?>
+	<?php endforeach; ?>
 </ul>
 
 <?php require('app/views/testGUI/partials/footer.php'); ?>

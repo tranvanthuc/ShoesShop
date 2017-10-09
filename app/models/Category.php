@@ -23,5 +23,20 @@ class Category
 	{
 		return App::get('database')->deleteById(Category::$table,$id);
 	}
+
+	public static function getById($id)
+	{
+		return App::get('database')->getById(Category::$table, $id);
+	}
+
+	public static function updateById($id, $name, $gender)
+	{
+		return App::get('database')->updateById(Category::$table,
+			[
+				'name' => $name,
+				'gender' => $gender
+			],$id);
+	}
+	
 }
 
