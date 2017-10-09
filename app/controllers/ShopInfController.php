@@ -15,8 +15,14 @@ class ShopInfController
         return view('shopInf/index',compact('shopInf'));
     }
 
+    //return to the create page
+    public function create()
+    {
+        return view('shopInf/create',compact('shopInf'));
+    }
+
     //insert Information of shop
-    public function insert()
+    public function store()
     {
         $description = $_POST['description'];
         $name = $_POST['name'];
@@ -28,8 +34,16 @@ class ShopInfController
         return redirect ('shopInf');
     }
 
+    public function show()
+    {
+        $id = $_GET['id'];
+        $shopInf = ShopInformation::getById($id)[0];
+        // die(var_dump($shopInf));
+        return view('shopInf/show',compact('shopInf'));
+    }
+
     // get shop information by id
-    public function getEditShopInf()
+    public function getupdate()
     {
         $id = $_GET['id'];
         $shopInf = ShopInformation::getById($id)[0];
@@ -39,7 +53,7 @@ class ShopInfController
     }
 
     //post edit shop information
-    public function postEditShopInf()
+    public function postupdate()
     {
         $id = $_POST['id'];
         $description = $_POST['description'];
@@ -53,7 +67,7 @@ class ShopInfController
     }
 
     //delete information of shop
-    public function deleteShopInf()
+    public function delete()
     {
         $id = $_GET['id'];
         ShopInformation::deleteById($id);

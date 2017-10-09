@@ -33,15 +33,21 @@ $router->post('register', 'AuthenController@postRegister');
 //show list information of the shop
 $router->get('shopInf', 'ShopInfController@index');
 
+//return to create shop information page
+$router->get('shopInf/create', 'ShopInfController@create');
+
+//return to show shop information page
+$router->get('shopInf/show', 'ShopInfController@show');
+
 //insert shop information
-$router->post('shopInf', 'ShopInfController@insert');
+$router->post('shopInf', 'ShopInfController@store');
 
 // //update shop information
-$router->get('shopInf/update', 'ShopInfController@getEditShopInf');
-$router->post('shopInf/update', 'ShopInfController@postEditShopInf');
+$router->get('shopInf/update', 'ShopInfController@getupdate');
+$router->post('shopInf/update', 'ShopInfController@postupdate');
 
 //delete shop information
-$router->get('shopInf/shop/delete', 'ShopInfController@deleteShopInf');
+$router->get('shopInf/shop/delete', 'ShopInfController@delete');
 
 
 //Sizes controller

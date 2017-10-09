@@ -39,6 +39,9 @@
         <li>
         <button ><a href="<?= "shopInf/update/?id=".$shop->id ?>" id ="btn-update">Update</a></button>
         </li><br />
+        <li>
+        <button ><a href="<?= "shopInf/show/?id=".$shop->id ?>" id ="btn-update">Show</a></button>
+        </li><br />
         
     <?php endforeach; ?>
 </ul><br />
