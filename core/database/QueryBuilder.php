@@ -28,9 +28,10 @@ class QueryBuilder
     $sql = sprintf(
       'insert into %s (%s) values (%s)',
       $table,
-      implode(',', array_keys($params)),
+      implode(', ', array_keys($params)),
       ':'. implode(', :', array_keys($params))
     );
+
     try {
       $stm = $this->pdo->prepare($sql);
       $stm->execute($params);
