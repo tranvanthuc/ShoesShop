@@ -9,7 +9,7 @@ class CategoriesController
 	{
 		$cates = Category::selectAll();
 		return view('category/index', compact("cates"));
-		// return (json_encode($cates));
+		// die((json_encode($cates)));
 	}
 
 	public function create()
@@ -26,5 +26,10 @@ class CategoriesController
 		return redirect('cates');
 	}
 
-
+	public function delete()
+	{
+		$id = $_GET['id'];
+		Category::deleteById($id);
+		return redirect('cates');
+	}
 } 
