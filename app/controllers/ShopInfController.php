@@ -12,13 +12,15 @@ class ShopInfController
         $shopInf = ShopInformation::selectAll();
         // die(var_dump($shopInf));
 
+        // die(json_encode($shopInf));
+        // return json_encode($shopInf);
         return view('shopInf/index',compact('shopInf'));
     }
 
     //return to the create page
     public function create()
     {
-        return view('shopInf/create',compact('shopInf'));
+        return view('shopInf/create');
     }
 
     //insert Information of shop

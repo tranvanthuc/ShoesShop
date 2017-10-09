@@ -10,14 +10,13 @@ class ProductsSizesController
     public function index()
     {
         $productsSizes = ProductsSizes::selectAll();
-
         // die(var_dump($productsSizes));
 
         return view('productsSizes/index', compact('productsSizes'));
     }
 
     // insert a record of table products_sizes
-    public function insert()
+    public function store()
     {
         $productId = $_POST['productId'];
         $sizeId = $_POST['sizeId'];
@@ -26,8 +25,23 @@ class ProductsSizesController
         return redirect('productsSizes');
     }
 
+    //return to the create page
+    public function create()
+    {
+        return view('productsSizes/create',compact('shopInf'));
+    }
+
     //get a record of table products_sizes by Id
-    public function getEditProductSize()
+    public function show()
+    {
+        $id = $_GET['id'];
+        $productSize = ProductsSizes::getById($id)[0];
+
+        return view('productsSizes/shpw', compact('productSize'));
+    }
+
+    //get a record of table products_sizes by Id
+    public function getupdate()
     {
         $id = $_GET['id'];
         $productSize = ProductsSizes::getById($id)[0];
@@ -36,7 +50,7 @@ class ProductsSizesController
     }
 
     //post edit a record in table products_sizes
-    public function postEditProductSize()
+    public function postupdate()
     {
         $id = $_POST['id'];
         $product_id = $_POST['productId'];
@@ -47,7 +61,7 @@ class ProductsSizesController
     }
 
     //delete a record in tablle products_sizes
-    public function deleteProductSize()
+    public function delete()
     {
         $id =$_GET['id'];
         ProductsSizes::deleteById($id);

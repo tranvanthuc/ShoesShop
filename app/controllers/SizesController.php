@@ -14,7 +14,7 @@ class SizesController
     }
 
     //insert new size
-    public function insert()
+    public function store()
     {
         $size = $_POST['size'];
         Size::insert($size);
@@ -22,8 +22,23 @@ class SizesController
         return redirect('sizes');
     }
 
+    //return to the create page
+    public function create()
+    {
+        return view('sizes/create');
+    }
+
+    //Show size
+    public function show()
+    {
+        $id = $_GET['id'];
+        $size = Size::getById($id)[0];
+
+        return view('sizes/show', compact('size'));
+    }
+
     //get edit size
-    public function getEditSize()
+    public function getupdate()
     {
         $id = $_GET['id'];
         $size = Size::getById($id)[0];
@@ -32,7 +47,7 @@ class SizesController
     }
 
     //post edit size
-    public function postEditSize()
+    public function postupdate()
     {
         $id = $_POST['id'];
         $size = $_POST['size'];
@@ -42,7 +57,7 @@ class SizesController
     }
 
     //get delete size by id
-    public function deleteSize()
+    public function delete()
     {
         $id = $_GET['id'];
         Size::deleteById($id);

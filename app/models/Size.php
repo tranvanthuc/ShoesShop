@@ -22,7 +22,6 @@ class Size
             'size' => $size
         ]);
     }
-
     //get size by id
     public static function getById($id)
     {
@@ -38,6 +37,12 @@ class Size
     //delete size by Id
     public static function deleteById($id)
     {
+        $proSizeId =  ProductsSizes::getProSizeBySizeId($id);
+
+        // die(var_dump($proSizeId));  
+        foreach ($proSizeId as $data){
+            App::get('database')->deleteById(ProductsSizes::$table, $data->id);
+        }
         App::get('database')->deleteById(Size::$table, $id);
     }
 }

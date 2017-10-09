@@ -46,4 +46,19 @@ class ProductsSizes
     {
         App::get('database')->deleteById(ProductsSizes::$table, $id);
     }
+
+    //get products_sizes by size_id
+    public static function getProSizeBySizeId($id)
+    {
+        // $table = User::$table;
+        // $sql = "select * from {$table} where email='{$email}' and password='{$password}'";
+        // $user = App::get('database')->query($sql);
+        
+        // return $user[0];
+
+        $table = ProductsSizes::$table;
+        $sql = "select id from {$table} where size_id= {$id}";
+        return App::get('database')->query($sql);
+
+    }
 }
