@@ -10,16 +10,26 @@ class SizesController
     {
         $sizes = Size::selectAll();
 
-        return view('sizes/index', compact('sizes'));
+        //return file json to show in front-end
+        header("Access-Control-Allow-Origin: *");
+        echo json_encode($sizes);
+
+        // return view('sizes/index', compact('sizes'));
     }
 
     //insert new size
     public function store()
     {
-        $size = $_POST['size'];
-        Size::insert($size);
+        try{
+            $size = $_POST['size'];
+            Size::insert($size);
+            return true;
+        }catch(Exception $e){
+            die($e->getMessage());
+            return false;
+        }
 
-        return redirect('sizes');
+        // return redirect('sizes');
     }
 
     //return to the create page
@@ -34,7 +44,11 @@ class SizesController
         $id = $_GET['id'];
         $size = Size::getById($id)[0];
 
-        return view('sizes/show', compact('size'));
+        //return file json to show in front-end
+        header("Access-Control-Allow-Origin: *");
+        echo json_encode($size);
+
+        // return view('sizes/show', compact('size'));
     }
 
     //get edit size
@@ -43,15 +57,25 @@ class SizesController
         $id = $_GET['id'];
         $size = Size::getById($id)[0];
 
-        return view('sizes/edit', compact('size'));
+        //return file json to show in front-end
+        header("Access-Control-Allow-Origin: *");
+        echo json_encode($size);
+
+        // return view('sizes/edit', compact('size'));
     }
 
     //post edit size
     public function postupdate()
     {
-        $id = $_POST['id'];
-        $size = $_POST['size'];
-        Size::updateById($id, $size);
+        try{
+            $id = $_POST['id'];
+            $size = $_POST['size'];
+            Size::updateById($id, $size);
+            return true;
+        } catch(Exception $e){
+            die($e->getMessage());
+            return false;
+        }
 
         return redirect('sizes');
     }
@@ -59,9 +83,15 @@ class SizesController
     //get delete size by id
     public function delete()
     {
-        $id = $_GET['id'];
-        Size::deleteById($id);
+        try{
+            $id = $_GET['id'];
+            Size::deleteById($id);
+            return true;
+        } catch(Exception $e){
+            die($e->getMessage());
+            return false;   
+        }
 
-        return redirect('sizes');
+        // return redirect('sizes');
     }
 }

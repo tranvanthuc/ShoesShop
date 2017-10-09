@@ -10,19 +10,29 @@ class ProductsSizesController
     public function index()
     {
         $productsSizes = ProductsSizes::selectAll();
-        // die(var_dump($productsSizes));
-
-        return view('productsSizes/index', compact('productsSizes'));
+        
+        //return file json to show in front-end
+        header("Access-Control-Allow-Origin: *");
+		echo json_encode($productsSizes);
+        
+        // return view('productsSizes/index', compact('productsSizes'));
     }
 
     // insert a record of table products_sizes
     public function store()
     {
-        $productId = $_POST['productId'];
-        $sizeId = $_POST['sizeId'];
-        ProductsSizes::insert($productId, $sizeId);
+        try{
+            $productId = $_POST['productId'];
+            $sizeId = $_POST['sizeId'];
+            ProductsSizes::insert($productId, $sizeId);  
+            return true;      
+        } catch(Exception $e){
+            die($e->getMessage());
+            return false;
+        }
+        
 
-        return redirect('productsSizes');
+        // return redirect('productsSizes');
     }
 
     //return to the create page
@@ -37,7 +47,11 @@ class ProductsSizesController
         $id = $_GET['id'];
         $productSize = ProductsSizes::getById($id)[0];
 
-        return view('productsSizes/shpw', compact('productSize'));
+        //return file json to show in front-end
+        header("Access-Control-Allow-Origin: *");
+        echo json_encode($productSize);
+
+        // return view('productsSizes/shpw', compact('productSize'));
     }
 
     //get a record of table products_sizes by Id
@@ -46,16 +60,26 @@ class ProductsSizesController
         $id = $_GET['id'];
         $productSize = ProductsSizes::getById($id)[0];
 
-        return view('productsSizes/edit', compact('productSize'));
+        //return file json to show in front-end
+        header("Access-Control-Allow-Origin: *");
+        echo json_encode($productSize);
+
+        // return view('productsSizes/edit', compact('productSize'));
     }
 
     //post edit a record in table products_sizes
     public function postupdate()
     {
-        $id = $_POST['id'];
-        $product_id = $_POST['productId'];
-        $size_id = $_POST['sizeId'];
-        ProductsSizes::updateById($id, $product_id, $size_id);
+        try{
+            $id = $_POST['id'];
+            $product_id = $_POST['productId'];
+            $size_id = $_POST['sizeId'];
+            ProductsSizes::updateById($id, $product_id, $size_id);
+            return true;
+        } catch(Exception $e){
+            die($e->getMessage());
+            return false;
+        }
 
         return redirect('productsSizes');        
     }
@@ -63,9 +87,15 @@ class ProductsSizesController
     //delete a record in tablle products_sizes
     public function delete()
     {
-        $id =$_GET['id'];
-        ProductsSizes::deleteById($id);
+        try{
+            $id =$_GET['id'];
+            ProductsSizes::deleteById($id);
+            return true;
+        } catch(Exception $e){
+            die($e->getMessage());
+            return false;
+        }
 
-        return redirect('productsSizes');
+        // return redirect('productsSizes');
     }
 }
