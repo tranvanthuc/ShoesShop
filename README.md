@@ -3,7 +3,6 @@
 ## How to run
 
 - Clone this project: `git clone git@github.com:tranvanthuc/ShoesShop.git`
-- Run `npm install`
 
 ### Backend
 
@@ -12,9 +11,4 @@
 - Database name `sql12197810`
 - Username `sql12197810`
 - Password in group
-- `cd` to **backend** folder and run `php -S localhost:8000`
-
-### Frontend
-
-- `cd` to **frontend** folder and run `npm start`
-- To go to admin page, please use this url: `http://localhost:3000/#!/admin`
+- Run project `php -S localhost:8000`
