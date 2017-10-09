@@ -9,7 +9,8 @@ class CategoriesController
 	{
 		$cates = Category::selectAll();
 
-		return new JsonResponse($cates);
+		header('Content-Type: application/json');
+		echo json_encode($cates);
 	}
 
 	public function create()
