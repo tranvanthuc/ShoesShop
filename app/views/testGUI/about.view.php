@@ -1,4 +1,3 @@
-
 <?php require('app/views/testGUI/partials/header.php'); ?>
 
     About us
