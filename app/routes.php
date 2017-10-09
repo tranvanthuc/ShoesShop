@@ -41,7 +41,7 @@ $router->get('shopInf/update', 'ShopInfController@getEditShopInf');
 $router->post('shopInf/update', 'ShopInfController@postEditShopInf');
 
 //delete shop information
-$router->get('shopInf/index/shop/delete', 'ShopInfController@deleteShopInf');
+$router->get('shopInf/shop/delete', 'ShopInfController@deleteShopInf');
 
 
 //Sizes controller

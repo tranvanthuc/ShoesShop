@@ -9,6 +9,7 @@ class ShopInfController
     public function index()
     {
         $shopInf = ShopInformation::selectAll();
+        // die(var_dump($shopInf));
 
         return view('shopInf/index',compact('shopInf'));
     }
@@ -55,7 +56,7 @@ class ShopInfController
     {
         $id = $_GET['id'];
         ShopInformation::deleteById($id);
-
+        
         return redirect('shopInf');
     }
 }
