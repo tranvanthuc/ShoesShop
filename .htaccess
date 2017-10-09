@@ -4,3 +4,9 @@ RewriteEngine On
 RewriteCond %{SCRIPT_FILENAME} !-d
 RewriteCond %{SCRIPT_FILENAME} !-f
 RewriteRule ^.*$ ./index.php
+
+Header set Access-Control-Allow-Origin: *
+Header set Access-Control-Allow-Headers: Content-Type, Depth, 
+    User-Agent, X-File-Size, X-Requested-With, If-Modified-Since, X-File-Name, Cache-Control
+Header set Access-Control-Allow-Credentials: true
+Header set Access-Control-Allow-Methods: OPTIONS, GET, POST
