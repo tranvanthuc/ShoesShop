@@ -79,8 +79,10 @@ class QueryBuilder
     try {
       $stm = $this->pdo->prepare($sql);
       $stm->execute();
+      return true;
     } catch(PDOException $e){
-      die($e->getMessage());
+      var_dump($e->getMessage());
+      return false;
     }
   }
 
