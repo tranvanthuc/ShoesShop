@@ -21,13 +21,15 @@ class User
   }
   
   // insert User
-  public static function insert($email, $password, $first_name, $gender) 
+  public static function insert($role_id ,$first_name, $last_name , 
+  $email, $password) 
   {
     App::get('database')->insert(User::$table, [
-      'email'=> $username,
-      'password' => $password,
+      'role_id'=> $role_id,
       'first_name' => $first_name,
-      'gender' => $gender
+      'last_name' => $last_name,
+      'email' => $email,
+      'password' => $password,
     ]);
   }
 
