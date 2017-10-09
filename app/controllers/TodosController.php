@@ -27,6 +27,7 @@ class TodosController
     $id = $_GET['id'];
     $todo = Todo::getById($id)[0];
     
+    
     return view('editTodo',compact('todo'));
   }
 

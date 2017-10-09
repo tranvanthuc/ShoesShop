@@ -23,3 +23,8 @@ $router->post('login', 'AuthenController@access');
 
 // logout
 $router->get('logout', 'AuthenController@logout');
+
+// CategoryController
+$router->get('cates', 'CategoriesController@index');
+$router->get('cate/create', 'CategoriesController@create');
+$router->post('cate/store', 'CategoriesController@store');
