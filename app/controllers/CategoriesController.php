@@ -8,8 +8,8 @@ class CategoriesController
 	public function index()
 	{
 		$cates = Category::selectAll();
-		return view('category/index', compact("cates"));
-		// return (json_encode($cates));
+		// return view('category/index', compact("cates"));
+		return (json_encode($cates));
 	}
 
 	public function create()
@@ -24,6 +24,11 @@ class CategoriesController
 		Category::insert($name, $gender);
 		
 		return redirect('cates');
+	}
+
+	public function delete()
+	{
+		
 	}
 
 

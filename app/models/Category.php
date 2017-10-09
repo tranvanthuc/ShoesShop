@@ -18,5 +18,10 @@ class Category
 			'gender' => $gender
 		]);
 	}
+
+	public function deleteById($id)
+	{
+		return App::get('database')->delete(Category::$table,$id);
+	}
 }
 
