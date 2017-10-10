@@ -1,39 +1,35 @@
 <?php
 
-// pages controller
-$router->get('', 'PagesController@home');
-$router->get('about', 'PagesController@about');
-$router->get('contact', 'PagesController@contact');
-
-// todos contronller
-// show todos list and insert todo
-$router->get('todos', 'TodosController@index');
-$router->post('todos', 'TodosController@store'); // post of insert
-
-// edit todo
-$router->get('todos/edit', 'TodosController@getUpdate');
-$router->post('todos/edit', 'TodosController@postUpdate');
-
-// delete todo
-$router->get('todos/delete', 'TodosController@getDelete');
+// CategoryController
+$router->get('cates', 'CategoriesController@index');
+$router->get('cate/create', 'CategoriesController@create');
+$router->post('cate/store', 'CategoriesController@store');
+$router->get('cate/delete', 'CategoriesController@delete');
+$router->get('cate/getUpdate', 'CategoriesController@getUpdate');
+$router->post('cate/postUpdate', 'CategoriesController@postUpdate');
 
 // authen
 $router->get('login', 'AuthenController@getLogin');
-$router->post('login', 'AuthenController@postLogin');
+$router->post('login', 'AuthenController@login');
+$router->get('users', 'AuthenController@getAllUsers');
+$router->get('users/user', 'AuthenController@getUserById');
+$router->post('user/update-password', 'AuthenController@updatePassword');
+// $router->post('user/update-profile', 'AuthenController@updateProfile');
 
 // logout
-$router->get('logout', 'AuthenController@getLogout');
+$router->get('logout', 'AuthenController@logout');
 
 // register
 $router->get('register', 'AuthenController@getRegister');
-$router->post('register', 'AuthenController@postRegister');
+$router->post('register', 'AuthenController@register');
+
 
 // ----------------------------shop_information controller----------------//
 //show list information of the shop
 $router->get('shopInf', 'ShopInfController@getAll');
 
 //return to create shop information page
-$router->get('shopInf/getById', 'ShopInfController@getById');
+$router->get('shopInf/shop', 'ShopInfController@getById');
 
 // insert shop information
 // $router->post('shopInf/', 'ShopInfController@insert');
@@ -49,7 +45,7 @@ $router->post('shopInf/update', 'ShopInfController@update');
 $router->get('sizes', 'SizesController@getAll');
 
 //show list Sizes of the shop
-$router->get('size/getById', 'SizesController@getById');
+$router->get('sizes/size', 'SizesController@getById');
 
 //insert new size
 $router->post('size/insert', 'SizesController@insert');
@@ -64,7 +60,7 @@ $router->get('size/delete', 'SizesController@delete');
 $router->get('productsSizes', 'ProductsSizesController@getAll');
 
 //get productsSizes by id
-$router->get('productSize/getById', 'ProductsSizesController@getById');
+$router->get('productsSizes/productSize', 'ProductsSizesController@getById');
 
 //insert new ProductsSizes
 $router->post('productSize/insert', 'ProductsSizesController@insert');
@@ -74,3 +70,28 @@ $router->post('productSize/update', 'ProductsSizesController@update');
 
 //delete size
 $router->get('productSize/delete', 'ProductsSizesController@delete');
+
+
+
+
+//------------------Test -------------- 
+
+// test json 
+$router->get('json', 'AuthenController@testJson');
+
+// pages controller
+$router->get('', 'PagesController@home');
+$router->get('about', 'PagesController@about');
+$router->get('contact', 'PagesController@contact');
+
+// todos contronller
+// show todos list and insert todo
+$router->get('todos', 'TodosController@getAll');
+$router->post('todos', 'TodosController@insert'); // post of insert
+
+// edit todo
+$router->get('todos/edit', 'TodosController@getById');
+$router->post('todos/edit', 'TodosController@update');
+
+// delete todo
+$router->get('todos/delete', 'TodosController@delete');

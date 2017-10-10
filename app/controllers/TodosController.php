@@ -6,32 +6,31 @@ use app\models\Todo;
 class TodosController 
 {
   // index
-  public function index()
+  public function getAll()
   {
-    $todos = Todo::selectAll();  
+    $todos = Todo::getAll();  
     return view('todos/index', compact('todos'));
   }
 
   // insert todo
-  public function store()
+  public function insert()
   {
     $description = $_POST['description'];
-    Todo::insert($description);
-   
+    $todo = Todo::insert($description);
+    die(var_dump($todo));
     return redirect('todos');
   }
 
   // get edit todo
-  public function getUpdate() 
+  public function getById() 
   {
     $id = $_GET['id'];
     $todo = Todo::getById($id)[0];
-    
     return view('todos/edit',compact('todo'));
   }
 
   // post edit todo 
-  public function postUpdate() 
+  public function update() 
   {
     $id = $_POST['id'];
     $description = $_POST['description'];
@@ -42,9 +41,10 @@ class TodosController
   }
 
   // get delete todo by id
-  public function getDeleteTodo() 
+  public function delete() 
   {
     $id = $_GET['id'];
+
     Todo::deleteById($id);
 
     return redirect('todos');

@@ -12,7 +12,7 @@ class QueryBuilder
         $this->pdo = $pdo;
     }
 
-  // selectAll
+    // selectAll
     public function getAll($table)
     {
         $stm = $this->pdo->prepare("select * from {$table}");
@@ -22,7 +22,7 @@ class QueryBuilder
         return $stm->fetchAll(PDO::FETCH_CLASS);
     }
 
-  // insert
+    // insert
     public function insert($table, $params)
     {
         $sql = sprintf(
@@ -32,15 +32,18 @@ class QueryBuilder
         ':'. implode(', :', array_keys($params))
         );
 
+
         try {
             $stm = $this->pdo->prepare($sql);
             $stm->execute($params);
+          // get last insert id
+            return $this->pdo->lastInsertId();
         } catch (PDOException $e) {
             die($e->getMessage());
         }
     }
 
-  // update by id
+     // update by id
     public function updateById($table, $params, $id)
     {
         $result = [];
@@ -49,7 +52,7 @@ class QueryBuilder
         for ($i=0; $i< count($params); $i++) {
             // die(var_dump(gettype($values[$i])));
             if (gettype($values[$i]) === "string") {
-                $temp = $keys[$i] . "='" .$values[$i]. "'";
+                $temp = $keys[$i] . "=\"" .$values[$i]. "\"";
             } else {
                 $temp = $keys[$i] . "=" .$values[$i];
             }
@@ -58,11 +61,12 @@ class QueryBuilder
         // die(var_dump($result));
       
         $sql = sprintf(
-        'update %s set %s where id=%s',
+        "update %s set %s where id=%s",
         $table,
         implode(',', $result),
         $id
         );
+        // die($sql);
         try {
             $stm = $this->pdo->prepare($sql);
             $stm->execute($params);
@@ -71,10 +75,10 @@ class QueryBuilder
         }
     }
 
-  // delete by id
+    // delete by id
     public function deleteById($table, $id)
     {
-        $sql = "delete from {$table} where id={$id}";
+          $sql = "delete from {$table} where id={$id}";
         try {
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
@@ -83,7 +87,7 @@ class QueryBuilder
         }
     }
 
-  // create query
+    // create query
     public function query($sql)
     {
         try {
@@ -95,10 +99,10 @@ class QueryBuilder
         }
     }
 
-  // get by id
+    // get by id
     public function getById($table, $id)
     {
-        $sql = "select * from {$table} where id={$id}";
+          $sql = "select * from {$table} where id={$id}";
         try {
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
@@ -110,7 +114,7 @@ class QueryBuilder
 
     public function getLastRecord($table)
     {
-        $sql = "select * from {$table} order by id desc limit 1";
+          $sql = "select * from {$table} order by id desc limit 1";
         try {
             $stm = $this->pdo->prepare($sql);
             $stm->execute();

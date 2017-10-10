@@ -9,18 +9,19 @@ class Todo
   public $description;
 
   // get all todos
-  public static function selectAll()
+  public static function getAll()
   {
-    return App::get('database')->selectAll(Todo::$table);
+    return App::get('database')->getAll(Todo::$table);
   }
 
-  // insert todo
+  // insert todo and return object after insert
   public static function insert($description) 
   {
-    App::get('database')->insert(Todo::$table, [
+    $id = App::get('database')->insert(Todo::$table, [
       'description'=> $description,
       'completed' => 0
     ]);
+    return Todo::getById($id);
   }
 
   // get todo by id
@@ -36,11 +37,14 @@ class Todo
       'description'=> $description,
       'completed' => $completed
     ], $id);
+    return Todo::getById($id);
   }
 
   // delete todo by id
   public static function deleteById($id) 
   {
-    App::get('database')->deleteById(Todo::$table, $id);
+    $todo = Todo::getById($id);
+    App::get('database')->deleteById(Todo::$table, $id) ;
+    return $todo;
   }
 }
