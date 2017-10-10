@@ -2,9 +2,10 @@
 namespace app\controllers;
 
 use app\models\User;
-
+use utils\Functions;
 class AuthenController 
 {
+  
   public function testJson() 
   {
     
@@ -42,14 +43,14 @@ class AuthenController
     return view('authen/login');
   }
 
-  public function getLogout()
+  public function logout()
   {
     session_start();
     session_destroy();
     return view('authen/login');
   }
 
-  public function postLogin()
+  public function login()
   {
     $email = $_POST['email'];
     $password = md5($_POST['password']);
@@ -68,7 +69,7 @@ class AuthenController
     return view('authen/register');
   }
 
-  public function postRegister()
+  public function register()
   {
     $email = $_POST['email'];
     $password = md5($_POST['password']);
@@ -78,5 +79,14 @@ class AuthenController
 
     User::insert($role_id, $first_name, $last_name, $email, $password);
     return \redirect('login');
+  }
+
+  // get All users
+  public function getAllUsers()
+  {
+    $users = User::getAll();
+    $success = "Success";
+    $failure = "Failure";
+    echo Functions::returnAPI($users, $success, $failure );
   }
 }
