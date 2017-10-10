@@ -27,6 +27,8 @@ $router->get('cates', 'CategoriesController@index');
 $router->get('cate/create', 'CategoriesController@create');
 $router->post('cate/store', 'CategoriesController@store');
 $router->get('cate/delete', 'CategoriesController@delete');
+$router->get('cate/getUpdate', 'CategoriesController@getUpdate');
+$router->post('cate/postUpdate', 'CategoriesController@postUpdate');
 
 // logout
 $router->get('logout', 'AuthenController@getLogout');

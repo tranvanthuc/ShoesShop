@@ -9,7 +9,7 @@ class CategoriesController
 	{
 		$cates = Category::selectAll();
 		return view('category/index', compact("cates"));
-		// die((json_encode($cates)));
+		// echo ((json_encode($cates)));
 	}
 
 	public function create()
@@ -32,4 +32,20 @@ class CategoriesController
 		Category::deleteById($id);
 		return redirect('cates');
 	}
+
+	public function getUpdate()
+	{
+		$cate = Category::getById($_GET['id'])[0];
+		return view('category/update', compact('cate'));
+	}
+
+	public function postUpdate()
+	{
+		$id = $_POST['id'];
+		$name = $_POST['name'];
+		$gender = $_POST['gender'];
+		Category::updateById($id, $name, $gender);		
+	}
+
+	
 } 
