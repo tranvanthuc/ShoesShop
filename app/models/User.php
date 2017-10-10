@@ -15,9 +15,9 @@ class User
   public $gender;
 
   // get all users
-  public static function selectAll()
+  public static function getAll()
   {
-    return App::get('database')->selectAll(User::$table);
+    return App::get('database')->getAll(User::$table);
   }
   
   // insert User
