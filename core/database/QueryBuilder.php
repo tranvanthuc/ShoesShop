@@ -13,7 +13,7 @@ class QueryBuilder
   }
 
   // selectAll
-  public function selectAll($table)
+  public function getAll($table)
   {
     $stm = $this->pdo->prepare("select * from {$table}");
 
