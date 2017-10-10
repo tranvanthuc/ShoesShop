@@ -9,9 +9,14 @@ class Category
 	public $name;
 	public $gender;
 
-	public static function selectAll()
+	public static function getAll()
 	{
-		return App::get('database')->selectAll(Category::$table);
+		return App::get('database')->getAll(Category::$table);
+	}
+
+	public static function getById($id)
+	{
+		return App::get('database')->getById(Category::$table, $id);
 	}
 
 	public static function insert($name, $gender)

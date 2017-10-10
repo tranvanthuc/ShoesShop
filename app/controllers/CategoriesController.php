@@ -2,30 +2,33 @@
 namespace app\controllers;
 
 use app\models\Category;
-header('Access-Control-Allow-Origin: *');
-header('Content-type: application/json');
 
 class CategoriesController
 {
 	public function index()
 	{
-		$cates = Category::selectAll();
+		header('Access-Control-Allow-Origin: *');
+		header('Content-type: application/json');
+		$cates = Category::getAll();
 
 		echo json_encode($cates);
 	}
 
-	public function create()
+	public function getById()
 	{
-		return view('category/create');
+		$id = $_GET['id'];
+		$cate = Category::getById($id);
+		echo json_encode($cate);
 	}
 
-	public function store()
+	public function insert()
 	{
 		$name = $_POST['name'];
 		$gender = $_POST['gender'];
 		Category::insert($name, $gender);
 		
-		return redirect('cates');
+		// return redirect('cates');
+		return Category::getById();
 	}
 
 	public function delete()
@@ -35,13 +38,7 @@ class CategoriesController
 		return redirect('cates');
 	}
 
-	public function getUpdate()
-	{
-		$cate = Category::getById($_GET['id'])[0];
-		return view('category/update', compact('cate'));
-	}
-
-	public function postUpdate()
+	public function update()
 	{
 		$id = $_POST['id'];
 		$name = $_POST['name'];
@@ -49,5 +46,15 @@ class CategoriesController
 		Category::updateById($id, $name, $gender);		
 	}
 
+	public function create()
+	{
+		return view('category/create');
+	}
+
+	/*public function getUpdate()
+	{
+		$cate = Category::getById($_GET['id'])[0];
+		return view('category/update', compact('cate'));
+	}*/
 	
 } 

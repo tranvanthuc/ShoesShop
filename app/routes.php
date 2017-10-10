@@ -24,11 +24,11 @@ $router->post('login', 'AuthenController@postLogin');
 
 // CategoryController
 $router->get('cates', 'CategoriesController@index');
-$router->get('cate/create', 'CategoriesController@create');
-$router->post('cate/store', 'CategoriesController@store');
+$router->post('cate/insert', 'CategoriesController@insert');
 $router->get('cate/delete', 'CategoriesController@delete');
-$router->get('cate/getUpdate', 'CategoriesController@getUpdate');
-$router->post('cate/postUpdate', 'CategoriesController@postUpdate');
+$router->post('cate/update', 'CategoriesController@update');
+$router->get('cate/create', 'CategoriesController@create');
+// $router->get('cate/getUpdate', 'CategoriesController@getUpdate');
 
 // logout
 $router->get('logout', 'AuthenController@getLogout');
