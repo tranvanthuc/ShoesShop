@@ -6,6 +6,9 @@ use core\App;
 class Category
 {
 	static $table = "categories";
+	public $name;
+	public $gender;
+
 	public static function selectAll()
 	{
 		return App::get('database')->selectAll(Category::$table);
