@@ -90,45 +90,42 @@ class ShopInfController
     {
         $result ;
         try {
-            $id = $_REQUEST['id'];
-            $description = $_REQUEST['description'];
-            $name = $_REQUEST['name'];
-            $address = $_REQUEST['address'];
-            $phone = $_REQUEST['phone'];
-            $email = $_REQUEST['email'];
+            if (isset($_GET['id']) &&
+                isset($_REQUEST['description']) &&
+                isset($_REQUEST['name']) &&
+                isset($_REQUEST['address']) &&
+                isset($_REQUEST['phone']) &&
+                isset($_REQUEST['email'])
+            ) {
+                $id = $_REQUEST['id'];
+                $description = $_REQUEST['description'];
+                $name = $_REQUEST['name'];
+                $address = $_REQUEST['address'];
+                $phone = $_REQUEST['phone'];
+                $email = $_REQUEST['email'];
+            }
+
             ShopInformation::updateById($id, $description, $name, $address, $phone, $email);
             
-            if (ShopInformation::updateById($id, $description, $name, $address, $phone, $email)) {
+            if ($id) {
                 $result = [
-                  "status" => true,
-                  "message" => "Success",
-                  "data" => array(
-                    'id' => $id,
-                    'description' => $description,
-                    'name' => $name,
-                    'address' => $address,
-                    'phone' => $phone,
-                    'email' => $email
-                )];
+                    "status" => true,
+                    "message" => "Success",
+                    "data" => ShopInformation::getLastRecord()
+                ];
             } else {
                 $result = [
-                "status" => false,
-                "message" => "Can not update data",
-                "data" => array(
-                    'id' => $id,
-                    'description' => $description,
-                    'name' => $name,
-                    'address' => $address,
-                    'phone' => $phone,
-                    'email' => $email
-                )];
+                    "status" => false,
+                    "message" => "Can not update data",
+                    "data" => ShopInformation::getLastRecord()
+                ];
             }
         } catch (Exception $e) {
             $result = [
                 "status" => false,
                 "message" => $e->getMessage(),
-                ];
-                echo json_encode($result);
+            ];
+            echo json_encode($result);
         }
         echo json_encode($result);
     }

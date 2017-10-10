@@ -59,4 +59,9 @@ class ProductsSizes
         $sql = "select id from {$table} where size_id= {$id}";
         return App::get('database')->query($sql);
     }
+    //get last record products_sizes
+    public static function getLastRecord()
+    {
+        return App::get('database')->getLastRecord(ProductsSizes::$table);
+    }
 }

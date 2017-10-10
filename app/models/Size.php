@@ -19,11 +19,8 @@ class Size
     public static function insert($size)
     {
         App::get('database')->insert(Size::$table, ['size' => $size]);
-
-        // $table = Size::$table;
-        // $sql = "insert into {$table} values {$size}";
-        // return App::get('database')->query($sql);
     }
+    
     //get size by id
     public static function getById($id)
     {
@@ -46,5 +43,11 @@ class Size
             App::get('database')->deleteById(ProductsSizes::$table, $data->id);
         }
         App::get('database')->deleteById(Size::$table, $id);
+    }
+
+    //delete get last record in size table
+    public static function getLastRecord()
+    {
+        return App::get('database')->getLastRecord(Size::$table);
     }
 }

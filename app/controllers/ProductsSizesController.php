@@ -50,10 +50,7 @@ class ProductsSizesController
                 $result = [
                     "status" => true,
                     "message" => "Success",
-                    "data" => array(
-                        "productId" => $productId,
-                        "sizeId" => $sizeId
-                    )
+                    "data" =>  ProductsSizes::getLastRecord()
                 ];
             } else {
                 $result = [

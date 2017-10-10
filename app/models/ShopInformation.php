@@ -66,4 +66,10 @@ class ShopInformation
     // {
     //     App::get('database')->deleteById(ShopInformation::$table, $id);
     // }
+
+    //get information of last record in shop information table
+    public static function getLastRecord()
+    {
+        return App::get('database')->getLastRecord(ShopInformation::$table);
+    }
 }
