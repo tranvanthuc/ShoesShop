@@ -42,11 +42,11 @@ class ProductsSizesController
     {
         $result ;
         try {
-            $productId = $_POST['productId'];
-            $sizeId = $_POST['sizeId'];
+            $productId = $_REQUEST['product_id'];
+            $sizeId = $_REQUEST['size_id'];
             ProductsSizes::insert($productId, $sizeId);
             
-            if (ProductsSizes::insert($productId, $sizeId)) {
+            if ($sizeId) {
                 $result = [
                     "status" => true,
                     "message" => "Success",
@@ -111,12 +111,12 @@ class ProductsSizesController
     {
         $result ;
         try {
-            $id = $_POST['id'];
-            $product_id = $_POST['productId'];
-            $size_id = $_POST['sizeId'];
+            $id = $_REQUEST['id'];
+            $product_id = $_REQUEST['productId'];
+            $size_id = $_REQUEST['sizeId'];
             ProductsSizes::updateById($id, $product_id, $size_id);
             
-            if (ProductsSizes::updateById($id, $product_id, $size_id)) {
+            if ($id) {
                 $result = [
                     "status" => true,
                     "message" => "Success",
@@ -155,7 +155,7 @@ class ProductsSizesController
             $id =$_GET['id'];
             ProductsSizes::deleteById($id);
 
-            if (!ProductsSizes::deleteById($id)) {
+            if ($id) {
                 $result = [
                     "status" => true,
                     "message" => "Success",

@@ -90,12 +90,12 @@ class ShopInfController
     {
         $result ;
         try {
-            $id = $_POST['id'];
-            $description = $_POST['description'];
-            $name = $_POST['name'];
-            $address = $_POST['address'];
-            $phone = $_POST['phone'];
-            $email = $_POST['email'];
+            $id = $_REQUEST['id'];
+            $description = $_REQUEST['description'];
+            $name = $_REQUEST['name'];
+            $address = $_REQUEST['address'];
+            $phone = $_REQUEST['phone'];
+            $email = $_REQUEST['email'];
             ShopInformation::updateById($id, $description, $name, $address, $phone, $email);
             
             if (ShopInformation::updateById($id, $description, $name, $address, $phone, $email)) {

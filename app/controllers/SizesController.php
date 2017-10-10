@@ -42,22 +42,14 @@ class SizesController
     {
         $result ;
         try {
-            $size = $_POST['size'];
+            $size = $_REQUEST['size'];
             Size::insert($size);
-            
-            if (Size::insert($size)) {
-                $result = [
-                    "status" => true,
-                    "message" => "Success",
-                    "data" => $size
-                ];
-            } else {
-                $result = [
-                    "status" => false,
-                    "message" => "Can not insert data",
-                    "data" => $size
-                ];
-            }
+
+            $result = [
+                "status" => true,
+                "message" => "Success",
+                "data" =>  $size
+            ];
         } catch (Exception $e) {
             $result = [
                 "status" => false,
@@ -104,11 +96,11 @@ class SizesController
     {
         $result ;
         try {
-            $id = $_POST['id'];
-            $size = $_POST['size'];
+            $id = $_REQUEST['id'];
+            $size = $_REQUEST['size'];
             Size::updateById($id, $size);
-            
-            if (Size::updateById($id, $size)) {
+       
+            if ($size) {
                 $result = [
                     "status" => true,
                     "message" => "Success",
@@ -149,13 +141,19 @@ class SizesController
                 $result = [
                     "status" => true,
                     "message" => "Success",
-                    "data" => $id
+                    "data" => array(
+                        'id' => $id,
+                        'size' => $size
+                    )
                 ];
             } else {
                 $result = [
                     "status" => false,
                     "message" => "Can not delete data",
-                    "data" => $id
+                    "data" => array(
+                        'id' => $id,
+                        'size' => $size
+                    )
                 ];
             }
         } catch (Exception $e) {

@@ -52,7 +52,7 @@ $router->get('sizes', 'SizesController@getAll');
 $router->get('size/getById', 'SizesController@getById');
 
 //insert new size
-$router->post('sizes/insert', 'SizesController@insert');
+$router->post('size/insert', 'SizesController@insert');
 
 $router->post('size/update', 'SizesController@update');
 
@@ -64,10 +64,10 @@ $router->get('size/delete', 'SizesController@delete');
 $router->get('productsSizes', 'ProductsSizesController@getAll');
 
 //get productsSizes by id
-$router->get('productsSizes/getById', 'ProductsSizesController@getById');
+$router->get('productSize/getById', 'ProductsSizesController@getById');
 
 //insert new ProductsSizes
-$router->post('productsSizes/insert', 'ProductsSizesController@insert');
+$router->post('productSize/insert', 'ProductsSizesController@insert');
 
 //update size by id
 $router->post('productSize/update', 'ProductsSizesController@update');

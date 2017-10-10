@@ -18,9 +18,11 @@ class Size
     //insert new size
     public static function insert($size)
     {
-        App::get('database')->insert(Size::$table, [
-            'size' => $size
-        ]);
+        App::get('database')->insert(Size::$table, ['size' => $size]);
+
+        // $table = Size::$table;
+        // $sql = "insert into {$table} values {$size}";
+        // return App::get('database')->query($sql);
     }
     //get size by id
     public static function getById($id)
