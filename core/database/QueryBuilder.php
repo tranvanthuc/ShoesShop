@@ -32,6 +32,7 @@ class QueryBuilder
       ':'. implode(', :', array_keys($params))
     );
 
+
     try {
       $stm = $this->pdo->prepare($sql);
       $stm->execute($params);
@@ -51,7 +52,7 @@ class QueryBuilder
     for($i=0; $i< count($params); $i++) {
       // die(var_dump(gettype($values[$i])));
       if(gettype($values[$i]) === "string") {
-        $temp = $keys[$i] . "='" .$values[$i]. "'";
+        $temp = $keys[$i] . "=\"" .$values[$i]. "\"";
       }
       else {
         $temp = $keys[$i] . "=" .$values[$i];
@@ -61,11 +62,12 @@ class QueryBuilder
     // die(var_dump($result));
       
     $sql = sprintf(
-      'update %s set %s where id=%s',
+      "update %s set %s where id=%s",
       $table,
       implode(',', $result),
       $id
     );
+// die($sql);
     try {
       $stm = $this->pdo->prepare($sql);
       $stm->execute($params);
