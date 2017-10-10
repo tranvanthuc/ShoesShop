@@ -1,0 +1,16 @@
+(GET)todos -> ...controller@getAll
+chức năng show toàn bộ các item
+
+(GET)todos/todo -> ...controller@getById
+chức năng show 1 item theo id
+
+(POST)todo/insert -> ...controller@insert
+xử lý insert trong ...controller.php
+
+(POST)todo/update -> ...controller@update
+thực hiện update trong ...controller.php
+
+(GET)todo/delete -> ...controller@delete
+thực hiện xóa trong ...controller.php
+
+Tất cả điều phải trả về JSON
