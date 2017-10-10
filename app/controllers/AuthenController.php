@@ -6,81 +6,6 @@ use utils\Functions;
 class AuthenController 
 {
   
-  public function testJson() 
-  {
-    
-    $result ;
-    try {
-      $id = $_REQUEST['id'];
-      $user = User::getById($id);
-      if( $user) {
-        $result = [
-          "status" => true,
-          "message" => "Success",
-          "data" => $user
-        ];
-      } else {
-        $result = [
-          "status" => false,
-          "message" => "Not found user {$id}",
-          "data" => $user
-        ];
-      }
-    } catch (Exception $e) {
-      $result = [
-        "status" => false,
-        "message" => $e->getMessage(),
-      ];
-      echo \json_encode($result);
-    }
-    
-    echo \json_encode($result);
-  }
-  
-  
-  public function getLogin()
-  {
-    return view('authen/login');
-  }
-
-  public function logout()
-  {
-    session_start();
-    session_destroy();
-    return view('authen/login');
-  }
-
-  public function login()
-  {
-    $email = $_POST['email'];
-    $password = md5($_POST['password']);
-    $user = User::checkLogin($email, $password);
-    if(\sizeof($user) == 0) {
-      return redirect('login');
-    }
-    \session_start();
-    $_SESSION['user'] = $user;
-    
-    return \redirect('');
-  }
-
-  public function getRegister() 
-  {
-    return view('authen/register');
-  }
-
-  public function register()
-  {
-    $email = $_POST['email'];
-    $password = md5($_POST['password']);
-    $first_name = "Thuc";
-    $last_name = "Tran Van";
-    $role_id = 1;
-
-    User::insert($role_id, $first_name, $last_name, $email, $password);
-    return \redirect('login');
-  }
-
   // get All users
   public function getAllUsers()
   {
@@ -89,4 +14,109 @@ class AuthenController
     $failure = "Failure";
     echo Functions::returnAPI($users, $success, $failure );
   }
+
+  // get user by id
+  public function getUserById() 
+  {
+    $id = $_REQUEST['id'];
+
+    $user = User::getById($id);
+    $success = "Success";
+    $failure = "Not found user {$id}";
+    echo Functions::returnAPI($user, $success, $failure );
+  }
+
+  // change password
+  public function login()
+  {
+    $email = $_REQUEST['email'];
+    $password = $_REQUEST['password'];
+    $user = User::checkLogin($email, md5($password));
+    $success = "Login Success";
+    $failure = "Username or password wrong";
+    echo Functions::returnAPI($user, $success, $failure );
+  }
+
+  // register
+  public function register() 
+  {
+    if(isset($_REQUEST['email']) && isset($_REQUEST['password'])
+      && isset($_REQUEST['first_name']) && isset($_REQUEST['last_name'])
+      && isset($_REQUEST['role_id'])) {
+        $email = $_REQUEST['email'];
+        $password = $_REQUEST['password'];
+        $first_name = $_REQUEST['first_name'];
+        $last_name = $_REQUEST['last_name'];
+        $role_id = $_REQUEST['role_id'];
+
+        $params = [
+          'role_id'=> $role_id,
+          'first_name' => $first_name,
+          'last_name' => $last_name,
+          'email' => $email,
+          'password' => md5($password),
+        ];
+    
+        $user = User::insert($params);
+        $success = "Register Success";
+        $failure = "Email exists";
+        echo Functions::returnAPI($user, $success, $failure );
+    } else {
+      $failure = "Missing params";
+      echo Functions::returnAPI([], "", $failure );
+    }
+  }
+
+  // update password 
+  public function updatePassword() 
+  {
+    if(
+      isset($_REQUEST['id']) && 
+      isset($_REQUEST['currentPassword']) && 
+      isset($_REQUEST['newPassword'])
+      ) {
+
+      $currentPassword = md5($_REQUEST['currentPassword']);
+      $newPassword = md5($_REQUEST['newPassword']);
+      $id = $_REQUEST['id'];
+
+      $user = User::updatePassword($id, $currentPassword, $newPassword);
+
+      $success = "Update Success";
+      $failure = "User's not exist or current password wrong";
+      echo Functions::returnAPI($user, $success, $failure );
+    } else {
+      $failure = "Missing params";
+      echo Functions::returnAPI([], "", $failure );
+    }
+  }
+
+  // update profile
+  // public function updateProfile()
+  // {
+  //   $id = $_REQUEST['id'];
+  //   $first_name = $_REQUEST['first_name'];
+  //   $last_name = $_REQUEST['last_name'];
+  //   $gender = $_REQUEST['gender'];
+  //   $phone = $_REQUEST['phone$phone'];
+  //   $address = $_REQUEST['address'];
+
+  //   $params = [
+  //      => ,
+  //      => $last_name,
+  //     'gender' => $gender,
+  //     'phone' => $phone,
+  //     'address' => $address
+  //   ];
+  //   if (isset($_REQUEST['first_name'])) 
+  //   {
+  //     $params['first_name'] = $first_name;
+  //   }
+
+  //   $user = User::updateById($id, $params);
+
+  //   $success = "Update Success";
+  //   $failure = "User's not exist";
+  //   echo Functions::returnAPI($user, $success, $failure );
+  // }
 }
