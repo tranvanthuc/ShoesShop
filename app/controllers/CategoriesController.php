@@ -2,6 +2,8 @@
 namespace app\controllers;
 
 use app\models\Category;
+header('Access-Control-Allow-Origin: *');
+header('Content-type: application/json');
 
 class CategoriesController
 {
@@ -9,8 +11,6 @@ class CategoriesController
 	{
 		$cates = Category::selectAll();
 
-		header('Access-Control-Allow-Origin: *');
-		header('Content-type: application/json');
 		echo json_encode($cates);
 	}
 
