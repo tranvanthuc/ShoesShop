@@ -5,6 +5,38 @@ use app\models\User;
 
 class AuthenController 
 {
+  public function testJson() 
+  {
+    
+    $result ;
+    try {
+      $id = $_REQUEST['id'];
+      $user = User::getById($id);
+      if( $user) {
+        $result = [
+          "status" => true,
+          "message" => "Success",
+          "data" => $user
+        ];
+      } else {
+        $result = [
+          "status" => false,
+          "message" => "Not found user {$id}",
+          "data" => $user
+        ];
+      }
+    } catch (Exception $e) {
+      $result = [
+        "status" => false,
+        "message" => $e->getMessage(),
+      ];
+      echo \json_encode($result);
+    }
+    
+    echo \json_encode($result);
+  }
+  
+  
   public function getLogin()
   {
     return view('authen/login');

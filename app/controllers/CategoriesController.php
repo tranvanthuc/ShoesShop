@@ -8,8 +8,10 @@ class CategoriesController
 	public function index()
 	{
 		$cates = Category::selectAll();
-		return view('category/index', compact("cates"));
-		// echo ((json_encode($cates)));
+
+		header('Access-Control-Allow-Origin: *');
+		header('Content-type: application/json');
+		echo json_encode($cates);
 	}
 
 	public function create()
