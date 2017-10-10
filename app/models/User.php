@@ -21,16 +21,10 @@ class User
   }
   
   // insert User
-  public static function insert($role_id ,$first_name, $last_name , 
-  $email, $password) 
+  public static function insert($params) 
   {
-    App::get('database')->insert(User::$table, [
-      'role_id'=> $role_id,
-      'first_name' => $first_name,
-      'last_name' => $last_name,
-      'email' => $email,
-      'password' => $password,
-    ]);
+    $id = App::get('database')->insert(User::$table, $params);
+    return User::getById($id);
   }
 
   // get User by id
@@ -43,6 +37,7 @@ class User
   public static function updateById($id, $params) 
   {
     App::get('database')->updateById(User::$table, $params, $id);
+    return User::getById($id);
   }
 
   // check login
@@ -51,13 +46,26 @@ class User
     $table = User::$table;
     $sql = "select * from {$table} where email='{$email}' and password='{$password}'";
     $user = App::get('database')->query($sql);
-    
-    return $user[0];
+    return $user;
+  }
+
+  // update password
+  public static function updatePassword($id, $currentPassword, $newPassword)
+  {
+    $table = User::$table;
+    $sql = "select * from {$table} where id='{$id}' and password='{$currentPassword}'";
+    $user = App::get('database')->query($sql);
+    if ($user) {
+      return User::updateById($id, ['password' => $newPassword]);
+    }
+    return [];
   }
 
   // delete User by id
   public static function deleteById($id) 
   {
+    $user = User::getById($id);
     App::get('database')->deleteById(User::$table, $id);
+    return $user;
   }
 }

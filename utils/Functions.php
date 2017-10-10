@@ -20,7 +20,7 @@ class Functions
   }
 
   // return api
-  public static function returnAPI($data, $success, $failure)
+  public static function returnAPI($data = [], $success = "", $failure = "")
   {
     $result ;
     if ($data) {
@@ -36,7 +36,12 @@ class Functions
         "data" => $data
       ];
     }
+    header('Access-Control-Allow-Origin: *');
+    header('Content-type: application/json');
 
     return \json_encode($result);
   }
+
+  // check isset data
+
 }
