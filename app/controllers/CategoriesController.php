@@ -16,6 +16,8 @@ class CategoriesController
 
 	public function getById()
 	{
+		header('Access-Control-Allow-Origin: *');
+		header('Content-type: application/json');
 		$id = $_GET['id'];
 		$cate = Category::getById($id);
 		echo json_encode($cate);
@@ -25,25 +27,31 @@ class CategoriesController
 	{
 		$name = $_POST['name'];
 		$gender = $_POST['gender'];
-		Category::insert($name, $gender);
+		$cate = Category::insert($name, $gender);
 		
 		// return redirect('cates');
-		return Category::getById();
+		echo json_encode($cate);
 	}
 
 	public function delete()
 	{
+		header('Access-Control-Allow-Origin: *');
+		header('Content-type: application/json');
 		$id = $_GET['id'];
-		Category::deleteById($id);
-		return redirect('cates');
+		$cate = Category::deleteById($id);
+		// return redirect('cates');
+		echo json_encode($cate);
 	}
 
 	public function update()
 	{
-		$id = $_POST['id'];
-		$name = $_POST['name'];
-		$gender = $_POST['gender'];
-		Category::updateById($id, $name, $gender);		
+		header('Access-Control-Allow-Origin: *');
+		header('Content-type: application/json');
+		$id = $_REQUEST['id'];
+		$name = $_REQUEST['name'];
+		$gender = $_REQUEST['gender'];
+		$cate = Category::updateById($id, $name, $gender);
+		echo json_encode($cate);
 	}
 
 	public function create()
@@ -51,10 +59,12 @@ class CategoriesController
 		return view('category/create');
 	}
 
-	/*public function getUpdate()
+	public function getUpdate()
 	{
+		/*header('Access-Control-Allow-Origin: *');
+		header('Content-type: application/json');*/
 		$cate = Category::getById($_GET['id'])[0];
 		return view('category/update', compact('cate'));
-	}*/
+	}
 	
 } 

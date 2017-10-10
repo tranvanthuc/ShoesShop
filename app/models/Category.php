@@ -21,29 +21,30 @@ class Category
 
 	public static function insert($name, $gender)
 	{
-		return App::get('database')->insert(Category::$table, [
+		$id = App::get('database')->insert(Category::$table, [
 			'name' => $name,
 			'gender' => $gender
 			]);
+		return Category::getById($id);
 	}
 
 	public static function deleteById($id)
 	{
-		return App::get('database')->deleteById(Category::$table,$id);
+		$cate = Category::getById($id);
+		App::get('database')->deleteById(Category::$table,$id);
+		return $cate;
 	}
 
-	public static function getById($id)
-	{
-		return App::get('database')->getById(Category::$table, $id);
-	}
 
 	public static function updateById($id, $name, $gender)
 	{
-		return App::get('database')->updateById(Category::$table,
+		App::get('database')->updateById(Category::$table,
 			[
 				'name' => $name,
 				'gender' => $gender
 			],$id);
+		return Category::getById($id);
+
 	}
 	
 }

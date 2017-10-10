@@ -1,6 +1,6 @@
 <h1>Update category</h1>
 
-<form action="/cate/postUpdate" method="POST">
+<form action="/cate/update" method="POST">
 	<input type="text" name="id" value="<?= $cate->id ?>" hidden>
 	<input type="text" name="name" value="<?= $cate->name; ?>">
 	<input type="text" name="gender" value="<?= $cate->gender; ?>">

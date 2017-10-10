@@ -67,7 +67,6 @@ class QueryBuilder
       implode(',', $result),
       $id
     );
-// die($sql);
     try {
       $stm = $this->pdo->prepare($sql);
       $stm->execute($params);
