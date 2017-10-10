@@ -16,8 +16,8 @@ class TodosController
   public function store()
   {
     $description = $_POST['description'];
-    Todo::insert($description);
-   
+    $id = Todo::insert($description);
+    die(var_dump($id));
     return redirect('todos');
   }
 
@@ -41,9 +41,10 @@ class TodosController
   }
 
   // get delete todo by id
-  public function getDeleteTodo() 
+  public function getDelete() 
   {
     $id = $_GET['id'];
+
     Todo::deleteById($id);
 
     return redirect('todos');

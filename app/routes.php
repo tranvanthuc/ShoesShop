@@ -32,3 +32,6 @@ $router->get('logout', 'AuthenController@getLogout');
 // register
 $router->get('register', 'AuthenController@getRegister');
 $router->post('register', 'AuthenController@postRegister');
+
+// test json 
+$router->get('json', 'AuthenController@testJson'); 

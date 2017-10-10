@@ -14,13 +14,14 @@ class Todo
     return App::get('database')->selectAll(Todo::$table);
   }
 
-  // insert todo
+  // insert todo and return object after insert
   public static function insert($description) 
   {
-    App::get('database')->insert(Todo::$table, [
+    $id = App::get('database')->insert(Todo::$table, [
       'description'=> $description,
       'completed' => 0
     ]);
+    return Todo::getById($id);
   }
 
   // get todo by id
@@ -41,6 +42,6 @@ class Todo
   // delete todo by id
   public static function deleteById($id) 
   {
-    App::get('database')->deleteById(Todo::$table, $id);
+    return App::get('database')->deleteById(Todo::$table, $id) ? "true": "false";
   }
 }
