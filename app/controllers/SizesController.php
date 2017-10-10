@@ -1,97 +1,170 @@
 <?php
 
 namespace app\controllers;
+
 use app\models\Size;
 
+header("Access-Control-Allow-Origin: *");
 class SizesController
 {
     //index
-    public function index()
+    public function getAll()
     {
-        $sizes = Size::selectAll();
+        $result ;
+        try {
+            $sizes = Size::getAll();
 
-        //return file json to show in front-end
-        header("Access-Control-Allow-Origin: *");
-        echo json_encode($sizes);
-
-        // return view('sizes/index', compact('sizes'));
+            if ($sizes) {
+                $result = [
+                    "status" => true,
+                    "message" => "Success",
+                    "data" => $sizes
+                ];
+            } else {
+                $result = [
+                    "status" => false,
+                    "message" => "Not found data",
+                    "data" => $sizes
+                ];
+            }
+        } catch (Exception $e) {
+            $result = [
+                "status" => false,
+                "message" => $e->getMessage(),
+            ];
+            echo json_encode($result);
+        }
+        echo json_encode($result);
     }
 
     //insert new size
-    public function store()
+    public function insert()
     {
-        try{
+        $result ;
+        try {
             $size = $_POST['size'];
             Size::insert($size);
-            return true;
-        }catch(Exception $e){
-            die($e->getMessage());
-            return false;
+            
+            if (Size::insert($size)) {
+                $result = [
+                    "status" => true,
+                    "message" => "Success",
+                    "data" => $size
+                ];
+            } else {
+                $result = [
+                    "status" => false,
+                    "message" => "Can not insert data",
+                    "data" => $size
+                ];
+            }
+        } catch (Exception $e) {
+            $result = [
+                "status" => false,
+                "message" => $e->getMessage(),
+            ];
+            echo json_encode($result);
         }
-
-        // return redirect('sizes');
+        echo json_encode($result);
     }
 
-    //return to the create page
-    public function create()
+    //get size by id
+    public function getById()
     {
-        return view('sizes/create');
+        $result ;
+        try {
+            $id = $_GET['id'];
+            $size = Size::getById($id)[0];
+
+            if ($size) {
+                $result = [
+                    "status" => true,
+                    "message" => "Success",
+                    "data" => $size
+                ];
+            } else {
+                $result = [
+                    "status" => false,
+                    "message" => "Not found data",
+                    "data" => $size
+                ];
+            }
+        } catch (Exception $e) {
+            $result = [
+                "status" => false,
+                "message" => $e->getMessage(),
+            ];
+            echo json_encode($result);
+        }
+        echo json_encode($result);
     }
 
-    //Show size
-    public function show()
+    //update size
+    public function update()
     {
-        $id = $_GET['id'];
-        $size = Size::getById($id)[0];
-
-        //return file json to show in front-end
-        header("Access-Control-Allow-Origin: *");
-        echo json_encode($size);
-
-        // return view('sizes/show', compact('size'));
-    }
-
-    //get edit size
-    public function getupdate()
-    {
-        $id = $_GET['id'];
-        $size = Size::getById($id)[0];
-
-        //return file json to show in front-end
-        header("Access-Control-Allow-Origin: *");
-        echo json_encode($size);
-
-        // return view('sizes/edit', compact('size'));
-    }
-
-    //post edit size
-    public function postupdate()
-    {
-        try{
+        $result ;
+        try {
             $id = $_POST['id'];
             $size = $_POST['size'];
             Size::updateById($id, $size);
-            return true;
-        } catch(Exception $e){
-            die($e->getMessage());
-            return false;
+            
+            if (Size::updateById($id, $size)) {
+                $result = [
+                    "status" => true,
+                    "message" => "Success",
+                    "data" => array(
+                        'id' => $id,
+                        'size' => $size
+                    )
+                ];
+            } else {
+                $result = [
+                    "status" => false,
+                    "message" => "Can not update data",
+                    "data" => array(
+                        'id' => $id,
+                        'size' => $size
+                    )
+                ];
+            }
+        } catch (Exception $e) {
+            $result = [
+                "status" => false,
+                "message" => $e->getMessage(),
+            ];
+            echo json_encode($result);
         }
-
-        return redirect('sizes');
+        echo json_encode($result);
     }
 
     //get delete size by id
     public function delete()
     {
-        try{
+        $result ;
+        try {
             $id = $_GET['id'];
             Size::deleteById($id);
-            return true;
-        } catch(Exception $e){
-            die($e->getMessage());
-            return false;   
-        }
 
-        // return redirect('sizes');
+            if (!Size::deleteById($id)) {
+                $result = [
+                    "status" => true,
+                    "message" => "Success",
+                    "data" => $id
+                ];
+            } else {
+                $result = [
+                    "status" => false,
+                    "message" => "Can not delete data",
+                    "data" => $id
+                ];
+            }
+        } catch (Exception $e) {
+            $result = [
+                "status" => false,
+                "message" => $e->getMessage(),
+            ];
+            echo json_encode($result);
+        }
+        echo json_encode($result);
     }
 }

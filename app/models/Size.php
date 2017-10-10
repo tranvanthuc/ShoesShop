@@ -10,15 +10,15 @@ class Size
     public $size;
 
     //get all sizes
-    public static function selectAll()
+    public static function getAll()
     {
-        return App::get('database')->selectAll(Size::$table);
+        return App::get('database')->getAll(Size::$table);
     }
 
     //insert new size
     public static function insert($size)
     {
-        App::get('database')->insert(Size::$table,[
+        App::get('database')->insert(Size::$table, [
             'size' => $size
         ]);
     }
@@ -29,7 +29,7 @@ class Size
     }
 
     //update size by Id
-    public static function updateById($id, $size)  
+    public static function updateById($id, $size)
     {
         App::get('database')->updateById(Size::$table, [ 'size' => $size], $id);
     }
@@ -39,8 +39,8 @@ class Size
     {
         $proSizeId =  ProductsSizes::getProSizeBySizeId($id);
 
-        // die(var_dump($proSizeId));  
-        foreach ($proSizeId as $data){
+        // die(var_dump($proSizeId));
+        foreach ($proSizeId as $data) {
             App::get('database')->deleteById(ProductsSizes::$table, $data->id);
         }
         App::get('database')->deleteById(Size::$table, $id);

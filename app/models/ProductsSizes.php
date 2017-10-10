@@ -11,19 +11,18 @@ class ProductsSizes
     public $sizeId;
 
     //get all records in products_sizes table
-    public static function selectAll()
+    public static function getAll()
     {
-        return App::get('database')->selectAll(ProductsSizes::$table);
+        return App::get('database')->getAll(ProductsSizes::$table);
     }
 
     //insert 1 record inproducts_sizes table
     public static function insert($productId, $sizeId)
     {
-        App::get('database')->insert(ProductsSizes::$table,[
+        App::get('database')->insert(ProductsSizes::$table, [
             'product_id' => $productId,
             'size_id' => $sizeId
         ]);
-
     }
 
     //get products_sizes by Id
@@ -59,6 +58,5 @@ class ProductsSizes
         $table = ProductsSizes::$table;
         $sql = "select id from {$table} where size_id= {$id}";
         return App::get('database')->query($sql);
-
     }
 }

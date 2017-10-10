@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace app\models;
 
@@ -14,28 +14,28 @@ class ShopInformation
     public $email;
 
     //get shop information
-    public static function selectAll()
+    public static function getAll()
     {
-        return App::get('database')->selectAll(ShopInformation::$table);
+        return App::get('database')->getAll(ShopInformation::$table);
     }
 
-    //insert information of shop
-    public static function insert(
-        $description,
-        $name,
-        $address,
-        $phone,
-        $email
-    )
-    {
-        App::get('database')->insert(ShopInformation::$table,[
-            'description' => $description,
-            'name' => $name,
-            'address' => $address,
-            'phone' => $phone,
-            'email' => $email
-        ]);
-    }
+    // //insert information of shop
+    // public static function insert(
+    //     $description,
+    //     $name,
+    //     $address,
+    //     $phone,
+    //     $email
+    // ) {
+    
+    //     App::get('database')->insert(ShopInformation::$table, [
+    //         'description' => $description,
+    //         'name' => $name,
+    //         'address' => $address,
+    //         'phone' => $phone,
+    //         'email' => $email
+    //     ]);
+    // }
 
     //get information of shop by id
     public static function getById($id)
@@ -51,8 +51,8 @@ class ShopInformation
         $address,
         $phone,
         $email
-    ){
-        App::get('database')->updateById(ShopInformation::$table,[
+    ) {
+        App::get('database')->updateById(ShopInformation::$table, [
             'description' => $description,
             'name' => $name,
             'address' => $address,
@@ -61,10 +61,9 @@ class ShopInformation
         ], $id);
     }
 
-    //delete shop information by Id
-    public static function deleteById($id)
-    {
-        App::get('database')->deleteById(ShopInformation::$table, $id);
-       
-    }
+    // //delete shop information by Id
+    // public static function deleteById($id)
+    // {
+    //     App::get('database')->deleteById(ShopInformation::$table, $id);
+    // }
 }
