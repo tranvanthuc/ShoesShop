@@ -28,5 +28,10 @@ class CategoriesController
 		return redirect('cates');
 	}
 
-
+	public function delete()
+	{
+		$id = $_GET['id'];
+		Category::deleteById($id);
+		return redirect('cates');
+	}
 } 
