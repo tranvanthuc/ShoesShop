@@ -21,7 +21,7 @@ $router->post('login', 'AuthenController@login');
 $router->get('users', 'AuthenController@getAllUsers');
 $router->get('users/user', 'AuthenController@getUserById');
 $router->post('user/update-password', 'AuthenController@updatePassword');
-// $router->post('user/update-profile', 'AuthenController@updateProfile');
+$router->post('user/update-profile', 'AuthenController@updateProfile');
 
 // logout
 $router->get('logout', 'AuthenController@logout');
