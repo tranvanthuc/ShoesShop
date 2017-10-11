@@ -1,6 +1,6 @@
 <?php 
 namespace core\database;
-
+use utils\Functions;
 use \PDO;
 
 class QueryBuilder 
@@ -16,9 +16,7 @@ class QueryBuilder
   public function getAll($table)
   {
     $stm = $this->pdo->prepare("select * from {$table}");
-
     $stm->execute();
-
     return $stm->fetchAll(PDO::FETCH_CLASS);
   }
 
@@ -46,20 +44,7 @@ class QueryBuilder
   // update by id
   public function updateById($table, $params, $id)
   {
-    $result = [];
-    $keys = array_keys($params);
-    $values = array_values($params);
-    for($i=0; $i< count($params); $i++) {
-      // die(var_dump(gettype($values[$i])));
-      if(gettype($values[$i]) === "string") {
-        $temp = $keys[$i] . "=\"" .$values[$i]. "\"";
-      }
-      else {
-        $temp = $keys[$i] . "=" .$values[$i];
-      } 
-      array_push($result, $temp);
-    }
-    // die(var_dump($result));
+    $result = Functions::getStringParams($params);
       
     $sql = sprintf(
       "update %s set %s where id=%s",
@@ -108,6 +93,25 @@ class QueryBuilder
       $stm->execute();
       return $stm->fetchAll(PDO::FETCH_CLASS);
     } catch (PDOException $e) {
+      die($e->getMessage());
+    }
+  }
+
+  // check field exists in db
+  public function checkDataExist($table, $params) 
+  {
+    $result = Functions::getStringParams($params);
+    
+    $sql = sprintf(
+      "select * from %s where %s",
+      $table,
+      implode(" and ", $result)
+    );
+    try {
+      $stm = $this->pdo->prepare($sql);
+      $stm->execute($params);
+      return $stm->fetchAll(PDO::FETCH_CLASS);
+    } catch(PDOException $e){
       die($e->getMessage());
     }
   }

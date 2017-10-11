@@ -42,4 +42,22 @@ class Functions
     return \json_encode($result);
   }
 
+  // get params
+  public static function getStringParams($params)
+  {
+    $result = [];
+    $keys = array_keys($params); // 'email' 'name'
+    $values = array_values($params); // 'thuc@gmail.com', 'thuc'
+    $length = count($params);
+    for($i=0; $i< $length; $i++) {
+      if(gettype($values[$i]) === "string") {
+        $temp = $keys[$i] . "=\"" .$values[$i]. "\"";
+      }
+      else {
+        $temp = $keys[$i] . "=" .$values[$i];
+      } 
+      array_push($result, $temp);
+    }
+    return $result;
+  } 
 }
