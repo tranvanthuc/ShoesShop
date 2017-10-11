@@ -75,12 +75,15 @@ class ProductsSizesController
             $params = [
                 'product_id' => $product_id = isset($_REQUEST['product_id']) ? $_REQUEST['product_id']: $productSize->product_id,                
                 'size_id' => $size_id =isset($_REQUEST['size_id']) ? $_REQUEST['size_id']: $productSize->size_id                
-            ];   
+            ];
+            
+            $checkSize = Size::checkDataExist($size_id);
+            // die(var_dump($checkSize));
 
             $checkExist = ProductSize::checkDataExist($params);
             // die(var_dump($params));
 
-            if(!$checkExist) {
+            if(!$checkExist && $checkSize) {
                 ProductSize::updateById($params, $id);
                 $productSizeData = ProductSize::getById($id);
 
@@ -88,7 +91,7 @@ class ProductsSizesController
                 $failure = "Failure";
                 echo Functions::returnAPI($productSizeData, $success, $failure );
             } else {
-                $failure = "Data exists !";
+                $failure = "Failure";
                 echo Functions::returnAPI([], "", $failure );
             }
         } else {
