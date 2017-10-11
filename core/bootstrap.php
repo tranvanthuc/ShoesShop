@@ -19,7 +19,8 @@ function view($nameView, $data = [])
   if($data) {
     extract($data);
   }
-  return require "app/views/testGUI/{$nameView}.view.php";
+  json_encode($data);
+  return require "app/views/{$nameView}.view.php";
 }
 
 function redirect($path) 

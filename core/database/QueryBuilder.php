@@ -13,7 +13,7 @@ class QueryBuilder
   }
 
   // selectAll
-  public function selectAll($table)
+  public function getAll($table)
   {
     $stm = $this->pdo->prepare("select * from {$table}");
 
@@ -32,9 +32,12 @@ class QueryBuilder
       ':'. implode(', :', array_keys($params))
     );
 
+
     try {
       $stm = $this->pdo->prepare($sql);
       $stm->execute($params);
+      // get last insert id  
+      return $this->pdo->lastInsertId();
     } catch(PDOException $e){
       die($e->getMessage());
     }
@@ -49,7 +52,7 @@ class QueryBuilder
     for($i=0; $i< count($params); $i++) {
       // die(var_dump(gettype($values[$i])));
       if(gettype($values[$i]) === "string") {
-        $temp = $keys[$i] . "='" .$values[$i]. "'";
+        $temp = $keys[$i] . "=\"" .$values[$i]. "\"";
       }
       else {
         $temp = $keys[$i] . "=" .$values[$i];
@@ -59,7 +62,7 @@ class QueryBuilder
     // die(var_dump($result));
       
     $sql = sprintf(
-      'update %s set %s where id=%s',
+      "update %s set %s where id=%s",
       $table,
       implode(',', $result),
       $id
