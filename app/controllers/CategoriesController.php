@@ -35,10 +35,19 @@ class CategoriesController
 		if(isset($_POST['name']) && isset($_POST['gender'])) {
 			$name = $_POST['name'];
 			$gender = $_POST['gender'];
-			$success = "Success";
+			
 			$failure = "Category already exists";
-			$cate = Category::insert($name, $gender);
-			echo Functions::returnAPI($cate, $success, $failure);			
+			$param = [
+			'name' => $name,
+			'gender' => $gender
+			];
+			$checkCateExist = Category::checkDataExist($param);
+			if(!$checkCateExist) {
+				$success = "Success";
+
+				$cate = Category::insert($name, $gender);
+				echo Functions::returnAPI($cate, $success, $failure);			
+			}
 		} else {
 			echo Functions::returnAPI([], "", $failure);
 		}

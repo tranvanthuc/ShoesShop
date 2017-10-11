@@ -49,5 +49,11 @@ class Category
 			],$id);
 		return Category::getById($id);
 	}
+
+	public static function checkDataExist($params)
+	{
+		$cate = App::get('database')->checkDataExist(Category::$table, $params);
+		return $cate ? true : false;
+	}
 }
 
