@@ -29,12 +29,18 @@ class AuthenController
   // change password
   public function login()
   {
-    $email = $_REQUEST['email'];
-    $password = $_REQUEST['password'];
-    $user = User::checkLogin($email, md5($password));
-    $success = "Login Success";
-    $failure = "Username or password wrong";
-    echo Functions::returnAPI($user, $success, $failure );
+    if (isset($_REQUEST['email']) && isset($_REQUEST['password'])) {
+      $email = $_REQUEST['email'];
+      $password = $_REQUEST['password'];
+      $user = User::checkLogin($email, md5($password));
+      $success = "Login Success";
+      $failure = "Username or password wrong";
+      echo Functions::returnAPI($user, $success, $failure );
+    } else {
+      $failure = "Missing params";
+      echo Functions::returnAPI([], "", $failure );
+    }
+    
   }
 
   // register
@@ -92,31 +98,54 @@ class AuthenController
   }
 
   // update profile
-  // public function updateProfile()
-  // {
-  //   $id = $_REQUEST['id'];
-  //   $first_name = $_REQUEST['first_name'];
-  //   $last_name = $_REQUEST['last_name'];
-  //   $gender = $_REQUEST['gender'];
-  //   $phone = $_REQUEST['phone$phone'];
-  //   $address = $_REQUEST['address'];
+  public function updateProfile()
+  {
+    if(
+      isset($_REQUEST['id']) && 
+      isset($_REQUEST['first_name']) && 
+      isset($_REQUEST['last_name']) && 
+      isset($_REQUEST['gender']) && 
+      isset($_REQUEST['phone']) && 
+      isset($_REQUEST['address'])
+      ) {
+      $id = $_REQUEST['id'];
+      $first_name = $_REQUEST['first_name'];
+      $last_name = $_REQUEST['last_name'];
+      $gender = $_REQUEST['gender'];
+      $phone = $_REQUEST['phone'];
+      $address = $_REQUEST['address'];
 
-  //   $params = [
-  //      => ,
-  //      => $last_name,
-  //     'gender' => $gender,
-  //     'phone' => $phone,
-  //     'address' => $address
-  //   ];
-  //   if (isset($_REQUEST['first_name'])) 
-  //   {
-  //     $params['first_name'] = $first_name;
-  //   }
+      $params = [
+        'first_name' => $first_name,
+        'last_name' => $last_name,
+        'gender' => $gender,
+        'phone' => $phone,
+        'address' => $address
+      ];
 
-  //   $user = User::updateById($id, $params);
+      $user = User::updateById($id, $params);
 
-  //   $success = "Update Success";
-  //   $failure = "User's not exist";
-  //   echo Functions::returnAPI($user, $success, $failure );
-  // }
+      $success = "Update Success";
+      $failure = "User's not exist";
+      echo Functions::returnAPI($user, $success, $failure );
+    } else {
+      $failure = "Missing params";
+      echo Functions::returnAPI([], "", $failure );
+    }
+  }
+
+  // delete user
+  public function delete() 
+  {
+    if(isset($_REQUEST['id'])) {
+      $id = $_REQUEST['id'];
+      $user = User::deleteById($id);
+      $success = "Delete Success";
+      $failure = "User's not exist";
+      echo Functions::returnAPI($user, $success, $failure );
+    } else {
+      $failure = "Missing params";
+      echo Functions::returnAPI([], "", $failure );
+    }
+  } 
 }
