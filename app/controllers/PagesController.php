@@ -3,20 +3,9 @@ namespace app\controllers;
 
 class PagesController 
 {
-  public function home()
+  public function index()
   {
     return view('index');
-  }
-
-  public function about()
-  {
-    return view('about');
-  }
-
-  public function contact()
-  {
-    $name = "Thuc";
-    return view('contact', ['name' => $name]);
   }
 
 }
