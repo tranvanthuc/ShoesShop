@@ -18,12 +18,17 @@ class AuthenController
   // get user by id
   public function getUserById() 
   {
-    $id = $_REQUEST['id'];
-
-    $user = User::getById($id);
-    $success = "Success";
-    $failure = "Not found user {$id}";
-    echo Functions::returnAPI($user, $success, $failure );
+    if (isset($_REQUEST['id'])) {
+      $id = $_REQUEST['id'];
+      $user = User::getById($id);
+      $success = "Success";
+      $failure = "Not found user {$id}";
+      echo Functions::returnAPI($user, $success, $failure );
+    } else {
+      $failure = "Missing params";
+      echo Functions::returnAPI([], "", $failure );
+    }
+    
   }
 
   // change password

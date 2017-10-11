@@ -30,3 +30,7 @@ $router->post('login', 'AuthenController@login');
 // register
 $router->post('register', 'AuthenController@register');
 
+// roles
+$router->get('roles', 'RolesController@getAll');
+$router->get('roles/role', 'RolesController@getById');
+
