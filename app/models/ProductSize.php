@@ -59,4 +59,11 @@ class ProductSize
     {
         return App::get('database')->getLastRecord(ProductSize::$table);
     }
+
+    // check data exist
+    public static function checkDataExist($params) 
+    {
+        $data = App::get('database')->checkDataExist(ProductSize::$table, $params);
+        return $data ? true : false;
+    } 
 }

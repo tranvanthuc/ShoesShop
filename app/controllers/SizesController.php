@@ -31,10 +31,11 @@ class SizesController
 
             if (!$checkSizeExist) {
                 Size::insert($size);
+                $sizeData = Size::getLastRecord();
 
                 $success = "Insert data success";
                 $failure = "Failure";
-                echo Functions::returnAPI($size, $success, $failure );
+                echo Functions::returnAPI($sizeData, $success, $failure );
             } else {
                 $failure = "Size exists !";
                 echo Functions::returnAPI([], "", $failure );
@@ -71,10 +72,11 @@ class SizesController
 
             if (!$checkSizeExist) {
                 Size::updateById($id, $size);
+                $sizeData = Size::getById($id);
 
                 $success = "Update data success";
                 $failure = "Failure";
-                echo Functions::returnAPI($size, $success, $failure );
+                echo Functions::returnAPI($sizeData, $success, $failure );
             } else {
                 $failure = "Size exists !";
                 echo Functions::returnAPI([], "", $failure );

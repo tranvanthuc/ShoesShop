@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Size;
 use app\models\ProductSize;
 use utils\Functions;
 
@@ -24,24 +25,29 @@ class ProductsSizesController
             $productId = $_REQUEST['product_id'];
             $sizeId = $_REQUEST['size_id'];
 
-            $paramsCheckExist = [
-                'product_id' => $productId,
-                'size_id' => $sizeId
-            ];
+            $checkSizeExits = Size::checkDataExist($sizeId);
+            if($checkSizeExits){
+                $paramsCheckExist = [
+                    'product_id' => $productId,
+                    'size_id' => $sizeId
+                ];
 
-            $checkExist = ProductSize::checkDataExist($paramsCheckExist);
+                $checkExist = ProductSize::checkDataExist($paramsCheckExist);
+                if(!$checkExist) {
+                    ProductSize::insert($productId, $sizeId);
+                    $productSizeData = ProductSize::getLastRecord();
 
-            if(!$checkExist) {
-                ProductSize::insert($productId, $sizeId);
-                $productSizeData = ProductSize::getLastRecord();
-
-                $success = "Insert data success";
-                $failure = "Failure";
-                echo Functions::returnAPI($productSizeData, $success, $failure );
+                    $success = "Insert data success";
+                    $failure = "Failure";
+                    echo Functions::returnAPI($productSizeData, $success, $failure );
+                } else {
+                    $failure = "Data exists";
+                    echo Functions::returnAPI([], "", $failure );
+                }
             } else {
-                $failure = "Data exists !";
+                $failure = "Size is not exist";            
                 echo Functions::returnAPI([], "", $failure );
-              }
+            }            
         } else {
             $failure = "Missing params";            
             echo Functions::returnAPI([], "", $failure );
@@ -67,17 +73,12 @@ class ProductsSizesController
             $productSize = ProductSize::getById($id)[0];
             // die(var_dump($productSize));
             $params = [
-                $product_id = isset($_REQUEST['product_id']) ? $_REQUEST['product_id']: $productSize->product_id,                
-                $size_id =isset($_REQUEST['size_id']) ? $_REQUEST['size_id']: $productSize->size_id                
+                'product_id' => $product_id = isset($_REQUEST['product_id']) ? $_REQUEST['product_id']: $productSize->product_id,                
+                'size_id' => $size_id =isset($_REQUEST['size_id']) ? $_REQUEST['size_id']: $productSize->size_id                
             ];   
+
+            $checkExist = ProductSize::checkDataExist($params);
             // die(var_dump($params));
-
-            $paramsCheckExist = [
-                'product_id' => $productId,
-                'size_id' => $sizeId
-            ];
-
-            $checkExist = ProductSize::checkDataExist($paramsCheckExist);
 
             if(!$checkExist) {
                 ProductSize::updateById($params, $id);
