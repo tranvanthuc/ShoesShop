@@ -100,13 +100,14 @@ class QueryBuilder
   // check field exists in db
   public function checkDataExist($table, $params) 
   {
-    $result = Functions::getStringParams($params);
+    $result = Functions::getStringParams($params); //chuyen => -> =
     
     $sql = sprintf(
       "select * from %s where %s",
       $table,
-      implode(" and ", $result)
+      implode(" and ", $result) 
     );
+    //sql = select * from table where name=stan and gender=men
     try {
       $stm = $this->pdo->prepare($sql);
       $stm->execute($params);
