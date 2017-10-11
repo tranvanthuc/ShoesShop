@@ -23,12 +23,25 @@ class ProductsSizesController
         if(isset($_REQUEST['product_id']) && isset($_REQUEST['size_id'])){
             $productId = $_REQUEST['product_id'];
             $sizeId = $_REQUEST['size_id'];
-            ProductSize::insert($productId, $sizeId);
-            $productSizeData = ProductSize::getLastRecord();
 
-            $success = "Insert data success";
-            $failure = "Failure";
-            echo Functions::returnAPI($productSizeData, $success, $failure );
+            $paramsCheckExist = [
+                'product_id' => $productId,
+                'size_id' => $sizeId
+            ];
+
+            $checkExist = ProductSize::checkDataExist($paramsCheckExist);
+
+            if(!$checkEmailExist) {
+                ProductSize::insert($productId, $sizeId);
+                $productSizeData = ProductSize::getLastRecord();
+
+                $success = "Insert data success";
+                $failure = "Failure";
+                echo Functions::returnAPI($productSizeData, $success, $failure );
+            } else {
+                $failure = "Email exists !";
+                echo Functions::returnAPI([], "", $failure );
+              }
         } else {
             $failure = "Missing params";            
             echo Functions::returnAPI([], "", $failure );
@@ -52,14 +65,14 @@ class ProductsSizesController
         if (isset($_REQUEST['id'])) {
             $id = $_REQUEST['id'];
             $productSize = ProductSize::getById($id)[0];
-            die(var_dump($productSize));
+            // die(var_dump($productSize));
             $params = [
                 $product_id = isset($_REQUEST['product_id']) ? $_REQUEST['product_id']: $productSize->product_id,                
                 $size_id =isset($_REQUEST['size_id']) ? $_REQUEST['size_id']: $productSize->size_id                
             ];   
             // die(var_dump($params));
 
-            ProductSize::updateById($id, $params);
+            ProductSize::updateById($params, $id);
             $productSizeData = ProductSize::getById($id);
 
             $success = "Update data success";

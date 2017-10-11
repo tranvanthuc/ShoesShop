@@ -1,5 +1,10 @@
 <?php
 
+// home pages
+$router->get('', 'PagesController@index');
+
+
+
 // CategoryController
 $router->get('cates', 'CategoriesController@index');
 $router->get('cate/create', 'CategoriesController@create');
@@ -8,19 +13,21 @@ $router->get('cate/delete', 'CategoriesController@delete');
 $router->get('cate/getUpdate', 'CategoriesController@getUpdate');
 $router->post('cate/postUpdate', 'CategoriesController@postUpdate');
 
-// authen
-$router->get('login', 'AuthenController@getLogin');
-$router->post('login', 'AuthenController@login');
+
+
+
+// users
 $router->get('users', 'AuthenController@getAllUsers');
 $router->get('users/user', 'AuthenController@getUserById');
 $router->post('user/update-password', 'AuthenController@updatePassword');
-// $router->post('user/update-profile', 'AuthenController@updateProfile');
+$router->post('user/update-profile', 'AuthenController@updateProfile');
+$router->get('user/delete', 'AuthenController@delete');
 
-// logout
-$router->get('logout', 'AuthenController@logout');
+
+// login
+$router->post('login', 'AuthenController@login');
 
 // register
-$router->get('register', 'AuthenController@getRegister');
 $router->post('register', 'AuthenController@register');
 
 
@@ -58,19 +65,19 @@ $router->get('size/delete', 'SizesController@delete');
 
 // ----------------------------ProductsSizes controller----------------//
 //show list ProductsSizes of the shop
-$router->get('productsSizes', 'ProductsSizesController@getAll');
+$router->get('products-sizes', 'ProductsSizesController@getAll');
 
 //get productsSizes by id
-$router->get('productsSizes/productSize', 'ProductsSizesController@getById');
+$router->get('products-sizes/productSize', 'ProductsSizesController@getById');
 
 //insert new ProductsSizes
-$router->post('productSize/insert', 'ProductsSizesController@insert');
+$router->post('product-size/insert', 'ProductsSizesController@insert');
 
 //update size by id
-$router->post('productSize/update', 'ProductsSizesController@update');
+$router->post('product-size/update', 'ProductsSizesController@update');
 
 //delete size
-$router->get('productSize/delete', 'ProductsSizesController@delete');
+$router->get('product-size/delete', 'ProductsSizesController@delete');
 
 //------------------Test -------------- 
 

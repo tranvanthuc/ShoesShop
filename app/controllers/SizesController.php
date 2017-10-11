@@ -23,15 +23,26 @@ class SizesController
     {
         if (isset($_REQUEST['size'])) {
             $size = $_REQUEST['size'];
-            Size::insert($size);
 
-            $success = "Insert data success";
-            $failure = "Failure";
-            echo Functions::returnAPI($size, $success, $failure );
+            $checkSize = [
+                'size' => $size
+            ];
+            $checkSizeExist = User::checkDataExist($checkSize);
+
+            if (!$checkSizeExist) {
+                Size::insert($size);
+
+                $success = "Insert data success";
+                $failure = "Failure";
+                echo Functions::returnAPI($size, $success, $failure );
+            } else {
+                $failure = "size exists !";
+                echo Functions::returnAPI([], "", $failure );
+            }
         } else {
             $failure = "Missing params";            
             echo Functions::returnAPI([], "", $failure );
-        }
+        }        
     }
 
     //get size by id
@@ -51,11 +62,23 @@ class SizesController
         if (isset($_REQUEST['id']) && isset($_REQUEST['size'])) {
             $id = $_REQUEST['id'];
             $size = $_REQUEST['size'];
-            Size::updateById($id, $size);
 
-            $success = "Update data success";
-            $failure = "Failure";
-            echo Functions::returnAPI($size, $success, $failure );
+            $checkSize = [
+                'size' => $size
+              ];
+
+            $checkSizeExist = User::checkDataExist($checkSize);
+
+            if (!$checkSizeExist) {
+                Size::updateById($id, $size);
+
+                $success = "Update data success";
+                $failure = "Failure";
+                echo Functions::returnAPI($size, $success, $failure );
+            } else {
+                $failure = "size exists !";
+                echo Functions::returnAPI([], "", $failure );
+            }
         } else {
             $failure = "Missing params";            
             echo Functions::returnAPI([], "", $failure );

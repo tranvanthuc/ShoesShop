@@ -40,7 +40,7 @@ class Size
 
         // die(var_dump($proSizeId));
         foreach ($proSizeId as $data) {
-            App::get('database')->deleteById(ProductsSizes::$table, $data->id);
+            App::get('database')->deleteById(ProductSize::$table, $data->id);
         }
         App::get('database')->deleteById(Size::$table, $id);
     }
@@ -50,4 +50,11 @@ class Size
     {
         return App::get('database')->getLastRecord(Size::$table);
     }
+
+      // check data exist
+    public static function checkDataExist($params) 
+    {
+        $size = App::get('database')->checkDataExist(Size::$table, $params);
+        return $size ? true : false;
+    } 
 }

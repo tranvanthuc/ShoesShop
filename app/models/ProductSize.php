@@ -32,7 +32,7 @@ class ProductSize
     }
 
     //Update products_sizes by Id
-    public static function updateById($id, $data)
+    public static function updateById($data, $id)
     {
         $params = [
             'product_id' => $data['product_id'],

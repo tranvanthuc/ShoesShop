@@ -27,13 +27,13 @@ class Functions
       $result = [
         "status" => true,
         "message" => $success,
-        "result" => $data
+        "results" => $data
       ];
     } else {
       $result = [
         "status" => false,
         "message" => $failure,
-        "result" => $data
+        "results" => $data
       ];
     }
     header('Access-Control-Allow-Origin: *');
@@ -42,6 +42,22 @@ class Functions
     return \json_encode($result);
   }
 
-  // check isset data
-
+  // get params
+  public static function getStringParams($params)
+  {
+    $result = [];
+    $keys = array_keys($params); // 'email' 'name'
+    $values = array_values($params); // 'thuc@gmail.com', 'thuc'
+    $length = count($params);
+    for($i=0; $i< $length; $i++) {
+      if(gettype($values[$i]) === "string") {
+        $temp = $keys[$i] . "=\"" .$values[$i]. "\"";
+      }
+      else {
+        $temp = $keys[$i] . "=" .$values[$i];
+      } 
+      array_push($result, $temp);
+    }
+    return $result;
+  } 
 }
