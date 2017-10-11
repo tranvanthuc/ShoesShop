@@ -1,19 +1,11 @@
 <?php
 
-
-
-
-
 // CategoryController
-$router->get('cates', 'CategoriesController@index');
+$router->get('cates', 'CategoriesController@getAll');
 $router->post('cate/insert', 'CategoriesController@insert');
 $router->get('cate/delete', 'CategoriesController@delete');
 $router->post('cate/update', 'CategoriesController@update');
 $router->get('cates/cate', 'CategoriesController@getById');
-
-$router->get('cate/create', 'CategoriesController@create');
-$router->get('cate/getUpdate', 'CategoriesController@getUpdate');
-
 
 
 

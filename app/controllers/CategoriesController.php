@@ -2,69 +2,75 @@
 namespace app\controllers;
 
 use app\models\Category;
+use utils\Functions;
 
 class CategoriesController
 {
-	public function index()
+	//select data
+	public function getAll()
 	{
-		header('Access-Control-Allow-Origin: *');
-		header('Content-type: application/json');
 		$cates = Category::getAll();
-
-		echo json_encode($cates);
+		$success = "Success";
+		$failure = "Failure";
+		echo Functions::returnAPI($cates, $success, $failure );
 	}
 
+	//get data with id
 	public function getById()
 	{
-		header('Access-Control-Allow-Origin: *');
-		header('Content-type: application/json');
-		$id = $_GET['id'];
-		$cate = Category::getById($id);
-		echo json_encode($cate);
+		if(isset($_GET['id'])) {
+			$id = $_GET['id'];
+			$success = "Success";
+			$failure = "Category does not exist";
+			$cate = Category::getById($id);
+			echo Functions::returnAPI($cate, $success, $failure);
+		} else {
+			echo Functions::returnAPI([], "", $failure );
+		}
 	}
 
+	// insert data
 	public function insert()
 	{
-		$name = $_POST['name'];
-		$gender = $_POST['gender'];
-		$cate = Category::insert($name, $gender);
-		
-		// return redirect('cates');
-		echo json_encode($cate);
+		if(isset($_POST['name']) && isset($_POST['gender'])) {
+			$name = $_POST['name'];
+			$gender = $_POST['gender'];
+			$success = "Success";
+			$failure = "Category already exists";
+			$cate = Category::insert($name, $gender);
+			echo Functions::returnAPI($cate, $success, $failure);			
+		} else {
+			echo Functions::returnAPI([], "", $failure);
+		}
 	}
 
+	// delete data
 	public function delete()
 	{
-		header('Access-Control-Allow-Origin: *');
-		header('Content-type: application/json');
-		$id = $_GET['id'];
-		$cate = Category::deleteById($id);
-		// return redirect('cates');
-		echo json_encode($cate);
+		if(isset($_GET['id'])) {
+			$id = $_GET['id'];
+			$cate = Category::deleteById($id);
+			$success = "Success";
+			$failure = "Category does not exist";
+			echo Functions::returnAPI($cate, $success, $failure);
+		} else {
+			echo Functions::returnAPI([], "", $failure);
+		}
 	}
 
+	// update data
 	public function update()
 	{
-		header('Access-Control-Allow-Origin: *');
-		header('Content-type: application/json');
-		$id = $_REQUEST['id'];
-		$name = $_REQUEST['name'];
-		$gender = $_REQUEST['gender'];
-		$cate = Category::updateById($id, $name, $gender);
-		echo json_encode($cate);
-	}
-
-	public function create()
-	{
-		return view('category/create');
-	}
-
-	public function getUpdate()
-	{
-		/*header('Access-Control-Allow-Origin: *');
-		header('Content-type: application/json');*/
-		$cate = Category::getById($_GET['id'])[0];
-		return view('category/update', compact('cate'));
-	}
-	
+		if(isset($_POST['id'])) {
+			$id = $_POST['id'];
+			$name = $_POST['name'];
+			$gender = $_POST['gender'];
+			$success = "Success";
+			$failure = "Category does not exist";
+			$cate = Category::updateById($id, $name, $gender);
+			echo Functions::returnAPI($cate, $success, $failure);
+		} else {
+			echo Functions::returnAPI([], "", $failure);
+		}
+	}	
 } 

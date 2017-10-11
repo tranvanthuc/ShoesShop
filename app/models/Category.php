@@ -9,16 +9,19 @@ class Category
 	public $name;
 	public $gender;
 
+	// get all data interactive DB
 	public static function getAll()
 	{
 		return App::get('database')->getAll(Category::$table);
 	}
 
+	// get data with id interactive DB
 	public static function getById($id)
 	{
 		return App::get('database')->getById(Category::$table, $id);
 	}
 
+	// insert data with interactive DB
 	public static function insert($name, $gender)
 	{
 		$id = App::get('database')->insert(Category::$table, [
@@ -28,6 +31,7 @@ class Category
 		return Category::getById($id);
 	}
 
+	// delete data with id interactive DB
 	public static function deleteById($id)
 	{
 		$cate = Category::getById($id);
@@ -35,17 +39,15 @@ class Category
 		return $cate;
 	}
 
-
+	// update data with id interactive DB
 	public static function updateById($id, $name, $gender)
 	{
 		App::get('database')->updateById(Category::$table,
 			[
-				'name' => $name,
-				'gender' => $gender
+			'name' => $name,
+			'gender' => $gender
 			],$id);
 		return Category::getById($id);
-
 	}
-	
 }
 
