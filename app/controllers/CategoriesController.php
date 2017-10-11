@@ -12,19 +12,21 @@ class CategoriesController
 		$cates = Category::getAll();
 		$success = "Success";
 		$failure = "Failure";
-		echo Functions::returnAPI($cates, $success, $failure );
+		echo Functions::returnAPI($cates, $success, $failure);
 	}
 
 	//get data with id
 	public function getById()
 	{
-		if(isset($_GET['id'])) {
+		if(isset($_GET['id'])) { // nguoi dung gui id
 			$id = $_GET['id'];
+			$cate = Category::getById($id); // tra ve mang [] neu id k0 dung
 			$success = "Success";
 			$failure = "Category does not exist";
-			$cate = Category::getById($id);
+
 			echo Functions::returnAPI($cate, $success, $failure);
 		} else {
+			$failure = "Missing params";
 			echo Functions::returnAPI([], "", $failure );
 		}
 	}
@@ -36,19 +38,22 @@ class CategoriesController
 			$name = $_POST['name'];
 			$gender = $_POST['gender'];
 			
-			$failure = "Category already exists";
-			$param = [
-			'name' => $name,
-			'gender' => $gender
+			$params = [
+			'name' => $name, //Stan
+			// 'gender' => $gender //men, women(k0 co TH cung 1 ten co 2 gender(men, women. both))
 			];
-			$checkCateExist = Category::checkDataExist($param);
+			$checkCateExist = Category::checkDataExist($params); //kiem tra name co trong DB
 			if(!$checkCateExist) {
-				$success = "Success";
+				$success = "Insert success";
 
 				$cate = Category::insert($name, $gender);
-				echo Functions::returnAPI($cate, $success, $failure);			
+				echo Functions::returnAPI($cate, $success,"");			
+			} else {
+				$failure = "Category already exists";
+				echo Functions::returnAPI([], "", $failure );
 			}
 		} else {
+			$failure = "Missing params";
 			echo Functions::returnAPI([], "", $failure);
 		}
 	}
@@ -63,6 +68,7 @@ class CategoriesController
 			$failure = "Category does not exist";
 			echo Functions::returnAPI($cate, $success, $failure);
 		} else {
+			$failure = "Missing params";
 			echo Functions::returnAPI([], "", $failure);
 		}
 	}
@@ -70,15 +76,24 @@ class CategoriesController
 	// update data
 	public function update()
 	{
-		if(isset($_POST['id'])) {
+		if(isset($_POST['id']) && isset($_POST['name']) && isset($_POST['gender'])) {
 			$id = $_POST['id'];
 			$name = $_POST['name'];
 			$gender = $_POST['gender'];
-			$success = "Success";
-			$failure = "Category does not exist";
-			$cate = Category::updateById($id, $name, $gender);
-			echo Functions::returnAPI($cate, $success, $failure);
+			$params = [
+			'name' => $name
+			];
+			$checkNameExist = Category::checkDataExist($params);
+			if(!$checkNameExist) {
+				$success = "Update success";
+				$cate = Category::updateById($id, $name, $gender);
+				echo Functions::returnAPI($cate, $success, "");
+			} else {
+				$failure = "Name already exist";
+				echo Functions::returnAPI($cate, "", $failure);
+			}
 		} else {
+			$failure = "Missing params";
 			echo Functions::returnAPI([], "", $failure);
 		}
 	}	
