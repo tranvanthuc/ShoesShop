@@ -19,7 +19,6 @@ $router->post('cate/postUpdate', 'CategoriesController@postUpdate');
 // users
 $router->get('users', 'AuthenController@getAllUsers');
 $router->get('users/user', 'AuthenController@getUserById');
-$router->post('user/update', 'AuthenController@update');
 $router->post('user/update-password', 'AuthenController@updatePassword');
 $router->post('user/update-profile', 'AuthenController@updateProfile');
 $router->get('user/delete', 'AuthenController@delete');
