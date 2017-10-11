@@ -133,4 +133,19 @@ class AuthenController
       echo Functions::returnAPI([], "", $failure );
     }
   }
+
+  // delete user
+  public function delete() 
+  {
+    if(isset($_REQUEST['id'])) {
+      $id = $_REQUEST['id'];
+      $user = User::deleteById($id);
+      $success = "Delete Success";
+      $failure = "User's not exist";
+      echo Functions::returnAPI($user, $success, $failure );
+    } else {
+      $failure = "Missing params";
+      echo Functions::returnAPI([], "", $failure );
+    }
+  } 
 }
