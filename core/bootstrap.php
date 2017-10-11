@@ -20,7 +20,7 @@ function view($nameView, $data = [])
     extract($data);
   }
   json_encode($data);
-  return require "app/views/testGUI/{$nameView}.view.php";
+  return require "app/views/{$nameView}.view.php";
 }
 
 function redirect($path) 
