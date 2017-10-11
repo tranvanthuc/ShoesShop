@@ -50,15 +50,10 @@ class User
   }
 
   // update password
-  public static function updatePassword($id, $currentPassword, $newPassword)
+  public static function updatePassword($id, $newPassword)
   {
-    $table = User::$table;
-    $sql = "select * from {$table} where id='{$id}' and password='{$currentPassword}'";
-    $user = App::get('database')->query($sql);
-    if ($user) {
-      return User::updateById($id, ['password' => $newPassword]);
-    }
-    return [];
+    $params = ['password' => $newPassword];
+    return User::updateById($id, $params);
   }
 
   // delete User by id
@@ -68,4 +63,11 @@ class User
     App::get('database')->deleteById(User::$table, $id);
     return $user;
   }
+
+  // check data exist
+  public static function checkDataExist($params) 
+  {
+    $user = App::get('database')->checkDataExist(User::$table, $params);
+    return $user ? true : false;
+  } 
 }

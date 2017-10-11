@@ -62,15 +62,44 @@ class AuthenController
           'email' => $email,
           'password' => md5($password),
         ];
+        
+        $paramsEmail = [
+          'email' => $email
+        ];
+
+        $checkEmailExist = User::checkDataExist($paramsEmail);
+
+        if(!$checkEmailExist) {
+          $user = User::insert($params);
+          $success = "Register Success";
+          $failure = "Email exists";
+          echo Functions::returnAPI($user, $success, $failure );
+        } else {
+          $failure = "Email exists !";
+          echo Functions::returnAPI([], "", $failure );
+        }
     
-        $user = User::insert($params);
-        $success = "Register Success";
-        $failure = "Email exists";
-        echo Functions::returnAPI($user, $success, $failure );
+        
     } else {
       $failure = "Missing params";
       echo Functions::returnAPI([], "", $failure );
     }
+  }
+  public function update() 
+  {
+    $id =  $_REQUEST['id'];
+    $first_name = $_REQUEST['first_name'];
+    $last_name = $_REQUEST['last_name'];
+    $params = [
+      'first_name' => $first_name,
+      'last_name' => $last_name
+    ];
+    $checkExist = User::checkDataExist($params);
+
+    $user = User::updateById($id, $params);
+    $success = "Update Success";
+    $failure = "User's not exist ";
+    echo Functions::returnAPI($user, $success, $failure );
   }
 
   // update password 
@@ -86,11 +115,23 @@ class AuthenController
       $newPassword = md5($_REQUEST['newPassword']);
       $id = $_REQUEST['id'];
 
-      $user = User::updatePassword($id, $currentPassword, $newPassword);
-
-      $success = "Update Success";
-      $failure = "User's not exist or current password wrong";
-      echo Functions::returnAPI($user, $success, $failure );
+      $params = [
+        'id' => $id,
+        'password' => $currentPassword
+      ];
+      $checkCurrentPassword = User::checkDataExist($params);
+      $user = User::updatePassword($id, $newPassword);
+      
+      if(!$user) {
+        $failure = "User's not exist";
+        echo Functions::returnAPI([], "", $failure );
+      } else if ($checkCurrentPassword) {
+        $success = "Update Success";
+        echo Functions::returnAPI($user, $success, "" );
+      } else {
+        $failure = "Current password wrong";
+        echo Functions::returnAPI([], "", $failure );
+      }
     } else {
       $failure = "Missing params";
       echo Functions::returnAPI([], "", $failure );
