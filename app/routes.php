@@ -33,10 +33,10 @@ $router->post('register', 'AuthenController@register');
 
 // ----------------------------shop_information controller----------------//
 //show list information of the shop
-$router->get('shopInf', 'ShopInfController@getAll');
+$router->get('shop-inf', 'ShopInfController@getAll');
 
 // //update shop information
-$router->post('shopInf/update', 'ShopInfController@update');
+$router->post('shop-inf/update', 'ShopInfController@update');
 
 // //return to create shop information page
 // $router->get('shopInf/shop', 'ShopInfController@getById');
@@ -68,7 +68,7 @@ $router->get('size/delete', 'SizesController@delete');
 $router->get('products-sizes', 'ProductsSizesController@getAll');
 
 //get productsSizes by id
-$router->get('products-sizes/productSize', 'ProductsSizesController@getById');
+$router->get('products-sizes/product-size', 'ProductsSizesController@getById');
 
 //insert new ProductsSizes
 $router->post('product-size/insert', 'ProductsSizesController@insert');

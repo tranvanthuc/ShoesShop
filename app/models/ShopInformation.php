@@ -38,8 +38,4 @@ class ShopInformation
         // die(var_dump($params));
         App::get('database')->updateById(ShopInformation::$table, $params, $id);
     }
-    public static function getLastRecord()
-    {
-        return App::get('database')->getLastRecord(ShopInformation::$table);
-    }
 }

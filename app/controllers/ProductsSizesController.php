@@ -31,7 +31,7 @@ class ProductsSizesController
 
             $checkExist = ProductSize::checkDataExist($paramsCheckExist);
 
-            if(!$checkEmailExist) {
+            if(!$checkExist) {
                 ProductSize::insert($productId, $sizeId);
                 $productSizeData = ProductSize::getLastRecord();
 
@@ -39,7 +39,7 @@ class ProductsSizesController
                 $failure = "Failure";
                 echo Functions::returnAPI($productSizeData, $success, $failure );
             } else {
-                $failure = "Email exists !";
+                $failure = "Data exists !";
                 echo Functions::returnAPI([], "", $failure );
               }
         } else {
@@ -72,12 +72,24 @@ class ProductsSizesController
             ];   
             // die(var_dump($params));
 
-            ProductSize::updateById($params, $id);
-            $productSizeData = ProductSize::getById($id);
+            $paramsCheckExist = [
+                'product_id' => $productId,
+                'size_id' => $sizeId
+            ];
 
-            $success = "Update data success";
-            $failure = "Failure";
-            echo Functions::returnAPI($productSizeData, $success, $failure );
+            $checkExist = ProductSize::checkDataExist($paramsCheckExist);
+
+            if(!$checkExist) {
+                ProductSize::updateById($params, $id);
+                $productSizeData = ProductSize::getById($id);
+
+                $success = "Update data success";
+                $failure = "Failure";
+                echo Functions::returnAPI($productSizeData, $success, $failure );
+            } else {
+                $failure = "Data exists !";
+                echo Functions::returnAPI([], "", $failure );
+            }
         } else {
             $failure = "Failure";            
             echo Functions::returnAPI([], "", $failure );

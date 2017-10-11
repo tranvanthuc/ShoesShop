@@ -30,7 +30,7 @@ class Size
     //update size by Id
     public static function updateById($id, $size)
     {
-        App::get('database')->updateById(Size::$table, [ 'size' => $size], $id);
+        App::get('database')->updateById(Size::$table, [ 'size' => $size ], $id);
     }
 
     //delete size by Id
@@ -51,7 +51,7 @@ class Size
         return App::get('database')->getLastRecord(Size::$table);
     }
 
-      // check data exist
+    // check data exist
     public static function checkDataExist($params) 
     {
         $size = App::get('database')->checkDataExist(Size::$table, $params);

@@ -27,7 +27,7 @@ class SizesController
             $checkSize = [
                 'size' => $size
             ];
-            $checkSizeExist = User::checkDataExist($checkSize);
+            $checkSizeExist = Size::checkDataExist($checkSize);
 
             if (!$checkSizeExist) {
                 Size::insert($size);
@@ -36,7 +36,7 @@ class SizesController
                 $failure = "Failure";
                 echo Functions::returnAPI($size, $success, $failure );
             } else {
-                $failure = "size exists !";
+                $failure = "Size exists !";
                 echo Functions::returnAPI([], "", $failure );
             }
         } else {
@@ -67,7 +67,7 @@ class SizesController
                 'size' => $size
               ];
 
-            $checkSizeExist = User::checkDataExist($checkSize);
+            $checkSizeExist = Size::checkDataExist($checkSize);
 
             if (!$checkSizeExist) {
                 Size::updateById($id, $size);
@@ -76,7 +76,7 @@ class SizesController
                 $failure = "Failure";
                 echo Functions::returnAPI($size, $success, $failure );
             } else {
-                $failure = "size exists !";
+                $failure = "Size exists !";
                 echo Functions::returnAPI([], "", $failure );
             }
         } else {
@@ -88,13 +88,18 @@ class SizesController
     //get delete size by id
     public function delete()
     {
-        $id = $_GET['id'];
-        $sizeData = Size::getById($id);
-        Size::deleteById($id);
+        if (isset($_REQUEST['id'])){
+            $id = $_GET['id'];
+            $sizeData = Size::getById($id);
+            Size::deleteById($id);
 
-        $success = "Delete data success";
-        $failure = "Failure";
+            $success = "Delete data success";
+            $failure = "Failure";
 
-        echo Functions::returnAPI($sizeData, $success, $failure );
+            echo Functions::returnAPI($sizeData, $success, $failure );
+        } else {
+            $failure = "Missing params";            
+            echo Functions::returnAPI([], "", $failure );
+        }
     }
 }
