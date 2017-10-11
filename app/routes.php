@@ -28,14 +28,14 @@ $router->post('register', 'AuthenController@register');
 //show list information of the shop
 $router->get('shopInf', 'ShopInfController@getAll');
 
-//return to create shop information page
-$router->get('shopInf/shop', 'ShopInfController@getById');
+// //update shop information
+$router->post('shopInf/update', 'ShopInfController@update');
+
+// //return to create shop information page
+// $router->get('shopInf/shop', 'ShopInfController@getById');
 
 // insert shop information
 // $router->post('shopInf/', 'ShopInfController@insert');
-
-// //update shop information
-$router->post('shopInf/update', 'ShopInfController@update');
 
 // //delete shop information
 // $router->get('shopInf/shop/delete', 'ShopInfController@delete');
@@ -50,6 +50,7 @@ $router->get('sizes/size', 'SizesController@getById');
 //insert new size
 $router->post('size/insert', 'SizesController@insert');
 
+//update new size
 $router->post('size/update', 'SizesController@update');
 
 //delete size
@@ -70,9 +71,6 @@ $router->post('productSize/update', 'ProductsSizesController@update');
 
 //delete size
 $router->get('productSize/delete', 'ProductsSizesController@delete');
-
-
-
 
 //------------------Test -------------- 
 

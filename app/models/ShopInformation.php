@@ -18,25 +18,7 @@ class ShopInformation
     {
         return App::get('database')->getAll(ShopInformation::$table);
     }
-
-    // //insert information of shop
-    // public static function insert(
-    //     $description,
-    //     $name,
-    //     $address,
-    //     $phone,
-    //     $email
-    // ) {
     
-    //     App::get('database')->insert(ShopInformation::$table, [
-    //         'description' => $description,
-    //         'name' => $name,
-    //         'address' => $address,
-    //         'phone' => $phone,
-    //         'email' => $email
-    //     ]);
-    // }
-
     //get information of shop by id
     public static function getById($id)
     {
@@ -44,30 +26,18 @@ class ShopInformation
     }
 
     //update information of shop by id
-    public static function updateById(
-        $id,
-        $description,
-        $name,
-        $address,
-        $phone,
-        $email
-    ) {
-        App::get('database')->updateById(ShopInformation::$table, [
-            'description' => $description,
-            'name' => $name,
-            'address' => $address,
-            'phone' => $phone,
-            'email' => $email
-        ], $id);
+    public static function updateById($id, $data) 
+    {
+        $params = [
+            'description' => $data['description'],
+            'name' => $data['name'],
+            'address' => $data['address'],
+            'phone' => $data['phone'],
+            'email' => $data['email']
+        ];
+        // die(var_dump($params));
+        App::get('database')->updateById(ShopInformation::$table, $params, $id);
     }
-
-    // //delete shop information by Id
-    // public static function deleteById($id)
-    // {
-    //     App::get('database')->deleteById(ShopInformation::$table, $id);
-    // }
-
-    //get information of last record in shop information table
     public static function getLastRecord()
     {
         return App::get('database')->getLastRecord(ShopInformation::$table);

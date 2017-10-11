@@ -36,7 +36,7 @@ class Size
     //delete size by Id
     public static function deleteById($id)
     {
-        $proSizeId =  ProductsSizes::getProSizeBySizeId($id);
+        $proSizeId =  ProductSize::getProSizeBySizeId($id);
 
         // die(var_dump($proSizeId));
         foreach ($proSizeId as $data) {

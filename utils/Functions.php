@@ -27,13 +27,13 @@ class Functions
       $result = [
         "status" => true,
         "message" => $success,
-        "data" => $data
+        "result" => $data
       ];
     } else {
       $result = [
         "status" => false,
         "message" => $failure,
-        "data" => $data
+        "result" => $data
       ];
     }
     header('Access-Control-Allow-Origin: *');

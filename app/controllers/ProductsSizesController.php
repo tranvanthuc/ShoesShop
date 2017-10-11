@@ -2,176 +2,84 @@
 
 namespace app\controllers;
 
-use app\models\ProductsSizes;
+use app\models\ProductSize;
+use utils\Functions;
 
-header("Access-Control-Allow-Origin: *");
 class ProductsSizesController
 {
     //index
     public function getAll()
     {
-        $result ;
-        try {
-            $productsSizes = ProductsSizes::getAll();
+        $productsSizes = ProductSize::getAll();
 
-            if ($productsSizes) {
-                $result = [
-                    "status" => true,
-                    "message" => "Success",
-                    "data" => $productsSizes
-                ];
-            } else {
-                $result = [
-                    "status" => false,
-                    "message" => "Not found data",
-                    "data" => $productsSizes
-                ];
-            }
-        } catch (Exception $e) {
-            $result = [
-                "status" => false,
-                "message" => $e->getMessage(),
-            ];
-            echo json_encode($result);
-        }
-        echo json_encode($result);
+        $success = "Get data success";
+        $failure = "Failure";
+        echo Functions::returnAPI($productsSizes, $success, $failure );
     }
 
     // insert a record of table products_sizes
     public function insert()
     {
-        $result ;
-        try {
+        if(isset($_REQUEST['product_id']) && isset($_REQUEST['size_id'])){
             $productId = $_REQUEST['product_id'];
             $sizeId = $_REQUEST['size_id'];
-            ProductsSizes::insert($productId, $sizeId);
-            
-            if ($sizeId) {
-                $result = [
-                    "status" => true,
-                    "message" => "Success",
-                    "data" =>  ProductsSizes::getLastRecord()
-                ];
-            } else {
-                $result = [
-                    "status" => false,
-                    "message" => "Can not insert data",
-                    "data" => array(
-                        "productId" => $productId,
-                        "sizeId" => $sizeId
-                    )
-                ];
-            }
-        } catch (Exception $e) {
-            $result = [
-                "status" => false,
-                "message" => $e->getMessage(),
-            ];
-            echo json_encode($result);
+            ProductSize::insert($productId, $sizeId);
+            $productSizeData = ProductSize::getLastRecord();
+
+            $success = "Insert data success";
+            $failure = "Failure";
+            echo Functions::returnAPI($productSizeData, $success, $failure );
+        } else {
+            $failure = "Missing params";            
+            echo Functions::returnAPI([], "", $failure );
         }
-        echo json_encode($result);
     }
 
     //get a record of table products_sizes by Id
     public function getById()
     {
-        $result ;
-        try {
-            $id = $_GET['id'];
-            $productSize = ProductsSizes::getById($id)[0];
+        $id = $_GET['id'];
+        $productSize = ProductSize::getById($id)[0];
 
-            if ($productSize) {
-                $result = [
-                    "status" => true,
-                    "message" => "Success",
-                    "data" => $productSize
-                  ];
-            } else {
-                $result = [
-                    "status" => false,
-                    "message" => "Not found data",
-                    "data" => $productSize
-                ];
-            }
-        } catch (Exception $e) {
-            $result = [
-                "status" => false,
-                "message" => $e->getMessage(),
-            ];
-            echo json_encode($result);
-        }
-        echo json_encode($result);
+        $success = "Get data success";
+        $failure = "Failure";
+        echo Functions::returnAPI($productSize, $success, $failure );
     }
 
     //post edit a record in table products_sizes
     public function update()
     {
-        $result ;
-        try {
+        if (isset($_REQUEST['id'])) {
             $id = $_REQUEST['id'];
-            $product_id = $_REQUEST['productId'];
-            $size_id = $_REQUEST['sizeId'];
-            ProductsSizes::updateById($id, $product_id, $size_id);
-            
-            if ($id) {
-                $result = [
-                    "status" => true,
-                    "message" => "Success",
-                    "data" => array(
-                        'id' => $id,
-                        'product_id' => $product_id,
-                        'size_id' => $size_id
-                    )
-                ];
-            } else {
-                $result = [
-                    "status" => false,
-                    "message" => "Can not update data",
-                    "data" => array(
-                        'id' => $id,
-                        'product_id' => $product_id,
-                        'size_id' => $size_id
-                    )
-                ];
-            }
-        } catch (Exception $e) {
-            $result = [
-                "status" => false,
-                "message" => $e->getMessage(),
-            ];
-            echo json_encode($result);
+            $productSize = ProductSize::getById($id)[0];
+            die(var_dump($productSize));
+            $params = [
+                $product_id = isset($_REQUEST['product_id']) ? $_REQUEST['product_id']: $productSize->product_id,                
+                $size_id =isset($_REQUEST['size_id']) ? $_REQUEST['size_id']: $productSize->size_id                
+            ];   
+            // die(var_dump($params));
+
+            ProductSize::updateById($id, $params);
+            $productSizeData = ProductSize::getById($id);
+
+            $success = "Update data success";
+            $failure = "Failure";
+            echo Functions::returnAPI($productSizeData, $success, $failure );
+        } else {
+            $failure = "Failure";            
+            echo Functions::returnAPI([], "", $failure );
         }
-        echo json_encode($result);
     }
 
     //delete a record in tablle products_sizes
     public function delete()
     {
-        $result ;
-        try {
-            $id =$_GET['id'];
-            ProductsSizes::deleteById($id);
+        $id =$_GET['id'];
+        $productsSizes = ProductSize::getById($id);
+        ProductSize::deleteById($id);
 
-            if ($id) {
-                $result = [
-                    "status" => true,
-                    "message" => "Success",
-                    "data" => $id
-                ];
-            } else {
-                $result = [
-                    "status" => false,
-                    "message" => "Can not delete data",
-                    "data" => $id
-                ];
-            }
-        } catch (Exception $e) {
-            $result = [
-                "status" => false,
-                "message" => $e->getMessage(),
-            ];
-            echo json_encode($result);
-        }
-        echo json_encode($result);
+        $success = "Delete data success";
+        $failure = "Failure";
+        echo Functions::returnAPI($productsSizes, $success, $failure );
     }
 }
