@@ -3,15 +3,12 @@
 // home pages
 $router->get('', 'PagesController@index');
 
-
-
 // CategoryController
-$router->get('cates', 'CategoriesController@index');
-$router->get('cate/create', 'CategoriesController@create');
-$router->post('cate/store', 'CategoriesController@store');
+$router->get('cates', 'CategoriesController@getAll');
+$router->post('cate/insert', 'CategoriesController@insert');
 $router->get('cate/delete', 'CategoriesController@delete');
-$router->get('cate/getUpdate', 'CategoriesController@getUpdate');
-$router->post('cate/postUpdate', 'CategoriesController@postUpdate');
+$router->post('cate/update', 'CategoriesController@update');
+$router->get('cates/cate', 'CategoriesController@getById');
 
 
 
