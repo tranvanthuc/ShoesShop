@@ -12,7 +12,7 @@ class AuthenController
     $users = User::getAll();
     $success = "Success";
     $failure = "Failure";
-     Functions::returnAPI($users, $success, $failure );
+    Functions::returnAPI($users, $success, $failure );
   }
 
   // get user by id
@@ -23,7 +23,7 @@ class AuthenController
     $user = User::getById($id);
     $success = "Success";
     $failure = "Not found user {$id}";
-     Functions::returnAPI($user, $success, $failure );
+    Functions::returnAPI($user, $success, $failure );
   }
 
   // change password
@@ -34,7 +34,7 @@ class AuthenController
     $user = User::checkLogin($email, md5($password));
     $success = "Login Success";
     $failure = "Username or password wrong";
-     Functions::returnAPI($user, $success, $failure );
+    Functions::returnAPI($user, $success, $failure );
   }
 
   // register
@@ -63,7 +63,7 @@ class AuthenController
          Functions::returnAPI($user, $success, $failure );
     } else {
       $failure = "Missing params";
-       Functions::returnAPI([], "", $failure );
+      Functions::returnAPI([], "", $failure );
     }
   }
 
@@ -87,7 +87,7 @@ class AuthenController
        Functions::returnAPI($user, $success, $failure );
     } else {
       $failure = "Missing params";
-       Functions::returnAPI([], "", $failure );
+      Functions::returnAPI([], "", $failure );
     }
   }
 
@@ -113,6 +113,6 @@ class AuthenController
 
     $success = "Update Success";
     $failure = "User's not exist";
-     Functions::returnAPI($user, $success, $failure );
+    Functions::returnAPI($user, $success, $failure );
   }
 }
