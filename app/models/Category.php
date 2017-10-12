@@ -9,37 +9,51 @@ class Category
 	public $name;
 	public $gender;
 
-	public static function selectAll()
+	// get all data interactive DB
+	public static function getAll()
 	{
-		return App::get('database')->selectAll(Category::$table);
+		return App::get('database')->getAll(Category::$table);
 	}
 
-	public static function insert($name, $gender)
-	{
-		return App::get('database')->insert(Category::$table, [
-			'name' => $name,
-			'gender' => $gender
-			]);
-	}
-
-	public static function deleteById($id)
-	{
-		return App::get('database')->deleteById(Category::$table,$id);
-	}
-
+	// get data with id interactive DB
 	public static function getById($id)
 	{
 		return App::get('database')->getById(Category::$table, $id);
 	}
 
+	// insert data with interactive DB
+	public static function insert($name, $gender)
+	{
+		$id = App::get('database')->insert(Category::$table, [
+			'name' => $name,
+			'gender' => $gender
+			]);
+		return Category::getById($id);
+	}
+
+	// delete data with id interactive DB
+	public static function deleteById($id)
+	{
+		$cate = Category::getById($id);
+		App::get('database')->deleteById(Category::$table,$id);
+		return $cate;
+	}
+
+	// update data with id interactive DB
 	public static function updateById($id, $name, $gender)
 	{
-		return App::get('database')->updateById(Category::$table,
+		App::get('database')->updateById(Category::$table,
 			[
-				'name' => $name,
-				'gender' => $gender
+			'name' => $name,
+			'gender' => $gender
 			],$id);
+		return Category::getById($id);
 	}
-	
+
+	public static function checkDataExist($params)
+	{
+		$cate = App::get('database')->checkDataExist(Category::$table, $params);
+		return $cate ? true : false;
+	}
 }
 
