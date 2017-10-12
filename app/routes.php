@@ -35,15 +35,6 @@ $router->get('shop-inf', 'ShopInfController@getAll');
 // //update shop information
 $router->post('shop-inf/update', 'ShopInfController@update');
 
-// //return to create shop information page
-// $router->get('shopInf/shop', 'ShopInfController@getById');
-
-// insert shop information
-// $router->post('shopInf/', 'ShopInfController@insert');
-
-// //delete shop information
-// $router->get('shopInf/shop/delete', 'ShopInfController@delete');
-
 // ----------------------------Sizes controller----------------//
 //show list Sizes of the shop
 $router->get('sizes', 'SizesController@getAll');
