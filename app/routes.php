@@ -12,7 +12,9 @@ $router->get('cates/cate', 'CategoriesController@getById');
 
 // ProductsController
 $router->get('products', 'ProductsController@getAll');
+$router->get('products/product', 'ProductsController@getById');
 $router->post('product/insert', 'ProductsController@insert');
+
 
 
 // users
