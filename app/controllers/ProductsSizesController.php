@@ -46,7 +46,7 @@ class ProductsSizesController
                     $failure = "Failure";
                     echo Functions::returnAPI($productSizeData, $success, $failure );                
             } else {
-                $failure = "Failure";            
+                $failure = "Data exists";            
                 echo Functions::returnAPI([], "", $failure );
             } 
         } else {
@@ -108,7 +108,7 @@ class ProductsSizesController
                 $productSizeData = ProductSize::getById($id);
 
                 $success = "Update data success";
-                $failure = "Failure";
+                $failure = "Update Failure";
                 echo Functions::returnAPI($productSizeData, $success, $failure );
             } else {
                 $failure = "Invalid data !";
@@ -136,7 +136,7 @@ class ProductsSizesController
                 ProductSize::deleteById($id);
 
                 $success = "Delete data success";
-                $failure = "Failure";
+                $failure = "Delete Failure";
                 echo Functions::returnAPI($productsSizes, $success, $failure );
             } else {
                 $failure = "Id is not exist in Database";            
