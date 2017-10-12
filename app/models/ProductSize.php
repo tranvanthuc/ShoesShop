@@ -17,12 +17,13 @@ class ProductSize
     }
 
     //insert 1 record inproducts_sizes table
-    public static function insert($productId, $sizeId)
+    public static function insert($params)
     {
-        App::get('database')->insert(ProductSize::$table, [
-            'product_id' => $productId,
-            'size_id' => $sizeId
-        ]);
+        $params = [
+            'product_id' => $params['product_id'],
+            'size_id' => $params['size_id']
+        ];
+        App::get('database')->insert(ProductSize::$table,$params );
     }
 
     //get products_sizes by Id

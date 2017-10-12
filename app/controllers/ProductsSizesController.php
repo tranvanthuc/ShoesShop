@@ -21,33 +21,34 @@ class ProductsSizesController
     // insert a record of table products_sizes
     public function insert()
     {
+        //check if product_id anf size_id exist in URI
         if(isset($_REQUEST['product_id']) && isset($_REQUEST['size_id'])){
             $productId = $_REQUEST['product_id'];
             $sizeId = $_REQUEST['size_id'];
 
-            $checkSizeExits = Size::checkDataExist($sizeId);
-            if($checkSizeExits){
-                $paramsCheckExist = [
-                    'product_id' => $productId,
-                    'size_id' => $sizeId
-                ];
-
-                $checkExist = ProductSize::checkDataExist($paramsCheckExist);
-                if(!$checkExist) {
-                    ProductSize::insert($productId, $sizeId);
+            $paramsCheckExist = [
+                'product_id' => $productId,
+                'size_id' => $sizeId
+            ];  
+            $checkSize = [ 'id' => $sizeId ];
+            
+            $checkSizeExist = Size::checkDataExist($checkSize);
+            $checkExist = ProductSize::checkDataExist($paramsCheckExist); 
+            // die(var_dump($checkSize));
+            
+            //check if size_id exist in DB and (product_id, size_id) not exist in DB
+            if( $checkSizeExist && !$checkExist ){
+                    ProductSize::insert($paramsCheckExist);
+                    // die(var_dump( ProductSize::insert($productId, $sizeId)));
                     $productSizeData = ProductSize::getLastRecord();
 
                     $success = "Insert data success";
                     $failure = "Failure";
-                    echo Functions::returnAPI($productSizeData, $success, $failure );
-                } else {
-                    $failure = "Data exists";
-                    echo Functions::returnAPI([], "", $failure );
-                }
+                    echo Functions::returnAPI($productSizeData, $success, $failure );                
             } else {
-                $failure = "Size is not exist";            
+                $failure = "Failure";            
                 echo Functions::returnAPI([], "", $failure );
-            }            
+            } 
         } else {
             $failure = "Missing params";            
             echo Functions::returnAPI([], "", $failure );
@@ -57,45 +58,62 @@ class ProductsSizesController
     //get a record of table products_sizes by Id
     public function getById()
     {
-        $id = $_GET['id'];
-        $productSize = ProductSize::getById($id)[0];
+        //check if id exist in URI       
+        if (isset($_GET['id']) ){
+            $id = $_GET['id'];
 
-        $success = "Get data success";
-        $failure = "Failure";
-        echo Functions::returnAPI($productSize, $success, $failure );
+            $checkId = [ 'id' => $id ];
+            $checkIdExist = ProductSize::checkDataExist($checkId);            
+            //check if id exist in DB    
+            if($checkIdExist){
+                $productSize = ProductSize::getById($id)[0];
+
+                $success = "Get data success";
+                $failure = "Failure";
+                echo Functions::returnAPI($productSize, $success, $failure );
+            } else {
+                $failure = "Id not exist in Database";            
+                echo Functions::returnAPI([], "", $failure );        
+            }
+        } else {
+            $failure = "Missing params";            
+            echo Functions::returnAPI([], "", $failure );
+        }
     }
 
-    //post edit a record in table products_sizes
+    //update a record in table products_sizes
     public function update()
     {
+        $failure = "Failure";
+        //check if id exist in URI
         if (isset($_REQUEST['id'])) {
             $id = $_REQUEST['id'];
-            $productSize = ProductSize::getById($id)[0];
-            // die(var_dump($productSize));
+
+            $productSize = ProductSize::getById($id)[0];                    
             $params = [
                 'product_id' => $product_id = isset($_REQUEST['product_id']) ? $_REQUEST['product_id']: $productSize->product_id,                
                 'size_id' => $size_id =isset($_REQUEST['size_id']) ? $_REQUEST['size_id']: $productSize->size_id                
             ];
-            
-            $checkSize = Size::checkDataExist($size_id);
-            // die(var_dump($checkSize));
+            $checkId = ['id'=> $id];
+            $checkSizeId = ['id' => $params['size_id']];
 
-            $checkExist = ProductSize::checkDataExist($params);
-            // die(var_dump($params));
-
-            if(!$checkExist && $checkSize) {
+            $checkIdExist = ProductSize::checkDataExist($checkId);
+            $checkSizeExist = Size::checkDataExist($checkSizeId);                
+            $checkExist = ProductSize::checkDataExist($params); 
+            // die(var_dump($checkIdExist));           
+            //check if size exist in DB
+            //Check if record has productsize_id and size_id not exist in DB 
+            //check if productSize_id exist in DB
+            if ($checkIdExist && $checkSizeExist && !$checkExist) {
                 ProductSize::updateById($params, $id);
                 $productSizeData = ProductSize::getById($id);
 
                 $success = "Update data success";
-                $failure = "Failure";
                 echo Functions::returnAPI($productSizeData, $success, $failure );
             } else {
-                $failure = "Failure";
                 echo Functions::returnAPI([], "", $failure );
             }
         } else {
-            $failure = "Failure";            
             echo Functions::returnAPI([], "", $failure );
         }
     }
@@ -103,12 +121,28 @@ class ProductsSizesController
     //delete a record in tablle products_sizes
     public function delete()
     {
-        $id =$_GET['id'];
-        $productsSizes = ProductSize::getById($id);
-        ProductSize::deleteById($id);
+        //check if id exist in URI       
+        if (isset($_GET['id']) ){
+            $id = $_GET['id'];
 
-        $success = "Delete data success";
-        $failure = "Failure";
-        echo Functions::returnAPI($productsSizes, $success, $failure );
+            $checkId = [ 'id' => $id ];
+            $checkIdExist = ProductSize::checkDataExist($checkId);            
+            //check if id exist in DB    
+            if($checkIdExist){
+                $id =$_GET['id'];
+                $productsSizes = ProductSize::getById($id);
+                ProductSize::deleteById($id);
+
+                $success = "Delete data success";
+                $failure = "Failure";
+                echo Functions::returnAPI($productsSizes, $success, $failure );
+            } else {
+                $failure = "Id not exist in Database";            
+                echo Functions::returnAPI([], "", $failure );        
+            }
+        } else {
+            $failure = "Missing params";            
+            echo Functions::returnAPI([], "", $failure );
+        }
     }
 }

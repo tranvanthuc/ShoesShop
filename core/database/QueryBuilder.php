@@ -55,6 +55,7 @@ class QueryBuilder
         try {
         $stm = $this->pdo->prepare($sql);
         $stm->execute($params);
+        // die(var_dump($stm));
         } catch(PDOException $e){
         die($e->getMessage());
         }
@@ -108,11 +109,12 @@ class QueryBuilder
         implode(" and ", $result)
         );
         try {
-        $stm = $this->pdo->prepare($sql);
-        $stm->execute($params);
-        return $stm->fetchAll(PDO::FETCH_CLASS);
+            $stm = $this->pdo->prepare($sql);
+            // die(var_dump($sql));
+            $stm->execute($params);
+            return $stm->fetchAll(PDO::FETCH_CLASS);
         } catch(PDOException $e){
-        die($e->getMessage());
+            die($e->getMessage());
         }
     }
 

@@ -35,7 +35,6 @@ class ShopInformation
             'phone' => $data['phone'],
             'email' => $data['email']
         ];
-        // die(var_dump($params));
         App::get('database')->updateById(ShopInformation::$table, $params, $id);
     }
 }

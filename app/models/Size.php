@@ -36,9 +36,9 @@ class Size
     //delete size by Id
     public static function deleteById($id)
     {
+        //get Product_size_id by size_id
         $proSizeId =  ProductSize::getProSizeBySizeId($id);
-
-        // die(var_dump($proSizeId));
+        //delete all products_sizes has size_id
         foreach ($proSizeId as $data) {
             App::get('database')->deleteById(ProductSize::$table, $data->id);
         }

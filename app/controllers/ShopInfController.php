@@ -20,7 +20,8 @@ class ShopInfController
     //update shop information
     public function update()
     {
-        if(isset($_REQUEST['id']) != null && $_REQUEST['id'] == 1 ){
+        //shop_id = 1
+        if($_REQUEST['id'] == 1 ){
             $id = $_REQUEST['id'];
             $shopInf = ShopInformation::getById($id)[0];
 
@@ -31,7 +32,6 @@ class ShopInfController
                 'phone' => isset($_REQUEST['phone']) ? $_REQUEST['phone']: $shopInf->phone,
                 'email' => isset($_REQUEST['email']) ? $_REQUEST['email']: $shopInf->email
             ];
-            // die(var_dump($params));
 
             ShopInformation::updateById($id, $params);
             $ShopInfUpdate = ShopInformation::getById($id);
