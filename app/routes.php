@@ -10,7 +10,9 @@ $router->get('cate/delete', 'CategoriesController@delete');
 $router->post('cate/update', 'CategoriesController@update');
 $router->get('cates/cate', 'CategoriesController@getById');
 
-
+// ProductsController
+$router->get('products', 'ProductsController@getAll');
+$router->post('product/insert', 'ProductsController@insert');
 
 
 // users
