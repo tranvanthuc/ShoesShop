@@ -48,8 +48,8 @@ class Router
       );
     }
     throw new Exception('No route defined for this URI.');
-  }
-
+  } 
+        
   // call action
   protected function callAction($controller, $action)
   {
