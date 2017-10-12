@@ -3,10 +3,10 @@
 
 return [
   'database' => [
-    'name' => 'sql12197810',
-    'username' => 'sql12197810',
-    'password' => 'taEyRnk35I',
-    'connection' => 'mysql:host=sql12.freemysqlhosting.net',
+    'name' => 'shoesshop',
+    'username' => 'shoesshop',
+    'password' => '	Abc123@@',
+    'connection' => 'mysql:host=mysql6.gear.host',
     'options' => [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
