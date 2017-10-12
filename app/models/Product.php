@@ -26,8 +26,25 @@ class Product
 	}
 
 	// insert data with interactive DB
-	public static function insert()
+	public static function insert($params)
 	{
+		$product = App::get('database')->insert(Product::$table, $params);
+		return Product::getById($product);
+	}
 
+	// delete data with interative DB
+	public static function deleteById($id)
+	{
+		$product = Product::getById($id); 
+		App::get('database')->deleteById(Product::$table, $id);
+		return $product;
+	}
+
+	// update data with interative DB
+	public static function updateById($id, $params)
+	{
+		App::get('database')->updateById(Product::$table,
+			$params,$id);
+		return Product::getById($id);
 	}
 }
