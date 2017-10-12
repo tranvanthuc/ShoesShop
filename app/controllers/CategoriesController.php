@@ -86,11 +86,12 @@ class CategoriesController
 			$checkNameExist = Category::checkDataExist($params);
 			if(!$checkNameExist) {
 				$success = "Update success";
+				$failure = "Category is not exist";
 				$cate = Category::updateById($id, $name, $gender);
-				echo Functions::returnAPI($cate, $success, "");
+				echo Functions::returnAPI($cate, $success, $failure);
 			} else {
 				$failure = "Name already exist";
-				echo Functions::returnAPI($cate, "", $failure);
+				echo Functions::returnAPI([], "", $failure);
 			}
 		} else {
 			$failure = "Missing params";
