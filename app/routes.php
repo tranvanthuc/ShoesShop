@@ -75,25 +75,3 @@ $router->post('product-size/update', 'ProductsSizesController@update');
 
 //delete size
 $router->get('product-size/delete', 'ProductsSizesController@delete');
-
-//------------------Test -------------- 
-
-// test json 
-$router->get('json', 'AuthenController@testJson');
-
-// pages controller
-$router->get('', 'PagesController@home');
-$router->get('about', 'PagesController@about');
-$router->get('contact', 'PagesController@contact');
-
-// todos contronller
-// show todos list and insert todo
-$router->get('todos', 'TodosController@getAll');
-$router->post('todos', 'TodosController@insert'); // post of insert
-
-// edit todo
-$router->get('todos/edit', 'TodosController@getById');
-$router->post('todos/edit', 'TodosController@update');
-
-// delete todo
-$router->get('todos/delete', 'TodosController@delete');

@@ -83,8 +83,7 @@ class ProductsSizesController
 
     //update a record in table products_sizes
     public function update()
-    {
-        $failure = "Failure";
+    {        
         //check if id exist in URI
         if (isset($_REQUEST['id'])) {
             $id = $_REQUEST['id'];
@@ -109,11 +108,14 @@ class ProductsSizesController
                 $productSizeData = ProductSize::getById($id);
 
                 $success = "Update data success";
+                $failure = "Failure";
                 echo Functions::returnAPI($productSizeData, $success, $failure );
             } else {
+                $failure = "Invalid data !";
                 echo Functions::returnAPI([], "", $failure );
             }
         } else {
+            $failure = "Failure";
             echo Functions::returnAPI([], "", $failure );
         }
     }
@@ -137,7 +139,7 @@ class ProductsSizesController
                 $failure = "Failure";
                 echo Functions::returnAPI($productsSizes, $success, $failure );
             } else {
-                $failure = "Id not exist in Database";            
+                $failure = "Id is not exist in Database";            
                 echo Functions::returnAPI([], "", $failure );        
             }
         } else {

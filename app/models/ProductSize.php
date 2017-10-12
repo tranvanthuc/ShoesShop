@@ -32,7 +32,7 @@ class ProductSize
         return App::get('database')->getById(ProductSize::$table, $id);
     }
 
-    //Update products_sizes by Id
+    //update products_sizes by Id
     public static function updateById($data, $id)
     {
         $params = [

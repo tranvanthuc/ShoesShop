@@ -40,7 +40,7 @@ class ShopInfController
             $failure = "Failure";
             echo Functions::returnAPI($ShopInfUpdate, $success, $failure );
         } else {
-            $failure = "Failure";            
+            $failure = "Invalid data !";            
             echo Functions::returnAPI([], "", $failure );
         }
     }

@@ -45,7 +45,7 @@ class Size
         App::get('database')->deleteById(Size::$table, $id);
     }
 
-    //delete get last record in size table
+    //get last record in size table
     public static function getLastRecord()
     {
         return App::get('database')->getLastRecord(Size::$table);
