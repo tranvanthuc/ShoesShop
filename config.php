@@ -3,10 +3,10 @@
 
 return [
   'database' => [
-    'name' => 'sql12197810',
-    'username' => 'sql12197810',
-    'password' => 'taEyRnk35I',
-    'connection' => 'mysql:host=sql12.freemysqlhosting.net',
+    'name' => '2468702_neolab',
+    'username' => '2468702_neolab',
+    'password' => 'thuc1234',
+    'connection' => 'mysql:host=fdb17.awardspace.net',
     'options' => [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
