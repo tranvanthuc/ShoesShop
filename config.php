@@ -3,7 +3,6 @@
 
 return [
   'database' => [
-
     'name' => 'sql9199141',
     'username' => 'sql9199141',
     'password' => 'UsmfIx1JHR',
@@ -13,12 +12,7 @@ return [
     ]
   ]
 ];
-/*=======
-    'name' => 'shoesshop',
-    'username' => 'shoesshop',
-    'password' => 'thuc123*',
-    'connection' => 'mysql:host=mysql6.gear.host',
->>>>>>> dev*/
+
 /*return [
   'database' => [
     'name' => 'shoeshop',

@@ -57,48 +57,30 @@ class AuthenController
     
   }
 
-  // register
   public function register() 
   {
-    if(isset($_REQUEST['email']) && isset($_REQUEST['password'])
-      && isset($_REQUEST['first_name']) && isset($_REQUEST['last_name'])
-      && isset($_REQUEST['role_id'])) {
-        $email = $_REQUEST['email'];
-        $password = $_REQUEST['password'];
-        $first_name = $_REQUEST['first_name'];
-        $last_name = $_REQUEST['last_name'];
-        $role_id = $_REQUEST['role_id'];
+    $postdata = file_get_contents("php://input");
+    $request = json_decode($postdata, true);
 
-        $params = [
-          'role_id'=> $role_id,
-          'first_name' => $first_name,
-          'last_name' => $last_name,
-          'email' => $email,
-          'password' => md5($password),
-        ];
+    // $paramsEmail = [
+    //   'email' => $request->email
+    // ];
+
+    // $checkEmailExist = User::checkDataExist($paramsEmail);
+
+    // if(!$checkEmailExist) {
+      $user = User::insert($request);
+      $success = "Register success !";
+      $failure = "Email exists !";
+      echo Functions::returnAPI($user, $success, $failure );
+    // } else {
+    //   $failure = "Email exists !";
+    //   echo Functions::returnAPI([], "", $failure );
+    // }
+
         
-        $paramsEmail = [
-          'email' => $email
-        ];
-
-        $checkEmailExist = User::checkDataExist($paramsEmail);
-
-        if(!$checkEmailExist) {
-          $user = User::insert($params);
-          $success = "Register success !";
-          $failure = "Email exists !";
-          echo Functions::returnAPI($user, $success, $failure );
-        } else {
-          $failure = "Email exists !";
-          echo Functions::returnAPI([], "", $failure );
-        }
-    
-        
-    } else {
-      $failure = "Missing params !";
-      echo Functions::returnAPI([], "", $failure );
-    }
   }
+
 
   // update password 
   public function updatePassword() 
