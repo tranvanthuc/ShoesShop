@@ -3,13 +3,24 @@
 
 return [
   'database' => [
-    'name' => 'sql12197810',
-    'username' => 'sql12197810',
-    'password' => 'taEyRnk35I',
-    'connection' => 'mysql:host=sql12.freemysqlhosting.net',
+    'name' => 'sql9199141',
+    'username' => 'sql9199141',
+    'password' => 'UsmfIx1JHR',
+    'connection' => 'mysql:host=sql9.freemysqlhosting.net',
     'options' => [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
   ]
 ];
-
+/*return [
+  'database' => [
+    'name' => 'shoeshop',
+    'username' => 'root',
+    'password' => 'huy',
+    'connection' => 'mysql:host=localhost',
+    'options' => [
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]
+  ]
+];
+*/
