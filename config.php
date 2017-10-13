@@ -3,10 +3,10 @@
 
 return [
   'database' => [
-    'name' => '2468702_neolab',
-    'username' => '2468702_neolab',
+    'name' => 'unaux_20789466_shoeshop',
+    'username' => 'unaux_20789466',
     'password' => 'thuc1234',
-    'connection' => 'mysql:host=fdb17.awardspace.net',
+    'connection' => 'mysql:host=sql209.unaux.com',
     'options' => [
       PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
     ]
