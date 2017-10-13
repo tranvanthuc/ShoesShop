@@ -33,10 +33,10 @@ class ProductsController
 	// insert product
 	public function insert()
 	{
-		if($_POST['name']
-		&& $_POST['price']
-		&& $_POST['amount']
-		&& $_POST['category_id']
+		if(isset($_POST['name'])
+		&& isset($_POST['price'])
+		&& isset($_POST['amount'])
+		&& isset($_POST['category_id'])
 		) {
 			$name = $_POST['name'];
 			$price = $_POST['price'];
@@ -68,7 +68,7 @@ class ProductsController
 	// delete product
 	public function delete()
 	{
-		if($_GET['id']) {
+		if(isset($_GET['id'])) {
 			$id = $_GET['id'];
 			$product = Product::deleteById($id);
 			$success = "Success";
@@ -83,11 +83,11 @@ class ProductsController
 	// update product
 	public function update()
 	{
-		if($_POST['id']
-		&& $_POST['name']
-		&& $_POST['price']
-		&& $_POST['amount']
-		&& $_POST['category_id']
+		if(isset($_POST['id'])
+		&& isset($_POST['name'])
+		&& isset($_POST['price'])
+		&& isset($_POST['amount'])
+		&& isset($_POST['category_id'])
 		) {
 			$id = $_POST['id'];
 			$name = $_POST['name'];
@@ -114,6 +114,5 @@ class ProductsController
 			$failure = "Missing params";
 			echo Functions::returnAPI([], "", $failure);
 		}
-
 	}
 }
