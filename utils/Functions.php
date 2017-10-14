@@ -36,8 +36,6 @@ class Functions
         "results" => $data
       ];
     }
-    
-
     echo \json_encode($result);
   }
 
@@ -59,4 +57,12 @@ class Functions
     }
     return $result;
   } 
+
+  // get json from front-end
+  public static function getDataFromClient() 
+  {
+    $postdata = file_get_contents("php://input");
+    $request = json_decode($postdata, true);
+    return $request;
+  }
 }

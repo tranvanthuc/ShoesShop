@@ -13,7 +13,7 @@ class RolesController
     $roles = Role::getAll();
     $success = "Success";
     $failure = "Failure";
-    echo Functions::returnAPI($roles, $success, $failure );
+    Functions::returnAPI($roles, $success, $failure );
   }
 
   // get role by id
@@ -24,10 +24,10 @@ class RolesController
       $role = Role::getById($id);
       $success = "Success";
       $failure = "Not found role {$id}";
-      echo Functions::returnAPI($role, $success, $failure );
+      Functions::returnAPI($role, $success, $failure );
     } else {
       $failure = "Missing params";
-      echo Functions::returnAPI([], "", $failure );
+      Functions::returnAPI([], "", $failure );
     }
   }
 }
