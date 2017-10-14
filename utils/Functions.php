@@ -36,7 +36,7 @@ class Functions
         "results" => $data
       ];
     }
-    header('Access-Control-Allow-Origin: *');
+    
 
     echo \json_encode($result);
   }

@@ -3,6 +3,7 @@
 use core\App;
 use core\database\Connection;
 use core\database\QueryBuilder;
+header('Access-Control-Allow-Origin: *');
 
 App::bind('config', require 'config.php');
 
