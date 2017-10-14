@@ -36,10 +36,9 @@ class Functions
         "results" => $data
       ];
     }
-    header('Access-Control-Allow-Origin: *');
-    header('Content-type: application/json');
+    
 
-    return \json_encode($result);
+    echo \json_encode($result);
   }
 
   // get params

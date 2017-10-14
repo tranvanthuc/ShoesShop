@@ -12,18 +12,23 @@ class AuthenController
     $users = User::getAll();
     $success = "Success";
     $failure = "Failure";
-    echo Functions::returnAPI($users, $success, $failure );
+    Functions::returnAPI($users, $success, $failure );
   }
 
   // get user by id
   public function getUserById() 
   {
-    $id = $_REQUEST['id'];
-
-    $user = User::getById($id);
-    $success = "Success";
-    $failure = "Not found user {$id}";
-    echo Functions::returnAPI($user, $success, $failure );
+    if (isset($_REQUEST['id'])) {
+      $id = $_REQUEST['id'];
+      $user = User::getById($id);
+      $success = "Success";
+      $failure = "Not found user {$id}";
+      Functions::returnAPI($user, $success, $failure );
+    } else {
+      $failure = "Missing params";
+      Functions::returnAPI([], "", $failure );
+    }
+    
   }
 
   // change password
@@ -44,15 +49,15 @@ class AuthenController
         $user = User::checkLogin($email, md5($password));
         $success = "Login success !";
         $failure = "Password wrong !";
-        echo Functions::returnAPI($user, $success, $failure );
+         Functions::returnAPI($user, $success, $failure );
       } else {
         $failure = "Email's not exist !";
-        echo Functions::returnAPI([], "", $failure );
+        Functions::returnAPI([], "", $failure );
       }
      
     } else {
       $failure = "Missing params";
-      echo Functions::returnAPI([], "", $failure );
+      Functions::returnAPI([], "", $failure );
     }
     
   }
@@ -72,10 +77,10 @@ class AuthenController
       $user = User::insert($request);
       $success = "Register success !";
       $failure = "Email exists !";
-      echo Functions::returnAPI($user, $success, $failure );
+      Functions::returnAPI($user, $success, $failure );
     // } else {
     //   $failure = "Email exists !";
-    //   echo Functions::returnAPI([], "", $failure );
+    //    Functions::returnAPI([], "", $failure );
     // }
 
         
@@ -104,17 +109,17 @@ class AuthenController
       
       if(!$user) {
         $failure = "User's not exist !";
-        echo Functions::returnAPI([], "", $failure );
+         Functions::returnAPI([], "", $failure );
       } else if ($checkCurrentPassword) {
         $success = "Update success !";
-        echo Functions::returnAPI($user, $success, "" );
+         Functions::returnAPI($user, $success, "" );
       } else {
         $failure = "Current password wrong !";
-        echo Functions::returnAPI([], "", $failure );
+         Functions::returnAPI([], "", $failure );
       }
     } else {
       $failure = "Missing params !";
-      echo Functions::returnAPI([], "", $failure );
+       Functions::returnAPI([], "", $failure );
     }
   }
 
@@ -148,10 +153,10 @@ class AuthenController
 
       $success = "Update success !";
       $failure = "User's not exist !";
-      echo Functions::returnAPI($user, $success, $failure );
+       Functions::returnAPI($user, $success, $failure );
     } else {
       $failure = "Missing params !";
-      echo Functions::returnAPI([], "", $failure );
+       Functions::returnAPI([], "", $failure );
     }
   }
 
@@ -163,10 +168,10 @@ class AuthenController
       $user = User::deleteById($id);
       $success = "Delete success !";
       $failure = "User's not exist !";
-      echo Functions::returnAPI($user, $success, $failure );
+       Functions::returnAPI($user, $success, $failure );
     } else {
       $failure = "Missing params !";
-      echo Functions::returnAPI([], "", $failure );
+       Functions::returnAPI([], "", $failure );
     }
   } 
 }
