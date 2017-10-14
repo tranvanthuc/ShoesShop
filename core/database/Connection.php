@@ -10,6 +10,7 @@ class Connection
     // turn on display errors
     ini_set('display_errors', true);
     error_reporting(E_ALL);
+   
 
     try {
       $pdo = new PDO(

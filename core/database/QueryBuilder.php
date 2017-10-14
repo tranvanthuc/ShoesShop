@@ -29,8 +29,6 @@ class QueryBuilder
         implode(', ', array_keys($params)),
         ':'. implode(', :', array_keys($params))
         );
-
-
         try {
             $stm = $this->pdo->prepare($sql);
             $stm->execute($params);
@@ -114,18 +112,6 @@ class QueryBuilder
             $stm->execute($params);
             return $stm->fetchAll(PDO::FETCH_CLASS);
         } catch(PDOException $e){
-            die($e->getMessage());
-        }
-    }
-
-    public function getLastRecord($table)
-    {
-          $sql = "select * from {$table} order by id desc limit 1";
-        try {
-            $stm = $this->pdo->prepare($sql);
-            $stm->execute();
-            return $stm->fetchAll(PDO::FETCH_CLASS);
-        } catch (PDOException $e) {
             die($e->getMessage());
         }
     }

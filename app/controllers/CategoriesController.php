@@ -81,6 +81,7 @@ class CategoriesController
 			$name = $_POST['name'];
 			$gender = $_POST['gender'];
 			$params = [
+			'id' => $id,
 			'name' => $name
 			];
 			$checkNameExist = Category::checkDataExist($params);
