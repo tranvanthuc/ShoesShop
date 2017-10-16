@@ -10,7 +10,7 @@ class ShopInfController
     //index
     public function getAll()
     {
-        $shopInf = ShopInformation::getAll();
+        $shopInf = ShopInformation::getAll(ShopInformation::$table);
 
         $success = "Get data success";
         $failure = "Failure";
@@ -20,10 +20,11 @@ class ShopInfController
     //update shop information
     public function update()
     {
+        $data = Functions::getDataFromClient();
         //shop_id = 1
         if($_REQUEST['id'] == 1 ){
             $id = $_REQUEST['id'];
-            $shopInf = ShopInformation::getById($id)[0];
+            $shopInf = ShopInformation::getById(ShopInformation::$table, $data['id'])[0];
 
             $params = [
                 'description' => isset($_REQUEST['description']) ? $_REQUEST['description']: $shopInf->description,
@@ -33,8 +34,8 @@ class ShopInfController
                 'email' => isset($_REQUEST['email']) ? $_REQUEST['email']: $shopInf->email
             ];
 
-            ShopInformation::updateById($id, $params);
-            $ShopInfUpdate = ShopInformation::getById($id);
+            ShopInformation::updateById(ShopInformation::$table, $id, $params);
+            $ShopInfUpdate = ShopInformation::getById(ShopInformation::$table, $id);
 
             $success = "Update data success";
             $failure = "Failure";
