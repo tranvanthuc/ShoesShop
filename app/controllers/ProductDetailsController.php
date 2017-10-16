@@ -88,7 +88,46 @@ class ProductDetailsController
 	// update data in table
 	public function update()
 	{
-		
+		$data = Functions::getDataFromClient();
+		if(isset($data['id'])
+			&& isset($data['name'])
+			&& isset($data['price'])
+			&& isset($data['category_id'])
+		) {
+			$id = $data['id'];
+			$name = $data['name'];
+			$price = $data['price'];
+			$category_id = $data['category_id'];
+			$checkName = [
+			'name' => $name
+			];
+			$checkNameExist = ProductDetail::checkDataExist($checkName);
+			if(!$checkNameExist) {
+				$proDetail = ProductDetail::updateById($id, $data);
+				$success = "Success";
+				$failure = "Failure";
+				Functions::returnAPI($proDetail, $success, $failure);
+			} else {
+				$paramsID = [
+				'name' => $name,
+				'id' => $id
+				];
+				$checkNameExist = ProductDetail::checkDataExist($paramsID);
+				if($checkNameExist) {
+					$proDetail = ProductDetail::updateById($id, $data);
+					$success = "Success";
+					$failure = "Failure";
+					Functions::returnAPI($proDetail, $success, $failure);
+				} else {
+					$failure = "Name already exist";
+					Functions::returnAPI([], "", $failure);
+				}
+			}
+			
+		} else {
+			$failure = "Missing params";
+			Functions::returnAPI([], "", $failure);
+		}
 	}
 }
 
