@@ -21,9 +21,9 @@ class OrdersController
 		$data = Functions::getDataFromClient();
 		if(isset($data['id'])) {
 			$id = $data['id'];
-			$order = Order::getById($id);
+			$order = Order::getById(Order::$table,$id);
 			$success = "Success";
-			$failure = "Not found Order";
+			$failure = "Not found Order!";
 			Functions::returnAPI($order, $success,$failure);
 		} else {
 			$failure = "Missing params";
@@ -37,7 +37,7 @@ class OrdersController
 		$data = Functions::getDataFromClient();
 		if (isset($data['user_id'])) {
 			$user_id = $data['user_id'];
-            $date = CURRENT_TIMESTAMP();
+            $date = date("Y-m-d H:i:s"); 
 
             $params = [
                 'user_id' => $user_id,
@@ -45,27 +45,6 @@ class OrdersController
             ];
             
             $order = Order::insert($params);
-            $success = "Success";
-            $failure = "Failure";
-            Functions::returnAPI($order, $success, $failure);
-		} else {
-			$failure = "Missing params";
-			Functions::returnAPI([], "", $failure);
-		}
-	}
-
-	// update order
-	public function update()
-	{
-		$data = Functions::getDataFromClient();
-		if (isset($data['user_id'])) {
-			$id = $data['user_id'];   
-            $params = [
-                'user_id' => $user_id,
-                'date' => $date,
-            ];
-            
-            $order = Order::updateById($id, $params);
             $success = "Success";
             $failure = "Failure";
             Functions::returnAPI($order, $success, $failure);
