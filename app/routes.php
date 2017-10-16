@@ -64,3 +64,19 @@ $router->post('order/delete', 'OrdersController@delete');
 
 //insert shop information
 $router->post('order/insert', 'OrdersController@insert');
+
+// ----------------------------Order Detail controller----------------//
+//show list information of the shop
+$router->get('orderDetails', 'OrderDetailsController@getAll');
+
+//show list information of the shop
+$router->post('orderDetails/orderDetail', 'OrderDetailsController@getById');
+
+//update shop information
+$router->post('orderDetail/update', 'OrderDetailsController@update');
+
+//delete shop information
+$router->post('orderDetail/delete', 'OrderDetailsController@delete');
+
+//insert shop information
+$router->post('orderDetail/insert', 'OrderDetailsController@insert');
