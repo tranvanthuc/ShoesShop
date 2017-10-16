@@ -3,21 +3,11 @@
 namespace app\models;
 
 use core\App;
+use app\models\Model;
 
-class Role 
+class Role extends Model
 {
   static $table = "roles";
   public $name;
 
-  // get all roles
-  public static function getAll()
-  {
-    return App::get('database')->getAll(Role::$table);
-  }
-
-  // get role by ID
-  public static function getById($id)
-  {
-    return App::get('database')->getById(Role::$table, $id);
-  }
 }
