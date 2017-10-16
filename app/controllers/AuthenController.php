@@ -9,7 +9,7 @@ class AuthenController
   // get All users
   public function getAllUsers()
   {
-    $users = User::getAll(User::$table);
+    $users = User::getAll();
     $success = "Success";
     $failure = "Failure";
     Functions::returnAPI($users, $success, $failure );
@@ -40,7 +40,7 @@ class AuthenController
       $paramsEmail = [
         'email' => $data['email']
       ];
-      $checkEmailExist = User::checkDataExist(User::$table, $paramsEmail);
+      $checkEmailExist = User::checkDataExist($paramsEmail);
       if ($checkEmailExist) {
         $user = User::checkLogin($data['email'], $data['password']);
         $success = "Login success !";
@@ -70,10 +70,10 @@ class AuthenController
         'email' => $data['email']
       ];
 
-      $checkEmailExist = User::checkDataExist(User::$table, $paramsEmail);
+      $checkEmailExist = User::checkDataExist($paramsEmail);
 
       if(!$checkEmailExist) {
-        $user = User::insert(User::$table, $data);
+        $user = User::insert($data);
         $success = "Register success !";
         $failure = "Email exists !";
         Functions::returnAPI($user, $success, $failure );
@@ -103,7 +103,7 @@ class AuthenController
         'id' => $id,
         'password' => $currentPassword
       ];
-      $checkCurrentPassword = User::checkDataExist(User::$table, $params);
+      $checkCurrentPassword = User::checkDataExist($params);
       $user = User::updatePassword($id, $newPassword);
       
       if (!$user) {
@@ -150,7 +150,7 @@ class AuthenController
         'address' => $address
       ];
 
-      $user = User::updateById(User::$table,$id, $params);
+      $user = User::updateById($id, $params);
 
       $success = "Update success !";
       $failure = "User's not exist !";

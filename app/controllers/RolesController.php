@@ -10,7 +10,7 @@ class RolesController
   // get all roles
   public function getAll()
   {
-    $roles = Role::getAll(Role::$table);
+    $roles = Role::getAll();
     $success = "Success";
     $failure = "Failure";
     Functions::returnAPI($roles, $success, $failure );
