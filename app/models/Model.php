@@ -30,25 +30,15 @@ class Model {
   // update  by id
   public static function updateById($id, $params) 
   {
-<<<<<<< HEAD
     App::get('database')->updateById(static::$table, $params, $id);
     return Model::getById(static::$table, $id);
-=======
-    App::get('database')->updateById($table, $params, $id);
-    return Model::getById($table, $id);
->>>>>>> origin/dev
   }
 
   // delete by id
   public static function deleteById($id) 
   {
-<<<<<<< HEAD
     $temp = Model::getById(static::$table, $id);
     App::get('database')->deleteById(static::$table, $id);
-=======
-    $temp = Model::getById($table, $id);
-    App::get('database')->deleteById($table, $id);
->>>>>>> origin/dev
     return $temp;
   }
 
