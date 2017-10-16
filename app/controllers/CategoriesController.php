@@ -19,7 +19,7 @@ class CategoriesController
 	public function getById()
 	{
 		$data = Functions::getDataFromClient();
-		if(isset($data['id'])) { // nguoi dung gui id
+		if (isset($data['id'])) { // nguoi dung gui id
 			$cate = Category::getById(Category::$table, $data['id']); // tra ve mang [] neu id k0 dung
 			$success = "Success";
 			$failure = "Not found category";
@@ -35,7 +35,7 @@ class CategoriesController
 	public function insert()
 	{
 		$data = Functions::getDataFromClient();
-		if(isset($data['name']) && isset($data['gender'])) {
+		if (isset($data['name']) && isset($data['gender'])) {
 
 			$params = [
 			'name' => $data['name'], //Stan
@@ -43,7 +43,7 @@ class CategoriesController
 			];
 
 			$checkNameExist = Category::checkDataExist($params); //kiem tra name co trong DB
-			if(!$checkNameExist) {
+			if (!$checkNameExist) {
 				$success = "Insert success";
 
 				$cate = Category::insert($data);
@@ -62,7 +62,7 @@ class CategoriesController
 	public function delete()
 	{
 		$data = Functions::getDataFromClient();
-		if(isset($data['id'])) {
+		if (isset($data['id'])) {
 			$cate = Category::deleteById($data['id']);
 			$success = "Success";
 			$failure = "Category does not exist";
@@ -77,7 +77,10 @@ class CategoriesController
 	public function update()
 	{
 		$data = Functions::getDataFromClient();
-		if(isset($data['id']) && isset($data['name']) && isset($data['gender'])) {
+		if (isset($data['id']) 
+			&& isset($data['name']) 
+			&& isset($data['gender'])
+		) {
 			$id = $data['id'];
 			$name = $data['name'];
 			$gender =  $data['gender'];
@@ -86,28 +89,26 @@ class CategoriesController
 			'name' => $name
 			];
 			$checkName = Category::checkDataExist($paramsName);
-			if(!$checkName) {
+			if (!$checkName) { // name's not exist
+				$success = "Update success";
+				$cate = Category::updateById($id, $data);
+				Functions::returnAPI($cate, $success, $failure);
+			} else {
 				$params = [
 					'id' => $id,
 					'name' => $name
 				];
-				$paramsData = [
-					'name' => $name,
-					'gender' => $gender
-				];
+				
 				$checkNameExist = Category::checkDataExist($params);
-				if(!$checkNameExist) {
+				if ($checkNameExist) {
 					$success = "Update success";
 					$failure = "Category is not exist";
-					$cate = Category::updateById($id, $paramsData);
+					$cate = Category::updateById($id, $data);
 					Functions::returnAPI($cate, $success, $failure);
 				} else {
 					$failure = "Name already exist";
 					Functions::returnAPI([], "", $failure);
 				}
-			} else {
-				$failure = "Name already exist";
-				Functions::returnAPI([], "", $failure);
 			}
 		} else {
 			$failure = "Missing params";
