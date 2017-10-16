@@ -36,7 +36,10 @@ class Functions
         "results" => $data
       ];
     }
-    echo \json_encode($result);
+    header('Access-Control-Allow-Origin: *');
+    header('Content-type: application/json');
+
+    return \json_encode($result);
   }
 
   // get params
@@ -57,12 +60,4 @@ class Functions
     }
     return $result;
   } 
-
-  // get json from front-end
-  public static function getDataFromClient() 
-  {
-    $postdata = file_get_contents("php://input");
-    $request = json_decode($postdata, true);
-    return $request;
-  }
 }

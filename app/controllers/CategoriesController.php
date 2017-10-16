@@ -12,7 +12,7 @@ class CategoriesController
 		$cates = Category::getAll();
 		$success = "Success";
 		$failure = "Failure";
-		Functions::returnAPI($cates, $success, $failure);
+		echo Functions::returnAPI($cates, $success, $failure);
 	}
 
 	//get data with id
@@ -24,10 +24,10 @@ class CategoriesController
 			$success = "Success";
 			$failure = "Category does not exist";
 
-			Functions::returnAPI($cate, $success, $failure);
+			echo Functions::returnAPI($cate, $success, $failure);
 		} else {
 			$failure = "Missing params";
-			Functions::returnAPI([], "", $failure );
+			echo Functions::returnAPI([], "", $failure );
 		}
 	}
 
@@ -47,14 +47,14 @@ class CategoriesController
 				$success = "Insert success";
 
 				$cate = Category::insert($name, $gender);
-				Functions::returnAPI($cate, $success,"");			
+				echo Functions::returnAPI($cate, $success,"");			
 			} else {
 				$failure = "Category already exists";
-				Functions::returnAPI([], "", $failure );
+				echo Functions::returnAPI([], "", $failure );
 			}
 		} else {
 			$failure = "Missing params";
-			Functions::returnAPI([], "", $failure);
+			echo Functions::returnAPI([], "", $failure);
 		}
 	}
 
@@ -66,10 +66,10 @@ class CategoriesController
 			$cate = Category::deleteById($id);
 			$success = "Success";
 			$failure = "Category does not exist";
-			Functions::returnAPI($cate, $success, $failure);
+			echo Functions::returnAPI($cate, $success, $failure);
 		} else {
 			$failure = "Missing params";
-			Functions::returnAPI([], "", $failure);
+			echo Functions::returnAPI([], "", $failure);
 		}
 	}
 
@@ -89,14 +89,14 @@ class CategoriesController
 				$success = "Update success";
 				$failure = "Category is not exist";
 				$cate = Category::updateById($id, $name, $gender);
-				Functions::returnAPI($cate, $success, $failure);
+				echo Functions::returnAPI($cate, $success, $failure);
 			} else {
 				$failure = "Name already exist";
-				Functions::returnAPI([], "", $failure);
+				echo Functions::returnAPI([], "", $failure);
 			}
 		} else {
 			$failure = "Missing params";
-			Functions::returnAPI([], "", $failure);
+			echo Functions::returnAPI([], "", $failure);
 		}
 	}	
 } 
