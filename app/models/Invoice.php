@@ -13,6 +13,13 @@ class Invoice extends Model
     public static function getInvoicesByUserId($user_id)
     {
         $table = Invoice::$table;
+        return App::get('database')->getById($table, $user_id);
+    }
+    
+    public static function getInvoicesByProductId($product_id)
+    {
+        $table = Invoice::$table;
+        return App::get('database')->getById($table, $productId);
     }
 
 }

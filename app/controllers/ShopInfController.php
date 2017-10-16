@@ -25,7 +25,7 @@ class ShopInfController
         if($data['id'] == 1 ){
             $id = $data['id'];
 
-            $ShopInfUpdate = ShopInformation::updateById(ShopInformation::$table, $id, $data);
+            $ShopInfUpdate = ShopInformation::updateById($id, $data);
             
             $success = "Update data success";
             $failure = "Failure";
