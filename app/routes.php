@@ -11,9 +11,9 @@ $router->get('', 'PagesController@index');
 // CategoryController
 $router->get('cates', 'CategoriesController@getAll');
 $router->post('cate/insert', 'CategoriesController@insert');
-$router->get('cate/delete', 'CategoriesController@delete');
+$router->post('cate/delete', 'CategoriesController@delete');
 $router->post('cate/update', 'CategoriesController@update');
-$router->get('cates/cate', 'CategoriesController@getById');
+$router->post('cates/cate', 'CategoriesController@getById');
 
 // ProductsController
 $router->get('products', 'ProductsController@getAll');
