@@ -92,7 +92,7 @@ class CategoriesController
 			if (!$checkName) { // name's not exist
 				$success = "Update success";
 				$cate = Category::updateById($id, $data);
-				Functions::returnAPI($cate, $success, $failure);
+				Functions::returnAPI($cate, $success, "");
 			} else {
 				$params = [
 					'id' => $id,
