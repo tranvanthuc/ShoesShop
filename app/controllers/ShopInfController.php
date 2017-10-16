@@ -14,7 +14,7 @@ class ShopInfController
 
         $success = "Get data success";
         $failure = "Failure";
-        echo Functions::returnAPI($shopInf, $success, $failure );
+        Functions::returnAPI($shopInf, $success, $failure );
     }
 
     //update shop information
@@ -38,10 +38,10 @@ class ShopInfController
 
             $success = "Update data success";
             $failure = "Failure";
-            echo Functions::returnAPI($ShopInfUpdate, $success, $failure );
+            Functions::returnAPI($ShopInfUpdate, $success, $failure );
         } else {
             $failure = "Invalid data !";            
-            echo Functions::returnAPI([], "", $failure );
+            Functions::returnAPI([], "", $failure );
         }
     }
 }
