@@ -22,7 +22,7 @@ class AuthenController
     if (isset($data['id'])) {
       $user = User::getById(User::$table, $data['id']);
       $success = "Success";
-      $failure = "Not found user {$data['id']}";
+      $failure = "Not found user !";
       Functions::returnAPI($user, $success, $failure );
     } else {
       $failure = "Missing params !";
