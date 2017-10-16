@@ -9,7 +9,7 @@ class CategoriesController
 	//select data
 	public function getAll()
 	{
-		$cates = Category::getAll();
+		$cates = Category::getAll(Category::$table);
 		$success = "Success";
 		$failure = "Failure";
 		Functions::returnAPI($cates, $success, $failure);
@@ -18,11 +18,11 @@ class CategoriesController
 	//get data with id
 	public function getById()
 	{
-		if(isset($_GET['id'])) { // nguoi dung gui id
-			$id = $_GET['id'];
-			$cate = Category::getById($id); // tra ve mang [] neu id k0 dung
+		$data = Functions::getDataFromClient();
+		if(isset($data['id'])) { // nguoi dung gui id
+			$cate = Category::getById(Category::$table, $data['id']); // tra ve mang [] neu id k0 dung
 			$success = "Success";
-			$failure = "Category does not exist";
+			$failure = "Not found category";
 
 			Functions::returnAPI($cate, $success, $failure);
 		} else {
@@ -34,19 +34,19 @@ class CategoriesController
 	// insert data
 	public function insert()
 	{
-		if(isset($_POST['name']) && isset($_POST['gender'])) {
-			$name = $_POST['name'];
-			$gender = $_POST['gender'];
-			
+		$data = Functions::getDataFromClient();
+		if(isset($data['name']) && isset($data['gender'])) {
+
 			$params = [
-			'name' => $name, //Stan
+			'name' => $data['name'], //Stan
 			// 'gender' => $gender //men, women(k0 co TH cung 1 ten co 2 gender(men, women. both))
 			];
-			$checkCateExist = Category::checkDataExist($params); //kiem tra name co trong DB
-			if(!$checkCateExist) {
+
+			$checkNameExist = Category::checkDataExist(Category::$table, $params); //kiem tra name co trong DB
+			if(!$checkNameExist) {
 				$success = "Insert success";
 
-				$cate = Category::insert($name, $gender);
+				$cate = Category::insert(Category::$table, $data);
 				Functions::returnAPI($cate, $success,"");			
 			} else {
 				$failure = "Category already exists";
@@ -61,9 +61,9 @@ class CategoriesController
 	// delete data
 	public function delete()
 	{
-		if(isset($_GET['id'])) {
-			$id = $_GET['id'];
-			$cate = Category::deleteById($id);
+		$data = Functions::getDataFromClient();
+		if(isset($data['id'])) {
+			$cate = Category::deleteById(Category::$table, $data['id']);
 			$success = "Success";
 			$failure = "Category does not exist";
 			Functions::returnAPI($cate, $success, $failure);
@@ -76,20 +76,34 @@ class CategoriesController
 	// update data
 	public function update()
 	{
-		if(isset($_POST['id']) && isset($_POST['name']) && isset($_POST['gender'])) {
-			$id = $_POST['id'];
-			$name = $_POST['name'];
-			$gender = $_POST['gender'];
-			$params = [
-			'id' => $id,
+		$data = Functions::getDataFromClient();
+		if(isset($data['id']) && isset($data['name']) && isset($data['gender'])) {
+			$id = $data['id'];
+			$name = $data['name'];
+
+			$paramsName = [
 			'name' => $name
 			];
-			$checkNameExist = Category::checkDataExist($params);
-			if(!$checkNameExist) {
-				$success = "Update success";
-				$failure = "Category is not exist";
-				$cate = Category::updateById($id, $name, $gender);
-				Functions::returnAPI($cate, $success, $failure);
+			$checkName = Category::checkDataExist(Category::$table, $paramsName);
+			if(!$checkName) {
+				$params = [
+				'id' => $id,
+				'name' => $name
+				];
+				$paramsData = [
+				'name' => $name,
+				'gender' => $data['gender']
+				];
+				$checkNameExist = Category::checkDataExist(Category::$table,$params);
+				if(!$checkNameExist) {
+					$success = "Update success";
+					$failure = "Category is not exist";
+					$cate = Category::updateById(Category::$table, $id, $paramsData);
+					Functions::returnAPI($cate, $success, $failure);
+				} else {
+					$failure = "Name already exist";
+					Functions::returnAPI([], "", $failure);
+				}
 			} else {
 				$failure = "Name already exist";
 				Functions::returnAPI([], "", $failure);
