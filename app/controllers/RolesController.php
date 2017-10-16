@@ -10,7 +10,7 @@ class RolesController
   // get all roles
   public function getAll()
   {
-    $roles = Role::getAll();
+    $roles = Role::getAll(Role::$table);
     $success = "Success";
     $failure = "Failure";
     Functions::returnAPI($roles, $success, $failure );
@@ -19,11 +19,12 @@ class RolesController
   // get role by id
   public function getById()
   {
-    if (isset($_REQUEST['id'])) {
-      $id = $_REQUEST['id'];
-      $role = Role::getById($id);
+    $data = Functions::getDataFromClient();
+    if (isset($data['id'])) {
+      $id = $data['id'];
+      $role = Role::getById(Role::$table, $id);
       $success = "Success";
-      $failure = "Not found role {$id}";
+      $failure = "Not found role !";
       Functions::returnAPI($role, $success, $failure );
     } else {
       $failure = "Missing params";
