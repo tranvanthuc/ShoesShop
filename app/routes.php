@@ -22,6 +22,10 @@ $router->post('product/insert', 'ProductsController@insert');
 $router->post('product/update', 'ProductsController@update');
 $router->post('product/delete', 'ProductsController@delete');
 
+// ProductDetailController
+$router->get('product-details', 'ProductDetailsController@getAll');
+$router->post('product-details/detail', 'ProductDetailsController@getById');
+
 // users
 $router->get('users', 'AuthenController@getAllUsers');
 $router->post('users/user', 'AuthenController@getUserById');
