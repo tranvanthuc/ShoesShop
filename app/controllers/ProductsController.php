@@ -12,7 +12,7 @@ class ProductsController
 		$products = Product::getAll();
 		$success = "Success";
 		$failure = "Failure";
-		Functions::returnAPI($products, $success, $failure);
+		echo Functions::returnAPI($products, $success, $failure);
 	}
 
 	// select product with id
@@ -23,10 +23,10 @@ class ProductsController
 			$product = Product::getById($id);
 			$success = "Success";
 			$failure = "Product is not exist";
-			Functions::returnAPI($product, $success,$failure);
+			echo Functions::returnAPI($product, $success,$failure);
 		} else {
 			$failure = "Missing params";
-			Functions::returnAPI([], "", $failure);
+			echo Functions::returnAPI([], "", $failure);
 		}			
 	}
 
@@ -57,11 +57,11 @@ class ProductsController
 			$product = Product::insert($params);
 			$success = "Success";
 			$failure = "Product is not exist";
-			Functions::returnAPI($product, $success, $failure);
+			echo Functions::returnAPI($product, $success, $failure);
 
 		} else {
 			$failure = "Missing params";
-			Functions::returnAPI([], "", $failure);
+			echo Functions::returnAPI([], "", $failure);
 		}
 	}
 
@@ -73,10 +73,10 @@ class ProductsController
 			$product = Product::deleteById($id);
 			$success = "Success";
 			$failure = "Product is not exist";
-			Functions::returnAPI($product, $success, $failure);
+			echo Functions::returnAPI($product, $success, $failure);
 		} else {
 			$failure = "Missing params";
-			Functions::returnAPI([], "", $failure);
+			echo Functions::returnAPI([], "", $failure);
 		}
 	}
 
@@ -109,10 +109,10 @@ class ProductsController
 			$product = Product::updateById($id,$params);
 			$success = "Success";
 			$failure = "Product is not exist";
-			Functions::returnAPI($product, $success, $failure);
+			echo Functions::returnAPI($product, $success, $failure);
 		} else {
 			$failure = "Missing params";
-			Functions::returnAPI([], "", $failure);
+			echo Functions::returnAPI([], "", $failure);
 		}
 	}
 }

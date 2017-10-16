@@ -9,138 +9,150 @@ class AuthenController
   // get All users
   public function getAllUsers()
   {
-    $users = User::getAll(User::$table);
+    $users = User::getAll();
     $success = "Success";
     $failure = "Failure";
-    Functions::returnAPI($users, $success, $failure );
+    echo Functions::returnAPI($users, $success, $failure );
   }
 
   // get user by id
   public function getUserById() 
   {
-    $data = Functions::getDataFromClient();
-    if (isset($data['id'])) {
-      $user = User::getById(User::$table, $data['id']);
-      $success = "Success";
-      $failure = "Not found user !";
-      Functions::returnAPI($user, $success, $failure );
-    } else {
-      $failure = "Missing params !";
-      Functions::returnAPI([], "", $failure );
-    }
+    $id = $_REQUEST['id'];
+
+    $user = User::getById($id);
+    $success = "Success";
+    $failure = "Not found user {$id}";
+    echo Functions::returnAPI($user, $success, $failure );
   }
 
   // change password
   public function login()
   {
-    $data = Functions::getDataFromClient();
+    if (isset($_REQUEST['email']) && isset($_REQUEST['password'])) {
+      $email = $_REQUEST['email'];
+      $password = $_REQUEST['password'];
+      
 
-    if (isset($data['email'])&&isset($data['password'])) {
-      $data['password'] = md5($data['password']);
-      $paramsEmail = [
-        'email' => $data['email']
+      $params = [
+        'email' => $email
       ];
-      $checkEmailExist = User::checkDataExist(User::$table, $paramsEmail);
+
+      $checkEmailExist = User::checkDataExist($params);
+
       if ($checkEmailExist) {
-        $user = User::checkLogin($data['email'], $data['password']);
+        $user = User::checkLogin($email, md5($password));
         $success = "Login success !";
         $failure = "Password wrong !";
-        Functions::returnAPI($user, $success, $failure );
+        echo Functions::returnAPI($user, $success, $failure );
       } else {
         $failure = "Email's not exist !";
-        Functions::returnAPI([], "", $failure );
+        echo Functions::returnAPI([], "", $failure );
       }
+     
     } else {
-      $failure = "Missing params !";
-      Functions::returnAPI([], "", $failure );
+      $failure = "Missing params";
+      echo Functions::returnAPI([], "", $failure );
     }
+    
   }
 
   // register
   public function register() 
   {
-    $data = Functions::getDataFromClient();
-    if (isset($data['email']) && isset($data['password']) &&
-        isset($data['first_name']) && isset($data['last_name']) &&
-        isset($data['role_id'])
-    ) {
-      $data['password'] = md5($data['password']);
+    if(isset($_REQUEST['email']) && isset($_REQUEST['password'])
+      && isset($_REQUEST['first_name']) && isset($_REQUEST['last_name'])
+      && isset($_REQUEST['role_id'])) {
+        $email = $_REQUEST['email'];
+        $password = $_REQUEST['password'];
+        $first_name = $_REQUEST['first_name'];
+        $last_name = $_REQUEST['last_name'];
+        $role_id = $_REQUEST['role_id'];
 
-      $paramsEmail = [
-        'email' => $data['email']
-      ];
+        $params = [
+          'role_id'=> $role_id,
+          'first_name' => $first_name,
+          'last_name' => $last_name,
+          'email' => $email,
+          'password' => md5($password),
+        ];
+        
+        $paramsEmail = [
+          'email' => $email
+        ];
 
-      $checkEmailExist = User::checkDataExist(User::$table, $paramsEmail);
+        $checkEmailExist = User::checkDataExist($paramsEmail);
 
-      if(!$checkEmailExist) {
-        $user = User::insert(User::$table, $data);
-        $success = "Register success !";
-        $failure = "Email exists !";
-        Functions::returnAPI($user, $success, $failure );
-      } else {
-        $failure = "Email exists !";
-        Functions::returnAPI([], "", $failure );
-      }
+        if(!$checkEmailExist) {
+          $user = User::insert($params);
+          $success = "Register success !";
+          $failure = "Email exists !";
+          echo Functions::returnAPI($user, $success, $failure );
+        } else {
+          $failure = "Email exists !";
+          echo Functions::returnAPI([], "", $failure );
+        }
+    
+        
     } else {
       $failure = "Missing params !";
-      Functions::returnAPI([], "", $failure );
+      echo Functions::returnAPI([], "", $failure );
     }
   }
-
 
   // update password 
   public function updatePassword() 
   {
-    $data = Functions::getDataFromClient();
-    if (isset($data['id']) && isset($data['newPassword']) && 
-        isset($data['currentPassword'])  
-    ){ 
-      $currentPassword = md5($data['currentPassword']);
-      $newPassword = md5($data['newPassword']);
-      $id = $data['id'];
+    if(
+      isset($_REQUEST['id']) && 
+      isset($_REQUEST['currentPassword']) && 
+      isset($_REQUEST['newPassword'])
+      ) {
+
+      $currentPassword = md5($_REQUEST['currentPassword']);
+      $newPassword = md5($_REQUEST['newPassword']);
+      $id = $_REQUEST['id'];
 
       $params = [
         'id' => $id,
         'password' => $currentPassword
       ];
-      $checkCurrentPassword = User::checkDataExist(User::$table, $params);
+      $checkCurrentPassword = User::checkDataExist($params);
       $user = User::updatePassword($id, $newPassword);
       
-      if (!$user) {
+      if(!$user) {
         $failure = "User's not exist !";
-        Functions::returnAPI([], "", $failure );
+        echo Functions::returnAPI([], "", $failure );
       } else if ($checkCurrentPassword) {
         $success = "Update success !";
-        Functions::returnAPI($user, $success, "" );
+        echo Functions::returnAPI($user, $success, "" );
       } else {
         $failure = "Current password wrong !";
-        Functions::returnAPI([], "", $failure );
+        echo Functions::returnAPI([], "", $failure );
       }
-
     } else {
       $failure = "Missing params !";
-      Functions::returnAPI([], "", $failure );
+      echo Functions::returnAPI([], "", $failure );
     }
   }
 
   // update profile
   public function updateProfile()
   {
-    $data = Functions::getDataFromClient();
     if(
-      isset($data['id']) && 
-      isset($data['first_name']) && 
-      isset($data['last_name']) && 
-      isset($data['gender']) && 
-      isset($data['phone']) && 
-      isset($data['address'])
+      isset($_REQUEST['id']) && 
+      isset($_REQUEST['first_name']) && 
+      isset($_REQUEST['last_name']) && 
+      isset($_REQUEST['gender']) && 
+      isset($_REQUEST['phone']) && 
+      isset($_REQUEST['address'])
       ) {
-      $id = $data['id'];
-      $first_name = $data['first_name'];
-      $last_name = $data['last_name'];
-      $gender = $data['gender'];
-      $phone = $data['phone'];
-      $address = $data['address'];
+      $id = $_REQUEST['id'];
+      $first_name = $_REQUEST['first_name'];
+      $last_name = $_REQUEST['last_name'];
+      $gender = $_REQUEST['gender'];
+      $phone = $_REQUEST['phone'];
+      $address = $_REQUEST['address'];
 
       $params = [
         'first_name' => $first_name,
@@ -150,16 +162,29 @@ class AuthenController
         'address' => $address
       ];
 
-      $user = User::updateById(User::$table,$id, $params);
+      $user = User::updateById($id, $params);
 
       $success = "Update success !";
       $failure = "User's not exist !";
-      Functions::returnAPI($user, $success, $failure );
+      echo Functions::returnAPI($user, $success, $failure );
     } else {
       $failure = "Missing params !";
-      Functions::returnAPI([], "", $failure );
+      echo Functions::returnAPI([], "", $failure );
     }
   }
 
-  
+  // delete user
+  public function delete() 
+  {
+    if(isset($_REQUEST['id'])) {
+      $id = $_REQUEST['id'];
+      $user = User::deleteById($id);
+      $success = "Delete success !";
+      $failure = "User's not exist !";
+      echo Functions::returnAPI($user, $success, $failure );
+    } else {
+      $failure = "Missing params !";
+      echo Functions::returnAPI([], "", $failure );
+    }
+  } 
 }
