@@ -114,4 +114,24 @@ class CategoriesController
 			Functions::returnAPI([], "", $failure);
 		}
 	}	
+
+	// get categories by catalog
+	public function getCategoriesByCatalog() 
+	{
+		$table = Category::$table;
+		$sqlMale = "select * from {$table} where gender='male' or gender='both'";
+		$catesByMale = Category::query($sqlMale);
+
+		$sqlFemale = "select * from {$table} where gender='female' or gender='both'";
+		$catesByFemale = Category::query($sqlFemale);
+
+		$data = [
+			"male" => $catesByMale,
+			"female" => $catesByFemale
+		];
+		$success = "Success";
+		$failure = "Failure";
+		Functions::returnAPI($data, $success, $failure);
+		
+	}
 } 
