@@ -33,7 +33,7 @@ class Model {
   // delete by id
   public static function deleteById($table,$id) 
   {
-    $temp = Model::getById($id);
+    $temp = Model::getById($table, $id);
     App::get('database')->deleteById($table, $id);
     return $temp;
   }
