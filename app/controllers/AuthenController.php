@@ -9,7 +9,7 @@ class AuthenController
   // get All users
   public function getAllUsers()
   {
-    $users = User::getAll();
+    $users = User::getAll(User::$table);
     $success = "Success";
     $failure = "Failure";
     Functions::returnAPI($users, $success, $failure );
@@ -20,7 +20,7 @@ class AuthenController
   {
     $data = Functions::getDataFromClient();
     if (isset($data['id'])) {
-      $user = User::getById($data['id']);
+      $user = User::getById(User::$table, $data['id']);
       $success = "Success";
       $failure = "Not found user {$data['id']}";
       Functions::returnAPI($user, $success, $failure );
@@ -40,7 +40,7 @@ class AuthenController
       $paramsEmail = [
         'email' => $data['email']
       ];
-      $checkEmailExist = User::checkDataExist($paramsEmail);
+      $checkEmailExist = User::checkDataExist(User::$table, $paramsEmail);
       if ($checkEmailExist) {
         $user = User::checkLogin($data['email'], $data['password']);
         $success = "Login success !";
@@ -70,10 +70,10 @@ class AuthenController
         'email' => $data['email']
       ];
 
-      $checkEmailExist = User::checkDataExist($paramsEmail);
+      $checkEmailExist = User::checkDataExist(User::$table, $paramsEmail);
 
       if(!$checkEmailExist) {
-        $user = User::insert($data);
+        $user = User::insert(User::$table, $data);
         $success = "Register success !";
         $failure = "Email exists !";
         Functions::returnAPI($user, $success, $failure );
@@ -103,7 +103,7 @@ class AuthenController
         'id' => $id,
         'password' => $currentPassword
       ];
-      $checkCurrentPassword = User::checkDataExist($params);
+      $checkCurrentPassword = User::checkDataExist(User::$table, $params);
       $user = User::updatePassword($id, $newPassword);
       
       if (!$user) {
@@ -150,7 +150,7 @@ class AuthenController
         'address' => $address
       ];
 
-      $user = User::updateById($id, $params);
+      $user = User::updateById(User::$table,$id, $params);
 
       $success = "Update success !";
       $failure = "User's not exist !";
@@ -161,19 +161,5 @@ class AuthenController
     }
   }
 
-  // delete user
-  public function delete() 
-  {
-    $data = Functions::getDataFromClient();
-    if(isset($data['id'])) {
-      $id = $data['id'];
-      $user = User::deleteById($id);
-      $success = "Delete success !";
-      $failure = "User's not exist !";
-      Functions::returnAPI($user, $success, $failure );
-    } else {
-      $failure = "Missing params !";
-      Functions::returnAPI([], "", $failure );
-    }
-  } 
+  
 }

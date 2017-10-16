@@ -26,10 +26,10 @@ $router->post('product/update', 'ProductsController@update');
 
 // users
 $router->get('users', 'AuthenController@getAllUsers');
-$router->get('users/user', 'AuthenController@getUserById');
+$router->post('users/user', 'AuthenController@getUserById');
 $router->post('user/update-password', 'AuthenController@updatePassword');
 $router->post('user/update-profile', 'AuthenController@updateProfile');
-$router->get('user/delete', 'AuthenController@delete');
+$router->post('user/delete', 'AuthenController@delete');
 
 
 // login
