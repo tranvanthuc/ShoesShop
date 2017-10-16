@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use core\App;
 use app\models\Model;
 
 class Role extends Model

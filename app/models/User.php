@@ -1,7 +1,6 @@
 <?php 
 namespace app\models;
 
-use core\App;
 use app\models\Model;
 
 class User extends Model
