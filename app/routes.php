@@ -17,12 +17,10 @@ $router->get('cates/cate', 'CategoriesController@getById');
 
 // ProductsController
 $router->get('products', 'ProductsController@getAll');
-$router->get('products/product', 'ProductsController@getById');
+$router->post('products/product', 'ProductsController@getById');
 $router->post('product/insert', 'ProductsController@insert');
-$router->get('product/delete', 'ProductsController@delete');
 $router->post('product/update', 'ProductsController@update');
-
-
+$router->post('product/delete', 'ProductsController@delete');
 
 // users
 $router->get('users', 'AuthenController@getAllUsers');
@@ -30,7 +28,6 @@ $router->post('users/user', 'AuthenController@getUserById');
 $router->post('user/update-password', 'AuthenController@updatePassword');
 $router->post('user/update-profile', 'AuthenController@updateProfile');
 $router->post('user/delete', 'AuthenController@delete');
-
 
 // login
 $router->post('login', 'AuthenController@login');
@@ -40,7 +37,7 @@ $router->post('register', 'AuthenController@register');
 
 // roles
 $router->get('roles', 'RolesController@getAll');
-$router->get('roles/role', 'RolesController@getById');
+$router->post('roles/role', 'RolesController@getById');
 
 
 // ----------------------------shop_information controller----------------//
