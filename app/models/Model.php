@@ -27,13 +27,13 @@ class Model {
   public static function updateById($table, $id, $params) 
   {
     App::get('database')->updateById($table, $params, $id);
-    return Model::getById($id);
+    return Model::getById($table, $id);
   }
 
   // delete by id
   public static function deleteById($table,$id) 
   {
-    $temp = Model::getById($id);
+    $temp = Model::getById($table, $id);
     App::get('database')->deleteById($table, $id);
     return $temp;
   }
