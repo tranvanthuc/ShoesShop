@@ -10,7 +10,7 @@ class ShopInfController
     //index
     public function getAll()
     {
-        $shopInf = ShopInformation::getAll(ShopInformation::$table);
+        $shopInf = ShopInformation::getAll();
 
         $success = "Get data success";
         $failure = "Failure";
