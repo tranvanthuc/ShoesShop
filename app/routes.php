@@ -40,6 +40,13 @@ $router->post('register', 'AuthenController@register');
 $router->get('roles', 'RolesController@getAll');
 $router->post('roles/role', 'RolesController@getById');
 
+// ProductDetailsController
+$router->get('product-details', 'ProductDetailsController@getAll');
+$router->post('product-details/detail', 'ProductDetailsController@getById');
+$router->post('product-detail/insert', 'ProductDetailsController@insert');
+$router->post('product-detail/delete', 'ProductDetailsController@delete');
+$router->post('product-detail/update', 'ProductDetailsController@update');
+
 
 // ----------------------------shop_information controller----------------//
 //show list information of the shop

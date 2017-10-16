@@ -51,7 +51,6 @@ class ProductsController
 			];
 			$checkSizeAndColorExist = Product::checkDataExist($checkSizeAndColor);
 			if (!$checkSizeAndColorExist) {
-				echo "ok 1";
 				$params = [
 					'product_detail_id' => $product_detail_id,
 					'size' => $size,
