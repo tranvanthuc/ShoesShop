@@ -5,7 +5,7 @@ namespace app\models;
 use core\App;
 use app\models\Model;
 
-class ShopInformation extends Models
+class ShopInformation extends Model
 {
     static $table = "shop_information";
     public $description;

@@ -27,7 +27,7 @@ class Model {
   public static function updateById($table, $id, $params) 
   {
     App::get('database')->updateById($table, $params, $id);
-    return Model::getById($id);
+    return Model::getById($table, $id);
   }
 
   // delete by id
