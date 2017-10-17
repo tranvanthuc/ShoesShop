@@ -133,6 +133,26 @@ class CategoriesController
 		$success = "Success";
 		$failure = "Failure";
 		Functions::returnAPI($data, $success, $failure);
-		
+	}
+
+	// get all cates by gender 
+	public function getByGender()
+	{
+		$data = Functions::getDataFromClient();
+		if ($data['gender'] == "both") {
+			$failure = "Please access get cates by catalog";
+			Functions::returnAPI([], "", $failure);
+		} else if ($data['gender']) {
+			$gender =  $data['gender'];
+			$table = Category::$table;
+			$sql = "select * from {$table} where gender='{$gender}' or gender='both'";
+			$catesByGender = Category::query($sql);
+			$success = "Success";
+			$failure = "Failure";
+			Functions::returnAPI($catesByGender, $success, $failure);
+		} else {
+			$failure = "Missing params";
+			Functions::returnAPI([], "", $failure);
+		}
 	}
 } 
