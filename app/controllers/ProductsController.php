@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\Product;
+use app\models\ProductDetail;
 use utils\Functions;
 
 class ProductsController
@@ -130,5 +131,25 @@ class ProductsController
 		}
 	}
 
+	// get all products all 
+	public function getAllInfo()
+	{
+		$data = Functions::getDataFromClient();
+		if (isset($data['id'])) {
+			$id = $data['id'];
+			$product = ProductDetail::getById(ProductDetail::$table, $id)[0];
+			$sql = "select size from products where product_detail_id = {$id}";
+			$sizes = Product::query($sql);
+			$product->sizes = Functions::getArraySizes($sizes);
+			$product->color = $product->name;
+			
+			$success = "Success";
+			$failure = "Not found product !";
+			Functions::returnAPI($product, $success, $failure);
+		} else {
+			$failure = "Missing params";
+			Functions::returnAPI([], "", $failure);
+		}
+	}
 	
 }
