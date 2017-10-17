@@ -10,11 +10,13 @@ $router->get('', 'PagesController@index');
 
 // CategoryController
 $router->get('cates', 'CategoriesController@getAll');
+$router->get('cates/catalog', 'CategoriesController@getCategoriesByCatalog');
 $router->post('cate/insert', 'CategoriesController@insert');
 $router->post('cate/delete', 'CategoriesController@delete');
 $router->post('cate/update', 'CategoriesController@update');
 $router->post('cates/cate', 'CategoriesController@getById');
-$router->get('cates/catalog', 'CategoriesController@getCategoriesByCatalog');
+$router->post('cates/gender', 'CategoriesController@getByGender');
+
 
 // ProductsController
 $router->get('products', 'ProductsController@getAll');
@@ -39,6 +41,13 @@ $router->post('register', 'AuthenController@register');
 // roles
 $router->get('roles', 'RolesController@getAll');
 $router->post('roles/role', 'RolesController@getById');
+
+// ProductDetailsController
+$router->get('product-details', 'ProductDetailsController@getAll');
+$router->post('product-details/detail', 'ProductDetailsController@getById');
+$router->post('product-detail/insert', 'ProductDetailsController@insert');
+$router->post('product-detail/delete', 'ProductDetailsController@delete');
+$router->post('product-detail/update', 'ProductDetailsController@update');
 
 
 // ----------------------------shop_information controller----------------//
