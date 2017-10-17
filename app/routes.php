@@ -56,3 +56,36 @@ $router->get('shop-inf', 'ShopInfController@getAll');
 
 // //update shop information
 $router->post('shop-inf/update', 'ShopInfController@update');
+
+
+// ----------------------------Order controller----------------//
+//show list information of the shop
+$router->get('orders', 'OrdersController@getAll');
+
+//show list information of the shop
+$router->post('orders/order', 'OrdersController@getByUserId');
+
+//update shop information
+$router->post('order/update', 'OrdersController@update');
+
+//delete shop information
+$router->post('order/delete', 'OrdersController@delete');
+
+//insert shop information
+$router->post('order/insert', 'OrdersController@insert');
+
+// ----------------------------Order Detail controller----------------//
+//show list information of the shop
+$router->get('order-details', 'OrderDetailsController@getAll');
+
+//show list information of the shop
+$router->post('order-details/order-detail', 'OrderDetailsController@getByProductId');
+
+//update shop information
+$router->post('order-detail/update', 'OrderDetailsController@update');
+
+//delete shop information
+$router->post('order-detail/delete', 'OrderDetailsController@delete');
+
+//insert shop information
+$router->post('order-detail/insert', 'OrderDetailsController@insert');
