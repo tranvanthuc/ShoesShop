@@ -5,8 +5,26 @@ header('Access-Control-Allow-Origin: *');
 
 <?php
 
+// login
+$router->post('login', 'AuthenController@login');
+
+// register
+$router->post('register', 'AuthenController@register');
+
+// roles
+$router->get('roles', 'RolesController@getAll');
+$router->post('roles/role', 'RolesController@getById');
+
+
 // home pages
 $router->get('', 'PagesController@index');
+
+// users
+$router->get('users', 'AuthenController@getAllUsers');
+$router->post('users/user', 'AuthenController@getUserById');
+$router->post('user/update-password', 'AuthenController@updatePassword');
+$router->post('user/update-profile', 'AuthenController@updateProfile');
+$router->post('user/delete', 'AuthenController@delete');
 
 // CategoryController
 $router->get('cates', 'CategoriesController@getAll');
@@ -26,23 +44,6 @@ $router->post('product/update', 'ProductsController@update');
 $router->post('product/delete', 'ProductsController@delete');
 $router->post('product/all-info', 'ProductsController@getAllInfo');
 
-// users
-$router->get('users', 'AuthenController@getAllUsers');
-$router->post('users/user', 'AuthenController@getUserById');
-$router->post('user/update-password', 'AuthenController@updatePassword');
-$router->post('user/update-profile', 'AuthenController@updateProfile');
-$router->post('user/delete', 'AuthenController@delete');
-
-// login
-$router->post('login', 'AuthenController@login');
-
-// register
-$router->post('register', 'AuthenController@register');
-
-// roles
-$router->get('roles', 'RolesController@getAll');
-$router->post('roles/role', 'RolesController@getById');
-
 // ProductDetailsController
 $router->get('product-details', 'ProductDetailsController@getAll');
 $router->post('product-details/detail', 'ProductDetailsController@getById');
@@ -50,7 +51,7 @@ $router->post('product-detail/insert', 'ProductDetailsController@insert');
 $router->post('product-detail/delete', 'ProductDetailsController@delete');
 $router->post('product-detail/update', 'ProductDetailsController@update');
 $router->post('product-details/category', 'ProductDetailsController@getByCategoryId');
-
+$router->get('product-details/limit', 'ProductDetailsController@getLimit');
 
 // ----------------------------shop_information controller----------------//
 //show list information of the shop
