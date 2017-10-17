@@ -24,6 +24,7 @@ $router->post('products/product', 'ProductsController@getById');
 $router->post('product/insert', 'ProductsController@insert');
 $router->post('product/update', 'ProductsController@update');
 $router->post('product/delete', 'ProductsController@delete');
+$router->post('product/all-info', 'ProductsController@getAllInfo');
 
 // users
 $router->get('users', 'AuthenController@getAllUsers');

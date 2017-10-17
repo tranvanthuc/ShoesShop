@@ -65,4 +65,14 @@ class Functions
     $request = json_decode($postdata, true);
     return $request;
   }
+
+  // get array 
+  public static function getArraySizes($sizes)
+  {
+    $result = [];
+    foreach( $sizes as $key ) {
+      array_push($result , $key->size);
+    }
+    return $result;
+  }
 }
