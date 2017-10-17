@@ -48,14 +48,15 @@ $router->post('product-details/detail', 'ProductDetailsController@getById');
 $router->post('product-detail/insert', 'ProductDetailsController@insert');
 $router->post('product-detail/delete', 'ProductDetailsController@delete');
 $router->post('product-detail/update', 'ProductDetailsController@update');
+$router->post('product-details/category', 'ProductDetailsController@getByCategoryId');
 
 
 // ----------------------------shop_information controller----------------//
 //show list information of the shop
-$router->get('shop-inf', 'ShopInfController@getAll');
+$router->get('shop-info', 'ShopInfController@getAll');
 
 // //update shop information
-$router->post('shop-inf/update', 'ShopInfController@update');
+$router->post('shop-info/update', 'ShopInfController@update');
 
 
 // ----------------------------Order controller----------------//
