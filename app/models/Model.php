@@ -54,4 +54,9 @@ class Model {
   {
     return App::get('database')->query($sql);
   }
+  // get by param
+  public static function getByParams($params) 
+  {
+    return App::get('database')->getByParams(static::$table, $params);
+  }
 }

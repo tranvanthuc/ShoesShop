@@ -39,30 +39,11 @@ class ProductDetailsController
 			&& isset($data['price'])
 			&& isset($data['category_id'])
 		) {
-			$name = $data['name'];
-			$price = $data['price'];
-			$category_id = $data['category_id'];
-			$checkName = [
-			'name' => $name
-			];
-			$checkNameExist = ProductDetail::checkDataExist($checkName);
-			if(!$checkNameExist) {
-				$params = [
-					'category_id' => $category_id,
-					'name' => $name,
-					'price' => $price,
-					'image' => $data['image'],
-					'description' => $data['description']
-				];
-				$proDetail = ProductDetail::insert($params);
-				$success = "Success";
-				$failure = "Failure";
-
-				Functions::returnAPI($proDetail, $success, $failure);
-			} else {
-				$failure = "Product name is exists";
-				Functions::returnAPI([], "", $failure);
-			}
+			
+			$proDetail = ProductDetail::insert($data);
+			$success = "Success";
+			$failure = "Failure";
+			Functions::returnAPI($proDetail, $success, $failure);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
@@ -124,6 +105,22 @@ class ProductDetailsController
 				}
 			}
 			
+		} else {
+			$failure = "Missing params";
+			Functions::returnAPI([], "", $failure);
+		}
+	}
+
+	// get product details by category id 
+	public function getByCategoryId()
+	{
+		$data = Functions::getDataFromClient();
+
+		if (isset($data['category_id'])) {
+			$product_details = ProductDetail::getByParams($data);
+			$success = "Get data success !";
+			$failure = "Not found product to delete !";
+			Functions::returnAPI($product_details, $success, $failure);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);

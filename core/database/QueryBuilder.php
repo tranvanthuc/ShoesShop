@@ -95,6 +95,23 @@ class QueryBuilder
             die($e->getMessage());
         }
     }
+    // get by param
+    public function getByParams($table, $params)
+    {
+        $result = Functions::getStringParams($params);
+        $sql = sprintf(
+            "select * from %s where %s",
+            $table,
+            implode(" and ", $result)
+        );
+        try {
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute($params);
+            return $stm->fetchAll(PDO::FETCH_CLASS);
+        } catch(PDOException $e){
+            die($e->getMessage());
+        }
+    }
 
     // check field exists in db
     public function checkDataExist($table, $params) 
