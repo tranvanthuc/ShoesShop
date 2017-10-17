@@ -120,10 +120,10 @@ class CategoriesController
 	public function getCategoriesByCatalog() 
 	{
 		$table = Category::$table;
-		$sqlMale = "select * from {$table} where gender='male' or gender='both'";
+		$sqlMale = "select * from {$table} where gender='male'";
 		$catesByMale = Category::query($sqlMale);
 
-		$sqlFemale = "select * from {$table} where gender='female' or gender='both'";
+		$sqlFemale = "select * from {$table} where gender='female'";
 		$catesByFemale = Category::query($sqlFemale);
 
 		$data = [
@@ -139,13 +139,10 @@ class CategoriesController
 	public function getByGender()
 	{
 		$data = Functions::getDataFromClient();
-		if ($data['gender'] == "both") {
-			$failure = "Please access get cates by catalog";
-			Functions::returnAPI([], "", $failure);
-		} else if ($data['gender']) {
+		if ($data['gender']) {
 			$gender =  $data['gender'];
 			$table = Category::$table;
-			$sql = "select * from {$table} where gender='{$gender}' or gender='both'";
+			$sql = "select * from {$table} where gender='{$gender}'";
 			$catesByGender = Category::query($sql);
 			$success = "Success";
 			$failure = "Failure";
