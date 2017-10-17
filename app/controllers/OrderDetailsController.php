@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\OrderDetail;
+use app\models\Product;
 use utils\Functions;
 
 class OrderDetailsController
@@ -16,12 +17,13 @@ class OrderDetailsController
 	}
 
 	// select order detail with id
-	public function getById()
+	public function getByProductId()
 	{
 		$data = Functions::getDataFromClient();
 		if(isset($data['id'])) {
 			$id = $data['id'];
-			$orderdetail = OrderDetail::getById(OrderDetail::$table,$id);
+			$orderdetail = OrderDetail::getAllInfoByProductId($id);
+
 			$success = "Success";
 			$failure = "Not found Order Detail!";
 			Functions::returnAPI($orderdetail, $success,$failure);

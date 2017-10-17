@@ -16,12 +16,12 @@ class OrdersController
 	}
 
 	// select order with id
-	public function getById()
+	public function getByUserId()
 	{
 		$data = Functions::getDataFromClient();
 		if(isset($data['id'])) {
 			$id = $data['id'];
-			$order = Order::getById(Order::$table,$id);
+			$order = Order::getAllInfoByUserId($id);
 			$success = "Success";
 			$failure = "Not found Order!";
 			Functions::returnAPI($order, $success,$failure);
