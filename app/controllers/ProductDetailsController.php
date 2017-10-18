@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\ProductDetail;
+use app\models\Category;
 use utils\Functions;
 
 class ProductDetailsController
@@ -132,6 +133,14 @@ class ProductDetailsController
 	{
 		$strCondition = "order by id desc limit 4";
 		$product_details = ProductDetail::getWithStringCondition(['*'], $strCondition);
+		foreach($product_details as $item) {
+			$paramsConditions = [
+				'id' => $item->category_id
+			];
+			$paramsGetFields = ['gender'];
+			$getGender = Category::getByParams($paramsGetFields, $paramsConditions)[0];
+			$item->gender = $getGender->gender;
+		}
 		$success = "Get data success !";
 		$failure = "Failure !";
 		Functions::returnAPI($product_details, $success, $failure);
