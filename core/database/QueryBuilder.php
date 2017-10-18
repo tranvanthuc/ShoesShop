@@ -96,17 +96,18 @@ class QueryBuilder
         }
     }
     // get by param
-    public function getByParams($table, $params)
+    public function getByParams($table, $paramsGetFields, $paramsConditions)
     {
-        $result = Functions::getStringParams($params);
+        $result = Functions::getStringParams($paramsConditions);
         $sql = sprintf(
-            "select * from %s where %s",
+            "select %s from %s where %s",
+            implode(", ", $paramsGetFields),
             $table,
             implode(" and ", $result)
         );
         try {
             $stm = $this->pdo->prepare($sql);
-            $stm->execute($params);
+            $stm->execute($paramsConditions);
             return $stm->fetchAll(PDO::FETCH_CLASS);
         } catch(PDOException $e){
             die($e->getMessage());
@@ -125,11 +126,28 @@ class QueryBuilder
         );
         try {
             $stm = $this->pdo->prepare($sql);
-            // die(var_dump($sql));
             $stm->execute($params);
             return $stm->fetchAll(PDO::FETCH_CLASS);
         } catch(PDOException $e){
             die($e->getMessage());
         }
+    }
+
+    // get with string condition
+    public function getWithStringCondition($table, $paramsGetFields, $strCondition)
+    {
+        $sql = sprintf(
+            "select %s from %s %s",
+            implode(", ", $paramsGetFields),
+            $table,
+            $strCondition
+            );
+            try {
+                $stm = $this->pdo->prepare($sql);
+                $stm->execute();
+                return $stm->fetchAll(PDO::FETCH_CLASS);
+            } catch(PDOException $e){
+                die($e->getMessage());
+            }
     }
 }

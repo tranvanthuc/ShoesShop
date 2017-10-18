@@ -54,9 +54,16 @@ class Model {
   {
     return App::get('database')->query($sql);
   }
+
   // get by param
-  public static function getByParams($params) 
+  public static function getByParams($paramsGetFields, $paramsConditions) 
   {
-    return App::get('database')->getByParams(static::$table, $params);
+    return App::get('database')->getByParams(static::$table, $paramsGetFields, $paramsConditions);
+  }
+
+  // get with String condition
+  public static function getWithStringCondition($paramsGetFields, $strCondition) 
+  {
+    return App::get('database')->getWithStringCondition(static::$table, $paramsGetFields, $strCondition);
   }
 }
