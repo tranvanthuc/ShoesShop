@@ -149,7 +149,7 @@ class CategoriesController
 
 			$catesByGender = Category::getByParams(['*'], $paramsGenderCondition);
 			foreach($catesByGender as $key => $cate) {
-				$paramsGetFields = ['id', 'name', 'price'];
+				$paramsGetFields = ['id', 'name', 'price', 'image'];
 				$paramsConditions = [
 					'category_id' => $cate->id
 				];
