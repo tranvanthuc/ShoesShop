@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\Category;
+use app\models\ProductDetail;
 use utils\Functions;
 
 class CategoriesController
@@ -144,6 +145,12 @@ class CategoriesController
 			$table = Category::$table;
 			$sql = "select * from {$table} where gender='{$gender}'";
 			$catesByGender = Category::query($sql);
+			foreach($catesByGender as $key => $cate) {
+				$sqlProductDetailByCategory = 
+				"select id, name, price from product_details where category_id ={$cate->id}";
+				$product_details = ProductDetail::query($sqlProductDetailByCategory);
+				$catesByGender[$key]->products = $product_details;
+			}
 			$success = "Success";
 			$failure = "Failure";
 			Functions::returnAPI($catesByGender, $success, $failure);
