@@ -117,7 +117,7 @@ class ProductDetailsController
 		$data = Functions::getDataFromClient();
 
 		if (isset($data['category_id'])) {
-			$product_details = ProductDetail::getByParams($data);
+			$product_details = ProductDetail::getByParams(['*'], $data);
 			$success = "Get data success !";
 			$failure = "Not found product to delete !";
 			Functions::returnAPI($product_details, $success, $failure);
@@ -130,8 +130,8 @@ class ProductDetailsController
 	// get limit product detail
 	public function getLimit()
 	{
-		$sql = "select * from dbshoesshop.product_details order by id desc limit 4";
-		$product_details = ProductDetail::query($sql);
+		$strCondition = "order by id desc limit 4";
+		$product_details = ProductDetail::getWithStringCondition(['*'], $strCondition);
 		$success = "Get data success !";
 		$failure = "Failure !";
 		Functions::returnAPI($product_details, $success, $failure);

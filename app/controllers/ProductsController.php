@@ -60,7 +60,6 @@ class ProductsController
 				];
 				
 				$product = Product::insert($params);
-				echo "ok 2";
 				$success = "Success";
 				$failure = "Failure";
 				Functions::returnAPI($product, $success, $failure);
@@ -138,8 +137,11 @@ class ProductsController
 		if (isset($data['id'])) {
 			$id = $data['id'];
 			$product = ProductDetail::getById(ProductDetail::$table, $id)[0];
-			$sql = "select size from products where product_detail_id = {$id}";
-			$sizes = Product::query($sql);
+			$paramsGetFields = ['size'];
+			$paramsConditions = [
+				'product_detail_id' => $id
+			];
+			$sizes = Product::getByParams($paramsGetFields, $paramsConditions);
 			$product->sizes = Functions::getArraySizes($sizes);
 			$product->color = $product->name;
 			

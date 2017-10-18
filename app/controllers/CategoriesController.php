@@ -143,12 +143,18 @@ class CategoriesController
 		if ($data['gender']) {
 			$gender =  $data['gender'];
 			$table = Category::$table;
-			$sql = "select * from {$table} where gender='{$gender}'";
-			$catesByGender = Category::query($sql);
+			$paramsGenderCondition = [
+				'gender' => $gender
+			];
+
+			$catesByGender = Category::getByParams(['*'], $paramsGenderCondition);
 			foreach($catesByGender as $key => $cate) {
-				$sqlProductDetailByCategory = 
-				"select id, name, price from product_details where category_id ={$cate->id}";
-				$product_details = ProductDetail::query($sqlProductDetailByCategory);
+				$paramsGetFields = ['id', 'name', 'price'];
+				$paramsConditions = [
+					'category_id' => $cate->id
+				];
+			
+				$product_details = ProductDetail::getByParams($paramsGetFields, $paramsConditions);
 				$catesByGender[$key]->products = $product_details;
 			}
 			$success = "Success";
