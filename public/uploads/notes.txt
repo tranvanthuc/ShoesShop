@@ -1,0 +1,31 @@
+- http://localhost:8000/?a=10&&b=20 add nhiều params vào url
+
+
+Lobster font google Atitii
+
+
+
+{
+  "autoload": {
+    "classmap": [
+      "./"
+    ]
+  },
+  "require" : {
+    "silex/silex": "^2.0.4",
+    "monolog/monolog": "^1.22",
+    "twig/twig": "^2.0",
+    "symfony/twig-bridge": "^3",
+    "vlucas/phpdotenv": "^2.4"
+  },
+  "require-dev": {
+    "heroku/heroku-buildpack-php": "*"
+  }
+}
+
+
+
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ /index.php?path=$1 [NC,L,QSA]

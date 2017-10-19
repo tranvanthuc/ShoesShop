@@ -19,6 +19,14 @@ $router->post('roles/role', 'RolesController@getById');
 // home pages
 $router->get('', 'PagesController@index');
 
+// send data with json
+$router->post('send-mail', 'PagesController@sendMail');
+
+
+// send with form
+$router->get('send-mail-form', 'PagesController@getSendMail');
+$router->post('send-mail-form', 'PagesController@postSendMail');
+
 // users
 $router->get('users', 'AuthenController@getAllUsers');
 $router->post('users/user', 'AuthenController@getUserById');
