@@ -92,3 +92,9 @@ $router->post('order-detail/delete', 'OrderDetailsController@delete');
 
 //insert shop information
 $router->post('order-detail/insert', 'OrderDetailsController@insert');
+
+
+// feedback
+$router->get('feedback', 'FeedbackController@getAll');
+$router->post('feedback/id', 'FeedbackController@getById');
+$router->post('feedback/insert', 'FeedbackController@insert');
