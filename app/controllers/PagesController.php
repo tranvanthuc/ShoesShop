@@ -34,7 +34,7 @@ class PagesController
     if (isset($_POST['fullname']) && isset($_POST['email']) &&
       isset($_POST['subject'])&& isset($_POST['content'])) {
       
-      if (isset($_FILES['file'])) {
+      if (isset($_POST['file'])) {
         $file = $_FILES['file'];
         $pathFile = Functions::attachFile($file);
         Functions::sendMail($_POST , $pathFile);
