@@ -36,6 +36,11 @@ class ShopInfController
             ShopInformation::updateById($id, $params);
             $ShopInfUpdate = ShopInformation::getById($id);
 
+<<<<<<< HEAD
+=======
+            $ShopInfUpdate = ShopInformation::updateById($id, $data);
+            
+>>>>>>> dev
             $success = "Update data success";
             $failure = "Failure";
             echo Functions::returnAPI($ShopInfUpdate, $success, $failure );

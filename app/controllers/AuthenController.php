@@ -37,9 +37,7 @@ class AuthenController
       $params = [
         'email' => $email
       ];
-
-      $checkEmailExist = User::checkDataExist($params);
-
+      $checkEmailExist = User::checkDataExist($paramsEmail);
       if ($checkEmailExist) {
         $user = User::checkLogin($email, md5($password));
         $success = "Login success !";
@@ -60,40 +58,28 @@ class AuthenController
   // register
   public function register() 
   {
-    if(isset($_REQUEST['email']) && isset($_REQUEST['password'])
-      && isset($_REQUEST['first_name']) && isset($_REQUEST['last_name'])
-      && isset($_REQUEST['role_id'])) {
-        $email = $_REQUEST['email'];
-        $password = $_REQUEST['password'];
-        $first_name = $_REQUEST['first_name'];
-        $last_name = $_REQUEST['last_name'];
-        $role_id = $_REQUEST['role_id'];
+    $data = Functions::getDataFromClient();
+    if (isset($data['email']) && isset($data['password']) &&
+        isset($data['first_name']) && isset($data['last_name']) &&
+        isset($data['role_id'])
+    ) {
+      $data['password'] = md5($data['password']);
 
-        $params = [
-          'role_id'=> $role_id,
-          'first_name' => $first_name,
-          'last_name' => $last_name,
-          'email' => $email,
-          'password' => md5($password),
-        ];
-        
-        $paramsEmail = [
-          'email' => $email
-        ];
+      $paramsEmail = [
+        'email' => $data['email']
+      ];
 
-        $checkEmailExist = User::checkDataExist($paramsEmail);
+      $checkEmailExist = User::checkDataExist($paramsEmail);
 
-        if(!$checkEmailExist) {
-          $user = User::insert($params);
-          $success = "Register success !";
-          $failure = "Email exists !";
-          echo Functions::returnAPI($user, $success, $failure );
-        } else {
-          $failure = "Email exists !";
-          echo Functions::returnAPI([], "", $failure );
-        }
-    
-        
+      if(!$checkEmailExist) {
+        $user = User::insert($data);
+        $success = "Register success !";
+        $failure = "Email exists !";
+        Functions::returnAPI($user, $success, $failure );
+      } else {
+        $failure = "Email exists !";
+        Functions::returnAPI([], "", $failure );
+      }
     } else {
       $failure = "Missing params !";
       echo Functions::returnAPI([], "", $failure );

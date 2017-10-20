@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\Product;
+use app\models\ProductDetail;
 use utils\Functions;
 
 class ProductsController
@@ -18,12 +19,13 @@ class ProductsController
 	// select product with id
 	public function getById()
 	{
-		if(isset($_GET['id'])) {
-			$id = $_GET['id'];
-			$product = Product::getById($id);
+		$data = Functions::getDataFromClient();
+		if(isset($data['id'])) {
+			$id = $data['id'];
+			$product = Product::getById(Product::$table, $id);
 			$success = "Success";
-			$failure = "Product is not exist";
-			echo Functions::returnAPI($product, $success,$failure);
+			$failure = "Not found product";
+			Functions::returnAPI($product, $success,$failure);
 		} else {
 			$failure = "Missing params";
 			echo Functions::returnAPI([], "", $failure);
@@ -33,47 +35,39 @@ class ProductsController
 	// insert product
 	public function insert()
 	{
-		if(isset($_POST['name'])
-		&& isset($_POST['price'])
-		&& isset($_POST['amount'])
-		&& isset($_POST['category_id'])
+		$data = Functions::getDataFromClient();
+		if (isset($data['product_detail_id'])
+			&& isset($data['size'])
+			&& isset($data['color'])
+			&& isset($data['quantity'])
 		) {
-			$name = $_POST['name'];
-			$price = $_POST['price'];
-			$amount = $_POST['amount'];
-			$category_id = $_POST['category_id'];
-			$image = isset($_POST['image']) ? $_POST['image'] : "";
-			$description = isset($_POST['description']) ? $_POST['description'] : "";
-			
-			$params = [
-			'category_id' => $category_id,
-			'name' => $name,
-			'price' => $price,
-			'amount' => $amount,
-			'image' => $image,
-			'description' => $description
+			$product_detail_id = $data['product_detail_id'];
+			$size = $data['size'];
+			$color = $data['color'];
+			$quantity = $data['quantity'];
+
+			$checkSizeAndColor = [
+				'size' => $size,
+				'color' => $color
 			];
-			
-			$product = Product::insert($params);
-			$success = "Success";
-			$failure = "Product is not exist";
-			echo Functions::returnAPI($product, $success, $failure);
+			$checkSizeAndColorExist = Product::checkDataExist($checkSizeAndColor);
+			if (!$checkSizeAndColorExist) {
+				$params = [
+					'product_detail_id' => $product_detail_id,
+					'size' => $size,
+					'color' => $color,
+					'quantity' => $quantity,
+				];
+				
+				$product = Product::insert($params);
+				$success = "Success";
+				$failure = "Failure";
+				Functions::returnAPI($product, $success, $failure);
+			} else {
+				$failure = "Color and size already existed ! ";
+				Functions::returnAPI([], "", $failure);
+			}
 
-		} else {
-			$failure = "Missing params";
-			echo Functions::returnAPI([], "", $failure);
-		}
-	}
-
-	// delete product
-	public function delete()
-	{
-		if(isset($_GET['id'])) {
-			$id = $_GET['id'];
-			$product = Product::deleteById($id);
-			$success = "Success";
-			$failure = "Product is not exist";
-			echo Functions::returnAPI($product, $success, $failure);
 		} else {
 			$failure = "Missing params";
 			echo Functions::returnAPI([], "", $failure);
@@ -83,36 +77,81 @@ class ProductsController
 	// update product
 	public function update()
 	{
-		if(isset($_POST['id'])
-		&& isset($_POST['name'])
-		&& isset($_POST['price'])
-		&& isset($_POST['amount'])
-		&& isset($_POST['category_id'])
+		$data = Functions::getDataFromClient();
+		if (isset($data['id'])
+			&& isset($data['size'])
+			&& isset($data['color'])
+			&& isset($data['quantity'])
 		) {
-			$id = $_POST['id'];
-			$name = $_POST['name'];
-			$price = $_POST['price'];
-			$amount = $_POST['amount'];
-			$category_id = $_POST['category_id'];
-			$image = isset($_POST['image']) ? $_POST['image'] : "";
-			$description = isset($_POST['description']) ? $_POST['description'] : "";
+			$id = $data['id'];
+			$size = $data['size'];
+			$color = $data['color'];
+			$quantity = $data['quantity'];
 			
-			$params = [
-			'category_id' => $category_id,
-			'name' => $name,
-			'price' => $price,
-			'amount' => $amount,
-			'image' => $image,
-			'description' => $description
+			$checkSizeAndColor = [
+				'size' => $size,
+				'color' => $color
 			];
-			
-			$product = Product::updateById($id,$params);
+			$checkSizeAndColorExist = Product::checkDataExist($checkSizeAndColor);
+			if (!$checkSizeAndColorExist) {
+				$params = [
+					'size' => $size,
+					'color' => $color,
+					'quantity' => $quantity,
+				];
+				
+				$product = Product::updateById($id, $params);
+				$success = "Update success";
+				$failure = "Not found product to update !";
+				Functions::returnAPI($product, $success, $failure);
+			} else {
+				$failure = "Color and size already existed ! ";
+				Functions::returnAPI([], "", $failure);
+			}
+		} else {
+			$failure = "Missing params";
+			Functions::returnAPI([], "", $failure);
+		}
+	}
+
+	// delete product by id
+	public function delete()
+	{
+		$data = Functions::getDataFromClient();
+		if (isset($data['id'])) {
+			$id = $data['id'];
+			$product = Product::deleteById($id);
 			$success = "Success";
-			$failure = "Product is not exist";
-			echo Functions::returnAPI($product, $success, $failure);
+			$failure = "Not found product to delete !";
+			Functions::returnAPI($product, $success, $failure);
 		} else {
 			$failure = "Missing params";
 			echo Functions::returnAPI([], "", $failure);
 		}
 	}
+
+	// get all products all 
+	public function getAllInfo()
+	{
+		$data = Functions::getDataFromClient();
+		if (isset($data['id'])) {
+			$id = $data['id'];
+			$product = ProductDetail::getById(ProductDetail::$table, $id)[0];
+			$paramsGetFields = ['size'];
+			$paramsConditions = [
+				'product_detail_id' => $id
+			];
+			$sizes = Product::getByParams($paramsGetFields, $paramsConditions);
+			$product->sizes = Functions::getArraySizes($sizes);
+			$product->color = $product->name;
+			
+			$success = "Success";
+			$failure = "Not found product !";
+			Functions::returnAPI($product, $success, $failure);
+		} else {
+			$failure = "Missing params";
+			echo Functions::returnAPI([], "", $failure);
+		}
+	}
+	
 }

@@ -95,6 +95,24 @@ class QueryBuilder
             die($e->getMessage());
         }
     }
+    // get by param
+    public function getByParams($table, $paramsGetFields, $paramsConditions)
+    {
+        $result = Functions::getStringParams($paramsConditions);
+        $sql = sprintf(
+            "select %s from %s where %s",
+            implode(", ", $paramsGetFields),
+            $table,
+            implode(" and ", $result)
+        );
+        try {
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute($paramsConditions);
+            return $stm->fetchAll(PDO::FETCH_CLASS);
+        } catch(PDOException $e){
+            die($e->getMessage());
+        }
+    }
 
     // check field exists in db
     public function checkDataExist($table, $params) 
@@ -108,7 +126,6 @@ class QueryBuilder
         );
         try {
             $stm = $this->pdo->prepare($sql);
-            // die(var_dump($sql));
             $stm->execute($params);
             return $stm->fetchAll(PDO::FETCH_CLASS);
         } catch(PDOException $e){
@@ -116,15 +133,21 @@ class QueryBuilder
         }
     }
 
-    public function getLastRecord($table)
+    // get with string condition
+    public function getWithStringCondition($table, $paramsGetFields, $strCondition)
     {
-          $sql = "select * from {$table} order by id desc limit 1";
-        try {
-            $stm = $this->pdo->prepare($sql);
-            $stm->execute();
-            return $stm->fetchAll(PDO::FETCH_CLASS);
-        } catch (PDOException $e) {
-            die($e->getMessage());
-        }
+        $sql = sprintf(
+            "select %s from %s %s",
+            implode(", ", $paramsGetFields),
+            $table,
+            $strCondition
+            );
+            try {
+                $stm = $this->pdo->prepare($sql);
+                $stm->execute();
+                return $stm->fetchAll(PDO::FETCH_CLASS);
+            } catch(PDOException $e){
+                die($e->getMessage());
+            }
     }
 }

@@ -1,9 +1,9 @@
 <?php 
 namespace app\models;
 
-use core\App;
+use app\models\Model;
 
-class User 
+class User extends Model
 {
   static $table = "users";
   public $email;
@@ -13,32 +13,6 @@ class User
   public $phone;
   public $address;
   public $gender;
-
-  // get all users
-  public static function getAll()
-  {
-    return App::get('database')->getAll(User::$table);
-  }
-  
-  // insert User
-  public static function insert($params) 
-  {
-    $id = App::get('database')->insert(User::$table, $params);
-    return User::getById($id);
-  }
-
-  // get User by id
-  public static function getById($id) 
-  {
-    return App::get('database')->getById(User::$table, $id);
-  }
-
-  // update User by id
-  public static function updateById($id, $params) 
-  {
-    App::get('database')->updateById(User::$table, $params, $id);
-    return User::getById($id);
-  }
 
   // check login
   public static function checkLogin($email, $password) 
@@ -54,14 +28,6 @@ class User
   {
     $params = ['password' => $newPassword];
     return User::updateById($id, $params);
-  }
-
-  // delete User by id
-  public static function deleteById($id) 
-  {
-    $user = User::getById($id);
-    App::get('database')->deleteById(User::$table, $id);
-    return $user;
   }
 
   // check data exist

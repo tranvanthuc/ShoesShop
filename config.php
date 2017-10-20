@@ -12,15 +12,3 @@ return [
     ]
   ]
 ];
-/*return [
-  'database' => [
-    'name' => 'shoeshop',
-    'username' => 'root',
-    'password' => 'huy',
-    'connection' => 'mysql:host=localhost',
-    'options' => [
-      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
-    ]
-  ]
-];
-*/

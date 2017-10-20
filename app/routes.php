@@ -1,74 +1,89 @@
 <?php
 
-// home pages
-$router->get('', 'PagesController@index');
-
-// CategoryController
-$router->get('cates', 'CategoriesController@getAll');
-$router->post('cate/insert', 'CategoriesController@insert');
-$router->get('cate/delete', 'CategoriesController@delete');
-$router->post('cate/update', 'CategoriesController@update');
-$router->get('cates/cate', 'CategoriesController@getById');
-
-// ProductsController
-$router->get('products', 'ProductsController@getAll');
-$router->get('products/product', 'ProductsController@getById');
-$router->post('product/insert', 'ProductsController@insert');
-$router->get('product/delete', 'ProductsController@delete');
-$router->post('product/update', 'ProductsController@update');
-
-
-
-// users
-$router->get('users', 'AuthenController@getAllUsers');
-$router->get('users/user', 'AuthenController@getUserById');
-$router->post('user/update-password', 'AuthenController@updatePassword');
-$router->post('user/update-profile', 'AuthenController@updateProfile');
-$router->get('user/delete', 'AuthenController@delete');
-
-
 // login
 $router->post('login', 'AuthenController@login');
 
 // register
 $router->post('register', 'AuthenController@register');
 
+// roles
+$router->get('roles', 'RolesController@getAll');
+$router->post('roles/role', 'RolesController@getById');
+
+
+// home pages
+$router->get('', 'PagesController@index');
+
+// users
+$router->get('users', 'AuthenController@getAllUsers');
+$router->post('users/user', 'AuthenController@getUserById');
+$router->post('user/update-password', 'AuthenController@updatePassword');
+$router->post('user/update-profile', 'AuthenController@updateProfile');
+$router->post('user/delete', 'AuthenController@delete');
+
+// CategoryController
+$router->get('cates', 'CategoriesController@getAll');
+$router->get('cates/catalog', 'CategoriesController@getCategoriesByCatalog');
+$router->post('cate/insert', 'CategoriesController@insert');
+$router->post('cate/delete', 'CategoriesController@delete');
+$router->post('cate/update', 'CategoriesController@update');
+$router->post('cates/cate', 'CategoriesController@getById');
+$router->post('cates/gender', 'CategoriesController@getByGender');
+
+
+// ProductsController
+$router->get('products', 'ProductsController@getAll');
+$router->post('products/product', 'ProductsController@getById');
+$router->post('product/insert', 'ProductsController@insert');
+$router->post('product/update', 'ProductsController@update');
+$router->post('product/delete', 'ProductsController@delete');
+$router->post('product/all-info', 'ProductsController@getAllInfo');
+
+// ProductDetailsController
+$router->get('product-details', 'ProductDetailsController@getAll');
+$router->post('product-details/detail', 'ProductDetailsController@getById');
+$router->post('product-detail/insert', 'ProductDetailsController@insert');
+$router->post('product-detail/delete', 'ProductDetailsController@delete');
+$router->post('product-detail/update', 'ProductDetailsController@update');
+$router->post('product-details/category', 'ProductDetailsController@getByCategoryId');
+$router->get('product-details/limit', 'ProductDetailsController@getLimit');
 
 // ----------------------------shop_information controller----------------//
 //show list information of the shop
-$router->get('shop-inf', 'ShopInfController@getAll');
+$router->get('shop-info', 'ShopInfController@getAll');
 
-// //update shop information
-$router->post('shop-inf/update', 'ShopInfController@update');
+//update shop information
+$router->post('shop-info/update', 'ShopInfController@update');
 
-// ----------------------------Sizes controller----------------//
-//show list Sizes of the shop
-$router->get('sizes', 'SizesController@getAll');
 
-//show list Sizes of the shop
-$router->get('sizes/size', 'SizesController@getById');
+// ----------------------------Order controller----------------//
+//show list information of the shop
+$router->get('orders', 'OrdersController@getAll');
 
-//insert new size
-$router->post('size/insert', 'SizesController@insert');
+//show list information of the shop
+$router->post('orders/order', 'OrdersController@getByUserId');
 
-//update new size
-$router->post('size/update', 'SizesController@update');
+//update shop information
+$router->post('order/update', 'OrdersController@update');
 
-//delete size
-$router->get('size/delete', 'SizesController@delete');
+//delete shop information
+$router->post('order/delete', 'OrdersController@delete');
 
-// ----------------------------ProductsSizes controller----------------//
-//show list ProductsSizes of the shop
-$router->get('products-sizes', 'ProductsSizesController@getAll');
+//insert shop information
+$router->post('order/insert', 'OrdersController@insert');
 
-//get productsSizes by id
-$router->get('products-sizes/product-size', 'ProductsSizesController@getById');
+// ----------------------------Order Detail controller----------------//
+//show list information of the shop
+$router->get('order-details', 'OrderDetailsController@getAll');
 
-//insert new ProductsSizes
-$router->post('product-size/insert', 'ProductsSizesController@insert');
+//show list information of the shop
+$router->post('order-details/order-detail', 'OrderDetailsController@getByProductId');
 
-//update size by id
-$router->post('product-size/update', 'ProductsSizesController@update');
+//update shop information
+$router->post('order-detail/update', 'OrderDetailsController@update');
 
-//delete size
-$router->get('product-size/delete', 'ProductsSizesController@delete');
+//delete shop information
+$router->post('order-detail/delete', 'OrderDetailsController@delete');
+
+//insert shop information
+$router->post('order-detail/insert', 'OrderDetailsController@insert');
