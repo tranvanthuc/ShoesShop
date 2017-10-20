@@ -39,10 +39,10 @@ class FeedbackController
 			&& isset($data['email'])
 			&& isset($data['content'])
 		) {
-			
 			$feedback = Feedback::insert($data);
 			$success = "Success";
 			$failure = "Failure";
+			
 			Functions::returnAPI($feedback, $success, $failure);
 		} else {
 			$failure = "Missing params";
