@@ -5,6 +5,11 @@ header('Access-Control-Allow-Origin: *');
 
 <?php
 
+
+// send with form
+$router->get('send-mail', 'SendMailController@getSend');
+$router->post('send-mail', 'SendMailController@postSend');
+
 // login
 $router->post('login', 'AuthenController@login');
 
@@ -20,12 +25,8 @@ $router->post('roles/role', 'RolesController@getById');
 $router->get('', 'PagesController@index');
 
 // send data with json
-$router->post('send-mail', 'PagesController@sendMail');
+// $router->post('send-mail', 'PagesController@sendMail');
 
-
-// send with form
-$router->get('send-mail-form', 'PagesController@getSendMail');
-$router->post('send-mail-form', 'PagesController@postSendMail');
 
 // users
 $router->get('users', 'AuthenController@getAllUsers');

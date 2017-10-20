@@ -8,7 +8,7 @@
   <title>Server</title>
 </head>
 <body>
-  <form action="send-mail-form" method="post" enctype="multipart/form-data">
+  <form action="send-mail" method="post" enctype="multipart/form-data">
     <div>
       <label for="Fullname">Fullname</label>
       <input type="text" name="fullname" placeholder="Enter fullname" required>
