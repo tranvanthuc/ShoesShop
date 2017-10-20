@@ -38,20 +38,20 @@ class OrderDetailsController
 	{
 		$data = Functions::getDataFromClient();
 		if (isset($data['order_id']) && isset($data['product_id']) && isset($data['quantity'])) {
-            $user_id = $data['order_id'];
-            $product_id = $data['product_id'];
-            $quantity = $data['quantity'];
-            
-            $params = [
-                'user_id' => $user_id,
-                'product_id' => $product_id,
-                'quantity' => $quantity,
-            ];
-            
-            $orderdetail = OrderDetail::insert($params);
-            $success = "Success";
-            $failure = "Failure";
-            Functions::returnAPI($orderdetail, $success, $failure);
+			$user_id = $data['order_id'];
+			$product_id = $data['product_id'];
+			$quantity = $data['quantity'];
+			
+			$params = [
+					'user_id' => $user_id,
+					'product_id' => $product_id,
+					'quantity' => $quantity,
+			];
+			
+			$orderdetail = OrderDetail::insert($params);
+			$success = "Success";
+			$failure = "Failure";
+			Functions::returnAPI($orderdetail, $success, $failure);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);

@@ -39,8 +39,7 @@ class CategoriesController
 		if (isset($data['name']) && isset($data['gender'])) {
 
 			$params = [
-			'name' => $data['name'], //Stan
-			// 'gender' => $gender //men, women(k0 co TH cung 1 ten co 2 gender(men, women. both))
+			'name' => $data['name'], 
 			];
 
 			$checkNameExist = Category::checkDataExist($params); //kiem tra name co trong DB
