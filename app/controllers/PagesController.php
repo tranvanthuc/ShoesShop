@@ -9,14 +9,4 @@ class PagesController
   {
     return view('index');
   }
-
-  public function getLogin()
-  {
-    return view('login');
-  }
-
-  public function getRegister()
-  {
-    return view('register');
-  }
 }
