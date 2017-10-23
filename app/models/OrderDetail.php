@@ -26,6 +26,15 @@ class OrderDetail extends Model
 		where product_id = {$id}";
 		$orderDetail = Product::query($sql);
 		return $orderDetail;
-	}
+    }
+    
+    public static function deleteByOrderId($id)
+    {
+        $table = OrderDetail::$table;
+        $sql = "delete from {$table} where order_id={$id}";
+
+        $orderDetail = OrderDetail::query($sql);
+        return $orderDetail;
+    }
 }
 

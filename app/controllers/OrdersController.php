@@ -75,7 +75,7 @@ class OrdersController
 					];
 
 					$orderDetail = OrderDetail::insert($paramsOrderDetail);
-					
+
 					// push data to order detail inserted array
 					array_push($orderDetailArray,$paramsOrderDetail); 
 
@@ -105,9 +105,18 @@ class OrdersController
 		if (isset($data['id'])) {
 			$id = $data['id'];
 			$order = Order::deleteById($id);
+			
+			$result = array();
+			$orderDetail = OrderDetail::deleteByOrderId($id);
+
+			$result["order"] = $order;
+			$result["order_details"] = $orderDetail;
 			$success = "Success";
 			$failure = "Not found order to delete !";
-			Functions::returnAPI($order, $success, $failure);
+			//Delete success but render to console fail
+			//error can not fetchAll() QueryBuilder
+			Functions::returnAPI($result, $success, $failure);
+			// die("Delete success");
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);

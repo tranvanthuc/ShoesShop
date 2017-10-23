@@ -32,7 +32,6 @@ class OrderDetailsController
 			Functions::returnAPI([], "", $failure);
 		}			
 	}
-	//order detail was insert when insert order
 
 	// delete order detail by id
 	public function delete()
