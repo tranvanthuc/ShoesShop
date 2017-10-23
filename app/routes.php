@@ -67,8 +67,7 @@ $router->post('order/insert', 'OrdersController@insert');
 
 //Order Detail Controller
 $router->get('order-details', 'OrderDetailsController@getAll');
-$router->post('order-details/order-detail', 'OrderDetailsController@getByProductId');
-$router->post('order-detail/update', 'OrderDetailsController@update');
+$router->post('order-details/order-detail', 'OrderDetailsController@getByOrderId');
 $router->post('order-detail/delete', 'OrderDetailsController@delete');
 
 

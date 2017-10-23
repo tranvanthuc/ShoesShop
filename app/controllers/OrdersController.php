@@ -20,8 +20,8 @@ class OrdersController
 	public function getByUserId()
 	{
 		$data = Functions::getDataFromClient();
-		if(isset($data['id'])) {
-			$id = $data['id'];
+		if(isset($data['user_id'])) {
+			$id = $data['user_id'];
 			$order = Order::getAllInfoByUserId($id);
 			$success = "Success";
 			$failure = "Not found Order!";
@@ -104,17 +104,17 @@ class OrdersController
 		$data = Functions::getDataFromClient();
 		if (isset($data['id'])) {
 			$id = $data['id'];
+
+			$orderDetail = OrderDetail::getByOrderId($id);
+			OrderDetail::deleteByOrderId($id);
+
 			$order = Order::deleteById($id);
 			
-			$result = array();
-			$orderDetail = OrderDetail::deleteByOrderId($id);
-
 			$result["order"] = $order;
 			$result["order_details"] = $orderDetail;
+
 			$success = "Success";
 			$failure = "Not found order to delete !";
-			//Delete success but render to console fail
-			//error can not fetchAll() QueryBuilder
 			Functions::returnAPI($result, $success, $failure);
 			// die("Delete success");
 		} else {
