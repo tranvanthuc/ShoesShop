@@ -12,4 +12,9 @@ class PagesController
   {
     return view('login');
   }
+
+  public function shopInf()
+  {
+    return view('shopInf');
+  }
 }

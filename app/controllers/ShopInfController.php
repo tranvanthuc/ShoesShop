@@ -35,4 +35,24 @@ class ShopInfController
             Functions::returnAPI([], "", $failure );
         }
     }
+
+    //index
+    public function shopInf()
+    {
+        $shopInf = ShopInformation::getAll();    
+        return view('shopInf/index',compact('shopInf'));    
+    }
+
+    //index
+    public function index()
+    {
+        $shopInf = ShopInformation::getAll();
+
+        //return file json to show in front-end
+        // header("Access-Control-Allow-Origin: *");
+        // echo json_encode($shopInf);
+        // console.log(json_encode($shopInf));
+
+        return view('shopInf',compact('shopInf'));
+    }
 }
