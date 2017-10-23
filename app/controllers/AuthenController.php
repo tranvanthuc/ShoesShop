@@ -19,11 +19,20 @@ class AuthenController
   public function getUserById() 
   {
     $data = Functions::getDataFromClient();
+    $view = false;
+    if (!$data) {
+      $view = true;
+      $data = $_REQUEST;
+    }
     if (isset($data['id'])) {
       $user = User::getById(User::$table, $data['id']);
       $success = "Success";
       $failure = "Not found user !";
-      Functions::returnAPI($user, $success, $failure );
+      if ($view) {
+        return view('userDetail', compact('user'));
+      } else {
+        Functions::returnAPI($user, $success, $failure );
+      }
     } else {
       $failure = "Missing params !";
       Functions::returnAPI([], "", $failure );
