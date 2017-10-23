@@ -6,7 +6,7 @@ header('Access-Control-Allow-Origin: *');
 <?php
 
 // login
-$router->post('login', 'AuthenController@login');
+// $router->post('login', 'AuthenController@login');
 
 // register
 $router->post('register', 'AuthenController@register');
@@ -98,3 +98,7 @@ $router->post('order-detail/insert', 'OrderDetailsController@insert');
 $router->get('feedback', 'FeedbackController@getAll');
 $router->post('feedback/id', 'FeedbackController@getById');
 $router->post('feedback/insert', 'FeedbackController@insert');
+
+
+$router->get('login', 'PagesController@getLogin');
+$router->post('login', 'PagesController@postLogin');
