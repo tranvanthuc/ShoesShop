@@ -105,4 +105,4 @@ $router->post('admin/login', 'AuthenController@postLogin');
 
 // $router->get('user-detail', 'AuthenController@getUserById');
 
-$router->get('shopInf', 'ShopInfController@index');
+$router->get('admin/shopInf', 'ShopInfController@index');

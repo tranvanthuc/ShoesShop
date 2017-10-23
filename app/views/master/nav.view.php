@@ -13,8 +13,13 @@
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="index.html">
+            <i class="fa fa-fw fa-dashboard"></i>
+            <span class="nav-link-text">Shop Information</span>
+          </a>
+        </li>
       </ul>
-
 
       <!-- side nav -->
       <ul class="navbar-nav sidenav-toggler">

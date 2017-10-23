@@ -8,10 +8,5 @@ class PagesController
     return view('index');
   }
 
-  public function shopInf()
-  {
-    return view('shopInf');
-  }
-  
   
 }
