@@ -7,6 +7,10 @@
   <title>Server</title>
 </head>
 <body>
+  <?php 
+    session_start();
+    $user = $_SESSION['user'];
+  ?>
   <h1>Welcome to Server</h1>
   <h3>All members</h3>
   <ul>
@@ -15,5 +19,6 @@
     <li>Thai Thi Hong Minh</li>
     <li>Le Thi Thuy Dung</li>
   </ul>
+  <h3><?= $user->first_name ?></h3>
 </body>
 </html>
