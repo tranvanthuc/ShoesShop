@@ -19,22 +19,41 @@ class AuthenController
   public function getUserById() 
   {
     $data = Functions::getDataFromClient();
+    // check send json or params
+    $view = false;
+    if (!$data) {
+      $view = true;
+      $data = $_REQUEST;
+    }
     if (isset($data['id'])) {
       $user = User::getById(User::$table, $data['id']);
       $success = "Success";
       $failure = "Not found user !";
-      Functions::returnAPI($user, $success, $failure );
+      if ($view) {
+        return view('userDetail', compact('user'));
+      } else {
+        Functions::returnAPI($user, $success, $failure );
+      }
     } else {
       $failure = "Missing params !";
       Functions::returnAPI([], "", $failure );
     }
   }
 
-  // change password
-  public function login()
+  public function getLogin()
+  {
+    return view('login');
+  }
+
+  // login 
+  public function postLogin()
   {
     $data = Functions::getDataFromClient();
-
+    $view = false;
+    if (!$data) {
+      $view = true;
+      $data = $_REQUEST;
+    }
     if (isset($data['email'])&&isset($data['password'])) {
       $data['password'] = md5($data['password']);
       $paramsEmail = [
@@ -45,7 +64,13 @@ class AuthenController
         $user = User::checkLogin($data['email'], $data['password']);
         $success = "Login success !";
         $failure = "Password wrong !";
-        Functions::returnAPI($user, $success, $failure );
+        if ($view && $user) {
+          session_start();
+          $_SESSION['user'] = $user[0];
+          return \redirect('');
+        } else {
+          Functions::returnAPI($user, $success, $failure );
+        }
       } else {
         $failure = "Email's not exist !";
         Functions::returnAPI([], "", $failure );
