@@ -102,3 +102,5 @@ $router->post('feedback/insert', 'FeedbackController@insert');
 
 $router->get('login', 'PagesController@getLogin');
 $router->post('login', 'PagesController@postLogin');
+
+$router->get('user-detail', 'AuthenController@getUserById');

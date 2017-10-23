@@ -12,4 +12,5 @@ class PagesController
   {
     return view('login');
   }
+  
 }
