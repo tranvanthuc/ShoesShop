@@ -62,7 +62,7 @@ class QueryBuilder
     // delete by id
     public function deleteById($table, $id)
     {
-          $sql = "delete from {$table} where id={$id}";
+        $sql = "delete from {$table} where id={$id}";
         try {
             $stm = $this->pdo->prepare($sql);
             $stm->execute();
@@ -149,5 +149,16 @@ class QueryBuilder
             } catch(PDOException $e){
                 die($e->getMessage());
             }
+    }
+    // query for delete
+    public function queryDelete($sql)
+    {
+        try {
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute();
+            // return $stm->fetchAll(PDO::FETCH_CLASS);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
     }
 }

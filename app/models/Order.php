@@ -12,7 +12,7 @@ class Order extends Model
 	{
 		$sql = "select ordetail.id as orderdetail_id, pro.id as product_id,users.id as user_id, 
 		users.last_name, users.first_name, users.email, prodetail.name, 
-			prodetail.image, pro.size, pro.color, prodetail.price, ordetail.quantity 
+		prodetail.image, pro.size, pro.color, prodetail.price, ordetail.quantity 
 		from dbshoesshop.products  as pro
 		inner join dbshoesshop.order_details as ordetail
 		on pro.id = ordetail.product_id
@@ -23,7 +23,7 @@ class Order extends Model
 		inner join dbshoesshop.users as users
 		on users.id = ord.user_id
 		where user_id = {$id}";
-		$order = Product::query($sql);
+		$order = Order::query($sql);
 		return $order;
 	}
 }

@@ -53,45 +53,22 @@ $router->post('product-detail/update', 'ProductDetailsController@update');
 $router->post('product-details/category', 'ProductDetailsController@getByCategoryId');
 $router->get('product-details/limit', 'ProductDetailsController@getLimit');
 
-// ----------------------------shop_information controller----------------//
-//show list information of the shop
+//shop_information Controller
 $router->get('shop-info', 'ShopInfController@getAll');
-
-// //update shop information
 $router->post('shop-info/update', 'ShopInfController@update');
 
 
-// ----------------------------Order controller----------------//
-//show list information of the shop
+//Order Controller
 $router->get('orders', 'OrdersController@getAll');
-
-//show list information of the shop
 $router->post('orders/order', 'OrdersController@getByUserId');
-
-//update shop information
 $router->post('order/update', 'OrdersController@update');
-
-//delete shop information
 $router->post('order/delete', 'OrdersController@delete');
-
-//insert shop information
 $router->post('order/insert', 'OrdersController@insert');
 
-// ----------------------------Order Detail controller----------------//
-//show list information of the shop
+//Order Detail Controller
 $router->get('order-details', 'OrderDetailsController@getAll');
-
-//show list information of the shop
-$router->post('order-details/order-detail', 'OrderDetailsController@getByProductId');
-
-//update shop information
-$router->post('order-detail/update', 'OrderDetailsController@update');
-
-//delete shop information
+$router->post('order-details/order-detail', 'OrderDetailsController@getByOrderId');
 $router->post('order-detail/delete', 'OrderDetailsController@delete');
-
-//insert shop information
-$router->post('order-detail/insert', 'OrderDetailsController@insert');
 
 
 // feedback
