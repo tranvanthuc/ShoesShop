@@ -9,7 +9,7 @@ header('Access-Control-Allow-Origin: *');
 $router->post('login', 'AuthenController@login');
 
 // register
-$router->post('register', 'AuthenController@register');
+// $router->post('register', 'AuthenController@register');
 
 // roles
 $router->get('roles', 'RolesController@getAll');
@@ -100,3 +100,7 @@ $router->post('order-detail/delete', 'OrderDetailsController@delete');
 
 //insert shop information
 $router->post('order-detail/insert', 'OrderDetailsController@insert');
+
+
+// add template for admin
+$router->get('register', 'PagesController@register');

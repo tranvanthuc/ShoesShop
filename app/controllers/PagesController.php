@@ -10,6 +10,11 @@ class PagesController
     return view('index');
   }
 
+  public function register()
+  {
+    return view('register');
+  }
+
   public function getSendMail()
   {
     return view('sendMail');
