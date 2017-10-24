@@ -18,6 +18,15 @@ class Functions
   
     return false;
   }
+  public static function setResponseCode($code, $reason = null) {
+    $code = intval($code);
+
+    if (version_compare(phpversion(), '5.4', '>') && is_null($reason)) {
+      http_response_code($code);
+    } else {
+      header(trim("HTTP/1.1 $code $reason"));
+    }
+}
 
   // return api
   public static function returnAPI($data = [], $success = "", $failure = "")
@@ -25,17 +34,18 @@ class Functions
     $result ;
     if ($data) {
       $result = [
-        "status" => true,
-        "message" => $success,
+        // "status" => true,
+        // "message" => $success,
         "results" => $data
       ];
+      \utils\Functions::setResponseCode(200, $success);
     } else {
       $result = [
-        "status" => false,
-        "message" => $failure,
+        // "status" => false,
+        // "message" => $failure,
         "results" => $data
       ];
-      header(' ', true, 404);
+      \utils\Functions::setResponseCode(404, $failure);
     }
     echo \json_encode($result);
   }
