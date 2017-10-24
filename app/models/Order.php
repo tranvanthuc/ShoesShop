@@ -26,5 +26,18 @@ class Order extends Model
 		$order = Product::query($sql);
 		return $order;
 	}
+	public static function getDataOfOrder()
+	{
+		$sql = "select users.first_name, users.last_name, users.email, orders.id as order_id, orders.date, 
+				sum(order_details.price) as totalFee
+				from dbshoesshop.users 
+				inner join dbshoesshop.orders on users.id =  orders.user_id
+				inner join dbshoesshop.order_details on orders.id = order_details.order_id
+				group by order_details.order_id ";	
+		$orders = Order::query($sql);
+		return $orders;
+	}
+
+
 }
 

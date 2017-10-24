@@ -70,5 +70,12 @@ class OrdersController
 		}
 	}
 
+	//index
+	public function index()
+	{
+		$orders = Order::getDataOfOrder();
+		// die(var_dump($orders));
+		return view('order/index',compact('orders'));
+	}
 	
 }
