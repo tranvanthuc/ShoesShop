@@ -77,5 +77,15 @@ class OrdersController
 		// die(var_dump($orders));
 		return view('order/index',compact('orders'));
 	}
+
+	//get order detail information
+	public function getOrderDetail()
+    {
+        $id = $_GET['id'];
+		$orders = Order::getOrderDetail($id);
+		// die(var_dump($orders));
+
+        return view('order/orderDetail',compact('orders'));
+    }
 	
 }

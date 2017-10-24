@@ -111,3 +111,4 @@ $router->post('admin/shopInfo/update', 'ShopInfController@update');
 
 //order
 $router->get('admin/orders', 'OrdersController@index');
+$router->get('admin/orders/order-detail', 'OrdersController@getOrderDetail');
