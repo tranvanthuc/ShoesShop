@@ -16,8 +16,7 @@ $router->get('roles', 'RolesController@getAll');
 $router->post('roles/role', 'RolesController@getById');
 
 
-// home pages
-$router->get('', 'PagesController@index');
+
 
 // users
 $router->get('users', 'AuthenController@getAllUsers');
@@ -100,7 +99,24 @@ $router->post('feedback/id', 'FeedbackController@getById');
 $router->post('feedback/insert', 'FeedbackController@insert');
 
 
+// ------------------------AMIND----------------------
+
+// home pages
+$router->get('', 'PagesController@dashboard');
+
+// login
 $router->get('admin/login', 'AuthenController@getLogin');
 $router->post('admin/login', 'AuthenController@postLogin');
 
+// logout
+$router->get('admin/logout', 'AuthenController@logout');
+
+// users management
+$router->get('admin/users', 'UsersController@index');
 // $router->get('user-detail', 'AuthenController@getUserById');
+
+// products managements
+$router->get('admin/products', 'ProductDetailsController@index');
+$router->get('admin/product/update', 'ProductDetailsController@getUpdate');
+$router->post('admin/product/update', 'ProductDetailsController@update');
+$router->post('admin/product/quantity/update', 'ProductsController@update');

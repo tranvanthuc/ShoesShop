@@ -20,6 +20,9 @@ class ProductsController
 	public function getById()
 	{
 		$data = Functions::getDataFromClient();
+		if (!$data) {
+			$data = $_REQUEST;
+		}
 		if(isset($data['id'])) {
 			$id = $data['id'];
 			$product = Product::getById(Product::$table, $id);
@@ -78,36 +81,25 @@ class ProductsController
 	public function update()
 	{
 		$data = Functions::getDataFromClient();
+		if (!$data) {
+			$data = $_REQUEST;
+		}
 		if (isset($data['id'])
 			&& isset($data['size'])
-			&& isset($data['color'])
 			&& isset($data['quantity'])
 		) {
 			$id = $data['id'];
 			$size = $data['size'];
-			$color = $data['color'];
 			$quantity = $data['quantity'];
-			
-			$checkSizeAndColor = [
+			$productDetailId = $data['product-detail-id'];
+
+			$params = [
 				'size' => $size,
-				'color' => $color
+				'quantity' => $quantity,
 			];
-			$checkSizeAndColorExist = Product::checkDataExist($checkSizeAndColor);
-			if (!$checkSizeAndColorExist) {
-				$params = [
-					'size' => $size,
-					'color' => $color,
-					'quantity' => $quantity,
-				];
-				
-				$product = Product::updateById($id, $params);
-				$success = "Update success";
-				$failure = "Not found product to update !";
-				Functions::returnAPI($product, $success, $failure);
-			} else {
-				$failure = "Color and size already existed ! ";
-				Functions::returnAPI([], "", $failure);
-			}
+			$product = Product::updateById($id, $params);
+			
+			\redirect('admin/product/update?id='.$productDetailId);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
@@ -134,6 +126,11 @@ class ProductsController
 	public function getAllInfo()
 	{
 		$data = Functions::getDataFromClient();
+		$view = false;
+    if (!$data) {
+      $view = true;
+      $data = $_REQUEST;
+    }
 		if (isset($data['id'])) {
 			$id = $data['id'];
 			$product = ProductDetail::getById(ProductDetail::$table, $id)[0];
@@ -144,6 +141,10 @@ class ProductsController
 			$sizes = Product::getByParams($paramsGetFields, $paramsConditions);
 			$product->sizes = Functions::getArraySizes($sizes);
 			$product->color = $product->name;
+			
+			if ($view) {
+				return view('products/index', compact('products'));
+			}
 			
 			$success = "Success";
 			$failure = "Not found product !";

@@ -3,6 +3,7 @@ namespace app\controllers;
 
 use app\models\ProductDetail;
 use app\models\Category;
+use app\models\Product;
 use utils\Functions;
 
 class ProductDetailsController
@@ -16,7 +17,7 @@ class ProductDetailsController
 		Functions::returnAPI($proDetails, $success, $failure);
 	}
 
-	// get data with id of table Product_details
+	// get data with id of table proDetails
 	public function getById()
 	{
 		$data = Functions::getDataFromClient();
@@ -67,10 +68,21 @@ class ProductDetailsController
 		}
 	}
 
+	// get update
+	public function getUpdate()
+	{
+		$data = $_REQUEST;
+		$proDetail = ProductDetail::getById(ProductDetail::$table, $data['id'])[0];
+		$products = Product::getProductByProDetailId($data['id']);
+		$cates = Category::getAll();
+		return view('products/update/index', \compact('products','proDetail', 'cates'));
+	}
+
 	// update data in table
 	public function update()
 	{
-		$data = Functions::getDataFromClient();
+		$data = $_REQUEST;
+
 		if(isset($data['id'])
 			&& isset($data['name'])
 			&& isset($data['price'])
@@ -86,8 +98,8 @@ class ProductDetailsController
 			$checkNameExist = ProductDetail::checkDataExist($checkName);
 			if(!$checkNameExist) {
 				$proDetail = ProductDetail::updateById($id, $data);
-				$success = "Success";
-				$failure = "Failure";
+				
+				\redirect('/admin/products');
 				Functions::returnAPI($proDetail, $success, $failure);
 			} else {
 				$paramsID = [
@@ -118,10 +130,10 @@ class ProductDetailsController
 		$data = Functions::getDataFromClient();
 
 		if (isset($data['category_id'])) {
-			$product_details = ProductDetail::getByParams(['*'], $data);
+			$proDetails = ProductDetail::getByParams(['*'], $data);
 			$success = "Get data success !";
 			$failure = "Not found product to delete !";
-			Functions::returnAPI($product_details, $success, $failure);
+			Functions::returnAPI($proDetails, $success, $failure);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
@@ -132,8 +144,8 @@ class ProductDetailsController
 	public function getLimit()
 	{
 		$strCondition = "order by id desc limit 4";
-		$product_details = ProductDetail::getWithStringCondition(['*'], $strCondition);
-		foreach($product_details as $item) {
+		$proDetails = ProductDetail::getWithStringCondition(['*'], $strCondition);
+		foreach($proDetails as $item) {
 			$paramsConditions = [
 				'id' => $item->category_id
 			];
@@ -143,7 +155,14 @@ class ProductDetailsController
 		}
 		$success = "Get data success !";
 		$failure = "Failure !";
-		Functions::returnAPI($product_details, $success, $failure);
+		Functions::returnAPI($proDetails, $success, $failure);
+	}
+
+	// index 
+	public function index()
+	{
+		$proDetails = ProductDetail::getAll();
+		return view('products/index', compact('proDetails'));
 	}
 }
 
