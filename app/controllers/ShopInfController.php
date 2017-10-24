@@ -39,7 +39,7 @@ class ShopInfController
             $success = "Update data success";
             $failure = "Failure";
             if ($view) {
-                return redirect('admin/shopInf');
+                return redirect('admin/shopInfo');
             } else {
                 Functions::returnAPI($ShopInfUpdate, $success, $failure );
             }
@@ -54,7 +54,7 @@ class ShopInfController
     {
         $shopInf = ShopInformation::getById(ShopInformation::$table, 1);
         // die(var_dump($shopInf));
-        return view('shopInf/index',compact('shopInf'));
+        return view('shopInfo/index',compact('shopInf'));
     }
 
 }
