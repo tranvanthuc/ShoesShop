@@ -35,6 +35,7 @@ class Functions
         "message" => $failure,
         "results" => $data
       ];
+      header(' ', true, 404);
     }
     echo \json_encode($result);
   }
