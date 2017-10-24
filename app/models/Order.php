@@ -46,12 +46,14 @@ class Order extends Model
 					orders.id as order_id, orders.date,
 					order_details.quantity, order_details.product_id,
 					products.size, products.color,
-					product_details.name, product_details.price
+					product_details.name, product_details.price,
+					categories.name as cate_name
 					from dbshoesshop.users 
 					inner join dbshoesshop.orders on users.id =  orders.user_id
 					inner join dbshoesshop.order_details on orders.id = order_details.order_id
-					inner join dbshoesshop.products on products.id = order_details.product_id
+					inner join dbshoesshop.products on products.id = order_details.product_id					
 					inner join dbshoesshop.product_details on products.product_detail_id = product_details.id
+					inner join dbshoesshop.categories on categories.id = product_details.category_id
 					where orders.id = {$order_id};";
 		$order = Order::query($sql);
 		return $order;

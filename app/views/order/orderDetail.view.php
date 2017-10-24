@@ -1,6 +1,6 @@
-
 <?php require('app/views/master/header.view.php') ?>
 <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+<link href="/public/css/order.css" rel="stylesheet">
 
 <body class="fixed-nav sticky-footer " id="page-top">
 <?php require('app/views/master/nav.view.php') ?>
@@ -15,29 +15,44 @@
             <li class="breadcrumb-item active">Order management</li>
             </ol>
             <!-- Content -->
-            
             <div class="row">
-            <div class="col-sm-6 ">
-                <div class="card">
+            <div class="col-sm-6 sub-card">
+                <div class="card " >
                 <div class="card-block">
-                    <h3 class="card-title">Order</h3>
-                    <p class="card-text">Order ID: <?= $orders[0]->order_id ?></p>
-                    <p class="card-text">Date/Time: <?= $orders[0]->date ?></p>
-                    <p class="card-text">Total Fee: <?= $orders[0]->date ?></p>
-                    <p class="card-text">Status: Done</p>
-                    <a href="#" class="btn btn-primary">View List order</a>
+                    <div class="card card-inverse card-success mb-3 text-center">
+                        <div class="card-block sub-title">
+                            <blockquote class="card-blockquote">
+                            <h4>Order Detail</h4>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="sub-field">
+                        <p class="card-text">Order ID: <?= $orders[0]->order_id ?></p>
+                        <p class="card-text">Date/Time: <?= $orders[0]->date ?></p>
+                        <p class="card-text">Total Fee: <?= $orders[0]->date ?></p>
+                        <p class="card-text">Status: Done</p>
+                        <center><a href="https://calm-dawn-66282.herokuapp.com/admin/orders" class="btn btn-primary">View List order</a></center>
+                    </div>
                 </div>
                 </div>
-            </div>
-            <div class="col-sm-6">
-                <div class="card">
-                <div class="card-block">
-                    <h3 class="card-title">Customer detail</h3>
-                    <p class="card-text">Name: <?= $orders[0]->last_name." ".$orders[0]->first_name ?></p>
-                    <p class="card-text">Email: <?= $orders[0]->email ?></p>
-                    <p class="card-text">Phone: <?= $orders[0]->phone ?></p>
-                    <p class="card-text">Address: <?= $orders[0]->address ?></p>
-                    <a href="#" class="btn btn-primary">View list User</a>
+            </div><br />
+            <div class="col-sm-6 sub-card">
+                <div class="card ">
+                <div class="card-block ">
+                    <div class="card card-inverse card-success mb-3 text-center">
+                        <div class="card-block sub-title">
+                            <blockquote class="card-blockquote">
+                            <h4>Customer Detail</h4>
+                            </blockquote>
+                        </div>
+                    </div>
+                    <div class="sub-field">
+                        <p class="card-text">Name: <?= $orders[0]->last_name." ".$orders[0]->first_name ?></p>
+                        <p class="card-text">Email: <?= $orders[0]->email ?></p>
+                        <p class="card-text">Phone: <?= $orders[0]->phone ?></p>
+                        <p class="card-text">Address: <?= $orders[0]->address ?></p>
+                        <center><a href="#" class="btn btn-primary">View list User</a></center>
+                    </div>
                 </div>
                 </div>
             </div>
@@ -63,7 +78,7 @@
                             <tbody>
                             <?php foreach($orders as $order) { ?>
                             <tr>
-                                <td><?= $order->name ?></td>
+                                <td><?= $order->cate_name." ".$order->name ?></td>
                                 <td><?= $order->size ?></td>
                                 <td><?= $order->color ?></td>
                                 <td><?= $order->quantity ?></td>
