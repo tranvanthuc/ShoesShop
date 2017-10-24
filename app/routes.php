@@ -101,9 +101,16 @@ $router->post('feedback/insert', 'FeedbackController@insert');
 
 
 
-$router->get('admin/dashboard', 'ProductDetailsController@dashboard');
+$router->get('admin/products', 'PagesController@index');
 
 $router->get('admin/login', 'AuthenController@getLogin');
 $router->post('admin/login', 'AuthenController@postLogin');
 
-// $router->get('user-detail', 'AuthenController@getUserById');
+
+
+// admin of categories
+$router->get('admin/cates', 'CategoriesController@index');
+$router->get('admin/cate/insert', 'CategoriesController@getInsert');
+$router->get('admin/cate/update', 'CategoriesController@getUpdate');
+$router->get('admin/cate/delete', 'CategoriesController@delete');
+

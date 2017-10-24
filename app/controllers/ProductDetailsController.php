@@ -15,13 +15,7 @@ class ProductDetailsController
 		$failure = "Failure";
 		Functions::returnAPI($proDetails, $success, $failure);
 	}
-
-	public function dashboard()
-	{
-		$dashboards = ProductDetail::getAll();
-		return view('dashboard',compact("dashboards"));
-	}
-
+	
 	// get data with id of table Product_details
 	public function getById()
 	{

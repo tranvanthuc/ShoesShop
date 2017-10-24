@@ -13,6 +13,12 @@
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="/admin/cates">
+            <i class="fa fa-th-list"></i>
+            <span class="nav-link-text">Categories Management</span>
+          </a>
+        </li>
       </ul>
 
 
