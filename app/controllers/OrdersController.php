@@ -62,14 +62,16 @@ class OrdersController
 			//Read json of order detail to insert
 			for($i=0; $i< count($data['products']); $i++){
 				if(
-					isset($data['products'][$i]['id']) && 	
+					isset($data['products'][$i]['id']) && 
+					isset($data['products'][$i]['size']) &&	
 					isset($data['products'][$i]['quantity']) &&
 					isset($data['products'][$i]['price'])
 				) {
-					
+					$productId = Order::getProductId($data['products'][$i]['id'],$data['products'][$i]['size'] );
+					// die(var_dump($productId ));
 					$paramsOrderDetail = [
 						'order_id' => $orderId,
-						'product_id' => $data['products'][$i]['id'],						
+						'product_id' => $productId[0]->id,						
 						'quantity' => $data['products'][$i]['quantity'],
 						'price' => $data['products'][$i]['price']
 					];
