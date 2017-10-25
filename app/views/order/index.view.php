@@ -55,7 +55,7 @@
                                 <td><ul style=" list-style-type: none; margin: 0;padding: 0;">
                                     <li style="float:left;">
                                         <a href="<?= "orders/order-detail/?id=".$order->order_id ?>" id ="btn-update">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp; 
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;
                                         </a>
                                     </li>
                                     <li style="float:left;"><i class="fa fa-trash-o" aria-hidden="true"></i></li>

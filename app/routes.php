@@ -106,8 +106,8 @@ $router->post('admin/login', 'AuthenController@postLogin');
 // $router->get('user-detail', 'AuthenController@getUserById');
 
 //shop information
-$router->get('admin/shopInfo', 'ShopInfController@index');
-$router->post('admin/shopInfo/update', 'ShopInfController@update');
+$router->get('admin/shop-info', 'ShopInfController@index');
+$router->post('admin/shop-info/update', 'ShopInfController@update');
 
 //order
 $router->get('admin/orders', 'OrdersController@index');

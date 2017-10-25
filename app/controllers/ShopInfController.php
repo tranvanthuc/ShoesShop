@@ -39,7 +39,7 @@ class ShopInfController
             $success = "Update data success";
             $failure = "Failure";
             if ($view) {
-                return redirect('admin/shopInfo');
+                return redirect('admin/shop-info');
             } else {
                 Functions::returnAPI($ShopInfUpdate, $success, $failure );
             }
