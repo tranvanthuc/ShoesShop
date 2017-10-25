@@ -24,7 +24,7 @@
           </div>
         </form>
       </div>
-      
+
     </div>
   </div>
 </div>
@@ -36,7 +36,7 @@ $('#myModal').on('show.bs.modal', function (event) {
   var size = button.data('size');
   var quantity = button.data('quantity');
   var productDetailId = button.data('product-detail-id');
-     
+
   $('#id').val(id);
   $('#size').val(size);
   $('#quantity').val(quantity);
@@ -47,18 +47,18 @@ $('#myModal').on('show.bs.modal', function (event) {
   //   url: "http://localhost:8000/products/product",
   //   data: {id: id},
   //   success: function(data){
-      
+
   //     var data = JSON.parse(data);
   //     var product = data.results[0];
   //     console.log(product.id);
   //     console.log(product);
-      
+
   //     $('#id').val(product.id);
   //     $('#size').val(product.size);
   //     $('#quantity').val(product.quantity);
   //   }
 
   // });
-  
+
 })
 </script>
