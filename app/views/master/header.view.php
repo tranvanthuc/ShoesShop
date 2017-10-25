@@ -14,6 +14,7 @@
   <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <!-- Custom styles for this template-->
   <link href="/public/css/sb-admin.min.css" rel="stylesheet">
+  <link href="/public/css/style.css" rel="stylesheet">
   <script src="/vendor/jquery/jquery.min.js"></script>
 </head>
 <?php 
