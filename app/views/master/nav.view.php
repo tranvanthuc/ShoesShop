@@ -20,7 +20,7 @@
           </a>
           <ul class="sidenav-second-level collapse" id="categories-management">
               <li>
-                <a href="/admin/cate/insert"><span class="fa fa-plus-square-o"></span> Add Categories</a>
+                <a href="/admin/cate/insert"><span class="fa fa-plus-square" aria-hidden="true"></span> Add Categories</a>
               </li>
               <li>
                 <a href="/admin/cates"><span class="fa fa-list"></span> List Categories</a>

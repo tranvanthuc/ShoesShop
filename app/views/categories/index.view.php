@@ -11,12 +11,11 @@
         <li class="breadcrumb-item">
           <a href="/admin/cates">Categories Management</a>
         </li>
-        <li class="breadcrumb-item active">Charts</li>
       </ol>
       <!-- content -->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Data Table Categories
+          <i class="fa fa-table"></i> List Categories
         </div>
         <div class="card-body">
           <div class="table-responsive">
@@ -38,9 +37,9 @@
                 </tr>
               </tfoot>
               <tbody>
-                <?php foreach ($cates as $cate): ?>
+                <?php foreach ($cates as $key => $cate): ?>
                   <tr>
-                    <td><?=$cate->id?></td>
+                    <td><?=++$key?></td>
                     <td><?=$cate->name?></td>
                     <td><?=$cate->gender?></td>
                     <td>
@@ -56,7 +55,6 @@
             </table>
           </div>
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
   </div>

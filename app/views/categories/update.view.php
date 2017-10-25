@@ -9,17 +9,16 @@
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/admin/cates">Categories Management</a>
+          <a href="/admin/cates">List Categories</a>
         </li>
         <li class="breadcrumb-item">
-          <a href="/admin/cate/update">Update</a>
+          <span>Update Category</span>
         </li>
-        <li class="breadcrumb-item active">Charts</li>
       </ol>
       <!-- content -->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-table"></i> Update Table
+          <i class="fa fa-table"></i> Current Category
         </div>
         <div class="card-body">
           <h2>Category #<?=$cate[0]->id?></h2>
@@ -30,7 +29,12 @@
               <input type="text" name="name" class="form-control" value="<?=$cate[0]->name;?>" required>
             </div>
             <div class="form-group">
-              <input type="text" name="gender" class="form-control" value="<?=$cate[0]->gender;?>" required>
+              <select class="form-control" name="gender" id="sel1">
+                <option selected="selected"><?=$cate[0]->gender?></option>
+                <option value="<?=$cate[0]->gender == 'female' ? 'male' : 'female'?>">
+                    <?=$cate[0]->gender == 'female' ? 'male' : 'female'?>
+                </option>
+              </select>
             </div>
             <div class="form-group">
               <button class="btn btn-primary" type="submit">UPDATE</button>
@@ -41,9 +45,7 @@
               <?php echo $error ?>
             </div>
           <?php endif;?>
-
         </div>
-        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
       </div>
     </div>
   </div>
