@@ -106,7 +106,7 @@ $router->post('admin/cate/delete', 'CategoriesController@delete');
 // ------------------------AMIND----------------------
 
 // home pages
-$router->get('', 'PagesController@dashboard');
+// $router->get('', 'PagesController@dashboard');
 
 // login
 $router->get('admin/login', 'AuthenController@getLogin');
