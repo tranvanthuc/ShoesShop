@@ -3,7 +3,8 @@ namespace app\models;
 
 use core\App;
 
-class Model {
+class Model
+{
 
   public static $table;
   // get all 

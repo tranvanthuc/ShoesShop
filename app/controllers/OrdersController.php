@@ -69,6 +69,4 @@ class OrdersController
 			Functions::returnAPI([], "", $failure);
 		}
 	}
-
-	
 }

@@ -5,9 +5,11 @@ namespace app\controllers;
 use app\models\Role;
 use utils\Functions;
 
-class RolesController {
+class RolesController
+{
     // get all roles
-    public function getAll() {
+    public function getAll()
+    {
         $roles = Role::getAll();
         $success = "Success";
         $failure = "Failure";
@@ -15,7 +17,8 @@ class RolesController {
     }
 
     // get role by id
-    public function getById() {
+    public function getById()
+    {
         $data = Functions::getDataFromClient();
         if (isset($data['id'])) {
             $id = $data['id'];

@@ -4,9 +4,11 @@ namespace app\controllers;
 use app\models\User;
 use utils\Functions;
 
-class AuthenController {
+class AuthenController
+{
 	// get user by id
-	public function getUserById() {
+	public function getUserById()
+	{
 		$data = Functions::getDataFromClient();
 		// check send json or params
 		$view = false;
@@ -29,12 +31,14 @@ class AuthenController {
 		}
 	}
 
-	public function getLogin() {
+	public function getLogin()
+	{
 		return view('authen/login');
 	}
 
 	// login
-	public function postLogin() {
+	public function postLogin()
+	{
 		$data = Functions::getDataFromClient();
 		$view = false;
 		if (!$data) {
@@ -68,14 +72,16 @@ class AuthenController {
 		}
 	}
 
-	public function logout() {
+	public function logout()
+	{
 		session_start();
 		session_destroy();
 		\redirect('admin/login');
 	}
 
 	// register
-	public function register() {
+	public function register()
+	{
 		$data = Functions::getDataFromClient();
 		if (isset($data['email']) && isset($data['password']) &&
 			isset($data['first_name']) && isset($data['last_name']) &&
@@ -105,7 +111,8 @@ class AuthenController {
 	}
 
 	// update password
-	public function updatePassword() {
+	public function updatePassword()
+	{
 		$data = Functions::getDataFromClient();
 		if (isset($data['id']) && isset($data['newPassword']) &&
 			isset($data['currentPassword'])
@@ -139,7 +146,8 @@ class AuthenController {
 	}
 
 	// update profile
-	public function updateProfile() {
+	public function updateProfile()
+	{
 		$data = Functions::getDataFromClient();
 		if (
 			isset($data['id']) &&

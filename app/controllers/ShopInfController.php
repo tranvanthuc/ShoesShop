@@ -5,9 +5,11 @@ namespace app\controllers;
 use app\models\ShopInformation;
 use utils\Functions;
 
-class ShopInfController {
+class ShopInfController
+{
 	//index
-	public function getAll() {
+	public function getAll()
+	{
 		$shopInf = ShopInformation::getAll();
 
 		$success = "Get data success";
@@ -16,7 +18,8 @@ class ShopInfController {
 	}
 
 	//update shop information
-	public function update() {
+	public function update()
+	{
 		$data = Functions::getDataFromClient();
 		//shop_id = 1
 		if ($data['id'] == 1) {

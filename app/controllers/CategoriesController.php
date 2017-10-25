@@ -5,14 +5,17 @@ use app\models\Category;
 use app\models\ProductDetail;
 use utils\Functions;
 
-class CategoriesController {
-	public function index() {
+class CategoriesController
+{
+	public function index()
+	{
 		$cates = Category::getAll();
 		return view('categories/index', compact("cates"));
 	}
 
 	//select data
-	public function getAll() {
+	public function getAll()
+	{
 		$cates = Category::getAll();
 		$success = "Success";
 		$failure = "Failure";
@@ -20,7 +23,8 @@ class CategoriesController {
 	}
 
 	//get data with id
-	public static function getById() {
+	public static function getById()
+	{
 		$data = Functions::getDataFromClient();
 		$view = false;
 		if (!$data) {
@@ -43,14 +47,16 @@ class CategoriesController {
 		}
 	}
 
-	public function getUpdate() {
+	public function getUpdate()
+	{
 		$cate = CategoriesController::getById();
 		die(var_dump($cate));
 		return view('categories/update', compact("cate"));
 	}
 
 	// insert data
-	public function insert() {
+	public function insert()
+	{
 		$data = $_REQUEST;
 		if (isset($data['name']) && isset($data['gender'])) {
 
@@ -74,12 +80,14 @@ class CategoriesController {
 	}
 
 	// tranfer insert page
-	public function getInsert() {
+	public function getInsert()
+	{
 		return view('/categories/insert');
 	}
 
 	// delete data
-	public function delete() {
+	public function delete()
+	{
 		$data = Functions::getDataFromClient();
 		$view = false;
 		if (!$data) {
@@ -102,7 +110,8 @@ class CategoriesController {
 	}
 
 	// update data
-	public function update() {
+	public function update()
+	{
 		$data = Functions::getDataFromClient();
 		$view = false;
 		if (!$data) {
@@ -156,7 +165,8 @@ class CategoriesController {
 	}
 
 	// get categories by catalog
-	public function getCategoriesByCatalog() {
+	public function getCategoriesByCatalog()
+	{
 		$table = Category::$table;
 		$sqlMale = "select * from {$table} where gender='male'";
 		$catesByMale = Category::query($sqlMale);
@@ -174,7 +184,8 @@ class CategoriesController {
 	}
 
 	// get all cates by gender
-	public function getByGender() {
+	public function getByGender()
+	{
 		$data = Functions::getDataFromClient();
 		if ($data['gender']) {
 			$gender = $data['gender'];

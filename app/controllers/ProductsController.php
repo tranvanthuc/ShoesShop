@@ -5,9 +5,11 @@ use app\models\Product;
 use app\models\ProductDetail;
 use utils\Functions;
 
-class ProductsController {
+class ProductsController
+{
 	//select all data of products
-	public function getAll() {
+	public function getAll()
+	{
 		$products = Product::getAll();
 		$success = "Success";
 		$failure = "Failure";
@@ -15,7 +17,8 @@ class ProductsController {
 	}
 
 	// select product with id
-	public function getById() {
+	public function getById()
+	{
 		$data = Functions::getDataFromClient();
 		if (!$data) {
 			$data = $_REQUEST;
@@ -33,7 +36,8 @@ class ProductsController {
 	}
 
 	// insert product
-	public function insert() {
+	public function insert()
+	{
 		$data = Functions::getDataFromClient();
 		if (!$data) {
 			$data = $_REQUEST;
@@ -66,7 +70,8 @@ class ProductsController {
 	}
 
 	// update product
-	public function update() {
+	public function update()
+	{
 		$data = Functions::getDataFromClient();
 		if (!$data) {
 			$data = $_REQUEST;
@@ -93,7 +98,8 @@ class ProductsController {
 	}
 
 	// delete product by id
-	public function delete() {
+	public function delete()
+	{
 		$data = Functions::getDataFromClient();
 		if (!$data) {
 			$data = $_REQUEST;
@@ -110,7 +116,8 @@ class ProductsController {
 	}
 
 	// get all products all
-	public function getAllInfo() {
+	public function getAllInfo()
+	{
 		$data = Functions::getDataFromClient();
 		$view = false;
 		if (!$data) {

@@ -6,9 +6,11 @@ use app\models\Product;
 use app\models\ProductDetail;
 use utils\Functions;
 
-class ProductDetailsController {
+class ProductDetailsController
+{
 	// get data in table ProductDetail
-	public function getAll() {
+	public function getAll()
+	{
 		$proDetails = ProductDetail::getAll();
 		$success = "Success";
 		$failure = "Failure";
@@ -18,7 +20,8 @@ class ProductDetailsController {
 	// get data with id of table Product_details
 
 	// get data with id of table proDetails
-	public function getById() {
+	public function getById()
+	{
 		$data = Functions::getDataFromClient();
 		if (isset($data['id'])) {
 			$proDetail = ProductDetail::getById(ProductDetail::$table, $data['id']);
@@ -33,13 +36,15 @@ class ProductDetailsController {
 	}
 
 	// get insert
-	public function getInsert() {
+	public function getInsert()
+	{
 		$cates = Category::getAll();
 		return view('products/insert', compact('cates'));
 	}
 
 	// insert data table Product_details
-	public function insert() {
+	public function insert()
+	{
 		$data = Functions::getDataFromClient();
 		if (!$data) {
 			$data = $_REQUEST;
@@ -59,7 +64,8 @@ class ProductDetailsController {
 	}
 
 	// delete data in table
-	public function delete() {
+	public function delete()
+	{
 		$data = Functions::getDataFromClient();
 		if (!$data) {
 			$data = $_REQUEST;
@@ -83,7 +89,8 @@ class ProductDetailsController {
 	}
 
 	// get update
-	public function getUpdate() {
+	public function getUpdate()
+	{
 		$data = $_REQUEST;
 		$proDetail = ProductDetail::getById(ProductDetail::$table, $data['id'])[0];
 		$products = Product::getProductByProDetailId($data['id']);
@@ -92,7 +99,8 @@ class ProductDetailsController {
 	}
 
 	// update data in table
-	public function update() {
+	public function update()
+	{
 		$data = $_REQUEST;
 
 		if (isset($data['id'])
@@ -122,7 +130,8 @@ class ProductDetailsController {
 	}
 
 	// get product details by category id
-	public function getByCategoryId() {
+	public function getByCategoryId()
+	{
 		$data = Functions::getDataFromClient();
 		if (isset($data['category_id'])) {
 			$proDetails = ProductDetail::getByParams(['*'], $data);
@@ -136,7 +145,8 @@ class ProductDetailsController {
 	}
 
 	// get limit product detail
-	public function getLimit() {
+	public function getLimit()
+	{
 		$strCondition = "order by id desc limit 4";
 		$proDetails = ProductDetail::getWithStringCondition(['*'], $strCondition);
 		foreach ($proDetails as $item) {
@@ -153,7 +163,8 @@ class ProductDetailsController {
 	}
 
 	// index
-	public function index() {
+	public function index()
+	{
 		$proDetails = ProductDetail::getAll();
 		return view('products/index', compact('proDetails'));
 	}

@@ -3,9 +3,11 @@
 namespace app\controllers;
 use app\models\User;
 
-class UsersController {
+class UsersController
+{
     // get All users
-    public function index() {
+    public function index()
+    {
         $users = User::getAll();
         $success = "Success";
         $failure = "Failure";

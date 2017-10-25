@@ -4,9 +4,11 @@ namespace app\controllers;
 use app\models\OrderDetail;
 use utils\Functions;
 
-class OrderDetailsController {
+class OrderDetailsController
+{
 	//select all data of Order Details
-	public function getAll() {
+	public function getAll()
+	{
 		$orderdetails = OrderDetail::getAll();
 		$success = "Success";
 		$failure = "Failure";
@@ -14,7 +16,8 @@ class OrderDetailsController {
 	}
 
 	// select order detail with id
-	public function getByProductId() {
+	public function getByProductId()
+	{
 		$data = Functions::getDataFromClient();
 		if (isset($data['id'])) {
 			$id = $data['id'];
@@ -30,7 +33,8 @@ class OrderDetailsController {
 	}
 
 	// insert order detail
-	public function insert() {
+	public function insert()
+	{
 		$data = Functions::getDataFromClient();
 		if (isset($data['order_id']) && isset($data['product_id']) && isset($data['quantity'])) {
 			$user_id = $data['order_id'];
@@ -54,7 +58,8 @@ class OrderDetailsController {
 	}
 
 	// delete order detail by id
-	public function delete() {
+	public function delete()
+	{
 		$data = Functions::getDataFromClient();
 		if (isset($data['id'])) {
 			$id = $data['id'];
