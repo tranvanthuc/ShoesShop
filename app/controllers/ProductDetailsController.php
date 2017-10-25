@@ -137,9 +137,10 @@ class ProductDetailsController
 			$paramsConditions = [
 				'id' => $item->category_id
 			];
-			$paramsGetFields = ['gender'];
+			$paramsGetFields = ['gender', 'name'];
 			$getGender = Category::getByParams($paramsGetFields, $paramsConditions)[0];
 			$item->gender = $getGender->gender;
+			$item->category_name = $getGender->name;
 		}
 		$success = "Get data success !";
 		$failure = "Failure !";
