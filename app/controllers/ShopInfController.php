@@ -7,32 +7,32 @@ use utils\Functions;
 
 class ShopInfController
 {
-	//index
-	public function getAll()
-	{
-		$shopInf = ShopInformation::getAll();
+    //index
+    public function getAll()
+    {
+        $shopInf = ShopInformation::getAll();
 
-		$success = "Get data success";
-		$failure = "Failure";
-		Functions::returnAPI($shopInf, $success, $failure);
-	}
+        $success = "Get data success";
+        $failure = "Failure";
+        Functions::returnAPI($shopInf, $success, $failure );
+    }
 
-	//update shop information
-	public function update()
-	{
-		$data = Functions::getDataFromClient();
-		//shop_id = 1
-		if ($data['id'] == 1) {
-			$id = $data['id'];
+    //update shop information
+    public function update()
+    {
+        $data = Functions::getDataFromClient();
+        //shop_id = 1
+        if($data['id'] == 1 ){
+            $id = $data['id'];
 
-			$ShopInfUpdate = ShopInformation::updateById($id, $data);
-
-			$success = "Update data success";
-			$failure = "Failure";
-			Functions::returnAPI($ShopInfUpdate, $success, $failure);
-		} else {
-			$failure = "Invalid data !";
-			Functions::returnAPI([], "", $failure);
-		}
-	}
+            $ShopInfUpdate = ShopInformation::updateById($id, $data);
+            
+            $success = "Update data success";
+            $failure = "Failure";
+            Functions::returnAPI($ShopInfUpdate, $success, $failure );
+        } else {
+            $failure = "Invalid data !";            
+            Functions::returnAPI([], "", $failure );
+        }
+    }
 }

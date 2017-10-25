@@ -1,4 +1,4 @@
-<?php
+<?php 
 namespace app\controllers;
 
 use app\models\Category;
@@ -7,12 +7,6 @@ use utils\Functions;
 
 class CategoriesController
 {
-	public function index()
-	{
-		$cates = Category::getAll();
-		return view('categories/index', compact("cates"));
-	}
-
 	//select data
 	public function getAll()
 	{
@@ -23,23 +17,40 @@ class CategoriesController
 	}
 
 	//get data with id
-	public static function getById()
+	public function getById()
 	{
 		$data = Functions::getDataFromClient();
-		$view = false;
-		if (!$data) {
-			$view = true;
-			$data = $_REQUEST;
-		}
-		if (isset($data['id'])) {
-			// nguoi dung gui id
+		if (isset($data['id'])) { // nguoi dung gui id
 			$cate = Category::getById(Category::$table, $data['id']); // tra ve mang [] neu id k0 dung
 			$success = "Success";
 			$failure = "Not found category";
-			if ($view) {
-				return view('categories/update', compact("cate"));
+
+			Functions::returnAPI($cate, $success, $failure);
+		} else {
+			$failure = "Missing params";
+			Functions::returnAPI([], "", $failure );
+		}
+	}
+
+	// insert data
+	public function insert()
+	{
+		$data = Functions::getDataFromClient();
+		if (isset($data['name']) && isset($data['gender'])) {
+
+			$params = [
+			'name' => $data['name'], 
+			];
+
+			$checkNameExist = Category::checkDataExist($params); //kiem tra name co trong DB
+			if (!$checkNameExist) {
+				$success = "Insert success";
+
+				$cate = Category::insert($data);
+				Functions::returnAPI($cate, $success,"");			
 			} else {
-				Functions::returnAPI($cate, $success, $failure);
+				$failure = "Category already exists";
+				Functions::returnAPI([], "", $failure );
 			}
 		} else {
 			$failure = "Missing params";
@@ -47,62 +58,15 @@ class CategoriesController
 		}
 	}
 
-	public function getUpdate()
-	{
-		$cate = CategoriesController::getById();
-		die(var_dump($cate));
-		return view('categories/update', compact("cate"));
-	}
-
-	// insert data
-	public function insert()
-	{
-		$data = $_REQUEST;
-		if (isset($data['name']) && isset($data['gender'])) {
-
-			$params = [
-				'name' => $data['name'],
-			];
-
-			$checkNameExist = Category::checkDataExist($params); //kiem tra name co trong DB
-			if (!$checkNameExist) {
-				$success = "Insert success";
-				$cate = Category::insert($data);
-				redirect('admin/cates');
-			} else {
-				$error = "Category already exists";
-				return view("/categories/insert", compact("error"));
-			}
-		} else {
-			$error = "Missing params";
-			return view("/categories/insert", compact("error"));
-		}
-	}
-
-	// tranfer insert page
-	public function getInsert()
-	{
-		return view('/categories/insert');
-	}
-
 	// delete data
 	public function delete()
 	{
 		$data = Functions::getDataFromClient();
-		$view = false;
-		if (!$data) {
-			$view = true;
-			$data = $_REQUEST;
-		}
 		if (isset($data['id'])) {
 			$cate = Category::deleteById($data['id']);
 			$success = "Success";
 			$failure = "Category does not exist";
-			if ($view) {
-				redirect('admin/cates');
-			} else {
-				Functions::returnAPI($cate, $success, $failure);
-			}
+			Functions::returnAPI($cate, $success, $failure);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
@@ -113,59 +77,47 @@ class CategoriesController
 	public function update()
 	{
 		$data = Functions::getDataFromClient();
-		$view = false;
-		if (!$data) {
-			$view = true;
-			$data = $_REQUEST;
-		}
-		if (isset($data['id'])
-			&& isset($data['name'])
+		if (isset($data['id']) 
+			&& isset($data['name']) 
 			&& isset($data['gender'])
 		) {
 			$id = $data['id'];
 			$name = $data['name'];
-			$gender = $data['gender'];
+			$gender =  $data['gender'];
 
 			$paramsName = [
-				'name' => $name,
-				'gender' => $gender,
+			'name' => $name
 			];
 			$checkName = Category::checkDataExist($paramsName);
-			if (!$checkName) {
-				// name's not exist
+			if (!$checkName) { // name's not exist
 				$success = "Update success";
 				$cate = Category::updateById($id, $data);
-				if ($view) {
-					redirect('admin/cates');
-				}
+				Functions::returnAPI($cate, $success, "");
 			} else {
 				$params = [
 					'id' => $id,
-					'name' => $name,
-					'gender' => $gender,
+					'name' => $name
 				];
+				
 				$checkNameExist = Category::checkDataExist($params);
 				if ($checkNameExist) {
 					$success = "Update success";
 					$failure = "Category is not exist";
 					$cate = Category::updateById($id, $data);
-					if ($view) {
-						redirect('admin/cates');
-					}
+					Functions::returnAPI($cate, $success, $failure);
 				} else {
-					$error = "Category already exists";
-					$cate = Category::getById(Category::$table, $id);
-					return view("/categories/update", compact("error", "cate"));
+					$failure = "Name already exist";
+					Functions::returnAPI([], "", $failure);
 				}
 			}
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
 		}
-	}
+	}	
 
 	// get categories by catalog
-	public function getCategoriesByCatalog()
+	public function getCategoriesByCatalog() 
 	{
 		$table = Category::$table;
 		$sqlMale = "select * from {$table} where gender='male'";
@@ -176,31 +128,31 @@ class CategoriesController
 
 		$data = [
 			"male" => $catesByMale,
-			"female" => $catesByFemale,
+			"female" => $catesByFemale
 		];
 		$success = "Success";
 		$failure = "Failure";
 		Functions::returnAPI($data, $success, $failure);
 	}
 
-	// get all cates by gender
+	// get all cates by gender 
 	public function getByGender()
 	{
 		$data = Functions::getDataFromClient();
 		if ($data['gender']) {
-			$gender = $data['gender'];
+			$gender =  $data['gender'];
 			$table = Category::$table;
 			$paramsGenderCondition = [
-				'gender' => $gender,
+				'gender' => $gender
 			];
 
 			$catesByGender = Category::getByParams(['*'], $paramsGenderCondition);
-			foreach ($catesByGender as $key => $cate) {
+			foreach($catesByGender as $key => $cate) {
 				$paramsGetFields = ['id', 'name', 'price', 'image'];
 				$paramsConditions = [
-					'category_id' => $cate->id,
+					'category_id' => $cate->id
 				];
-
+			
 				$product_details = ProductDetail::getByParams($paramsGetFields, $paramsConditions);
 				$catesByGender[$key]->products = $product_details;
 			}
@@ -212,4 +164,4 @@ class CategoriesController
 			Functions::returnAPI([], "", $failure);
 		}
 	}
-}
+} 

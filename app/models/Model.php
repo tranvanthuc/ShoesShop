@@ -3,8 +3,7 @@ namespace app\models;
 
 use core\App;
 
-class Model
-{
+class Model {
 
   public static $table;
   // get all 
@@ -47,7 +46,6 @@ class Model
   public static function checkDataExist($params) 
   {
     $temp = App::get('database')->checkDataExist(static::$table, $params);
-    // die(var_dump($temp));
     return $temp ? true : false;
   } 
   
