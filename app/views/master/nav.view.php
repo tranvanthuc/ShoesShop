@@ -27,6 +27,7 @@
               </li>
           </ul>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="/admin/users">
             <i class="fa fa-users" aria-hidden="true"></i>
             <span class="nav-link-text">View list users</span>
@@ -72,5 +73,5 @@
       </ul>
     </div>
   </nav>
-
-
+  
+  

@@ -1,10 +1,8 @@
 <?php
 namespace app\controllers;
-
 use app\models\Category;
 use app\models\ProductDetail;
 use utils\Functions;
-
 class CategoriesController
 {
 	public function index()
@@ -12,7 +10,6 @@ class CategoriesController
 		$cates = Category::getAll();
 		return view('categories/index', compact("cates"));
 	}
-
 	//select data
 	public function getAll()
 	{
@@ -21,7 +18,6 @@ class CategoriesController
 		$failure = "Failure";
 		Functions::returnAPI($cates, $success, $failure);
 	}
-
 	//get data with id
 	public static function getById()
 	{
@@ -46,24 +42,20 @@ class CategoriesController
 			Functions::returnAPI([], "", $failure);
 		}
 	}
-
 	public function getUpdate()
 	{
 		$cate = CategoriesController::getById();
 		die(var_dump($cate));
 		return view('categories/update', compact("cate"));
 	}
-
 	// insert data
 	public function insert()
 	{
 		$data = $_REQUEST;
 		if (isset($data['name']) && isset($data['gender'])) {
-
 			$params = [
 				'name' => $data['name'],
 			];
-
 			$checkNameExist = Category::checkDataExist($params); //kiem tra name co trong DB
 			if (!$checkNameExist) {
 				$success = "Insert success";
@@ -78,13 +70,11 @@ class CategoriesController
 			return view("/categories/insert", compact("error"));
 		}
 	}
-
 	// tranfer insert page
 	public function getInsert()
 	{
 		return view('/categories/insert');
 	}
-
 	// delete data
 	public function delete()
 	{
@@ -108,7 +98,6 @@ class CategoriesController
 			Functions::returnAPI([], "", $failure);
 		}
 	}
-
 	// update data
 	public function update()
 	{
@@ -125,7 +114,6 @@ class CategoriesController
 			$id = $data['id'];
 			$name = $data['name'];
 			$gender = $data['gender'];
-
 			$paramsName = [
 				'name' => $name,
 				'gender' => $gender,
@@ -163,17 +151,14 @@ class CategoriesController
 			Functions::returnAPI([], "", $failure);
 		}
 	}
-
 	// get categories by catalog
 	public function getCategoriesByCatalog()
 	{
 		$table = Category::$table;
 		$sqlMale = "select * from {$table} where gender='male'";
 		$catesByMale = Category::query($sqlMale);
-
 		$sqlFemale = "select * from {$table} where gender='female'";
 		$catesByFemale = Category::query($sqlFemale);
-
 		$data = [
 			"male" => $catesByMale,
 			"female" => $catesByFemale,
@@ -182,7 +167,6 @@ class CategoriesController
 		$failure = "Failure";
 		Functions::returnAPI($data, $success, $failure);
 	}
-
 	// get all cates by gender
 	public function getByGender()
 	{
@@ -193,14 +177,12 @@ class CategoriesController
 			$paramsGenderCondition = [
 				'gender' => $gender,
 			];
-
 			$catesByGender = Category::getByParams(['*'], $paramsGenderCondition);
 			foreach ($catesByGender as $key => $cate) {
 				$paramsGetFields = ['id', 'name', 'price', 'image'];
 				$paramsConditions = [
 					'category_id' => $cate->id,
 				];
-
 				$product_details = ProductDetail::getByParams($paramsGetFields, $paramsConditions);
 				$catesByGender[$key]->products = $product_details;
 			}

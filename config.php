@@ -1,4 +1,4 @@
-<?php
+<?php 
 // mysql
 
 // return [
@@ -13,13 +13,14 @@
 //   ]
 // ];
 return [
-	'database' => [
-		'name' => 'dbshoesshop',
-		'username' => 'dbshoesshop',
-		'password' => 'thuc123*',
-		'connection' => 'mysql:host=mysql6.gear.host',
-		'options' => [
-			PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-		],
-	],
+  'database' => [
+    'name' => 'dbshoesshop',
+    'username' => 'dbshoesshop',
+    'password' => 'thuc123*',
+    'connection' => 'mysql:host=mysql6.gear.host',
+    'options' => [
+      PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
+    ]
+  ]
 ];
+
