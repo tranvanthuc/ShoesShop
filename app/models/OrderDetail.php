@@ -13,8 +13,14 @@ class OrderDetail extends Model
 
     public static function getByOrderId($id)
     {
-        $table = OrderDetail::$table;
-        $sql = "select * from {$table} where order_id={$id}";
+        $sql = "select users.last_name, users.first_name, users.email, users.phone,
+        users.address, orders.id as order_id, order_details.name, 
+        order_details.price, order_details.quantity,
+        order_details.size, order_details.total
+        from dbshoesshop.orders
+        inner join dbshoesshop.users on users.id = orders.user_id
+        inner join dbshoesshop.order_details on orders.id = order_details.order_id
+        where orders.id ={$id};";
 
         $orderDetail = OrderDetail::query($sql);
         return $orderDetail;        

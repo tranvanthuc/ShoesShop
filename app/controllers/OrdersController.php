@@ -17,12 +17,13 @@ class OrdersController
 	}
 
 	// select order with id
-	public function getByUserId()
+	public function getById()
 	{
 		$data = Functions::getDataFromClient();
-		if(isset($data['user_id'])) {
-			$id = $data['user_id'];
-			$order = Order::getAllInfoByUserId($id);
+		if(isset($data['id'])) {
+			$id = $data['id'];
+			$order = Order::getAllInfoById($id);
+			// die(var_dump($order));
 			$success = "Success";
 			$failure = "Not found Order!";
 			Functions::returnAPI($order, $success,$failure);
@@ -36,7 +37,7 @@ class OrdersController
 	public function insert()
 	{
 		$data = Functions::getDataFromClient();
-		die(var_dump($data));
+		// die(var_dump($data));
 		if (isset($data['user_id'])) {
 			$user_id = $data['user_id'];
             $date = date("Y-m-d H:i:s"); 
@@ -69,7 +70,7 @@ class OrdersController
 					isset($data['products'][$i]['price']) &&
 					isset($data['products'][$i]['total'])
 				) {					
-					die(var_dump(count($data['products'])));
+					// die(var_dump(count($data['products'])));
 					$paramsOrderDetail = [
 						'order_id' => $orderId,
 						'name' => $data['products'][$i]['name'],
@@ -109,18 +110,28 @@ class OrdersController
 		$data = Functions::getDataFromClient();
 		if (isset($data['id'])) {
 			$id = $data['id'];
+			// die(var_dump("miss".$id ));
+			$checkId = [
+				'id' => $id
+			];
+			$checkIdExist = Order::checkDataExist($checkId);
+			// die(var_dump($checkIdExist ));
+			if($checkIdExist){
+				$orderDetail = OrderDetail::getByOrderId($id);
+				OrderDetail::deleteByOrderId($id);
 
-			$orderDetail = OrderDetail::getByOrderId($id);
-			OrderDetail::deleteByOrderId($id);
+				$order = Order::deleteById($id);
+				// die(var_dump("miss".$checkIdExist ));
+				$result["order"] = $order;
+				$result["order_details"] = $orderDetail;
 
-			$order = Order::deleteById($id);
-			
-			$result["order"] = $order;
-			$result["order_details"] = $orderDetail;
-
-			$success = "Success";
-			$failure = "Not found order to delete !";
-			Functions::returnAPI($result, $success, $failure);
+				$success = "Success";
+				$failure = "Failure";
+				Functions::returnAPI($result, $success, $failure);
+			} else {
+				$failure = "Order is not exist !";
+				Functions::returnAPI([], "", $failure);
+			}
 			// die("Delete success");
 		} else {
 			$failure = "Missing params";
