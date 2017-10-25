@@ -5,8 +5,8 @@ use app\models\ProductDetail;
 
 class PagesController 
 {
-  public function index()
+  public function dashboard()
   {
-    return view('index');
+    return view('dashboard');
   }
 }
