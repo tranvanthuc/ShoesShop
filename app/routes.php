@@ -112,3 +112,4 @@ $router->post('admin/shop-info/update', 'ShopInfController@update');
 //order
 $router->get('admin/orders', 'OrdersController@index');
 $router->get('admin/orders/order-detail', 'OrdersController@getOrderDetail');
+$router->get('admin/orders/order/delete', 'OrdersController@delete');

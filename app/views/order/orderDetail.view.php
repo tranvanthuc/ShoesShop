@@ -33,7 +33,12 @@
                                     <?= $orders[0]->date ?>
                                 </p>
                                 <p class="card-text">Total Fee:
-                                    <?= $orders[0]->date ?>
+                                    <?php $total = 0;
+                                        foreach($orders as $order){
+                                            $total = $total + $order->price*$order->quantity;
+                                        }
+                                        echo (float)$total;  
+                                    ?>
                                 </p>
                                 <p class="card-text">Status: Done</p>
                             </div>
@@ -73,7 +78,7 @@
                             </div>
                             <div class="card-footer " style="color: black;">
                                 <center>
-                                    <a href="javascript: history.go(-1)" class="btn btn-primary">View List order</a>
+                                    <a href="#" class="btn btn-primary">View List order</a>
                                 </center>
                             </div>
                         </div>
@@ -109,7 +114,7 @@
                                         <?= $order->size ?>
                                     </td>
                                     <td>
-                                        <?= $order->color ?>
+                                        <?= $order->pro_detail_name ?>
                                     </td>
                                     <td>
                                         <?= $order->quantity ?>

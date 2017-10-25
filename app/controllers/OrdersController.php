@@ -2,6 +2,7 @@
 namespace app\controllers;
 
 use app\models\Order;
+use app\models\OrderDetail;
 use utils\Functions;
 
 class OrdersController
@@ -58,12 +59,25 @@ class OrdersController
 	public function delete()
 	{
 		$data = Functions::getDataFromClient();
+
+		// check send json or params
+		$view = false;
+		if (!$data) {
+		$view = true;
+		$data = $_REQUEST;        
+		}
+		
 		if (isset($data['id'])) {
 			$id = $data['id'];
 			$order = Order::deleteById($id);
+			$orderDetail = OrderDetail::deleteById($id);
 			$success = "Success";
 			$failure = "Not found order to delete !";
-			Functions::returnAPI($order, $success, $failure);
+			if ($view) {
+                return redirect('admin/orders');
+            } else {
+				Functions::returnAPI($order, $success, $failure);
+			}
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);

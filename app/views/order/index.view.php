@@ -1,6 +1,7 @@
 
 <?php require('app/views/master/header.view.php') ?>
 <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+<link href="/public/css/order.css" rel="stylesheet">
 
 <body class="fixed-nav sticky-footer " id="page-top">
 <?php require('app/views/master/nav.view.php') ?>
@@ -52,14 +53,40 @@
                                 <td><?= $order->email?></td>
                                 <td><?= $order->date?></td>
                                 <td><?= $order->totalFee?></td>
-                                <td><ul style=" list-style-type: none; margin: 0;padding: 0;">
-                                    <li style="float:left;">
-                                        <a href="<?= "orders/order-detail/?id=".$order->order_id ?>" id ="btn-update">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;
-                                        </a>
-                                    </li>
-                                    <li style="float:left;"><i class="fa fa-trash-o" aria-hidden="true"></i></li>
-                                </ul></td>
+                                <td>
+                                    <ul id ="action-btn" >
+                                        <li >
+                                            <a href="<?= "orders/order-detail/?id=".$order->order_id ?>" id ="btn-update">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;
+                                            </a>
+                                        </li>
+                                        <li style="float:left;">
+                                            <a href="" id ="btn-update" data-toggle="modal" data-target="#myModal">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </a>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="myModal" role="dialog">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Delete order</h5>
+                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p>Do you want to delete it?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button class="btn btn-primary" type= "submit">
+                                                            <a href="<?= "orders/order/delete/?id=".$order->order_id ?>" style="color:black;">OK </a>
+                                                        </button>
+                                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick='window.location.reload();' >Close</button>
+                                                    </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </li>
+                                    </ul>
+                                </td>
                             </tr>
                                 <?php }?>
                             </tbody>
@@ -67,7 +94,6 @@
                     </div>
                 </div> 
             </div>      
-            <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
         </div>
     </div>
 </body>

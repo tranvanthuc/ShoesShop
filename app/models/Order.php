@@ -45,7 +45,7 @@ class Order extends Model
 		$sql = "select 	users.first_name, users.last_name, users.email, users.phone, users.address,	users.gender,
 					orders.id as order_id, orders.date,
 					order_details.quantity, order_details.product_id,
-					products.size, products.color,
+					products.size, products.color, product_details.name as pro_detail_name,
 					product_details.name, product_details.price,
 					categories.name as cate_name
 					from dbshoesshop.users 
