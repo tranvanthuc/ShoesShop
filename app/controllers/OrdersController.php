@@ -17,12 +17,13 @@ class OrdersController
 	}
 
 	// select order with id
-	public function getByUserId()
+	public function getById()
 	{
 		$data = Functions::getDataFromClient();
-		if(isset($data['user_id'])) {
-			$id = $data['user_id'];
-			$order = Order::getAllInfoByUserId($id);
+		if(isset($data['id'])) {
+			$id = $data['id'];
+			$order = Order::getAllInfoById($id);
+			// die(var_dump($order));
 			$success = "Success";
 			$failure = "Not found Order!";
 			Functions::returnAPI($order, $success,$failure);
@@ -36,6 +37,7 @@ class OrdersController
 	public function insert()
 	{
 		$data = Functions::getDataFromClient();
+		// die(var_dump($data));
 		if (isset($data['user_id'])) {
 			$user_id = $data['user_id'];
             $date = date("Y-m-d H:i:s"); 
@@ -62,16 +64,20 @@ class OrdersController
 			//Read json of order detail to insert
 			for($i=0; $i< count($data['products']); $i++){
 				if(
-					isset($data['products'][$i]['id']) && 	
+					isset($data['products'][$i]['name']) && 
+					isset($data['products'][$i]['size']) &&	
 					isset($data['products'][$i]['quantity']) &&
-					isset($data['products'][$i]['price'])
-				) {
-					
+					isset($data['products'][$i]['price']) &&
+					isset($data['products'][$i]['total'])
+				) {					
+					// die(var_dump(count($data['products'])));
 					$paramsOrderDetail = [
 						'order_id' => $orderId,
-						'product_id' => $data['products'][$i]['id'],						
+						'name' => $data['products'][$i]['name'],
+						'size' => $data['products'][$i]['size'],						
 						'quantity' => $data['products'][$i]['quantity'],
-						'price' => $data['products'][$i]['price']
+						'price' => $data['products'][$i]['price'],
+						'total' => $data['products'][$i]['total']
 					];
 
 					$orderDetail = OrderDetail::insert($paramsOrderDetail);
@@ -104,18 +110,28 @@ class OrdersController
 		$data = Functions::getDataFromClient();
 		if (isset($data['id'])) {
 			$id = $data['id'];
+			// die(var_dump("miss".$id ));
+			$checkId = [
+				'id' => $id
+			];
+			$checkIdExist = Order::checkDataExist($checkId);
+			// die(var_dump($checkIdExist ));
+			if($checkIdExist){
+				$orderDetail = OrderDetail::getByOrderId($id);
+				OrderDetail::deleteByOrderId($id);
 
-			$orderDetail = OrderDetail::getByOrderId($id);
-			OrderDetail::deleteByOrderId($id);
+				$order = Order::deleteById($id);
+				// die(var_dump("miss".$checkIdExist ));
+				$result["order"] = $order;
+				$result["order_details"] = $orderDetail;
 
-			$order = Order::deleteById($id);
-			
-			$result["order"] = $order;
-			$result["order_details"] = $orderDetail;
-
-			$success = "Success";
-			$failure = "Not found order to delete !";
-			Functions::returnAPI($result, $success, $failure);
+				$success = "Success";
+				$failure = "Failure";
+				Functions::returnAPI($result, $success, $failure);
+			} else {
+				$failure = "Order is not exist !";
+				Functions::returnAPI([], "", $failure);
+			}
 			// die("Delete success");
 		} else {
 			$failure = "Missing params";

@@ -60,7 +60,7 @@ $router->post('shop-info/update', 'ShopInfController@update');
 
 //Order Controller
 $router->get('orders', 'OrdersController@getAll');
-$router->post('orders/order', 'OrdersController@getByUserId');
+$router->post('orders/order', 'OrdersController@getById');
 $router->post('order/update', 'OrdersController@update');
 $router->post('order/delete', 'OrdersController@delete');
 $router->post('order/insert', 'OrdersController@insert');
