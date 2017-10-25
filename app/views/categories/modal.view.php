@@ -13,8 +13,8 @@
           <input type="hidden" class="form-control" id="id" name="id">
           <p>Do you want to delete this categories?</p>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <input type="submit" class="btn btn-danger" value="Delete">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+            <input type="submit" class="btn btn-danger" value="Yes">
           </div>
         </form>
       </div>
