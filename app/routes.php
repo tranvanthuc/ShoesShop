@@ -135,3 +135,11 @@ $router->post('admin/product/size/delete', 'ProductsController@delete');
 
 // update quantity
 $router->post('admin/product/quantity/update', 'ProductsController@update');
+
+
+
+// admin of categories
+$router->get('admin/cates', 'CategoriesController@index');
+$router->get('admin/cate/insert', 'CategoriesController@getInsert');
+$router->get('admin/cate/update', 'CategoriesController@getUpdate');
+$router->post('admin/cate/delete', 'CategoriesController@delete');
