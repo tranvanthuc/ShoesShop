@@ -33,19 +33,28 @@ class ProductDetailsController
 		}
 	}
 
+	// get insert
+	public function getInsert()
+	{
+		$cates = Category::getAll();
+		return view('products/insert', compact('cates'));
+	}
+
 	// insert data table Product_details
 	public function insert()
 	{
 		$data = Functions::getDataFromClient();
+		if (!$data) {
+			$data = $_REQUEST;
+		}
 		if(isset($data['name'])
 			&& isset($data['price'])
 			&& isset($data['category_id'])
 		) {
 			
-			$proDetail = ProductDetail::insert($data);
-			$success = "Success";
-			$failure = "Failure";
-			Functions::returnAPI($proDetail, $success, $failure);
+			ProductDetail::insert($data);
+			
+			\redirect('admin/products');
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
@@ -55,13 +64,22 @@ class ProductDetailsController
 	// delete data in table
 	public function delete()
 	{
-		$data = Functions::getDataFromClient();
+		$data = Functions::getDataFromClient(); 
+		if (!$data) {
+			$data = $_REQUEST;
+		}
 		if (isset($data['id'])) {
 			$id = $data['id'];
+			
+			$params = [
+				'product_detail_id' => $id
+			];
+			
+			$products = Product::deleteByParams($params);
+
 			$proDetail = ProductDetail::deleteById($id);
-			$success = "Success";
-			$failure = "Not found product to delete !";
-			Functions::returnAPI($proDetail, $success, $failure);
+			
+			\redirect('admin/products');
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
@@ -96,26 +114,12 @@ class ProductDetailsController
 			'name' => $name
 			];
 			$checkNameExist = ProductDetail::checkDataExist($checkName);
-			if(!$checkNameExist) {
+			if(count($checkNameExist)  <= 1 ) {
 				$proDetail = ProductDetail::updateById($id, $data);
-				
-				\redirect('/admin/products');
-				Functions::returnAPI($proDetail, $success, $failure);
+				\redirect('admin/product/update?id='. $id);
 			} else {
-				$paramsID = [
-				'name' => $name,
-				'id' => $id
-				];
-				$checkNameExist = ProductDetail::checkDataExist($paramsID);
-				if($checkNameExist) {
-					$proDetail = ProductDetail::updateById($id, $data);
-					$success = "Success";
-					$failure = "Failure";
-					Functions::returnAPI($proDetail, $success, $failure);
-				} else {
-					$failure = "Name already exist";
-					Functions::returnAPI([], "", $failure);
-				}
+				$failure = "Name already exist";
+				Functions::returnAPI([], "", $failure);
 			}
 			
 		} else {
@@ -164,5 +168,6 @@ class ProductDetailsController
 		$proDetails = ProductDetail::getAll();
 		return view('products/index', compact('proDetails'));
 	}
+
 }
 

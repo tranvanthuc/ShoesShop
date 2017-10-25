@@ -14,7 +14,7 @@
     <!-- content -->
     <div class="card mb-3">
       <div class="card-header">
-        <i class="fa fa-table"></i> Products management
+        <i class="fa fa-table"></i> List Products
       </div>
       <div class="card-body">
         <div class="table-responsive">
@@ -49,7 +49,9 @@
                 <td>
                   <a href=<?= "/admin/product/update?id=" . $product->id ?> class="btn btn-primary fa fa-pencil-square-o"></a>
                   &nbsp;
-                  <a href="#" class="btn btn-danger fa fa fa-trash-o"></a>
+                  <a href="#" class="btn btn-danger fa fa-trash-o" 
+                  data-toggle="modal" data-target="#deleteModal" 
+                  data-id="<?= $product->id; ?>"
                 </td>
               </tr>
                 <?php endforeach; ?>
@@ -64,6 +66,7 @@
 
 
 
+<?php require('modalDelete.view.php') ?>
 <?php require('app/views/master/footer.view.php') ?>
 
 <script src="/vendor/datatables/jquery.dataTables.js"></script>

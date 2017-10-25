@@ -1,4 +1,7 @@
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+
+<!-- edit -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -9,14 +12,14 @@
       <div class="modal-body">
         <form action="/admin/product/quantity/update" method="post">
           <input type="hidden" class="form-control" id="id" name="id">
-          <input type="hidden" class="form-control" id="product-detail-id" name="product-detail-id">
+          <input type="hidden" class="form-control" id="product_detail_id" name="product_detail_id">
           <div class="form-group">
             <label for="recipient-name" class="col-form-label">Size:</label>
             <input type="text" class="form-control" id="size" name="size" readonly="true">
           </div>
           <div class="form-group">
             <label for="message-text" class="col-form-label">Quantity:</label>
-            <input type="text" class="form-control" id="quantity" name="quantity" >
+            <input type="number" class="form-control" id="quantity" name="quantity" >
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -24,41 +27,22 @@
           </div>
         </form>
       </div>
-      
     </div>
   </div>
 </div>
 
 <script>
-$('#myModal').on('show.bs.modal', function (event) {
+$('#editModal').on('show.bs.modal', function (event) {
   var button = $(event.relatedTarget) // Button that triggered the modal
   var id = button.data('id');
   var size = button.data('size');
   var quantity = button.data('quantity');
-  var productDetailId = button.data('product-detail-id');
+  var product_detail_id = button.data('product-detail-id');
      
   $('#id').val(id);
   $('#size').val(size);
   $('#quantity').val(quantity);
-  $('#product-detail-id').val(productDetailId);
+  $('#product_detail_id').val(product_detail_id);
 
-  // $.ajax({
-  //   type: "POST",
-  //   url: "http://localhost:8000/products/product",
-  //   data: {id: id},
-  //   success: function(data){
-      
-  //     var data = JSON.parse(data);
-  //     var product = data.results[0];
-  //     console.log(product.id);
-  //     console.log(product);
-      
-  //     $('#id').val(product.id);
-  //     $('#size').val(product.size);
-  //     $('#quantity').val(product.quantity);
-  //   }
-
-  // });
-  
 })
 </script>

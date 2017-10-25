@@ -1,19 +1,29 @@
 <form action="/admin/product/update" method="post">
   <div class="row">
     <div class="col-md-10 offset-md-1">
+      <input type="hidden" class="form-control" name="id" 
+        value=<?= $proDetail->id ?> >
       <div class="form-group">
         <label for="name">Name</label>
         <input type="text" class="form-control" name="name" 
-        value=<?= $proDetail->name ?> >
+        value="<?= $proDetail->name; ?>" >
       </div>
 
       <div class="form-group">
         <label for="category">Category</label>
         <select class="form-control" name="category_id">
         <?php foreach($cates as $cate) : ?>
-          <option value=<?= $cate->id ?>>
-            <?= $cate->name . " - " . $cate->gender ?> 
-          </option>
+          <?php if ($cate->id === $proDetail->category_id) { ?>
+            <option value=<?= $cate->id ?> 
+            selected="selected"
+            >
+              <?= $cate->name . " - " . $cate->gender ?> 
+            </option>
+          <?php } else { ?>
+            <option value=<?= $cate->id ?> >
+              <?= $cate->name . " - " . $cate->gender ?> 
+            </option>
+          <?php } ?>
         <?php endforeach ?>
         </select>
       </div>

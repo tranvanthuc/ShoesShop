@@ -39,35 +39,27 @@ class ProductsController
 	public function insert()
 	{
 		$data = Functions::getDataFromClient();
+		if(!$data) {
+			$data = $_REQUEST;
+		}
 		if (isset($data['product_detail_id'])
 			&& isset($data['size'])
 			&& isset($data['color'])
 			&& isset($data['quantity'])
 		) {
-			$product_detail_id = $data['product_detail_id'];
 			$size = $data['size'];
-			$color = $data['color'];
-			$quantity = $data['quantity'];
+			$product_detail_id = $data['product_detail_id'];
 
-			$checkSizeAndColor = [
+			$checkSize = [
 				'size' => $size,
-				'color' => $color
+				'product_detail_id' => $product_detail_id
 			];
-			$checkSizeAndColorExist = Product::checkDataExist($checkSizeAndColor);
-			if (!$checkSizeAndColorExist) {
-				$params = [
-					'product_detail_id' => $product_detail_id,
-					'size' => $size,
-					'color' => $color,
-					'quantity' => $quantity,
-				];
-				
-				$product = Product::insert($params);
-				$success = "Success";
-				$failure = "Failure";
-				Functions::returnAPI($product, $success, $failure);
+			$checkSizeExist = Product::checkDataExist($checkSize);
+			if (!$checkSizeExist) {
+				$product = Product::insert($data);
+				\redirect('admin/product/update?id='.$product_detail_id);
 			} else {
-				$failure = "Color and size already existed ! ";
+				$failure = "Size already existed ! ";
 				Functions::returnAPI([], "", $failure);
 			}
 
@@ -91,7 +83,7 @@ class ProductsController
 			$id = $data['id'];
 			$size = $data['size'];
 			$quantity = $data['quantity'];
-			$productDetailId = $data['product-detail-id'];
+			$product_detail_id = $data['product_detail_id'];
 
 			$params = [
 				'size' => $size,
@@ -99,7 +91,7 @@ class ProductsController
 			];
 			$product = Product::updateById($id, $params);
 			
-			\redirect('admin/product/update?id='.$productDetailId);
+			\redirect('admin/product/update?id='.$product_detail_id);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
@@ -110,12 +102,14 @@ class ProductsController
 	public function delete()
 	{
 		$data = Functions::getDataFromClient();
+		if (!$data) {
+			$data = $_REQUEST;
+		}
 		if (isset($data['id'])) {
 			$id = $data['id'];
+			$product_detail_id = $data['product_detail_id'];
 			$product = Product::deleteById($id);
-			$success = "Success";
-			$failure = "Not found product to delete !";
-			Functions::returnAPI($product, $success, $failure);
+			\redirect('admin/product/update?id='.$product_detail_id);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);

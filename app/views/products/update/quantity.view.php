@@ -1,3 +1,9 @@
+<div class="btn-add">
+  <button type="button" class="btn btn-primary fa fa-plus" data-toggle="modal" data-target="#addModal">
+  </button>
+</div>
+
+<?php require('modalAdd.view.php') ?>
 <div class="table-responsive">
   <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
     <thead >
@@ -28,18 +34,22 @@
         <td><?= $product->quantity ?></td>
         <td>
         <a href="#" class="btn btn-primary fa fa-pencil-square-o" 
-        data-toggle="modal" data-target="#myModal" 
+        data-toggle="modal" data-target="#editModal" 
         data-id="<?= $product->id; ?>" data-size="<?= $product->size; ?>" 
         data-quantity="<?= $product->quantity; ?>"
         data-product-detail-id=<?= $proDetail->id ?>
         >
         </a>
           &nbsp;
-          <a href="#" class="btn btn-danger fa fa fa-trash-o"></a>
+          <a href="#" class="btn btn-danger fa fa-trash-o" 
+          data-toggle="modal" data-target="#deleteModal" 
+          data-id="<?= $product->id; ?>"
+          data-product-detail-id=<?= $proDetail->id ?>
         </td>
       </tr>
         <?php endforeach; ?>
     </tbody>
   </table>
-  <?php require('modal.view.php') ?>
+  <?php require('modalDelete.view.php') ?>
+  <?php require('modalEdit.view.php') ?>
 </div>

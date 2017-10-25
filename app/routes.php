@@ -117,6 +117,21 @@ $router->get('admin/users', 'UsersController@index');
 
 // products managements
 $router->get('admin/products', 'ProductDetailsController@index');
+
+// insert product
+$router->get('admin/product/insert', 'ProductDetailsController@getInsert');
+$router->post('admin/product/insert', 'ProductDetailsController@insert');
+
+// update product
 $router->get('admin/product/update', 'ProductDetailsController@getUpdate');
 $router->post('admin/product/update', 'ProductDetailsController@update');
+
+// delete
+$router->post('admin/product/delete', 'ProductDetailsController@delete');
+
+// insert size
+$router->post('admin/product/size/insert', 'ProductsController@insert');
+$router->post('admin/product/size/delete', 'ProductsController@delete');
+
+// update quantity
 $router->post('admin/product/quantity/update', 'ProductsController@update');

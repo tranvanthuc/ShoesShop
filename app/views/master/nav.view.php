@@ -21,15 +21,21 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Products management">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#products-management" data-parent="#parent-products">
-            <i class="fa fa-users" aria-hidden="true"></i>
+            <i class="fa fa-cubes" aria-hidden="true"></i>
             <span class="nav-link-text">Products management</span>
           </a>
           <ul class="sidenav-second-level collapse" id="products-management">
             <li>
-              <a href="/admin/product/insert">Add Product</a>
+              <a href="/admin/product/insert">
+                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                <span class="nav-link-text">Add Product</span>
+              </a>
             </li>
             <li>
-              <a href="/admin/products">List Products</a>
+              <a href="/admin/products">
+              <i class="fa fa-list" aria-hidden="true"></i>
+              <span class="nav-link-text">List Products</span>
+              </a>
             </li>
           </ul>
         </li>
