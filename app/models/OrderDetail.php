@@ -5,8 +5,11 @@ class OrderDetail extends Model
 {
 	static $table = "order_details";
 	public $order_id;
-    public $product_id;
+    public $name;
+    public $size;    
     public $quantity;
+    public $price;
+    public $total;
 
     public static function getByOrderId($id)
     {

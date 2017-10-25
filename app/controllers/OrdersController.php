@@ -36,6 +36,7 @@ class OrdersController
 	public function insert()
 	{
 		$data = Functions::getDataFromClient();
+		die(var_dump($data));
 		if (isset($data['user_id'])) {
 			$user_id = $data['user_id'];
             $date = date("Y-m-d H:i:s"); 
@@ -62,18 +63,20 @@ class OrdersController
 			//Read json of order detail to insert
 			for($i=0; $i< count($data['products']); $i++){
 				if(
-					isset($data['products'][$i]['id']) && 
+					isset($data['products'][$i]['name']) && 
 					isset($data['products'][$i]['size']) &&	
 					isset($data['products'][$i]['quantity']) &&
-					isset($data['products'][$i]['price'])
-				) {
-					$productId = Order::getProductId($data['products'][$i]['id'],$data['products'][$i]['size'] );
-					// die(var_dump($productId ));
+					isset($data['products'][$i]['price']) &&
+					isset($data['products'][$i]['total'])
+				) {					
+					die(var_dump(count($data['products'])));
 					$paramsOrderDetail = [
 						'order_id' => $orderId,
-						'product_id' => $productId[0]->id,						
+						'name' => $data['products'][$i]['name'],
+						'size' => $data['products'][$i]['size'],						
 						'quantity' => $data['products'][$i]['quantity'],
-						'price' => $data['products'][$i]['price']
+						'price' => $data['products'][$i]['price'],
+						'total' => $data['products'][$i]['total']
 					];
 
 					$orderDetail = OrderDetail::insert($paramsOrderDetail);

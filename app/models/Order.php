@@ -26,15 +26,5 @@ class Order extends Model
 		$order = Order::query($sql);
 		return $order;
 	}
-	
-	//get product Id by product_detail and size
-	public static function getProductId($productDedetailId, $size)
-	{
-		$sql = "select products.id from dbshoesshop.product_details 
-		inner join dbshoesshop.products on products.product_detail_id = product_details.id
-		where products.size = {$size} and product_details.id = {$productDedetailId}";
-		$productId = Order::query($sql);
-		return $productId;
-	}
 }
 
