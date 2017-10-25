@@ -1,0 +1,5 @@
+.btn-add {
+  position: absolute;
+  right: 42%;
+  z-index: 100;
+}

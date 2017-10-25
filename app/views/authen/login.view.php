@@ -1,6 +1,10 @@
 
-<?php require('master/header.view.php') ?>
-
+<?php require('app/views/master/header.view.php') ?>
+<?php 
+  if (isset($_SESSION['user'])) {
+    redirect('admin/dashboard');
+  }
+?>
 <body class="bg-dark">
   <div class="container">
     <div class="card card-login mx-auto mt-5">
@@ -15,21 +19,16 @@
             <label for="exampleInputPassword1">Password</label>
             <input class="form-control"  type="password" name="password" placeholder="Password">
           </div>
-          <!-- <div class="form-group">
-            <div class="form-check">
-              <label class="form-check-label">
-                <input class="form-check-input" type="checkbox"> Remember Password</label>
-            </div>
-          </div> -->
           <input type="submit" class="btn btn-primary btn-block" value="Login" >
         </form>
-        <div class="text-center">
-          <a class="d-block small mt-3" href="register.html">Register an Account</a>
-          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
-        </div>
+        <?php if(isset($error)) { ?>
+          <div class="alert alert-warning" role="alert">
+            <strong>Error!</strong> <?= $error ?>
+          </div>
+        <?php } ?>
       </div>
     </div>
   </div>
   
 
-<?php require('master/footer.view.php') ?>
+<?php require('app/views/master/footer.view.php') ?>

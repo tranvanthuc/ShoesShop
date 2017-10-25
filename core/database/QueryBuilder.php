@@ -70,6 +70,23 @@ class QueryBuilder
             die($e->getMessage());
         }
     }
+    // delete by params
+    public function deleteByParams($table, $params)
+    {
+        $result = Functions::getStringParams($params);
+        $sql = sprintf(
+            "delete from %s where %s",
+            $table,
+            implode(" and ", $result)
+        );
+        
+        try {
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute($params);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 
     // create query
     public function query($sql)

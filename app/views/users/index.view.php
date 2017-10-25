@@ -1,60 +1,54 @@
 
-<?php require('master/header.view.php') ?>
+<?php require('app/views/master/header.view.php') ?>
 <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-<?php require('master/nav.view.php') ?>
+<?php require('app/views/master/nav.view.php') ?>
 
 <div class="content-wrapper">
   <div class="container-fluid">
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
-      <li class="breadcrumb-item">
-        <a href="#">Dashboard</a>
-      </li>
-      <li class="breadcrumb-item active">Charts</li>
+      <li class="breadcrumb-item active">View list users</li>
     </ol>
     <!-- content -->
     <div class="card mb-3">
       <div class="card-header">
-        <i class="fa fa-table"></i> Data Table Example
+        <i class="fa fa-table"></i> List users
       </div>
       <div class="card-body">
         <div class="table-responsive">
           <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <?php 
+                $fields = ['ID', 'Name','Email', 'Gender', 'Role'];
+                foreach($fields as $field) :
+                ?>
+                <th><?= $field ?></th>
+                <?php endforeach; ?>
               </tr>
             </thead>
             <tfoot>
               <tr>
-                <th>Name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th>Age</th>
-                <th>Start date</th>
-                <th>Salary</th>
+                <?php foreach($fields as $field) : ?>
+                <th><?= $field ?></th>
+                <?php endforeach; ?>
               </tr>
             </tfoot>
             <tbody>
               <?php
-                for($i=0 ; $i<11 ; $i++) {
+                $i = 1;
+                foreach($users as $user) :
               ?>
               <tr>
-                <td>Tiger Nixon</td>
-                <td>System Architect</td>
-                <td>Edinburgh</td>
-                <td>61</td>
-                <td>2011/04/25</td>
-                <td>$320,800</td>
+                <td><?= $i++ ?></td>
+                <td><?= $user->first_name . ", " . $user->last_name; ?></td>
+                <td><?= $user->email ?></td>
+                <td><?= $user->gender == 1 ? "Male" : "Female" ?></td>
+                <td><?= $user->role_id == 1 ? "Admin" : "Customer" ?></td>
               </tr>
-                <?php }?>
+                <?php endforeach; ?>
             </tbody>
           </table>
         </div>
@@ -67,7 +61,7 @@
 
 
 
-<?php require('master/footer.view.php') ?>
+<?php require('app/views/master/footer.view.php') ?>
 
 <script src="/vendor/datatables/jquery.dataTables.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>

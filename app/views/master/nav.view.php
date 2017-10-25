@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="index.html">Start Bootstrap</a>
+    <a class="navbar-brand" href="index.html">Shoes Shop</a>
     <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -8,10 +8,36 @@
       <!-- nav - sidenav -->
       <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="index.html">
+          <a class="nav-link" href="/">
             <i class="fa fa-fw fa-dashboard"></i>
             <span class="nav-link-text">Dashboard</span>
           </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="/admin/users">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <span class="nav-link-text">View list users</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Products management">
+          <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#products-management" data-parent="#parent-products">
+            <i class="fa fa-cubes" aria-hidden="true"></i>
+            <span class="nav-link-text">Products management</span>
+          </a>
+          <ul class="sidenav-second-level collapse" id="products-management">
+            <li>
+              <a href="/admin/product/insert">
+                <i class="fa fa-plus-square" aria-hidden="true"></i>
+                <span class="nav-link-text">Add Product</span>
+              </a>
+            </li>
+            <li>
+              <a href="/admin/products">
+              <i class="fa fa-list" aria-hidden="true"></i>
+              <span class="nav-link-text">List Products</span>
+              </a>
+            </li>
+          </ul>
         </li>
       </ul>
 
@@ -25,12 +51,13 @@
         </li>
       </ul>
       <ul class="navbar-nav ml-auto">
-        
         <li class="nav-item">
-          <a class="nav-link" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa fa-fw fa-sign-out"></i>Logout</a>
+          <a class="nav-link" href="http://localhost:8000/admin/logout">
+            <i class="fa fa-fw fa-sign-out"></i>Logout
+          </a>
         </li>
       </ul>
     </div>
   </nav>
+  
   
