@@ -9,6 +9,16 @@
   <div class="container-fluid">
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
+      <li class="breadcrumb-item">
+        <a href="#">Dashboard</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="#">Products Management</a>
+      </li>
+      <li class="breadcrumb-item">
+        <a href="/admin/cates">Categories Management</a>
+      </li>
+      <li class="breadcrumb-item active">Charts</li>
       <li class="breadcrumb-item active">View list users</li>
     </ol>
     <!-- content -->

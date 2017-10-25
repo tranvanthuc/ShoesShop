@@ -38,11 +38,10 @@ $('#editModal').on('show.bs.modal', function (event) {
   var size = button.data('size');
   var quantity = button.data('quantity');
   var product_detail_id = button.data('product-detail-id');
-     
+
   $('#id').val(id);
   $('#size').val(size);
   $('#quantity').val(quantity);
   $('#product_detail_id').val(product_detail_id);
-
 })
 </script>

@@ -2,7 +2,6 @@
 namespace app\controllers;
 
 use app\models\OrderDetail;
-use app\models\Product;
 use utils\Functions;
 
 class OrderDetailsController
@@ -20,17 +19,17 @@ class OrderDetailsController
 	public function getByProductId()
 	{
 		$data = Functions::getDataFromClient();
-		if(isset($data['id'])) {
+		if (isset($data['id'])) {
 			$id = $data['id'];
 			$orderdetail = OrderDetail::getAllInfoByProductId($id);
 
 			$success = "Success";
 			$failure = "Not found Order Detail!";
-			Functions::returnAPI($orderdetail, $success,$failure);
+			Functions::returnAPI($orderdetail, $success, $failure);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
-		}			
+		}
 	}
 
 	// insert order detail
@@ -41,13 +40,13 @@ class OrderDetailsController
 			$user_id = $data['order_id'];
 			$product_id = $data['product_id'];
 			$quantity = $data['quantity'];
-			
+
 			$params = [
-					'user_id' => $user_id,
-					'product_id' => $product_id,
-					'quantity' => $quantity,
+				'user_id' => $user_id,
+				'product_id' => $product_id,
+				'quantity' => $quantity,
 			];
-			
+
 			$orderdetail = OrderDetail::insert($params);
 			$success = "Success";
 			$failure = "Failure";
@@ -74,5 +73,4 @@ class OrderDetailsController
 		}
 	}
 
-	
 }

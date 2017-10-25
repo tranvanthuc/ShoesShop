@@ -23,23 +23,23 @@ class ProductsController
 		if (!$data) {
 			$data = $_REQUEST;
 		}
-		if(isset($data['id'])) {
+		if (isset($data['id'])) {
 			$id = $data['id'];
 			$product = Product::getById(Product::$table, $id);
 			$success = "Success";
 			$failure = "Not found product";
-			Functions::returnAPI($product, $success,$failure);
+			Functions::returnAPI($product, $success, $failure);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
-		}			
+		}
 	}
 
 	// insert product
 	public function insert()
 	{
 		$data = Functions::getDataFromClient();
-		if(!$data) {
+		if (!$data) {
 			$data = $_REQUEST;
 		}
 		if (isset($data['product_detail_id'])
@@ -52,12 +52,12 @@ class ProductsController
 
 			$checkSize = [
 				'size' => $size,
-				'product_detail_id' => $product_detail_id
+				'product_detail_id' => $product_detail_id,
 			];
 			$checkSizeExist = Product::checkDataExist($checkSize);
 			if (!$checkSizeExist) {
 				$product = Product::insert($data);
-				\redirect('admin/product/update?id='.$product_detail_id);
+				\redirect('admin/product/update?id=' . $product_detail_id);
 			} else {
 				$failure = "Size already existed ! ";
 				Functions::returnAPI([], "", $failure);
@@ -90,8 +90,7 @@ class ProductsController
 				'quantity' => $quantity,
 			];
 			$product = Product::updateById($id, $params);
-			
-			\redirect('admin/product/update?id='.$product_detail_id);
+			\redirect('admin/product/update?id=' . $product_detail_id);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
@@ -109,37 +108,37 @@ class ProductsController
 			$id = $data['id'];
 			$product_detail_id = $data['product_detail_id'];
 			$product = Product::deleteById($id);
-			\redirect('admin/product/update?id='.$product_detail_id);
+			\redirect('admin/product/update?id=' . $product_detail_id);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
 		}
 	}
 
-	// get all products all 
+	// get all products all
 	public function getAllInfo()
 	{
 		$data = Functions::getDataFromClient();
 		$view = false;
-    if (!$data) {
-      $view = true;
-      $data = $_REQUEST;
-    }
+		if (!$data) {
+			$view = true;
+			$data = $_REQUEST;
+		}
 		if (isset($data['id'])) {
 			$id = $data['id'];
 			$product = ProductDetail::getById(ProductDetail::$table, $id)[0];
 			$paramsGetFields = ['size'];
 			$paramsConditions = [
-				'product_detail_id' => $id
+				'product_detail_id' => $id,
 			];
 			$sizes = Product::getByParams($paramsGetFields, $paramsConditions);
 			$product->sizes = Functions::getArraySizes($sizes);
 			$product->color = $product->name;
-			
+
 			if ($view) {
 				return view('products/index', compact('products'));
 			}
-			
+
 			$success = "Success";
 			$failure = "Not found product !";
 			Functions::returnAPI($product, $success, $failure);
@@ -148,5 +147,5 @@ class ProductsController
 			Functions::returnAPI([], "", $failure);
 		}
 	}
-	
+
 }

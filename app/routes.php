@@ -1,6 +1,6 @@
 
 <?php
-header('Access-Control-Allow-Origin: *'); 
+header('Access-Control-Allow-Origin: *');
 ?>
 
 <?php
@@ -14,9 +14,6 @@ $router->post('register', 'AuthenController@register');
 // roles
 $router->get('roles', 'RolesController@getAll');
 $router->post('roles/role', 'RolesController@getById');
-
-
-
 
 // users
 $router->get('users', 'AuthenController@getAllUsers');
@@ -33,7 +30,6 @@ $router->post('cate/delete', 'CategoriesController@delete');
 $router->post('cate/update', 'CategoriesController@update');
 $router->post('cates/cate', 'CategoriesController@getById');
 $router->post('cates/gender', 'CategoriesController@getByGender');
-
 
 // ProductsController
 $router->get('products', 'ProductsController@getAll');
@@ -58,7 +54,6 @@ $router->get('shop-info', 'ShopInfController@getAll');
 
 // //update shop information
 $router->post('shop-info/update', 'ShopInfController@update');
-
 
 // ----------------------------Order controller----------------//
 //show list information of the shop
@@ -92,12 +87,21 @@ $router->post('order-detail/delete', 'OrderDetailsController@delete');
 //insert shop information
 $router->post('order-detail/insert', 'OrderDetailsController@insert');
 
-
 // feedback
 $router->get('feedback', 'FeedbackController@getAll');
 $router->post('feedback/id', 'FeedbackController@getById');
 $router->post('feedback/insert', 'FeedbackController@insert');
 
+$router->get('admin/products', 'PagesController@index');
+
+$router->get('admin/login', 'AuthenController@getLogin');
+$router->post('admin/login', 'AuthenController@postLogin');
+
+// admin of categories
+$router->get('admin/cates', 'CategoriesController@index');
+$router->get('admin/cate/insert', 'CategoriesController@getInsert');
+$router->get('admin/cate/update', 'CategoriesController@getUpdate');
+$router->post('admin/cate/delete', 'CategoriesController@delete');
 
 // ------------------------AMIND----------------------
 
