@@ -1,16 +1,17 @@
-<?php require 'app/views/master/header.view.php'?>
+<?php require 'app/views/master/header.view.php' ?>
 <link href="/public/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <?php require 'app/views/master/nav.view.php'?>
+  <?php require 'app/views/master/nav.view.php' ?>
 
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
         <li class="breadcrumb-item">
-          <a href="/admin/cates">Categories Management</a>
+          <a href="/">Dashboard</a>
         </li>
+        <li class="breadcrumb-item">Categories Management</li>
       </ol>
       <!-- content -->
       <div class="card mb-3">
@@ -45,9 +46,9 @@
                     <td>
                       <a href="/admin/cate/update/?id=<?=$cate->id?>" class="btn btn-primary fa fa-pencil-square-o"></a>
                       <a href="#" class="btn btn-danger fa fa-trash-o"
-                        data-toggle="modal" data-target="#myModal"
-                        data-id="<?=$cate->id;?>"
-                        >
+                      data-toggle="modal" data-target="#myModal"
+                      data-id="<?=$cate->id;?>"
+                      >
                     </td>
                   </tr>
                 <?php endforeach?>

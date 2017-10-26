@@ -17,7 +17,7 @@
         <div class="card text-white bg-primary o-hidden h-100">
           <div class="card-body">
             <div class="card-body-icon">
-              <i class="fa fa-fw fa-comments"></i>
+              <i class="fa fa-fw fa fa-users"></i>
             </div>
             <div class="mr-5"><?=$users;?> Users</div>
           </div>
@@ -65,11 +65,11 @@
         <div class="card text-white bg-danger o-hidden h-100">
           <div class="card-body">
             <div class="card-body-icon">
-              <i class="fa fa-fw fa-support"></i>
+              <i class="fa fa-fw fa-comments-o"></i>
             </div>
-            <div class="mr-5">13 New Tickets!</div>
+            <div class="mr-5"><?= $feedbacks ?> Feedbacks</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="">
+          <a class="card-footer text-white clearfix small z-1" href="/admin/feedback">
             <span class="float-left">View Details</span>
             <span class="float-right">
               <i class="fa fa-angle-right"></i>
