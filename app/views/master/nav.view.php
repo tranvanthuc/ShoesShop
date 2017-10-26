@@ -19,6 +19,12 @@
             <span class="nav-link-text">View list users</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+          <a class="nav-link" href="/admin/feedback">
+            <i class="fa fa-users" aria-hidden="true"></i>
+            <span class="nav-link-text">View feedback</span>
+          </a>
+        </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Products management">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#products-management" data-parent="#parent-products">
             <i class="fa fa-cubes" aria-hidden="true"></i>
