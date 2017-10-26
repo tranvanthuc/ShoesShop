@@ -3,6 +3,7 @@ namespace app\controllers;
 
 use app\models\Feedback;
 use utils\Functions;
+use utils\Mail;
 
 class FeedbackController
 {
@@ -57,11 +58,31 @@ class FeedbackController
 		return view('feedback/index', \compact('feedback'));
 	}
 
-	public function response()
+	// response
+	public function getResponse()
 	{
 		$id = $_REQUEST['id'];
 		$feedback = Feedback::getById(Feedback::$table, $id)[0];
 		return view('feedback/response', compact('feedback'));
 	}
 
+	public function response()
+  {
+    if (isset($_POST['name']) && isset($_POST['email']) &&
+      isset($_POST['subject'])&& isset($_POST['content'])) {
+      if (isset($_FILES['file'])) {
+				$file = $_FILES['file'];
+        $pathFile = Mail::attachFile($file);
+
+        echo $pathFile;
+        Mail::send($_POST , $pathFile);
+      } else {
+        Mail::send($_POST , "");
+			}
+			\redirect('admin/feedback');
+    } else {
+      $failure = "Missing params !";
+      Functions::returnAPI([], "", $failure);
+    }
+  }
 }

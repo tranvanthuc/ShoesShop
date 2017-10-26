@@ -75,4 +75,10 @@ class Functions
     }
     return $result;
   }
+
+  // conver string to array
+  public static function convertStrToArray($char, $string)
+  {
+    return explode($char, $string);
+  }
 }

@@ -8,16 +8,18 @@
   <div class="container-fluid">
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
-      <li class="breadcrumb-item"><a href="/admin/products">List Products</a></li>
-      <li class="breadcrumb-item active">Add product</li>
+      <li class="breadcrumb-item"><a href="/">Dashboard</a></li>
+      <li class="breadcrumb-item"><a href="/admin/feedback">List Feedback</a></li>
+      <li class="breadcrumb-item active">Response</li>
     </ol>
     <!-- content -->
     <div class="card mb-3">
       <div class="card-header">
-        <i class="fa fa-table"></i> New product
+        <i class="fa fa-comments-o"></i> Current Feedback
       </div>
       <div class="card-body">
-      <form action="/admin/product/insert" method="post">
+      <form action="/admin/feedback/response" method="post" 
+        enctype="multipart/form-data">
         <div class="row">
           <div class="col-md-10 offset-md-1">
             <div class="form-group">
@@ -37,6 +39,11 @@
             </div>
 
             <div class="form-group">
+              <label for="subject">Subject</label>
+              <input type="text" class="form-control" name="subject">
+            </div>
+
+            <div class="form-group">
               <label for="cc">CC</label>
               <input type="text" class="form-control" name="cc" >
             </div>
@@ -44,6 +51,11 @@
             <div class="form-group">
               <label for="response">Response</label>
               <textarea class="form-control ckeditor" name="response" rows="5" autofocus></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="attach file">Attach File</label>
+              <input type="file" class="form-control" name="file">
             </div>
             
             <div class="row form-group">
