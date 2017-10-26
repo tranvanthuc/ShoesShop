@@ -3,16 +3,19 @@
 <link href="/public/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-<?php require('app/views/master/nav.view.php') ?>
+  <?php require('app/views/master/nav.view.php') ?>
 
-<div class="content-wrapper">
-  <div class="container-fluid">
-    <!-- Breadcrumbs-->
-    <ol class="breadcrumb">
-      <li class="breadcrumb-item active">Products management</li>
-    </ol>
-    <!-- content -->
-    <div class="card mb-3">
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+         <a href="/">Dashboard</a>
+       </li>
+       <li class="breadcrumb-item active">Products management</li>
+     </ol>
+     <!-- content -->
+     <div class="card mb-3">
       <div class="card-header">
         <i class="fa fa-table"></i> List Products
       </div>
@@ -24,37 +27,37 @@
                 <?php 
                 $fields = ['ID', 'Name','Price', 'Created_at', 'Action'];
                 foreach($fields as $field) :
-                ?>
-                <th><?= $field ?></th>
+                  ?>
+                  <th><?= $field ?></th>
                 <?php endforeach; ?>
               </tr>
             </thead>
             <tfoot>
               <tr>
                 <?php foreach($fields as $field) : ?>
-                <th><?= $field ?></th>
+                  <th><?= $field ?></th>
                 <?php endforeach; ?>
               </tr>
             </tfoot>
             <tbody>
               <?php
-                $i = 1;
-                foreach($proDetails as $product) :
-              ?>
-              <tr>
-                <td><?= $i++ ?></td>
-                <td><?= $product->name ?></td>
-                <td><?= $product->price ?></td>
-                <td><?= $product->created_at ?></td>
-                <td>
-                  <a href=<?= "/admin/product/update?id=" . $product->id ?> class="btn btn-primary fa fa-pencil-square-o"></a>
-                  &nbsp;
-                  <a href="#" class="btn btn-danger fa fa-trash-o" 
-                  data-toggle="modal" data-target="#deleteModal" 
-                  data-id="<?= $product->id; ?>"
-                </td>
-              </tr>
-                <?php endforeach; ?>
+              $i = 1;
+              foreach($proDetails as $product) :
+                ?>
+                <tr>
+                  <td><?= $i++ ?></td>
+                  <td><?= $product->name ?></td>
+                  <td><?= $product->price ?></td>
+                  <td><?= $product->created_at ?></td>
+                  <td>
+                    <a href=<?= "/admin/product/update?id=" . $product->id ?> class="btn btn-primary fa fa-pencil-square-o"></a>
+                    &nbsp;
+                    <a href="#" class="btn btn-danger fa fa-trash-o" 
+                    data-toggle="modal" data-target="#deleteModal" 
+                    data-id="<?= $product->id; ?>"
+                  </td>
+                </tr>
+              <?php endforeach; ?>
             </tbody>
           </table>
         </div>

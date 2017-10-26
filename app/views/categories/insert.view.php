@@ -1,13 +1,16 @@
-<?php require 'app/views/master/header.view.php'?>
+<?php require 'app/views/master/header.view.php' ?>
 <link href="/public/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  <?php require 'app/views/master/nav.view.php'?>
+  <?php require 'app/views/master/nav.view.php' ?>
 
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Breadcrumbs-->
       <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">Dashboard</a>
+        </li>
         <li class="breadcrumb-item">
           <a href="/admin/cates">List Categories</a>
         </li>

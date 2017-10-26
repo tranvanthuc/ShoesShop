@@ -5,7 +5,7 @@ use app\models\User;
 use utils\Functions;
 class AuthenController 
 {
-  // get user by id
+  // get user by ids-
   public function getUserById() 
   {
     $data = Functions::getDataFromClient();
