@@ -22,7 +22,6 @@
               <nav class="nav flex-column nav-pills" id="myTab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-info-tab" data-toggle="tab" href="#nav-info" role="tab" aria-controls="nav-info" aria-selected="true">Product Infomation</a>
                 <a class="nav-item nav-link" id="nav-quantity-tab" data-toggle="tab" href="#nav-quantity" role="tab" aria-controls="nav-quantity" aria-selected="false">Quantity</a>
-                <a class="nav-item nav-link" id="nav-upload-image-tab" data-toggle="tab" href="#nav-upload-image" role="tab" aria-controls="nav-upload-image" aria-selected="false">Upload image</a>
               </nav>
             </div>
             <div class="col-md-9">
@@ -32,9 +31,6 @@
                 </div>
                 <div class="tab-pane fade" id="nav-quantity" role="tabpanel" aria-labelledby="nav-quantity-tab">
                 <?php require('quantity.view.php') ?>
-                </div>
-                <div class="tab-pane fade" id="nav-upload-image" role="tabpanel" aria-labelledby="nav-upload-image-tab">
-                <?php require('uploadImage.view.php') ?>
                 </div>
               </div>
             </div>

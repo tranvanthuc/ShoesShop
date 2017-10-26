@@ -1,0 +1,46 @@
+/* order detail */
+.sub-card {
+  padding-top: 10px;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 15px;
+}
+.sub-title {
+  padding-top: 10px;
+  background-color: #007bff;
+  color: #fff;
+}
+.sub-field p {
+  margin-left: 20px;
+}
+.sub-field a {
+  margin-bottom: 10px;
+}
+.act-btn-ord-detail {
+  float: right;
+}
+.act-btn-ord-detail a {
+  color: white;
+}
+
+/* index */
+#action-btn {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+#action-btn li {
+  float: left;
+}
+#action-btn a:hover {
+  text-decoration: none;
+}
+.view-icon {
+  color: white;
+}
+.view-icon:hover {
+  opacity: 0.8;
+}
