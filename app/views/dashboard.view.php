@@ -1,9 +1,9 @@
-
 <?php require('master/header.view.php') ?>
 <link href="/public/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <?php require('master/nav.view.php') ?>
+
 <div class="content-wrapper">
   <div class="container-fluid">
     <!-- Breadcrumbs-->
@@ -17,11 +17,11 @@
         <div class="card text-white bg-primary o-hidden h-100">
           <div class="card-body">
             <div class="card-body-icon">
-              <i class="fa fa-fw fa-comments"></i>
+              <i class="fa fa-fw fa fa-users"></i>
             </div>
-            <div class="mr-5">26 New Messages!</div>
+            <div class="mr-5"><?=$users;?> Users</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
+          <a class="card-footer text-white clearfix small z-1" href="/admin/users">
             <span class="float-left">View Details</span>
             <span class="float-right">
               <i class="fa fa-angle-right"></i>
@@ -35,9 +35,9 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-list"></i>
             </div>
-            <div class="mr-5">11 New Tasks!</div>
+            <div class="mr-5"><?= $cates; ?> Categories</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
+          <a class="card-footer text-white clearfix small z-1" href="/admin/cates">
             <span class="float-left">View Details</span>
             <span class="float-right">
               <i class="fa fa-angle-right"></i>
@@ -51,9 +51,9 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-shopping-cart"></i>
             </div>
-            <div class="mr-5">123 New Orders!</div>
+            <div class="mr-5"><?= $products ?> Products</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
+          <a class="card-footer text-white clearfix small z-1" href="/admin/products">
             <span class="float-left">View Details</span>
             <span class="float-right">
               <i class="fa fa-angle-right"></i>
@@ -65,11 +65,11 @@
         <div class="card text-white bg-danger o-hidden h-100">
           <div class="card-body">
             <div class="card-body-icon">
-              <i class="fa fa-fw fa-support"></i>
+              <i class="fa fa-fw fa-comments-o"></i>
             </div>
-            <div class="mr-5">13 New Tickets!</div>
+            <div class="mr-5"><?= $feedbacks ?> Feedbacks</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
+          <a class="card-footer text-white clearfix small z-1" href="/admin/feedback">
             <span class="float-left">View Details</span>
             <span class="float-right">
               <i class="fa fa-angle-right"></i>
