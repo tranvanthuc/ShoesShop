@@ -146,6 +146,8 @@ $router->post('admin/product/size/delete', 'ProductsController@delete');
 // update quantity
 $router->post('admin/product/quantity/update', 'ProductsController@update');
 
+// feedback managements
+$router->get('admin/feedback', 'FeedbackController@index');
 
 
 // admin of categories
