@@ -12,7 +12,10 @@
                 <li class="breadcrumb-item">
                     <a href="#">Dashboard</a>
                 </li>
-                <li class="breadcrumb-item active">Order management</li>
+                <li class="breadcrumb-item">
+                    <a href="/admin/orders">Orders</a>
+                </li>
+                <li class="breadcrumb-item active">Order detail</li>
             </ol>
             <!-- Content -->
             <div class="row">
@@ -27,25 +30,20 @@
                         <div class="card-body" style="background-color: white">
                             <div class="sub-field " style="color: black;">
                                 <p class="card-text">Order ID:
-                                    <?= $orders[0]->order_id ?>
+                                    <?= $orderDetails[0]->order_id ?>
                                 </p>
                                 <p class="card-text">Date/Time:
-                                    <?= $orders[0]->date ?>
+                                    <?= $orderDetails[0]->date ?>
                                 </p>
                                 <p class="card-text">Total Fee:
-                                    <?php $total = 0;
-                                        foreach($orders as $order){
-                                            $total = $total + $order->price*$order->quantity;
+                                    <?php $subTotal = 0;
+                                        foreach($orderDetails as $orderDetail){
+                                            $subTotal = $subTotal + $orderDetail->total;
                                         }
-                                        echo (float)$total;  
+                                        echo "$ ".$subTotal;  
                                     ?>
                                 </p>
                                 <p class="card-text">Status: Done</p>
-                            </div>
-                            <div class="card-footer " style="color: black;">
-                                <center>
-                                    <a href="javascript: history.go(-1)" class="btn btn-primary">View List order</a>
-                                </center>
                             </div>
                         </div>
                     </div>
@@ -64,22 +62,17 @@
                         <div class="card-body" style="background-color: white">
                             <div class="sub-field " style="color: black;">
                                 <p class="card-text">Name:
-                                    <?= $orders[0]->last_name." ".$orders[0]->first_name ?>
+                                    <?= $orderDetails[0]->last_name." ".$orderDetails[0]->first_name ?>
                                 </p>
                                 <p class="card-text">Email:
-                                    <?= $orders[0]->email ?>
+                                    <?= $orderDetails[0]->email ?>
                                 </p>
                                 <p class="card-text">Phone:
-                                    <?= $orders[0]->phone ?>
+                                    <?= $orderDetails[0]->phone ?>
                                 </p>
                                 <p class="card-text">Address:
-                                    <?= $orders[0]->address ?>
+                                    <?= $orderDetails[0]->address ?>
                                 </p>
-                            </div>
-                            <div class="card-footer " style="color: black;">
-                                <center>
-                                    <a href="#" class="btn btn-primary">View List order</a>
-                                </center>
                             </div>
                         </div>
                     </div>
@@ -98,32 +91,28 @@
                                 <tr>
                                     <th>Item</th>
                                     <th>Size</th>
-                                    <th>Color</th>
                                     <th>Quantity</th>
                                     <th>Price</th>
                                     <th>Sub-Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php foreach($orders as $order) { ?>
+                                <?php foreach($orderDetails as $orderDetail) { ?>
                                 <tr>
                                     <td>
-                                        <?= $order->cate_name." ".$order->name ?>
+                                        <?= $orderDetail->name ?>
                                     </td>
                                     <td>
-                                        <?= $order->size ?>
+                                        <?= $orderDetail->size ?>
                                     </td>
                                     <td>
-                                        <?= $order->pro_detail_name ?>
+                                        <?= $orderDetail->quantity ?>
                                     </td>
                                     <td>
-                                        <?= $order->quantity ?>
+                                        <?= $orderDetail->price ?>
                                     </td>
                                     <td>
-                                        <?= $order->price ?>
-                                    </td>
-                                    <td>
-                                        <?= $order->price*$order->quantity ?>
+                                        <?= $orderDetail->total ?>
                                     </td>
                                 </tr>
                                 <?php } ?>

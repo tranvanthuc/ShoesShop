@@ -55,33 +55,42 @@
                                 <td><?= $order->totalFee?></td>
                                 <td>
                                     <ul id ="action-btn" >
-                                        <li >
-                                            <a href="<?= "orders/order-detail/?id=".$order->order_id ?>" id ="btn-update">
-                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;
-                                            </a>
+                                        <li>
+                                            <a href="<?= "orders/order-detail/?id=".$order->order_id ?>" class="btn btn-primary btn-sm" >
+                                                <i class="fa fa-eye view-icon" aria-hidden="true"></i></i>
+                                            </a>&thinsp;
                                         </li>
-                                        <li style="float:left;">
-                                            <a href="" id ="btn-update" data-toggle="modal" data-target="#myModal">
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        <li>
+                                            <a href="#" data-toggle="modal" data-target="#myModal" 
+                                                class="btn btn-danger btn-sm" data-id="<?= $order->order_id;?>">
+                                                <i class="fa fa-trash-o view-icon" aria-hidden="true"></i>
                                             </a>
                                             <!-- Modal -->
-                                            <div class="modal fade" id="myModal" role="dialog">
-                                                <div class="modal-dialog">
+                                            <div class="modal fade" id="myModal" role="dialog" tabindex="-1"  
+                                                aria-labelledby="myModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
                                                     <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h5 class="modal-title">Delete order</h5>
                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <p>Do you want to delete it?</p>
+                                                        <form action="/admin/orders/order/delete" method="post">
+                                                            <input type="hidden" class="form-control" id="id" name="id">
+                                                            <p>Do you want to delete it?</p>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                                                                <input type="submit" class="btn btn-danger" value="Yes">
+                                                            </div>
+                                                        </form>
                                                     </div>
-                                                    <div class="modal-footer">
-                                                        <button class="btn btn-primary" type= "submit">
-                                                            <a href="<?= "orders/order/delete/?id=".$order->order_id ?>" style="color:black;">OK </a>
-                                                        </button>
-                                                        <button type="button" class="btn btn-default" data-dismiss="modal" onclick='window.location.reload();' >Close</button>
-                                                    </div>
-                                                    </div>
+                                                    <script>
+                                                        $('#myModal').on('show.bs.modal', function (event) {
+                                                        var button = $(event.relatedTarget) 
+                                                        var id = button.data('id');
+                                                        $('#id').val(id);
+                                                    })
+                                                    </script>
                                                 </div>
                                             </div>
                                         </li>

@@ -150,4 +150,17 @@ class QueryBuilder
                 die($e->getMessage());
             }
     }
+
+    // create query delete
+    public function queryDelete($sql)
+    {
+        try {
+            $stm = $this->pdo->prepare($sql);
+            // die(var_dump($sql));
+            $stm->execute();
+            // return $stm->fetchAll(PDO::FETCH_CLASS);
+        } catch (PDOException $e) {
+            die($e->getMessage());
+        }
+    }
 }
