@@ -72,4 +72,10 @@ class Model {
   {
     return App::get('database')->queryDelete($sql);
   }
+  
+  // get with String condition
+  public static function deleteByParams($params) 
+  {
+    App::get('database')->deleteByParams(static::$table, $params);
+  }
 }

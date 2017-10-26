@@ -5,16 +5,6 @@ use app\models\User;
 use utils\Functions;
 class AuthenController 
 {
-  
-  // get All users
-  public function getAllUsers()
-  {
-    $users = User::getAll();
-    $success = "Success";
-    $failure = "Failure";
-    Functions::returnAPI($users, $success, $failure );
-  }
-
   // get user by id
   public function getUserById() 
   {
@@ -42,7 +32,7 @@ class AuthenController
 
   public function getLogin()
   {
-    return view('login');
+    return view('authen/login');
   }
 
   // login 
@@ -81,6 +71,13 @@ class AuthenController
     }
   }
 
+  public function logout() 
+  {
+    session_start();
+    session_destroy();
+    \redirect('admin/login');
+  }
+
   // register
   public function register() 
   {
@@ -97,7 +94,7 @@ class AuthenController
 
       $checkEmailExist = User::checkDataExist($paramsEmail);
 
-      if(!$checkEmailExist) {
+      if (!$checkEmailExist) {
         $user = User::insert($data);
         $success = "Register success !";
         $failure = "Email exists !";

@@ -3,6 +3,7 @@ namespace app\controllers;
 
 use app\models\ProductDetail;
 use app\models\Category;
+use app\models\Product;
 use utils\Functions;
 
 class ProductDetailsController
@@ -16,7 +17,7 @@ class ProductDetailsController
 		Functions::returnAPI($proDetails, $success, $failure);
 	}
 
-	// get data with id of table Product_details
+	// get data with id of table proDetails
 	public function getById()
 	{
 		$data = Functions::getDataFromClient();
@@ -32,19 +33,28 @@ class ProductDetailsController
 		}
 	}
 
+	// get insert
+	public function getInsert()
+	{
+		$cates = Category::getAll();
+		return view('products/insert', compact('cates'));
+	}
+
 	// insert data table Product_details
 	public function insert()
 	{
 		$data = Functions::getDataFromClient();
+		if (!$data) {
+			$data = $_REQUEST;
+		}
 		if(isset($data['name'])
 			&& isset($data['price'])
 			&& isset($data['category_id'])
 		) {
 			
-			$proDetail = ProductDetail::insert($data);
-			$success = "Success";
-			$failure = "Failure";
-			Functions::returnAPI($proDetail, $success, $failure);
+			ProductDetail::insert($data);
+			
+			\redirect('admin/products');
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
@@ -54,23 +64,43 @@ class ProductDetailsController
 	// delete data in table
 	public function delete()
 	{
-		$data = Functions::getDataFromClient();
+		$data = Functions::getDataFromClient(); 
+		if (!$data) {
+			$data = $_REQUEST;
+		}
 		if (isset($data['id'])) {
 			$id = $data['id'];
+			
+			$params = [
+				'product_detail_id' => $id
+			];
+			
+			$products = Product::deleteByParams($params);
+
 			$proDetail = ProductDetail::deleteById($id);
-			$success = "Success";
-			$failure = "Not found product to delete !";
-			Functions::returnAPI($proDetail, $success, $failure);
+			
+			\redirect('admin/products');
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
 		}
 	}
 
+	// get update
+	public function getUpdate()
+	{
+		$data = $_REQUEST;
+		$proDetail = ProductDetail::getById(ProductDetail::$table, $data['id'])[0];
+		$products = Product::getProductByProDetailId($data['id']);
+		$cates = Category::getAll();
+		return view('products/update/index', \compact('products','proDetail', 'cates'));
+	}
+
 	// update data in table
 	public function update()
 	{
-		$data = Functions::getDataFromClient();
+		$data = $_REQUEST;
+
 		if(isset($data['id'])
 			&& isset($data['name'])
 			&& isset($data['price'])
@@ -84,26 +114,12 @@ class ProductDetailsController
 			'name' => $name
 			];
 			$checkNameExist = ProductDetail::checkDataExist($checkName);
-			if(!$checkNameExist) {
+			if(count($checkNameExist)  <= 1 ) {
 				$proDetail = ProductDetail::updateById($id, $data);
-				$success = "Success";
-				$failure = "Failure";
-				Functions::returnAPI($proDetail, $success, $failure);
+				\redirect('admin/product/update?id='. $id);
 			} else {
-				$paramsID = [
-				'name' => $name,
-				'id' => $id
-				];
-				$checkNameExist = ProductDetail::checkDataExist($paramsID);
-				if($checkNameExist) {
-					$proDetail = ProductDetail::updateById($id, $data);
-					$success = "Success";
-					$failure = "Failure";
-					Functions::returnAPI($proDetail, $success, $failure);
-				} else {
-					$failure = "Name already exist";
-					Functions::returnAPI([], "", $failure);
-				}
+				$failure = "Name already exist";
+				Functions::returnAPI([], "", $failure);
 			}
 			
 		} else {
@@ -118,10 +134,10 @@ class ProductDetailsController
 		$data = Functions::getDataFromClient();
 
 		if (isset($data['category_id'])) {
-			$product_details = ProductDetail::getByParams(['*'], $data);
+			$proDetails = ProductDetail::getByParams(['*'], $data);
 			$success = "Get data success !";
 			$failure = "Not found product to delete !";
-			Functions::returnAPI($product_details, $success, $failure);
+			Functions::returnAPI($proDetails, $success, $failure);
 		} else {
 			$failure = "Missing params";
 			Functions::returnAPI([], "", $failure);
@@ -132,8 +148,8 @@ class ProductDetailsController
 	public function getLimit()
 	{
 		$strCondition = "order by id desc limit 4";
-		$product_details = ProductDetail::getWithStringCondition(['*'], $strCondition);
-		foreach($product_details as $item) {
+		$proDetails = ProductDetail::getWithStringCondition(['*'], $strCondition);
+		foreach($proDetails as $item) {
 			$paramsConditions = [
 				'id' => $item->category_id
 			];
@@ -143,7 +159,15 @@ class ProductDetailsController
 		}
 		$success = "Get data success !";
 		$failure = "Failure !";
-		Functions::returnAPI($product_details, $success, $failure);
+		Functions::returnAPI($proDetails, $success, $failure);
 	}
+
+	// index 
+	public function index()
+	{
+		$proDetails = ProductDetail::getAll();
+		return view('products/index', compact('proDetails'));
+	}
+
 }
 

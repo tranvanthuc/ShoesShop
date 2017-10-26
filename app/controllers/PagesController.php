@@ -3,10 +3,9 @@ namespace app\controllers;
 
 class PagesController 
 {
-  public function index()
-  {
-    return view('index');
-  }
 
-  
+  public function dashboard()
+  {
+    return view('dashboard');
+  }
 }

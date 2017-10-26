@@ -131,7 +131,7 @@ class OrdersController
 	{
 		$orders = Order::getDataOfOrder();
 		// die(var_dump($orders));
-		return view('order/index',compact('orders'));
+		return view('orders/index',compact('orders'));
 	}
 
 	//get order detail information
@@ -140,7 +140,7 @@ class OrdersController
 		$id = $_GET['id'];
 		$orders = Order::getOrderDetail($id);
 		// die(var_dump($orders));
-		return view('order/orderDetail',compact('orders'));
+		return view('orders/orderDetail',compact('orders'));
 	}
 
 }

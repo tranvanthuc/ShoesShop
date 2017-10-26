@@ -16,8 +16,7 @@ $router->get('roles', 'RolesController@getAll');
 $router->post('roles/role', 'RolesController@getById');
 
 
-// home pages
-$router->get('', 'PagesController@index');
+
 
 // users
 $router->get('users', 'AuthenController@getAllUsers');
@@ -100,6 +99,12 @@ $router->post('feedback/id', 'FeedbackController@getById');
 $router->post('feedback/insert', 'FeedbackController@insert');
 
 
+// ------------------------AMIND----------------------
+
+// home pages
+$router->get('', 'PagesController@dashboard');
+
+// login
 $router->get('admin/login', 'AuthenController@getLogin');
 $router->post('admin/login', 'AuthenController@postLogin');
 
@@ -113,3 +118,38 @@ $router->post('admin/shop-info/update', 'ShopInfController@update');
 $router->get('admin/orders', 'OrdersController@index');
 $router->get('admin/orders/order-detail', 'OrderDetailsController@getOrderDetailByOrderId');
 $router->post('admin/orders/order/delete', 'OrdersController@delete');
+
+// logout
+$router->get('admin/logout', 'AuthenController@logout');
+
+// users management
+$router->get('admin/users', 'UsersController@index');
+
+// products managements
+$router->get('admin/products', 'ProductDetailsController@index');
+
+// insert product
+$router->get('admin/product/insert', 'ProductDetailsController@getInsert');
+$router->post('admin/product/insert', 'ProductDetailsController@insert');
+
+// update product
+$router->get('admin/product/update', 'ProductDetailsController@getUpdate');
+$router->post('admin/product/update', 'ProductDetailsController@update');
+
+// delete
+$router->post('admin/product/delete', 'ProductDetailsController@delete');
+
+// insert size
+$router->post('admin/product/size/insert', 'ProductsController@insert');
+$router->post('admin/product/size/delete', 'ProductsController@delete');
+
+// update quantity
+$router->post('admin/product/quantity/update', 'ProductsController@update');
+
+
+
+// admin of categories
+$router->get('admin/cates', 'CategoriesController@index');
+$router->get('admin/cate/insert', 'CategoriesController@getInsert');
+$router->get('admin/cate/update', 'CategoriesController@getUpdate');
+$router->post('admin/cate/delete', 'CategoriesController@delete');

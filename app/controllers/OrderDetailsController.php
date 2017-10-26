@@ -22,6 +22,6 @@ class OrderDetailsController
         $id = $_GET['id'];
 		$orderDetails = OrderDetail::getOrderDetailByOrderId($id);
 		// die(var_dump($orders));
-        return view('order/orderDetail',compact('orderDetails'));
+        return view('orders/orderDetail',compact('orderDetails'));
     }
 }
