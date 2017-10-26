@@ -1,7 +1,6 @@
 
 <?php require('app/views/master/header.view.php') ?>
-<!-- <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"> -->
-
+<script src="/public/ckeditor/ckeditor.js"></script>
 
 <body class="fixed-nav sticky-footer " id="page-top">
 <?php require('app/views/master/nav.view.php') ?>
@@ -31,7 +30,7 @@
                 </div>
                 <div class="form-group">
                     <label>Description</label>
-                    <textarea class="form-control" name="description" rows="11" 
+                    <textarea class="form-control ckeditor" name="description" rows="11" 
                     maxlength="1500" style="resize: none;"><?= $shopInf[0]->description; ?></textarea>
                 </div>
                 <div class="form-group">
