@@ -46,7 +46,7 @@
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
           <a class="nav-link" href="/admin/feedback">
-            <i class="fa fa-users" aria-hidden="true"></i>
+            <i class="fa fa-comments-o" aria-hidden="true"></i>
             <span class="nav-link-text">View feedback</span>
           </a>
         </li>
