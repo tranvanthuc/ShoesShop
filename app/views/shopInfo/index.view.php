@@ -20,8 +20,8 @@
             
             <center><h3>Shop Information</h3></center>
             <div class="row">
-            <div class="col-2"></div>
-            <div class="col-11">
+            <div class="col-1 col-md-1"></div>
+            <div class="col-10 col-md-10">
             <form method="POST" action="shop-info/update">
                 <input type="hidden" name="id" value="<?= $shopInf[0]->id ?>" class="txt-input">
                 <div class="form-group">
@@ -72,7 +72,7 @@
                 </div>
             </form>  
             </div> 
-            <div class="col-1"></div>  
+            <div class="col-1 col-md-1"></div> 
             </div>  
         </div>    
     </div>
