@@ -13,6 +13,17 @@
             <span class="nav-link-text">Dashboard</span>
           </a>
         </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Shop Information">
+          <a class="nav-link" href="/admin/shop-info">
+          <i class="fa fa-building-o" aria-hidden="true"></i>
+            <span class="nav-link-text">Shop Information</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Orders Management">
+          <a class="nav-link" href="/admin/orders">
+            <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+            <span class="nav-link-text">Orders Management</span>
+          </a>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Categories management">
           <a class="nav-link nav-link-collapse collapsed" data-toggle="collapse" href="#categories-management" data-parent="#parent-products">
             <i class="fa fa-th-list" aria-hidden="true"></i>
@@ -54,7 +65,6 @@
           </ul>
         </li>
       </ul>
-
 
       <!-- side nav -->
       <ul class="navbar-nav sidenav-toggler">

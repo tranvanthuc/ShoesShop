@@ -66,6 +66,13 @@ class Model {
   {
     return App::get('database')->getWithStringCondition(static::$table, $paramsGetFields, $strCondition);
   }
+
+  // query delete
+  public static function queryDelete($sql) 
+  {
+    return App::get('database')->queryDelete($sql);
+  }
+  
   // get with String condition
   public static function deleteByParams($params) 
   {
