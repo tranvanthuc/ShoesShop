@@ -118,6 +118,7 @@ $router->post('admin/shop-info/update', 'ShopInfController@update');
 $router->get('admin/orders', 'OrdersController@index');
 $router->get('admin/orders/order-detail', 'OrderDetailsController@getOrderDetailByOrderId');
 $router->post('admin/orders/order/delete', 'OrdersController@delete');
+$router->post('admin/order/order-detail/export', 'OrdersController@exportFile');
 
 // logout
 $router->get('admin/logout', 'AuthenController@logout');

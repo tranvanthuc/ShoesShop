@@ -121,6 +121,10 @@
                     </div>
                 </div>
             </div>
+            <form action="/admin/order/order-detail/export" method="post">
+                <input type="hidden" class="form-control" id="id" name="id" value="<?=$orderDetails[0]->order_id ?>">
+                <input type="submit" id="button" class="btn btn-primary btn-sm" value="Export File" />    
+            </form>
         </div>
     </div>
 </body>

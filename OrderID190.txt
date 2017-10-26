@@ -1,0 +1,13 @@
+OrderId: 190
+Date/time: 2017-10-26 02:28:34
+Sub-total: 
+Customer: Minh Toan Nguyen
+Email: nguyen.mt@neo-lab.vn
+Phone: 
+Address: 
+Name: Women's Wooster Blanco White
+Size: 41
+Quantity: 1
+Price: 169
+Total: 169
+
