@@ -1,5 +1,6 @@
 <?php require('app/views/master/header.view.php') ?>
 
+<script src="/public/ckeditor/ckeditor.js"></script>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <?php require('app/views/master/nav.view.php') ?>
 
@@ -30,7 +31,7 @@
 
             <div class="form-group">
               <label for="content">Content</label>
-              <textarea class="form-control" name="content" rows="5" readonly="true">
+              <textarea class="form-control ckeditor" name="content" rows="5" readonly="true">
               <?= $feedback->content ?>
               </textarea>
             </div>
@@ -42,7 +43,7 @@
 
             <div class="form-group">
               <label for="response">Response</label>
-              <textarea class="form-control" name="response" rows="5" autofocus></textarea>
+              <textarea class="form-control ckeditor" name="response" rows="5" autofocus></textarea>
             </div>
             
             <div class="row form-group">

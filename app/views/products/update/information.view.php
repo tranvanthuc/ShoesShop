@@ -1,3 +1,4 @@
+<script src="/public/ckeditor/ckeditor.js"></script>
 <form action="/admin/product/update" method="post">
   <div class="row">
     <div class="col-md-10 offset-md-1">
@@ -34,7 +35,7 @@
       </div>
       <div class="form-group">
         <label for="description">Description</label>
-        <textarea class="form-control" rows="5" name="description"
+        <textarea class="form-control ckeditor" rows="5" name="description"
         ><?= $proDetail->description ?></textarea>
       </div>
       

@@ -1,4 +1,5 @@
 <?php require('app/views/master/header.view.php') ?>
+<script src="/public/ckeditor/ckeditor.js"></script>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <?php require('app/views/master/nav.view.php') ?>
@@ -41,7 +42,7 @@
 
             <div class="form-group">
               <label for="description">Description</label>
-              <textarea class="form-control" rows="5" name="description"
+              <textarea class="form-control ckeditor" rows="5" name="description"
               ></textarea>
             </div>
             
