@@ -1,4 +1,5 @@
 <?php require('app/views/master/header.view.php') ?>
+<script src="/public/ckeditor/ckeditor.js"></script>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
   <?php require('app/views/master/nav.view.php') ?>
@@ -44,21 +45,19 @@
                   <input type="text" class="form-control" name="price">
                 </div>
 
-                <div class="form-group">
-                  <label for="description">Description</label>
-                  <textarea class="form-control" rows="5" name="description"
-                  ></textarea>
-                </div>
-
-                <div class="row form-group">
-                  <div class="col-md-3">
-                    <input type="submit" value="Save" class="btn btn-primary form-control">
-                  </div>
-
-                  <div class="col-md-3">
-                    <a href="/admin/products"class="btn btn-secondary form-control" >Cancel</a>
-                  </div>
-                </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <textarea class="form-control ckeditor" rows="5" name="description"
+              ></textarea>
+            </div>
+            
+            <div class="row form-group">
+              <div class="col-md-3">
+                <input type="submit" value="Save" class="btn btn-primary form-control">
+              </div>
+              
+              <div class="col-md-3">
+                <a href="/admin/products"class="btn btn-secondary form-control" >Cancel</a>
               </div>
             </div>
           </form>
