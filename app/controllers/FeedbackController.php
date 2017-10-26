@@ -50,4 +50,10 @@ class FeedbackController
 		}
 	}
 
+	public function index()
+	{
+		$feedback = Feedback::getAll();
+		return view('feedback/index', \compact('feedback'));
+	}
+
 }

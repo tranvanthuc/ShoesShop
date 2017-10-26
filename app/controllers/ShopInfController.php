@@ -21,6 +21,15 @@ class ShopInfController
     public function update()
     {
         $data = Functions::getDataFromClient();
+
+        // check send json or params
+        $view = false;
+        if (!$data) {
+        $view = true;
+        $data = $_REQUEST;        
+        }
+        // die(var_dump($data));
+        
         //shop_id = 1
         if($data['id'] == 1 ){
             $id = $data['id'];
@@ -29,10 +38,23 @@ class ShopInfController
             
             $success = "Update data success";
             $failure = "Failure";
-            Functions::returnAPI($ShopInfUpdate, $success, $failure );
+            if ($view) {
+                return redirect('admin/shop-info');
+            } else {
+                Functions::returnAPI($ShopInfUpdate, $success, $failure );
+            }
         } else {
             $failure = "Invalid data !";            
             Functions::returnAPI([], "", $failure );
         }
     }
+
+    //index
+    public function index()
+    {
+        $shopInf = ShopInformation::getById(ShopInformation::$table, 1);
+        // die(var_dump($shopInf));
+        return view('shopInfo/index',compact('shopInf'));
+    }
+
 }

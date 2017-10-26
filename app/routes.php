@@ -108,12 +108,22 @@ $router->get('', 'PagesController@dashboard');
 $router->get('admin/login', 'AuthenController@getLogin');
 $router->post('admin/login', 'AuthenController@postLogin');
 
+// $router->get('user-detail', 'AuthenController@getUserById');
+
+//shop information
+$router->get('admin/shop-info', 'ShopInfController@index');
+$router->post('admin/shop-info/update', 'ShopInfController@update');
+
+//order
+$router->get('admin/orders', 'OrdersController@index');
+$router->get('admin/orders/order-detail', 'OrderDetailsController@getOrderDetailByOrderId');
+$router->post('admin/orders/order/delete', 'OrdersController@delete');
+
 // logout
 $router->get('admin/logout', 'AuthenController@logout');
 
 // users management
 $router->get('admin/users', 'UsersController@index');
-// $router->get('user-detail', 'AuthenController@getUserById');
 
 // products managements
 $router->get('admin/products', 'ProductDetailsController@index');
@@ -136,6 +146,8 @@ $router->post('admin/product/size/delete', 'ProductsController@delete');
 // update quantity
 $router->post('admin/product/quantity/update', 'ProductsController@update');
 
+// feedback managements
+$router->get('admin/feedback', 'FeedbackController@index');
 
 
 // admin of categories
