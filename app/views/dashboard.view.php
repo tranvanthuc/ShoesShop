@@ -1,4 +1,3 @@
-
 <?php require('master/header.view.php') ?>
 <link href="/public/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
 
@@ -20,9 +19,9 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-comments"></i>
             </div>
-            <div class="mr-5"><?=users;?> Users</div>
+            <div class="mr-5"><?=$users;?> Users</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
+          <a class="card-footer text-white clearfix small z-1" href="/admin/users">
             <span class="float-left">View Details</span>
             <span class="float-right">
               <i class="fa fa-angle-right"></i>
@@ -36,9 +35,9 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-list"></i>
             </div>
-            <div class="mr-5">11 New Tasks!</div>
+            <div class="mr-5"><?= $cates; ?> Categories</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
+          <a class="card-footer text-white clearfix small z-1" href="/admin/cates">
             <span class="float-left">View Details</span>
             <span class="float-right">
               <i class="fa fa-angle-right"></i>
@@ -52,9 +51,9 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-shopping-cart"></i>
             </div>
-            <div class="mr-5">123 New Orders!</div>
+            <div class="mr-5"><?= $products ?> Products</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
+          <a class="card-footer text-white clearfix small z-1" href="/admin/products">
             <span class="float-left">View Details</span>
             <span class="float-right">
               <i class="fa fa-angle-right"></i>
@@ -70,7 +69,7 @@
             </div>
             <div class="mr-5">13 New Tickets!</div>
           </div>
-          <a class="card-footer text-white clearfix small z-1" href="#">
+          <a class="card-footer text-white clearfix small z-1" href="">
             <span class="float-left">View Details</span>
             <span class="float-right">
               <i class="fa fa-angle-right"></i>
