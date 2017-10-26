@@ -50,10 +50,18 @@ class FeedbackController
 		}
 	}
 
+	// index
 	public function index()
 	{
 		$feedback = Feedback::getAll();
 		return view('feedback/index', \compact('feedback'));
+	}
+
+	public function response()
+	{
+		$id = $_REQUEST['id'];
+		$feedback = Feedback::getById(Feedback::$table, $id)[0];
+		return view('feedback/response', compact('feedback'));
 	}
 
 }
