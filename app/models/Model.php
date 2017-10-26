@@ -71,4 +71,10 @@ class Model {
   {
     App::get('database')->deleteByParams(static::$table, $params);
   }
+  // get all row in table
+
+  public static function getAllRow() 
+  {
+    return App::get('database')->getAllRow(static::$table)[0]->total;
+  }
 }
