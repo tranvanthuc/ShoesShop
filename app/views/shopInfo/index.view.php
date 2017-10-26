@@ -83,9 +83,9 @@
 
 <script src="/public/js/shop-info.js"></script>
 
-<!-- <script src="/vendor/datatables/jquery.dataTables.js"></script> -->
-<!-- <script src="/vendor/datatables/dataTables.bootstrap4.js"></script> -->
+<script src="/vendor/datatables/jquery.dataTables.js"></script>
+<script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
 <!-- Custom scripts for all pages-->
-<!-- <script src="/public/js/sb-admin.min.js"></script> -->
+<script src="/public/js/sb-admin.min.js"></script>
 <!-- Custom scripts for this page-->
-<!-- <script src="/public/js/sb-admin-datatables.min.js"></script> -->
+<script src="/public/js/sb-admin-datatables.min.js"></script>

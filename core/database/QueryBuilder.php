@@ -180,4 +180,16 @@ class QueryBuilder
             die($e->getMessage());
         }
     }
+    // get all row in table
+    public function getAllRow($table)
+    {
+        $sql = "select count(id) as total from {$table}";
+        try {
+            $stm = $this->pdo->prepare($sql);
+            $stm->execute();
+            return $stm->fetchAll(PDO::FETCH_CLASS);
+        } catch(PDOException $e){
+            die($e->getMessage());
+        }
+    }
 }
