@@ -4,6 +4,7 @@
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
 <?php require('master/nav.view.php') ?>
+
 <div class="content-wrapper">
   <div class="container-fluid">
     <!-- Breadcrumbs-->
@@ -19,7 +20,7 @@
             <div class="card-body-icon">
               <i class="fa fa-fw fa-comments"></i>
             </div>
-            <div class="mr-5">26 New Messages!</div>
+            <div class="mr-5"><?=users;?> Users</div>
           </div>
           <a class="card-footer text-white clearfix small z-1" href="#">
             <span class="float-left">View Details</span>
