@@ -84,20 +84,13 @@
                                                             </div>
                                                         </form>
                                                     </div>
-                                                    <script>
-                                                        $('#myModal').on('show.bs.modal', function (event) {
-                                                        var button = $(event.relatedTarget) 
-                                                        var id = button.data('id');
-                                                        $('#id').val(id);
-                                                    })
-                                                    </script>
                                                 </div>
                                             </div>
                                         </li>
                                     </ul>
                                 </td>
                             </tr>
-                                <?php }?>
+                            <?php }?>
                             </tbody>
                         </table>
                     </div>
@@ -108,6 +101,15 @@
 </body>
 
 <?php require('app/views/master/footer.view.php') ?>
+
+
+<script>
+    $('#myModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget) // Button that triggered the modal
+    var id = button.data('id');
+    $('#id').val(id);
+})
+</script>
 
 <script src="/vendor/datatables/jquery.dataTables.js"></script>
 <script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
