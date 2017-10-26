@@ -50,7 +50,7 @@
                     <td><?= $item->name ?></td>
                     <td><?= $item->created_at ?></td>
                     <td>
-                      <a href="#" class="btn btn-primary fa fa-eye"></a>
+                      <a href=<?= "/admin/feedback/response?id=". $item->id ?> class="btn btn-primary fa fa-eye"></a>
                       &nbsp;
                     </td>
                   </tr>

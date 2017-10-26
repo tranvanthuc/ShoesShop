@@ -21,7 +21,7 @@ class CategoriesController
 	//get data with id
 	public static function getById()
 	{
-		$data = Functions::getDataFromClient();
+		$data = Functions::getDataFcromClient();
 		$view = false;
 		if (!$data) {
 			$view = true;

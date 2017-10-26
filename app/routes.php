@@ -148,6 +148,7 @@ $router->post('admin/product/quantity/update', 'ProductsController@update');
 
 // feedback managements
 $router->get('admin/feedback', 'FeedbackController@index');
+$router->get('admin/feedback/response', 'FeedbackController@response');
 
 
 // admin of categories
