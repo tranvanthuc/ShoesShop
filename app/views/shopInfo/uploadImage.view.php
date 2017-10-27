@@ -21,9 +21,9 @@
             <div class="row">
             <div class="col-1 col-md-1"></div>
             <div class="col-10 col-md-10">
-                <form action="" method="post" >
+                <form action="" method="post" enctype="multipart/form-data">
                     <button type="button" id="submit-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModalUpload">UpoadImage</button>
-                </form>
+                
                 <!-- Modal -->
                 <div class="modal fade" id="myModalUpload" role="dialog">
                     <div class="modal-dialog">
@@ -33,14 +33,15 @@
                             <button type="button" class="close" data-dismiss="modal">&times;</button>
                         </div>
                         <div class="modal-body">
-                            <input name="uploadedImage" type="file" value="Choose Image"><br /><br />
+                            <input name="uploadedImage" id="uploadedImage" type="file" value="Choose Image">
                         </div>
                         <div class="modal-footer">                            
-                            <button  class="btn btn-primary" type= "submit"> UpoadImage </button>
+                            <input class="btn btn-primary" name="submit" type= "submit" value="UpoadImage">
                             <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
                         </div>
                         </div>
                     </div>
+                    </form>
                 </div>
                 </div> 
                 <div class="col-1 col-md-1"></div> 

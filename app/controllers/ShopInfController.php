@@ -69,30 +69,33 @@ class ShopInfController
     //post update image
     public function postUpdateImage()
     {
-        $target_dir = "uploads/";
-        $target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+        $target_dir = "public/uploads/";
+        $target_file = $target_dir . basename($_FILES["uploadedImage"]["name"]);
         $uploadOk = 1;
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
+        $status= '';
         if(isset($_POST['submit'])){
+            // die(var_dump(isset($_POST['submit'])));
             //check image file is actual image or face image
-            $check = getimagesize($_FILE["uploadedImage"]["tmp_name"]);
+            $check = getimagesize($_FILES["uploadedImage"]["tmp_name"]);
             if($check !== false) {
-                echo "File name is an image - ".$check["mime"] . ".";
+                $status = "File name is an image - ".$check["mime"] . ".";
                 $uploadOk = 1;
             } else {
-                echo "file is not a image";
+                $status = "file is not a image";
                 $uploadOk = 0;
             }
         }
+        
         //check if file already exists
         if(\file_exists($target_file)) {
-            echo "Sorry, file iexist";
+            $status = "Sorry, file is exist";
             $uploadOk =0;
         }
         //check file size 
-        if($_FILE["uploadedImage"]["size"] > 500000) {
-            echo "Sorry, your file is too large";
+        if($_FILES["uploadedImage"]["size"] > 500000) {
+            $status = "Sorry, your file is too large";
             $uploadOk = 0;
         }
 
@@ -103,21 +106,24 @@ class ShopInfController
             $imageFileType != "jpeg" &&
             $imageFileType != "gif"
         ) {
-            echo "Sorry, only jpg, png, jpeg, gif are allowed";
+            $status = "Sorry, only jpg, png, jpeg, gif are allowed";
             $uploadOk = 0;
         }
 
         //check uploadOK true or error
         if($uploadOk == 0) {
-            echo "Sorry, your file is not upload.";
+            $status = "Sorry, your file is not upload.";
         } else {
-            if(\move_uploaded_file($_FILE["uploadedImage"]["tmp_name"], $target_file)) {
-                echo "The file " . basename($_FILE["uploadedImage"]["tmp_name"]."has been upload.");
+            if(\move_uploaded_file($_FILES["uploadedImage"]["tmp_name"], $target_file)) {
+                $status = "The file " . basename($_FILES["uploadedImage"]["tmp_name"]." has been upload.");
+                ShopInformation::uploadImage($_FILES["uploadedImage"]["name"]);
+                
             } else {
-                echo "Sorry error when uploading your file";
-            }
+                $status = "Sorry error when uploading your file";
+            }            
         }
-        return redirect('admin/shop-info');
+        return redirect('admin/shop-info', compact('status'));
+        
     }
 
 }

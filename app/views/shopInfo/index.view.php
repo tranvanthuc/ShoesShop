@@ -50,8 +50,8 @@
                     <input type="text" class="form-control" name="address" value="<?= $shopInf[0]->address; ?>" />
                 </div>
 
-                <button ><a href="<?= "/admin/shop-info/update/upload-image/?id=".$shopInf[0]->id ?>" >Upload image</a></button>
-
+                <a class="btn btn-primary" href="<?= "/admin/shop-info/update/upload-image/?id=".$shopInf[0]->id ?>" >Upload image</a>              
+                
                 <button type="button" id="submit-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Update</button>
                 
                 <!-- Modal -->

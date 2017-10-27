@@ -13,4 +13,11 @@ class ShopInformation extends Model
     public $phone;
     public $email;
 
+    public static function uploadImage($imagePath)
+    {
+        $table = ShopInformation::$table;
+        $sql = "Update {$table} set image = '{$imagePath}' where id= 1";
+        ShopInformation::queryDelete($sql);
+    }
+
 }
