@@ -22,7 +22,7 @@
             <div class="row">
             <div class="col-1 col-md-1"></div>
             <div class="col-10 col-md-10">
-            <form method="POST" action="shop-info/update">
+            <form method="POST" action="shop-info/update" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?= $shopInf[0]->id ?>" class="txt-input">
                 <div class="form-group">
                     <label >Name</label>
@@ -50,6 +50,8 @@
                     <input type="text" class="form-control" name="address" value="<?= $shopInf[0]->address; ?>" />
                 </div>
 
+                <button ><a href="<?= "/admin/shop-info/update/upload-image/?id=".$shopInf[0]->id ?>" >Upload image</a></button>
+
                 <button type="button" id="submit-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Update</button>
                 
                 <!-- Modal -->
@@ -70,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-            </form>  
+            </form> 
             </div> 
             <div class="col-1 col-md-1"></div> 
             </div>  
