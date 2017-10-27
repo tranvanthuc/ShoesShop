@@ -1,0 +1,31 @@
+OrderId: 188
+Date/time: 2017-10-26 02:28:05
+Sub-total: 814
+Customer: Minh Toan Nguyen
+Email: nguyen.mt@neo-lab.vn
+Phone: 
+Address: 
+Name: Captoe Almond
+Size: 40
+Quantity: 1
+Price: 179
+Total: 179
+
+Name: Men's Pronto Ox Blood
+Size: 42
+Quantity: 3
+Price: 99
+Total: 297
+
+Name: Men's Hirsh Cadet
+Size: 43
+Quantity: 1
+Price: 159
+Total: 159
+
+Name: Women's Royale Blush Mono
+Size: 41
+Quantity: 1
+Price: 179
+Total: 179
+

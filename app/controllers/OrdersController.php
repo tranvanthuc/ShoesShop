@@ -152,13 +152,20 @@ class OrdersController
 			if(isset($id)){
 				$orderDetails = OrderDetail::getOrderDetailByOrderId($id);
 				$myfile = fopen("OrderID{$orderDetails[0]->order_id}.txt", "a");
+				for($i =0; $i < count($orderDetails);$i++){
+					
+				}
 				fwrite($myfile, "OrderId: ".$orderDetails[0]->order_id. "\n");
 				fwrite($myfile, "Date/time: ".$orderDetails[0]->date. "\n");
+				$subTotal;
+				foreach($orderDetails as $orderDetail){
+					$subTotal = $subTotal + $orderDetail->total;
+				}
 				fwrite($myfile, "Sub-total: ".$subTotal. "\n");
 				fwrite($myfile, "Customer: ".$orderDetails[0]->last_name." ".$orderDetails[0]->first_name. "\n");
 				fwrite($myfile, "Email: ".$orderDetails[0]->email. "\n");
 				fwrite($myfile, "Phone: ".$orderDetails[0]->phone. "\n");
-				fwrite($myfile, "Address: ".$orderDetails[0]->address. "\n");
+				fwrite($myfile, "Address: ".$orderDetails[0]->address. "\n". "\n");
 				foreach($orderDetails as $orderDetail) {
 					$data= 
 						"Name: ". $orderDetail->name. "\n".
