@@ -1,6 +1,6 @@
 <?php require('app/views/master/header.view.php') ?>
 <!-- <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"> -->
-
+<link href="/public/css/order.css" rel="stylesheet">
 
 <body class="fixed-nav sticky-footer " id="page-top">
     <?php require('app/views/master/nav.view.php') ?>
@@ -26,15 +26,14 @@
                     <div class="col-10 col-md-10">
                         <form method="POST" action="shop-info/update" enctype="multipart/form-data">
                             <input type="hidden" name="id" value="<?= $shopInf[0]->id ?>" class="txt-input">
-                            <div class="form-group">
+                            <center><img id="shop-img"src="/public/uploads/<?= $shopInf[0]->image ?>" alt="Shop information image" ></center>
+                            <div class="form-group"><br/>
                                 <label>Name</label>
                                 <input type="text" class="form-control" name="name" maxlength="100" value="<?= $shopInf[0]->name; ?>" required/>
                             </div>
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" name="description" rows="11" maxlength="1500" style="resize: none;">
-                                    <?= $shopInf[0]->description; ?>
-                                </textarea>
+                                <textarea class="form-control" name="description" rows="11" maxlength="1500" style="resize: none;"><?= $shopInf[0]->description; ?></textarea>
                             </div>
                             <div class="form-group">
                                 <label>Email</label>

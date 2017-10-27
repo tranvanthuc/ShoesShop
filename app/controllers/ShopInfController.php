@@ -53,7 +53,7 @@ class ShopInfController
     public function index()
     {
         $shopInf = ShopInformation::getById(ShopInformation::$table, 1);
-        // die(var_dump($shopInf));
+        // die(var_dump( $shopInf));
         return view('shopInfo/index',compact('shopInf'));
     }
 
@@ -67,7 +67,7 @@ class ShopInfController
 
         $status= '';
         if(isset($_POST['submit'])){
-            // die(var_dump(isset($_POST['submit'])));
+            // die(var_dump(isset($imageFileType)));
             //check image file is actual image or face image
             $check = getimagesize($_FILES["uploadedImage"]["tmp_name"]);
             if($check !== false) {
