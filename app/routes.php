@@ -156,3 +156,5 @@ $router->get('admin/cates', 'CategoriesController@index');
 $router->get('admin/cate/insert', 'CategoriesController@getInsert');
 $router->get('admin/cate/update', 'CategoriesController@getUpdate');
 $router->post('admin/cate/delete', 'CategoriesController@delete');
+
+$router->get('map', 'MapController@index');
