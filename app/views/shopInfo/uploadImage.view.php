@@ -1,63 +1,43 @@
-
-<?php require('app/views/master/header.view.php') ?>
-<!-- <link href="/vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet"> -->
-
-
-<body class="fixed-nav sticky-footer " id="page-top">
-<?php require('app/views/master/nav.view.php') ?>
-
-<div class="content-wrapper">
-    <div class="container-fluid">
-        <!-- Breadcrumbs-->
-        <ol class="breadcrumb">
-        <li class="breadcrumb-item">
-            <a href="/">Dashboard</a>
-        </li>
-        <li class="breadcrumb-item active">Shop Information</li>
-        </ol>
-        <!-- Content -->
-        <div class="shop-info" >            
-            <center><h3>Shop Information</h3></center>
-            <div class="row">
-            <div class="col-1 col-md-1"></div>
-            <div class="col-10 col-md-10">
-                <form action="" method="post" enctype="multipart/form-data">
-                    <button type="button" id="submit-btn" class="btn btn-primary" data-toggle="modal" data-target="#myModalUpload">UpoadImage</button>
-                
-                <!-- Modal -->
-                <div class="modal fade" id="myModalUpload" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title">Update shop information</h5>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <input name="uploadedImage" id="uploadedImage" type="file" value="Choose Image">
-                        </div>
-                        <div class="modal-footer">                            
-                            <input class="btn btn-primary" name="submit" type= "submit" value="UpoadImage">
-                            <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
-                        </div>
-                        </div>
-                    </div>
-                    </form>
+<form action="shop-info/upload-image" method="post" enctype="multipart/form-data" id="myForm">
+    <!-- Modal -->
+    <div class="modal fade" id="uploadModal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Update shop information</h5>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
-                </div> 
-                <div class="col-1 col-md-1"></div> 
-            </div>  
-        </div>    
+                <div class="modal-body">
+                    <input name="uploadedImage" id="uploadedImage" type="file" value="Choose Image">
+                </div>
+                <div class="modal-footer">
+                    <input class="btn btn-primary" name="submit" type="submit" value="UpoadImage">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-</body>
+</form>
 
-<?php require('app/views/master/footer.view.php') ?>
+<script>
+$(function(){
+    $('#myform').on('submit', function(e){
+        
+        // prevent native form submission here
+        e.preventDefault();
 
-<script src="/public/js/shop-info.js"></script>
-
-<script src="/vendor/datatables/jquery.dataTables.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
-<!-- Custom scripts for all pages-->
-<script src="/public/js/sb-admin.min.js"></script>
-<!-- Custom scripts for this page-->
-<script src="/public/js/sb-admin-datatables.min.js"></script>
+        // now do whatever you want here
+        $.ajax({
+            type: $(this).attr('method'), // <-- get method of form
+            url: $(this).attr('action'), // <-- get action of form
+            data: $(this).serialize(), // <-- serialize all fields into a string that is ready to be posted to your PHP file
+            beforeSend: function(){
+                $('#result').html('<img src="loading.gif" />');
+            },
+            success: function(data){
+                $('#result').html(data);
+            }
+        });
+    });
+});
+</script>

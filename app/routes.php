@@ -113,9 +113,10 @@ $router->post('admin/login', 'AuthenController@postLogin');
 //shop information
 $router->get('admin/shop-info', 'ShopInfController@index');
 $router->post('admin/shop-info/update', 'ShopInfController@update');
+$router->post('admin/shop-info/upload-image', 'ShopInfController@uploadImage');
 
-$router->get('admin/shop-info/update/upload-image', 'ShopInfController@getUpdateImage');
-$router->post('admin/shop-info/update/upload-image', 'ShopInfController@postUpdateImage');
+// $router->get('admin/shop-info/update/upload-image', 'ShopInfController@getUpdateImage');
+// $router->post('admin/shop-info/update/upload-image', 'ShopInfController@postUpdateImage');
 
 //order
 $router->get('admin/orders', 'OrdersController@index');
