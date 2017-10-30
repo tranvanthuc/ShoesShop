@@ -157,3 +157,7 @@ $router->get('admin/cates', 'CategoriesController@index');
 $router->get('admin/cate/insert', 'CategoriesController@getInsert');
 $router->get('admin/cate/update', 'CategoriesController@getUpdate');
 $router->post('admin/cate/delete', 'CategoriesController@delete');
+
+// research ajax
+$router->get('ajax/cates', 'AjaxController@index');
+$router->get('ajax/cate/update', 'AjaxController@update');
