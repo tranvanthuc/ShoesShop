@@ -32,12 +32,13 @@
                             );                            
                             
                             if (isset($_GET['msg'])) {
-                                $error_id = isset($_GET['msg']);
+                                // die(var_dump($_GET['msg']));
+                                $error_id = $_GET['msg'];
                                 switch ($error_id) {
                                     case 0: echo $errors[0];
                                         break;
-                                    case 1: echo $errors[1];
-                                        break;
+                                    // case 1: echo $errors[1];
+                                    //     break;
                                     case 2: echo $errors[2];
                                         break;
                                     case 3: echo $errors[3];
