@@ -3,6 +3,7 @@
 
     $name = $('#name');
     $gender = $('#gender');
+    $error = $('#error');
     
     var api = getAPI();
     
@@ -19,6 +20,9 @@
         var cate = getData(data)[0];
         $name.val(cate.name);
         $gender.val(cate.gender);
+      },
+      error: function(error) {
+        $error.html(error.statusText);
       }
     });
 
@@ -38,8 +42,8 @@
           console.log(cate);
           window.location.href = "/ajax/cates";
         },
-        error: function() {
-          alert('Update cate error');
+        error: function(error) {
+          $error.html(error.statusText);
         }
       });
     });

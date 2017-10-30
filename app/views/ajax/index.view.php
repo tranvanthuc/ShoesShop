@@ -7,8 +7,7 @@
   window.paceOptions = {
     eventLag: false,
     document: false,
-  // restartOnRequestAfter: false,
-  elements: {
+    elements: {
     selectors: ['#cates']
   }
 };
@@ -35,12 +34,5 @@
   </div>
 
 </body>
-
-<script>
-  Pace.on('done', function(){
-    console.log("finished");
-    $('#content').fadeIn(1000);
-  })
-</script>
-
+<script src="/public/myJs/showContent.js"></script>
 <?php require('app/views/master/footer.view.php') ?>
