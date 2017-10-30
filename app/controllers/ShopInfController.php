@@ -76,6 +76,7 @@ class ShopInfController
             } else {
                 $status = "file is not a image";
                 $uploadOk = 0;
+                header ("Location: /admin/shop-info?msg=1");
             }
         }
         
@@ -83,11 +84,13 @@ class ShopInfController
         if(\file_exists($target_file)) {
             $status = $status."\n Sorry, file is exist";
             $uploadOk =0;
+            header ("Location: /admin/shop-info?msg=2");
         }
         //check file size 
         if($_FILES["uploadedImage"]["size"] > 500000) {
             $status = "Sorry, your file is too large";
             $uploadOk = 0;
+            header ("Location: /admin/shop-info?msg=3");
         }
 
         //Allow certain file formats
@@ -99,6 +102,7 @@ class ShopInfController
         ) {
             $status = $status."\n Sorry, only jpg, png, jpeg, gif are allowed";
             $uploadOk = 0;
+            header ("Location: /admin/shop-info?msg=4");
         }
 
         //check uploadOK true or error
@@ -107,12 +111,16 @@ class ShopInfController
         } else {
             if(\move_uploaded_file($_FILES["uploadedImage"]["tmp_name"], $target_file)) {
                 $status = $status."\n The file " . basename($_FILES["uploadedImage"]["tmp_name"]." has been upload.");
-                ShopInformation::uploadImage($_FILES["uploadedImage"]["name"]);                
+                ShopInformation::uploadImage($_FILES["uploadedImage"]["name"]); 
+                header ("Location: /admin/shop-info?msg=0");                               
             } else {
                 $status = $status."\n Sorry error when uploading your file";
-            }            
+                header ("Location: /admin/shop-info?msg=5");
+            }  
+
         } 
-        return redirect('admin/shop-info');            
+        // die(var_dump($status));
+        // return redirect('admin/shop-info');    
     }
 
 }

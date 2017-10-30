@@ -19,6 +19,37 @@
 
                 <center>
                     <h3>Shop Information</h3>
+                    <?php if(isset($_GET['msg'])): ?>                        
+                        <div class="alert alert-danger" style="width:30%;" role="alert">
+                        <?php 
+                            $errors = array (
+                                0 => "Upload image success",
+                                1 => "File is not a image",
+                                2 => "File is exist",
+                                3 => "File is too large",
+                                4 => "Only jpg, png, jpeg, gif are allowed",
+                                5 => "Error when uploading your file"                                
+                            );                            
+                            
+                            if (isset($_GET['msg'])) {
+                                $error_id = isset($_GET['msg']);
+                                switch ($error_id) {
+                                    case 0: echo $errors[0];
+                                        break;
+                                    case 1: echo $errors[1];
+                                        break;
+                                    case 2: echo $errors[2];
+                                        break;
+                                    case 3: echo $errors[3];
+                                        break;
+                                    case 4: echo $errors[4];
+                                        break;
+                                    default: echo $errors[5];
+                                }
+                            }
+                        ?>
+                        </div>
+                    <?php endif;?>
                     <button class="btn btn-success" style="width:30%;" data-toggle="modal" data-target="#uploadModal">Update image</button>
                 </center>
                 <div class="row">
@@ -86,9 +117,9 @@
 
 <script src="/public/js/shop-info.js"></script>
 
-<script src="/vendor/datatables/jquery.dataTables.js"></script>
-<script src="/vendor/datatables/dataTables.bootstrap4.js"></script>
+<!-- <script src="/vendor/datatables/jquery.dataTables.js"></script> -->
+<!-- <script src="/vendor/datatables/dataTables.bootstrap4.js"></script> -->
 <!-- Custom scripts for all pages-->
-<script src="/public/js/sb-admin.min.js"></script>
+<!-- <script src="/public/js/sb-admin.min.js"></script> -->
 <!-- Custom scripts for this page-->
-<script src="/public/js/sb-admin-datatables.min.js"></script>
+<!-- <script src="/public/js/sb-admin-datatables.min.js"></script> -->
