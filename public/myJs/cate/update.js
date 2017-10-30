@@ -3,11 +3,10 @@
 
     $name = $('#name');
     $gender = $('#gender');
-    var api = 'https://calm-dawn-66282.herokuapp.com/';
-
-    var url_str = window.location.href;
-    var url = new URL(url_str);
-    var id = url.searchParams.get('id');
+    
+    var api = getAPI();
+    
+    var id = getParam('id');
     var idParam = {
       id: id,
     };

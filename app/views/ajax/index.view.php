@@ -1,11 +1,16 @@
-<?php require('app/views/master/header.view.php') ?>
+<?php 
+  require('app/views/master/header.view.php');
+
+?>
 <?php ?>
 <script src="/public/myJs/functions.js"></script>
-<script src="/public/myJs/insertCate.js"></script>
+<script src="/public/myJs/cate/insert.js"></script>
+<link rel="stylesheet" href="/public/myCss/style.css">
 
 
 <body >
   <div>
+    <?php   require('app/views/loading.view.php');?>
     <ul id="cates">
     </ul>
   </div>

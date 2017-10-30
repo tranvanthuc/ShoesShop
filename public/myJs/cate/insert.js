@@ -3,8 +3,11 @@ $(document).ready(function() {
   $cates = $('#cates');
   $name = $('#name');
   $gender = $('#gender');
-  var api = 'https://calm-dawn-66282.herokuapp.com/';
+  $loading = $('#loading');
+  
 
+  var api = getAPI();
+  $loading.show();
   $.ajax({
     type: 'GET',
     url: api + 'cates',
@@ -14,7 +17,8 @@ $(document).ready(function() {
         $.each(cates, function(i, cate) {
           $cates.append(
             '<li><a href="/ajax/cate/update?id=' + cate.id + '"> '+ cate.name + '</a></li>'
-          )
+          );
+          $loading.hide();
         });
       } catch (error) {
         alert(error);
@@ -28,6 +32,7 @@ $(document).ready(function() {
       gender: $gender.val()
     };
 
+    $loading.show();
     $.ajax({
       type: 'POST',
       url: api + 'cate/insert',
@@ -37,7 +42,8 @@ $(document).ready(function() {
         $cates.append(
           '<li><a href="/ajax/cate/update?id=' + 
           cate.id + '"> '+ cate.name + '</a></li>'
-          )
+          );
+          $loading.hide();
       },
       error: function() {
         alert('Insert cate error');
