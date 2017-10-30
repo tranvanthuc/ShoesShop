@@ -67,7 +67,8 @@ class ShopInfController
 
         $status= '';
         if(isset($_POST['submit'])){
-            // die(var_dump(isset($imageFileType)));
+
+            // die(var_dump($target_file));
             //check image file is actual image or face image
             $check = getimagesize($_FILES["uploadedImage"]["tmp_name"]);
             if($check !== false) {
@@ -112,7 +113,9 @@ class ShopInfController
             if(\move_uploaded_file($_FILES["uploadedImage"]["tmp_name"], $target_file)) {
                 $status = $status."\n The file " . basename($_FILES["uploadedImage"]["tmp_name"]." has been upload.");
                 ShopInformation::uploadImage($_FILES["uploadedImage"]["name"]); 
-                header ("Location: /admin/shop-info?msg=0");                               
+                // die(var_dump( $target_file));
+                header ("Location: /admin/shop-info?msg=0");
+                                               
             } else {
                 $status = $status."\n Sorry error when uploading your file";
                 header ("Location: /admin/shop-info?msg=5");
@@ -121,6 +124,13 @@ class ShopInfController
         } 
         // die(var_dump($status));
         // return redirect('admin/shop-info');    
+    }
+
+    //Demo ajax
+    public function demo()
+    {
+        $shopInf = ShopInformation::getById(ShopInformation::$table, 1);
+        return view('shopInfo/demo', compact('shopInf'));
     }
 
 }

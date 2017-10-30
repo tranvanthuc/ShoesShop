@@ -1,4 +1,6 @@
 <form action="shop-info/upload-image" method="post" enctype="multipart/form-data" id="myForm">
+
+<!--  -->
     <!-- Modal -->
     <div class="modal fade" id="uploadModal" role="dialog">
         <div class="modal-dialog">
@@ -11,7 +13,7 @@
                     <input name="uploadedImage" id="uploadedImage" type="file" value="Choose Image">
                 </div>
                 <div class="modal-footer">
-                    <input class="btn btn-primary" name="submit" type="submit" value="UpoadImage">
+                    <input class="btn btn-primary" name="submit" type="submit" onclick="load_ajax()"  value="UpoadImage" >
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -20,24 +22,28 @@
 </form>
 
 <script>
-$(function(){
-    $('#myform').on('submit', function(e){
-        
+function load_ajax(){
+$(document).ready(function() {      
         // prevent native form submission here
-        e.preventDefault();
+        // e.preventDefault();
 
         // now do whatever you want here
         $.ajax({
-            type: $(this).attr('method'), // <-- get method of form
-            url: $(this).attr('action'), // <-- get action of form
-            data: $(this).serialize(), // <-- serialize all fields into a string that is ready to be posted to your PHP file
-            beforeSend: function(){
-                $('#result').html('<img src="loading.gif" />');
-            },
+            type: "POST", // <-- get method of form
+            url: "http://localhost:8080/admin/shop-info/upload-image", // <-- get action of form
+            data: 
+            // {
+            //     submit : $('#number').val(),
+            //     uploadedImage: $('#uploadedImage').val()
+            // } 
+            
+            $(this).serialize(), // <-- serialize all fields into a string that is ready to be posted to your PHP file
+
             success: function(data){
-                $('#result').html(data);
+                // $('#result').html(data);
+                // alert("work");
             }
         });
     });
-});
+};
 </script>
