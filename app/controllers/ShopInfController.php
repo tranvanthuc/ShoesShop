@@ -65,17 +65,17 @@ class ShopInfController
         $uploadOk = 1;
         $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
-        $status= '';
+        // $status= '';
         if(isset($_POST['submit'])){
 
             // die(var_dump($target_file));
             //check image file is actual image or face image
             $check = getimagesize($_FILES["uploadedImage"]["tmp_name"]);
             if($check !== false) {
-                $status = "File name is an image - ".$check["mime"] . ".";
+                // $status = "File name is an image - ".$check["mime"] . ".";
                 $uploadOk = 1;
             } else {
-                $status = "file is not a image";
+                // $status = "file is not a image";
                 $uploadOk = 0;
                 header ("Location: /admin/shop-info?msg=1");
             }
@@ -83,13 +83,13 @@ class ShopInfController
         
         //check if file already exists
         if(\file_exists($target_file)) {
-            $status = $status."\n Sorry, file is exist";
+            // $status = $status."\n Sorry, file is exist";
             $uploadOk =0;
             header ("Location: /admin/shop-info?msg=2");
         }
         //check file size 
         if($_FILES["uploadedImage"]["size"] > 500000) {
-            $status = "Sorry, your file is too large";
+            // $status = "Sorry, your file is too large";
             $uploadOk = 0;
             header ("Location: /admin/shop-info?msg=3");
         }
@@ -101,23 +101,23 @@ class ShopInfController
             $imageFileType != "jpeg" &&
             $imageFileType != "gif"
         ) {
-            $status = $status."\n Sorry, only jpg, png, jpeg, gif are allowed";
+            // $status = $status."\n Sorry, only jpg, png, jpeg, gif are allowed";
             $uploadOk = 0;
             header ("Location: /admin/shop-info?msg=4");
         }
 
         //check uploadOK true or error
         if($uploadOk == 0) {
-            $status = $status."\n Sorry, your file is not upload.";
+            $status = "\n Sorry, your file is not upload.";
         } else {
             if(\move_uploaded_file($_FILES["uploadedImage"]["tmp_name"], $target_file)) {
-                $status = $status."\n The file " . basename($_FILES["uploadedImage"]["tmp_name"]." has been upload.");
+                // $status = $status."\n The file " . basename($_FILES["uploadedImage"]["tmp_name"]." has been upload.");
                 ShopInformation::uploadImage($_FILES["uploadedImage"]["name"]); 
                 // die(var_dump( $target_file));
                 header ("Location: /admin/shop-info?msg=0");
                                                
             } else {
-                $status = $status."\n Sorry error when uploading your file";
+                // $status = $status."\n Sorry error when uploading your file";
                 header ("Location: /admin/shop-info?msg=5");
             }  
 

@@ -84,4 +84,24 @@ class Model {
   {
     return App::get('database')->getAllRow(static::$table)[0]->total;
   }
+
+  //TRANSACTION//
+  //begin
+  public static function beginTrans()
+  {
+    App::get('database')->beginTrans();
+  }
+
+  //commit
+  public static function commitTrans()
+  {
+    App::get('database')->commitTrans();
+  }
+
+  //rollback
+  public static function rollbackTrans()
+  {
+    App::get('database')->rollbackTrans();
+  }
+  
 }

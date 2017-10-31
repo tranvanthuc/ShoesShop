@@ -2,6 +2,9 @@
 namespace app\controllers;
 
 use app\models\Order;
+use app\models\User;
+use app\models\Model;
+use app\models\ProductDetail;
 use app\models\OrderDetail;
 use utils\Functions;
 
@@ -33,65 +36,65 @@ class OrdersController
 		}			
 	}
 
-	// insert order
-	public function insert()
-	{
-		$data = Functions::getDataFromClient();
-		// die(var_dump($data));
-		if (isset($data['user_id'])) {
-			$user_id = $data['user_id'];
-            $date = date("Y-m-d H:i:s"); 
-            $paramsOrder = [
-                'user_id' => $user_id,
-                'date' => $date,
-			];            
-			//insert order: id, user_id, date
-			$order = Order::insert($paramsOrder);	
-			//Get id of inserted order
-			$orderId = $order[0]->id;
-			//data result(return json)
-			$resultArray = array("user_id" => $user_id);
-			//order detail array
-			$orderDetailArray = array();
-			// params of order detail inserted
-			$paramsOrderDetail = array();
-			//Read json of order detail to insert
-			for($i=0; $i< count($data['products']); $i++){
-				if(
-					isset($data['products'][$i]['name']) && 
-					isset($data['products'][$i]['size']) &&	
-					isset($data['products'][$i]['quantity']) &&
-					isset($data['products'][$i]['price']) &&
-					isset($data['products'][$i]['total'])
-				) {					
-					// die(var_dump(count($data['products'])));
-					$paramsOrderDetail = [
-						'order_id' => $orderId,
-						'name' => $data['products'][$i]['name'],
-						'size' => $data['products'][$i]['size'],						
-						'quantity' => $data['products'][$i]['quantity'],
-						'price' => $data['products'][$i]['price'],
-						'total' => $data['products'][$i]['total']
-					];
-					$orderDetail = OrderDetail::insert($paramsOrderDetail);
-					// push data to order detail inserted array
-					array_push($orderDetailArray,$paramsOrderDetail); 
-				} else {
-					$failure = "Missing params";
-					Functions::returnAPI([], "", $failure);
-					break;
-				}		
-			}
+	// // insert order
+	// public function insert()
+	// {
+	// 	$data = Functions::getDataFromClient();
+	// 	// die(var_dump($data));
+	// 	if (isset($data['user_id'])) {
+	// 		$user_id = $data['user_id'];
+    //         $date = date("Y-m-d H:i:s"); 
+    //         $paramsOrder = [
+    //             'user_id' => $user_id,
+    //             'date' => $date,
+	// 		];            
+	// 		//insert order: id, user_id, date
+	// 		$order = Order::insert($paramsOrder);	
+	// 		//Get id of inserted order
+	// 		$orderId = $order[0]->id;
+	// 		//data result(return json)
+	// 		$resultArray = array("user_id" => $user_id);
+	// 		//order detail array
+	// 		$orderDetailArray = array();
+	// 		// params of order detail inserted
+	// 		$paramsOrderDetail = array();
+	// 		//Read json of order detail to insert
+	// 		for($i=0; $i< count($data['products']); $i++){
+	// 			if(
+	// 				isset($data['products'][$i]['name']) && 
+	// 				isset($data['products'][$i]['size']) &&	
+	// 				isset($data['products'][$i]['quantity']) &&
+	// 				isset($data['products'][$i]['price']) &&
+	// 				isset($data['products'][$i]['total'])
+	// 			) {					
+	// 				// die(var_dump(count($data['products'])));
+	// 				$paramsOrderDetail = [
+	// 					'order_id' => $orderId,
+	// 					'name' => $data['products'][$i]['name'],
+	// 					'size' => $data['products'][$i]['size'],						
+	// 					'quantity' => $data['products'][$i]['quantity'],
+	// 					'price' => $data['products'][$i]['price'],
+	// 					'total' => $data['products'][$i]['total']
+	// 				];
+	// 				$orderDetail = OrderDetail::insert($paramsOrderDetail);
+	// 				// push data to order detail inserted array
+	// 				array_push($orderDetailArray,$paramsOrderDetail); 
+	// 			} else {
+	// 				$failure = "Missing params";
+	// 				Functions::returnAPI([], "", $failure);
+	// 				break;
+	// 			}		
+	// 		}
 			
-			$resultArray["products"] = $orderDetailArray;			
-			$success = "Success";
-			$failure = "Failure";
-			Functions::returnAPI($resultArray , $success, $failure);
-		} else {
-			$failure = "Missing params";
-			Functions::returnAPI([], "", $failure);
-		}
-	}
+	// 		$resultArray["products"] = $orderDetailArray;			
+	// 		$success = "Success";
+	// 		$failure = "Failure";
+	// 		Functions::returnAPI($resultArray , $success, $failure);
+	// 	} else {
+	// 		$failure = "Missing params";
+	// 		Functions::returnAPI([], "", $failure);
+	// 	}
+	// }
 
 	// delete order by id
 	public function delete()
@@ -185,5 +188,135 @@ class OrdersController
             return false;
         }
 	}
+
+	// insert order with check TRANSACTION and validate data before insert
+	public function insert()
+	{
+		$data = Functions::getDataFromClient();
+		// die(var_dump($data));
+		try {
+			Model::beginTrans();
+			$checkError = 1;
+			if (isset($data['user_id'])) {
+
+				$user_id = $data['user_id'];
+
+				$checkUser = [
+					'id' => $user_id
+				];
+				//check if user id exist
+				$checkUserExist = User::checkDataExist($checkUser);	
+				// die(var_dump($checkUserExist));
+				//insert order			
+				if($checkUserExist)
+				{
+					$date = date("Y-m-d H:i:s"); 
+					$paramsOrder = [
+						'user_id' => $user_id,
+						'date' => $date,
+					];            
+					//insert order: id, user_id, date
+					$order = Order::insert($paramsOrder);	
+					//Get id of inserted order
+					$orderId = $order[0]->id;
+
+					//data result(return to json)
+					$resultArray = array("user_id" => $user_id);
+
+					//order detail array
+					$orderDetailArray = array();
+					// params of order detail inserted
+					$paramsOrderDetail = array();
+					//Read json of order detail to insert
+					for($i=0; $i< count($data['products']); $i++){
+						if(
+							isset($data['products'][$i]['name']) && 
+							isset($data['products'][$i]['product_detail_id']) &&	
+							isset($data['products'][$i]['size']) &&	
+							isset($data['products'][$i]['quantity']) &&
+							isset($data['products'][$i]['price']) &&
+							isset($data['products'][$i]['total'])
+						) {
+							$productName = $data['products'][$i]['name'];
+							$productDetailId = $data['products'][$i]['product_detail_id'];
+							$productSize = $data['products'][$i]['size'];
+							$productQuantity = $data['products'][$i]['quantity'];
+							$productPrice = $data['products'][$i]['price'];
+							$productTotal =  $data['products'][$i]['total'];
+
+							$checkProductDetail = [
+								'id'=> $productDetailId
+							];
+
+							$ckeckProductDetailExist = ProductDetail::checkDataExist($checkProductDetail);
+							if($ckeckProductDetailExist){
+								$getProductQuantity = Order::getproductQuantity($productDetailId, $productSize);
+								$checkQuanity = (int)($getProductQuantity[0]->quantity);
+								$productId = $getProductQuantity[0]->id;
+								// die(var_dump($getProductQuantity));
+								//check if quantity <= amount of the product							
+								if($productQuantity < $checkQuanity){									
+									// die(var_dump($productQuantity < $checkQuanity));
+									$paramsOrderDetail = [
+										'order_id' => $orderId,
+										'name' => $productName,
+										'size' => $productSize,						
+										'quantity' => $productQuantity,
+										'price' => $productPrice,
+										'total' => $productTotal
+									];
+									$orderDetail = OrderDetail::insert($paramsOrderDetail);
+
+									$updateProductQuantity =  Order::updateProductQUantity(
+										$productQuantity,
+										$checkQuanity, 
+										$productId
+									);
+									// push data to order detail inserted array
+									array_push($orderDetailArray,$paramsOrderDetail); 
+								} else {
+									$checkError = 0;
+									$failure = "Quantity is invalid or Size is invalid";
+									Functions::returnAPI([], "", $failure);
+									break;
+								}
+							} else {
+								$checkError = 0;
+								$failure = "Product detail is not exist";
+								Functions::returnAPI([], "", $failure);
+								break;
+							}						
+						} else {
+							$checkError = 0;
+							$failure = "Missing params";
+							Functions::returnAPI([], "", $failure);
+							break;
+						}		
+					}				
+				} else {
+					$checkError = 0;
+					$failure = "User is not exist";
+					Functions::returnAPI([], "", $failure);
+				}
+			} else {
+				$checkError = 0;
+				$failure = "Missing params";
+				Functions::returnAPI([], "", $failure);
+			}
+			if($checkError == 1){
+				$resultArray["products"] = $orderDetailArray;			
+				$success = "Success";
+				$failure = "Failure";
+				Functions::returnAPI($resultArray , $success, $failure);
+			}
+			Model::commitTrans();
+		} catch (Exception $e){
+			Model::rollbackTrans();
+			$failure = "Missing params";
+			Functions::returnAPI([], "", $failure);
+			die($e->getMessage());
+		}
+	}
+	
 
 }

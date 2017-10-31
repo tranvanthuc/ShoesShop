@@ -34,4 +34,21 @@ class Order extends Model
 		$orders = Order::query($sql);
 		return $orders;
 	}
+
+	//get product quantity by name and size
+	public static function getproductQuantity($product_detail_id, $size)
+	{
+		$sql = "select quantity, id from dbshoesshop.products where product_detail_id='{$product_detail_id}' and size={$size} limit 1";
+		$productQUantity = Order::query($sql);
+		return $productQUantity;
+	}
+
+	//minus quantity after insert into order
+	public static function updateProductQUantity($minusQuantity, $quantity, $id)
+	{
+		$resultQuantity = $quantity- $minusQuantity;
+		$sql = "update dbshoesshop.products set quantity = {$resultQuantity} where id = {$id}";
+		Order::queryDelete($sql);
+		// return $productQUantity;
+	}
 }

@@ -192,4 +192,24 @@ class QueryBuilder
             die($e->getMessage());
         }
     }
+
+    //TRANSACTION//
+    //begin transaction
+    public function beginTrans()
+    {
+        $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);        
+        $this->pdo->beginTransaction();
+    }
+
+    //commit transaction
+    public function commitTrans()
+    {
+        $this->pdo->commit();
+    }
+
+    //rollback transaction
+    public function rollbackTrans()
+    {
+        $this->pdo->rollback();
+    }
 }
