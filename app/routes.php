@@ -118,6 +118,10 @@ $router->post('admin/shop-info/upload-image', 'ShopInfController@uploadImage');
 // $router->get('admin/shop-info/update/upload-image', 'ShopInfController@getUpdateImage');
 // $router->post('admin/shop-info/update/upload-image', 'ShopInfController@postUpdateImage');
 
+// $router->get('admin/user-demos', 'UserDemoController@getAll');
+// $router->get('admin/user-demos/login', 'UserDemoController@getLogin');
+// $router->post('admin/user-demos/login', 'UserDemoController@postLogin');
+
 //order
 $router->get('admin/orders', 'OrdersController@index');
 $router->get('admin/orders/order-detail', 'OrderDetailsController@getOrderDetailByOrderId');
