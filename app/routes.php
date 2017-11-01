@@ -115,6 +115,9 @@ $router->get('admin/shop-info', 'ShopInfController@index');
 $router->post('admin/shop-info/update', 'ShopInfController@update');
 $router->post('admin/shop-info/upload-image', 'ShopInfController@uploadImage');
 
+$router->get('admin/send-mail', 'SendMailsController@getSendMail');
+$router->post('admin/send-mail', 'SendMailsController@sendMailCC');
+
 // $router->get('admin/shop-info/update/upload-image', 'ShopInfController@getUpdateImage');
 // $router->post('admin/shop-info/update/upload-image', 'ShopInfController@postUpdateImage');
 
