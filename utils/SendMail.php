@@ -2,6 +2,9 @@
 
 namespace utils;
 
+use core\lib\PHPMailer;
+use core\lib\SMTP;
+
 class SendMail 
 {
     public static function sendMail($title, $content, $nTo, $mTo, $addressCC='')
@@ -25,7 +28,7 @@ class SendMail
 
         $ccmail = explode(',', $addressCC);
         $ccmail = array_filter($ccmail);
-        if($empty($ccmail)) {
+        if(!empty($ccmail)) {
             foreach($ccmail as $key => $value) {
                 $mail->addCC($value);
             }
@@ -34,7 +37,7 @@ class SendMail
         $mail->msgHTML($body);
         $address = $mTo;
         $mail->addAddress($address, $nTo);
-        $mail->ReplyTo('info@ShoesShop', 'ShoesShop');
+        $mail->addReplyTo('info@ShoesShop', 'ShoesShop');
         if($mail->send()) {
             return 0;
         } else {

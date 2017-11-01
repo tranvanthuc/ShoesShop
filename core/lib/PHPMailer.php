@@ -1,4 +1,6 @@
 <?php
+namespace core\lib;
+use Exception;
 /**
  * PHPMailer - PHP email creation and transport class.
  * PHP Version 5
