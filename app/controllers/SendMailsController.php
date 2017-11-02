@@ -16,12 +16,12 @@ class SendMailsController
     {
         $title = $_POST['title'];
         $content = $_POST['content'];
-        $nTo = $_POST['user_name'];
-        $mTo = $_POST['email'];
-        $address = $_POST['ccmail'];
+        $nTo = $_POST['name_to'];
+        $mTo = $_POST['email_to'];
+        $addressCC = $_POST['ccmail'];
 
-        $mail = SendMail::sendMail($title, $content, $nTo, $mTo, $address);
-        if($mail == 1) {
+        $mail = SendMail::sendMail($title, $content, $nTo, $mTo, $addressCC);
+        if($mail == 0) {
             echo 'Email was sended';            
         } else {
             echo 'false';

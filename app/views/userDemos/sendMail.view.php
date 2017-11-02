@@ -22,8 +22,16 @@
                         redirect('admin/login');
                     }
                 ?>
-                <input type="hidden" class="form-control" id="user_name" name="user_name" value=<?= $_SESSION['user']->id?> >     
-                <input type="hidden" class="form-control" id="user_email" name="email" value=<?= $_SESSION['user']->email?>>     
+                <!-- <input type="hidden" class="form-control" id="user_name" name="user_name" value=<?= $_SESSION['user']->first_name?> >     
+                <input type="hidden" class="form-control" id="user_email" name="email" value=<?= $_SESSION['user']->email?>>      -->
+                <div class="form-group">
+                    <label for="exampleInputEmail1">To name</label>
+                    <input class="form-control"  type="text" name="name_to" placeholder="Enter receive name">
+                </div> 
+                <div class="form-group">
+                    <label for="exampleInputEmail1">To email</label>
+                    <input class="form-control"  type="email" name="email_to" placeholder="Enter reveive email">
+                </div> 
                 <div class="form-group">
                     <label for="exampleInputEmail1">Title</label>
                     <input class="form-control"  type="text" name="title" placeholder="Enter title">

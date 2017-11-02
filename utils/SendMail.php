@@ -11,12 +11,12 @@ class SendMail
     {
         $nFrom = 'ShoesShop';
         $mFrom = 'minhthai0124@gmail.com'; //my email address
-        $mPass = 'macminhthu1303'; //my email address pass
+        $mPass = 'Blackroses07'; //my email address pass
         $mail = new PHPMailer();
         $body = $content;
         
         $mail->isSMTP();
-        $mail->CharSet = "utf-8";
+        $mail->CharSet   = "utf-8";
         $mail->SMTPDebug = 0; //enable SMTP debug information for testing
         $mail->SMTPAuth = true; //enable SMTP authentication
         $mail->SMTPSecure = "ssl";
